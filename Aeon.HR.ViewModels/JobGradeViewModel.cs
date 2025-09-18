@@ -25,6 +25,7 @@ namespace Aeon.HR.ViewModels
             }
         }
         public double? MaxWFH { get; set; } 
+        public double? MaxPRDERD { get; set; }
         public StorePositionType? StorePosition { get; set; } = null;
         public HQPositionType? HQPosition { get; set; }
         public string _ExportStorePosition { 

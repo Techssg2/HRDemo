@@ -74,6 +74,13 @@ namespace Aeon.HR.BusinessObjects.Handlers
                     goto Finish;
                 }
 
+                if (args.MaxPRDERD.HasValue && args.MaxPRDERD < 0)
+                {
+                    result.ErrorCodes = new List<int> { -1 };
+                    result.Messages = new List<string> { "Max PRD + ERD must be greater than or equal to 0!" };
+                    goto Finish;
+                }
+
                 var existsGradeTitle = await _uow.GetRepository<JobGrade>().FindByAsync(x => args.Id != x.Id && x.Title.ToLower().Trim().Equals(args.Title.ToLower().Trim()));
                 if (existsGradeTitle.Any())
                 {
@@ -156,6 +163,13 @@ namespace Aeon.HR.BusinessObjects.Handlers
                 {
                     result.ErrorCodes = new List<int> { -1 };
                     result.Messages = new List<string> { "Column UpGrade is invalid!" };
+                    goto Finish;
+                }
+
+                if (args.MaxPRDERD.HasValue && args.MaxPRDERD < 0)
+                {
+                    result.ErrorCodes = new List<int> { -1 };
+                    result.Messages = new List<string> { "Max PRD + ERD must be greater than or equal to 0!" };
                     goto Finish;
                 }
 
