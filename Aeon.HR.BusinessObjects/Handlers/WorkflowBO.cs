@@ -3061,15 +3061,38 @@ namespace Aeon.HR.BusinessObjects.Handlers
             try
             {
                 args.Predicate += " AND (( itemType IN (\"ShiftExchangeApplication\",\"LeaveApplication\",\"OvertimeApplication\",\"MissingTimeClock\") AND dueDate >= \"2020-02-25 20:52:06.8996976 +07:00\" ) OR !(itemType IN (\"ShiftExchangeApplication\",\"LeaveApplication\",\"OvertimeApplication\",\"MissingTimeClock\") ))";
-                var edoc2_tasks = _uow.GetRepository<WorkflowTask>(isSuperAdmin).FindBy<WorkflowTaskViewModel>(args.Order, 1, 1000, args.Predicate, args.PredicateParameters).ToList();
+                // Use proper pagination instead of fixed 1000 limit
+                var pageSize = args.Limit > 0 ? Math.Min(args.Limit, 1000) : 1000; // Cap at 1000 for safety
+                var pageIndex = args.Page > 0 ? args.Page : 1;
+                
+                var edoc2_tasks = (await _uow.GetRepository<WorkflowTask>(isSuperAdmin)
+                    .FindByAsync<WorkflowTaskViewModel>(args.Order, pageIndex, pageSize, args.Predicate, args.PredicateParameters)
+                    .ConfigureAwait(false)).ToList();
                 if (edoc2_tasks.Count > 0)
                 {
+                    // Optimize: Bulk load departments with regions to avoid N+1 queries
+                    var departmentIds = edoc2_tasks
+                        .Where(x => x.RequestedDepartmentId.HasValue)
+                        .Select(x => x.RequestedDepartmentId.Value)
+                        .Distinct()
+                        .ToList();
+
+                    var departmentLookup = new Dictionary<Guid, Department>();
+                    if (departmentIds.Any())
+                    {
+                        var departments = await _uow.GetRepository<Department>(true)
+                            .FindByAsync(x => departmentIds.Contains(x.Id), "", x => x.Region)
+                            .ConfigureAwait(false);
+                        
+                        departmentLookup = departments.ToDictionary(d => d.Id);
+                    }
+
                     foreach (WorkflowTaskViewModel item in edoc2_tasks)
                     {
-                        var departmentItem = _uow.GetRepository<Department>(true).FindBy(x => x.Id == item.RequestedDepartmentId).FirstOrDefault();
-                        if (null != departmentItem)
+                        if (item.RequestedDepartmentId.HasValue && 
+                            departmentLookup.TryGetValue(item.RequestedDepartmentId.Value, out var departmentItem))
                         {
-                            if (null != departmentItem.Region)
+                            if (departmentItem.Region != null)
                             {
                                 item.RegionId = departmentItem.Region.Id;
                                 item.RegionName = departmentItem.Region.RegionName;
@@ -3084,10 +3107,11 @@ namespace Aeon.HR.BusinessObjects.Handlers
                 }
 
                 #region Get Ignore Acting Items
-                List<string> ignoreReferenceNumberActing = this.IgnoreReferenceNumberActing();
+                var ignoreReferenceNumberActing = this.IgnoreReferenceNumberActing();
                 if (ignoreReferenceNumberActing.Any())
                 {
-                    edoc2_tasks = edoc2_tasks.Where(x => ignoreReferenceNumberActing.Any() && !ignoreReferenceNumberActing.Contains(x.ReferenceNumber)).ToList();
+                    var ignoreHashSet = new HashSet<string>(ignoreReferenceNumberActing);
+                    edoc2_tasks = edoc2_tasks.Where(x => !ignoreHashSet.Contains(x.ReferenceNumber)).ToList();
                 }
                 #endregion
 
@@ -3137,7 +3161,7 @@ namespace Aeon.HR.BusinessObjects.Handlers
                     #endregion
                 };
 
-                await Task.WhenAll(tasks);
+                await Task.WhenAll(tasks).ConfigureAwait(false);
 
                 //ncao2: add more tasks from new modules
                 var moduleTasks = DashboardHelper.GetMyTasks(_uow.UserContext.CurrentUserId, args);
