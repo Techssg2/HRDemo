@@ -224,7 +224,7 @@ ssgApp
                         controller: "requestToHireController"
                     }
                 },
-                params: { action: { title: "NEW ITEM: REQUEST TO HIRE" }, referenceValue: "", id: "" }
+                params: { action: { title: "NEW ITEM: RTH" }, referenceValue: "", id: "" }
             })
             .state("home.requestToHire.myRequests", {
                 // Request to hire myrequest

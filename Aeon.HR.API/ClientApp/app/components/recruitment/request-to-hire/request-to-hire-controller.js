@@ -6,8 +6,8 @@ ssgApp.controller('requestToHireController', function ($rootScope, $scope, workf
     var ssg = this;
     $scope.isITHelpdesk = $rootScope.currentUser && $rootScope.currentUser.isITHelpDesk;
     $scope.isAllowImportMaual = $rootScope.currentUser && ($rootScope.currentUser.isITHelpDesk || $rootScope.currentUser.isHRAdmin || $rootScope.currentUser.loginName == 'SAdmin');
-    $scope.titleHeader = 'REQUEST TO HIRE';
-    $scope.titleEdit = "REQUEST TO HIRE: ";
+    $scope.titleHeader = 'RTH';
+    $scope.titleEdit = "RTH: ";
     $scope.title = $stateParams.id ? /*$translate.instant('REQUEST_TO_HIRE_MENU') + */$stateParams.referenceValue : $state.current.name == 'home.requestToHire.item' ? /*"NEW ITEM: REQUEST TO HIRE"*/'' : $stateParams.action.title.toUpperCase();
     $scope.value = 0;
     var currentAction = null;
@@ -70,6 +70,10 @@ ssgApp.controller('requestToHireController', function ($rootScope, $scope, workf
     {
         fieldName: 'operation',
         title: 'HQ/Operation'
+    },
+    {
+        fieldName: 'jobDescription',
+        title: 'Remark'
     }
     ];
     $scope.total = 0;
@@ -2213,7 +2217,7 @@ ssgApp.controller('requestToHireController', function ($rootScope, $scope, workf
     }
 
     $scope.importRequestToHire = function () {
-        $scope.importDialog.title('IMPORT REQUEST TO HIRE')
+        $scope.importDialog.title('IMPORT RTH')
         $scope.importDialog.open();
     }
 

@@ -66,7 +66,7 @@
                     ref: [{
                         state: "home.requestToHire.item",
                         isItem: true,
-                        title: "REQUEST TO HIRE",
+                        title: "RTH",
                         prefix: "REQ-"
                     },
                     { state: "home.requestToHire.myRequests", isItem: false },
