@@ -11,6 +11,7 @@ namespace Aeon.HR.ViewModels
     public class JobGradeViewModel
     {
         public Guid Id { get; set; }
+        [Required]
         public string Title { get; set; }
         public string Caption { get; set; }
         public int Grade { get; set; }
@@ -24,6 +25,7 @@ namespace Aeon.HR.ViewModels
                 return (DepartmentType == null || DepartmentType == 0) ? "" : DepartmentType.ToString();
             }
         }
+        [Range(0, double.MaxValue, ErrorMessage = "Max PRD + ERD must be greater than or equal to 0")]
         public double? MaxWFH { get; set; } 
         public StorePositionType? StorePosition { get; set; } = null;
         public HQPositionType? HQPosition { get; set; }

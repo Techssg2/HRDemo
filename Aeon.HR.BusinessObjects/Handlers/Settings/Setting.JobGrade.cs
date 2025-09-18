@@ -53,6 +53,14 @@ namespace Aeon.HR.BusinessObjects.Handlers
             }
             else
             {
+                // Validate MaxWFH if provided - must be >= 0
+                if (args.MaxWFH.HasValue && args.MaxWFH.Value < 0)
+                {
+                    result.ErrorCodes = new List<int> { -1 };
+                    result.Messages = new List<string> { "Max PRD + ERD must be greater than or equal to 0!" };
+                    goto Finish;
+                }
+
                 if (args.DepartmentType == 0)
                 {
                     result.ErrorCodes = new List<int> { -1 };
@@ -135,6 +143,15 @@ namespace Aeon.HR.BusinessObjects.Handlers
                     goto Finish;
                 }
                 cache.Set(Inprocess_JobGrade, true, DateTime.Now.AddHours(1));
+
+                // Validate MaxWFH if provided - must be >= 0
+                if (args.MaxWFH.HasValue && args.MaxWFH.Value < 0)
+                {
+                    result.ErrorCodes = new List<int> { -1 };
+                    result.Messages = new List<string> { "Max PRD + ERD must be greater than or equal to 0!" };
+                    cache.Set(Inprocess_JobGrade, false, DateTime.Now.AddHours(1));
+                    goto Finish;
+                }
 
                 try
                 {

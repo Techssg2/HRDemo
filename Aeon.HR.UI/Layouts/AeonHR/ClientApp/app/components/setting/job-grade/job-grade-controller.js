@@ -92,9 +92,21 @@ ssgApp.controller('jobGradeController', function ($rootScope, $scope, $location,
             width: "200px",
             template: function (dataItem) {
                 if (dataItem.canEdit || !dataItem['id']) {
-                    return `<input class="k-textbox w100" name="title" ng-model="dataItem.title"/>`;
+                    return `<input required class="k-textbox w100" name="title" ng-model="dataItem.title"/>`;
                 } else {
                     return `<span>{{dataItem.title}}</span>`
+                }
+            }
+        },
+        {
+            field: "maxWFH",
+            title: "Max PRD + ERD",
+            width: "150px",
+            template: function (dataItem) {
+                if (dataItem.canEdit || !dataItem['id']) {
+                    return `<input name="maxWFH" kendo-numeric-text-box k-min="0" k-decimals="2" class="w100" ng-model="dataItem.maxWFH"/>`;
+                } else {
+                    return `<span>{{dataItem.maxWFH || ''}}</span>`
                 }
             }
         },
@@ -571,6 +583,14 @@ ssgApp.controller('jobGradeController', function ($rootScope, $scope, $location,
 
     function ValidationForJobGrade(model) {
         let errors = validationRequired(model, requiredFieldsOfJobGrade, '[field] : Field is required');
+        
+        // Validate MaxWFH field - must be >= 0 if provided
+        if (model.maxWFH !== null && model.maxWFH !== undefined && model.maxWFH < 0) {
+            errors.push({
+                controlName: 'Max PRD + ERD : Must be greater than or equal to 0'
+            });
+        }
+        
         return errors;
     }
 
@@ -690,6 +710,7 @@ ssgApp.controller('jobGradeController', function ($rootScope, $scope, $location,
             grade: total + 1,
             caption: '',
             title: '',
+            maxWFH: null,
             expiredDayPosition: 0,
             items: [],
             canEdit: false
