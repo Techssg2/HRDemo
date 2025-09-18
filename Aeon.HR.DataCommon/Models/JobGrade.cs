@@ -25,6 +25,7 @@ namespace Aeon.HR.Data.Models
         public int ExpiredDayPosition { get; set; }
         public DepartmentType DepartmentType { get; set; }
         public double? MaxWFH { get; set; }
+        public double? MaxPRDERD { get; set; }
         public StorePositionType StorePosition { get; set; }
         public HQPositionType HQPosition { get; set; }
         public virtual ICollection<HeadCount> HeadCounts { get; set; }

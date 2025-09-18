@@ -92,7 +92,7 @@ ssgApp.controller('jobGradeController', function ($rootScope, $scope, $location,
             width: "200px",
             template: function (dataItem) {
                 if (dataItem.canEdit || !dataItem['id']) {
-                    return `<input class="k-textbox w100" name="title" ng-model="dataItem.title"/>`;
+                    return `<input required class="k-textbox w100" name="title" ng-model="dataItem.title"/>`;
                 } else {
                     return `<span>{{dataItem.title}}</span>`
                 }
@@ -107,6 +107,18 @@ ssgApp.controller('jobGradeController', function ($rootScope, $scope, $location,
                     return `<input required name="expiredDayPosition" kendo-numeric-text-box k-min="0" class="w100" k-format="'#,0'" ng-model="dataItem.expiredDayPosition"/>`
                 } else {
                     return `<span>{{dataItem.expiredDayPosition}}</span>`
+                }
+            }
+        },
+        {
+            field: "maxPRDERD",
+            title: "Max PRD + ERD",
+            width: "150px",
+            template: function (dataItem) {
+                if (dataItem.canEdit || !dataItem['id']) {
+                    return `<input name="maxPRDERD" kendo-numeric-text-box k-min="0" k-decimals="2" class="w100" k-format="'#,0.00'" ng-model="dataItem.maxPRDERD"/>`
+                } else {
+                    return `<span>{{dataItem.maxPRDERD}}</span>`
                 }
             }
         },
@@ -691,6 +703,7 @@ ssgApp.controller('jobGradeController', function ($rootScope, $scope, $location,
             caption: '',
             title: '',
             expiredDayPosition: 0,
+            maxPRDERD: null,
             items: [],
             canEdit: false
         };

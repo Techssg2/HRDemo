@@ -98,6 +98,14 @@ namespace Aeon.HR.BusinessObjects.Handlers
                     goto Finish;
                 }
 
+                // Validate MaxPRDERD field - must be >= 0 if provided
+                if (args.MaxPRDERD.HasValue && args.MaxPRDERD.Value < 0)
+                {
+                    result.ErrorCodes = new List<int> { -1 };
+                    result.Messages = new List<string> { "Max PRD + ERD must be greater than or equal to 0!" };
+                    goto Finish;
+                }
+
                 Mapper.Map(args, existJobGrade);
                 _uow.GetRepository<JobGrade>().Update(existJobGrade);
                 await _uow.CommitAsync();
@@ -183,6 +191,14 @@ namespace Aeon.HR.BusinessObjects.Handlers
                 {
                     result.ErrorCodes = new List<int> { -1 };
                     result.Messages = new List<string> { "Title already exists!" };
+                    goto Finish;
+                }
+
+                // Validate MaxPRDERD field - must be >= 0 if provided
+                if (args.MaxPRDERD.HasValue && args.MaxPRDERD.Value < 0)
+                {
+                    result.ErrorCodes = new List<int> { -1 };
+                    result.Messages = new List<string> { "Max PRD + ERD must be greater than or equal to 0!" };
                     goto Finish;
                 }
 
