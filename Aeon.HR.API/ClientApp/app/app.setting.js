@@ -3081,7 +3081,7 @@
         { state: 'home.admin', roles: [1, 2, 4, 8, 16, 32, 64], gradeUsers: [2, 3, 4, 5, 6, 7, 8, 9], type: [0, 1] },
         { state: 'home.facility', roles: [1, 2], gradeUsers: [2, 3, 4, 5, 6, 7, 8, 9], type: [0, 1] },
         { state: 'home.daysConfiguration', roles: [1, 32], gradeUsers: [2, 3, 4, 5, 6, 7, 8, 9], type: [0, 1] },
-        { state: 'home.over-budget', roles: [1, 2, 4, 8, 16, 32], gradeUsers: [1, 2, 3, 4, 5, 6, 7, 8, 9], type: [0, 1] },
+        { state: 'home.over-budget', roles: [1, 2, 4, 8, 16, 32, 64], gradeUsers: [1, 2, 3, 4, 5, 6, 7, 8, 9], type: [0, 1] },
         { state: 'home.over-budget.myRequests', roles: [1, 2, 4, 8, 16, 32, 64], gradeUsers: [1, 2, 3, 4, 5, 6, 7, 8, 9], type: [0, 1] },
         { state: 'home.over-budget.allRequests', roles: [1, 2, 4, 8, 16, 32, 64], gradeUsers: [1, 2, 3, 4, 5, 6, 7, 8, 9], type: [0, 1] },
         { state: 'home.over-budget.item', roles: [1, 2, 4, 8, 16, 32, 64], gradeUsers: [1, 2, 3, 4, 5, 6, 7, 8, 9], type: [0, 1] },

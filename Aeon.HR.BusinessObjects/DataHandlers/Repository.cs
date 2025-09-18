@@ -599,6 +599,7 @@ namespace Aeon.HR.BusinessObjects.DataHandlers
                 allowViewAllType.Add(typeof(PromoteAndTransfer));
                 allowViewAllType.Add(typeof(Acting));
                 allowViewAllType.Add(typeof(RequestToHire));
+                allowViewAllType.Add(typeof(BusinessTripOverBudget));
                 if (allowViewAllType.Contains(typeof(T)) && !(_userContext is null) && (_userContext.CurrentUserRole & UserRole.HR) == UserRole.HR)
                 {
                     //Fix for special case, promotion required two hr store to check
@@ -606,6 +607,11 @@ namespace Aeon.HR.BusinessObjects.DataHandlers
                     {
                         allowViewAll = true;
                     }
+                }
+                // Allow Accounting role to view all BusinessTripOverBudget (BOB) forms
+                if (typeof(T) == typeof(BusinessTripOverBudget) && !(_userContext is null) && (_userContext.CurrentUserRole & UserRole.Accounting) == UserRole.Accounting)
+                {
+                    allowViewAll = true;
                 }
                 if (!_forceAllItems && !allowViewAll)
                 {
@@ -1529,6 +1535,7 @@ namespace Aeon.HR.BusinessObjects.DataHandlers
                 allowViewAllType.Add(typeof(PromoteAndTransfer));
                 allowViewAllType.Add(typeof(Acting));
                 allowViewAllType.Add(typeof(RequestToHire));
+                allowViewAllType.Add(typeof(BusinessTripOverBudget));
 
                 if (allowViewAllType.Contains(typeof(T)) && !(_userContext is null) && (_userContext.CurrentUserRole & UserRole.HR) == UserRole.HR)
                 {
@@ -1537,6 +1544,11 @@ namespace Aeon.HR.BusinessObjects.DataHandlers
                     {
                         allowViewAll = true;
                     }
+                }
+                // Allow Accounting role to view all BusinessTripOverBudget (BOB) forms
+                if (typeof(T) == typeof(BusinessTripOverBudget) && !(_userContext is null) && (_userContext.CurrentUserRole & UserRole.Accounting) == UserRole.Accounting)
+                {
+                    allowViewAll = true;
                 }
                 if (!_forceAllItems && !allowViewAll)
                 {
