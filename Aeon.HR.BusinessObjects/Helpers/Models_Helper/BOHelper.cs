@@ -318,6 +318,28 @@ namespace Aeon.HR.BusinessObjects
                                 returnValue = true;
                                 break;
                             }
+                        case "BTA":
+                            {
+                                BusinessTripApplication item = unitOfWork.GetRepository<BusinessTripApplication>(true).GetSingle(x => x != null && x.ReferenceNumber.Equals(itemRef));
+                                if (item != null)
+                                {
+                                    item.Status = Const.Status.outOfPeriod;
+                                }
+                                unitOfWork.GetRepository<BusinessTripApplication>().Update(item);
+                                returnValue = true;
+                                break;
+                            }
+                        case "RES":
+                            {
+                                ResignationApplication item = unitOfWork.GetRepository<ResignationApplication>(true).GetSingle(x => x != null && x.ReferenceNumber.Equals(itemRef));
+                                if (item != null)
+                                {
+                                    item.Status = Const.Status.outOfPeriod;
+                                }
+                                unitOfWork.GetRepository<ResignationApplication>().Update(item);
+                                returnValue = true;
+                                break;
+                            }
                         default:
                             returnValue = false;
                             break;
@@ -571,6 +593,48 @@ namespace Aeon.HR.BusinessObjects
 
                 DateTime _45DayBefore = DateTime.Now.AddDays(-45);
                 returnValue = qShiftExchangeApplication
+                    .GroupJoin(uow.GetRepository<UserDepartmentMapping>().GetAll(), t => t.CreatedById, p => p.UserId, (t, p) => new { t, p })
+                    .Where(x => x.p.Any(d => d.Department.IsStore == isStore) || x.t.Created < _45DayBefore).Select(x => x.t).AsEnumerable();
+            }
+            catch
+            {
+            }
+            return returnValue;
+        }
+
+        public static IEnumerable<BusinessTripApplication> GetBusinessTripApplication_OutOfPeriod(this IUnitOfWork uow, DateTime startDate, DateTime endDate, bool isStore)
+        {
+            IEnumerable<BusinessTripApplication> returnValue = null;
+            try
+            {
+                List<string> ignoreStatus = new List<string>() { Const.Status.cancelled, Const.Status.completed, "Completed Changing", Const.Status.draft, Const.Status.rejected, Const.Status.outOfPeriod };
+                IQueryable<BusinessTripApplication> qBusinessTripApplication = uow.GetRepository<BusinessTripApplication>(true).FindBy(x => x != null
+                 && !ignoreStatus.Contains(x.Status)
+                 && !x.BusinessTripApplicationDetails.Any(y => y.FromDate > endDate || y.ToDate > endDate)).AsQueryable();
+
+                DateTime _45DayBefore = DateTime.Now.AddDays(-45);
+                returnValue = qBusinessTripApplication
+                    .GroupJoin(uow.GetRepository<UserDepartmentMapping>().GetAll(), t => t.CreatedById, p => p.UserId, (t, p) => new { t, p })
+                    .Where(x => x.p.Any(d => d.Department.IsStore == isStore) || x.t.Created < _45DayBefore).Select(x => x.t).AsEnumerable();
+            }
+            catch
+            {
+            }
+            return returnValue;
+        }
+
+        public static IEnumerable<ResignationApplication> GetResignationApplication_OutOfPeriod(this IUnitOfWork uow, DateTime startDate, DateTime endDate, bool isStore)
+        {
+            IEnumerable<ResignationApplication> returnValue = null;
+            try
+            {
+                List<string> ignoreStatus = new List<string>() { Const.Status.cancelled, Const.Status.completed, Const.Status.draft, Const.Status.rejected, Const.Status.outOfPeriod };
+                IQueryable<ResignationApplication> qResignationApplication = uow.GetRepository<ResignationApplication>(true).FindBy(x => x != null
+                 && !ignoreStatus.Contains(x.Status)
+                 && x.OfficialResignationDate <= endDate).AsQueryable();
+
+                DateTime _45DayBefore = DateTime.Now.AddDays(-45);
+                returnValue = qResignationApplication
                     .GroupJoin(uow.GetRepository<UserDepartmentMapping>().GetAll(), t => t.CreatedById, p => p.UserId, (t, p) => new { t, p })
                     .Where(x => x.p.Any(d => d.Department.IsStore == isStore) || x.t.Created < _45DayBefore).Select(x => x.t).AsEnumerable();
             }

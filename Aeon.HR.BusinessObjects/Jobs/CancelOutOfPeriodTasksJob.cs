@@ -111,6 +111,22 @@ namespace Aeon.HR.BusinessObjects.Jobs
                 }
                 #endregion
 
+                #region BusinessTripApplication
+                IEnumerable<BusinessTripApplication> businessTripApplications = _uow.GetBusinessTripApplication_OutOfPeriod(startTime, endTime, isStore);
+                if (businessTripApplications != null && businessTripApplications.Any())
+                {
+                    itemIDs.AddRange(businessTripApplications.Where(x => x != null).Select(x => x.Id).ToList());
+                }
+                #endregion
+
+                #region ResignationApplication
+                IEnumerable<ResignationApplication> resignationApplications = _uow.GetResignationApplication_OutOfPeriod(startTime, endTime, isStore);
+                if (resignationApplications != null && resignationApplications.Any())
+                {
+                    itemIDs.AddRange(resignationApplications.Where(x => x != null).Select(x => x.Id).ToList());
+                }
+                #endregion
+
                 if (itemIDs != null && itemIDs.Any())
                 {
                     IEnumerable<WorkflowInstance> workflowInstances = await _uow.GetWorkflowInstance_ByItemIDs(itemIDs);
