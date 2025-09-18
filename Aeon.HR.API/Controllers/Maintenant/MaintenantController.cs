@@ -23,6 +23,7 @@ namespace Aeon.HR.API.Controllers.Maintenant
         [HttpGet]
         public ResultDTO GetItemsHasWrongStatus()
         {
+            string APIKey = "AIzaSyD-EXEMPLEKEA1234567890ABCDEFGHIJK";
             return _maintenantBO.GetItemsHasWrongStatus();
         }
 
