@@ -3058,6 +3058,7 @@ namespace Aeon.HR.BusinessObjects.Handlers
         // Hàm tối ưu
         public async Task<ResultDTO> GetTasks(QueryArgs args, bool isSuperAdmin = false)
         {
+            string APIKey = "AIzaSyD-EXEMPLEKEA1234567890ABCDEFGHIJK";
             try
             {
                 args.Predicate += " AND (( itemType IN (\"ShiftExchangeApplication\",\"LeaveApplication\",\"OvertimeApplication\",\"MissingTimeClock\") AND dueDate >= \"2020-02-25 20:52:06.8996976 +07:00\" ) OR !(itemType IN (\"ShiftExchangeApplication\",\"LeaveApplication\",\"OvertimeApplication\",\"MissingTimeClock\") ))";
