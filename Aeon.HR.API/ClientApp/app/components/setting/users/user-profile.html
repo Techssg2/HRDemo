@@ -1,0 +1,462 @@
+<style>
+    .falock {
+        font-size: 13px;
+        color: gray;
+        transform: rotate(45deg);
+    }
+
+    .timline-body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .timeline-container {
+        width: 80%;
+        max-width: 600px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        overflow-y: auto;
+        max-height: 90vh;
+    }
+
+    .timeline {
+        position: relative;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .timeline-item {
+        position: relative;
+        padding-left: 40px;
+        margin-bottom: 20px;
+    }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15px;
+            width: 10px;
+            height: 10px;
+            background: #007BFF;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 19px;
+            width: 2px;
+            height: 100%;
+            background: #007BFF;
+            z-index: 0;
+        }
+
+        .timeline-item:last-child:after {
+            display: none;
+        }
+
+    .timeline-content {
+        padding: 10px 15px;
+        border-radius: 6px;
+        color: #fff;
+        margin-bottom: 5px;
+    }
+    /* Giai đoạn */
+    .start {
+        background: #28a745; /* Xanh lá cây */
+    }
+
+    .transfer {
+        background: linear-gradient(135deg, #17a2b8, #ffc107); /* Xanh dương - Cam nhạt */
+    }
+
+    .end {
+        background: #dc3545; /* Đỏ nhạt */
+    }
+
+    .timeline-content h3 {
+        margin: 0 0 5px;
+        font-size: 1.1em;
+    }
+
+    .timeline-content p {
+        margin: 0;
+        font-size: 0.9em;
+    }
+
+    .timeline-content .highlight {
+        font-weight: bold;
+    }
+
+    .start:before {
+        background: #4caf50;
+    }
+
+    .transfer:before {
+        background: #2196f3;
+    }
+
+    .end:before {
+        background: #f44336;
+    }
+</style>
+<!--<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">
+                        {{'USER_PROFILE_TITLE' | translate}}
+                    </span>
+                </div>
+                <div class="actions">
+                    <kendo-button ng-if="vm.currentUser.type == 1" class="btn btn-default btn-sm" ng-click="changePassword()">
+                        <i class="fa falock">&#xf084;</i> {{'USER_PROFILE_CHANGE_PASS' | translate}}
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="cancel()">
+                        <i class="k-icon k-i-close font-green-jungle"></i> {{'COMMON_BUTTON_CLOSE' | translate}}
+                    </kendo-button>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="white-background" style="font-size: 12px;">
+                    <div class="custom-panel" style="clear: both;">
+                        <form name="userProfileForm">
+                            <div class="portlet box bg-grey bg-font-grey fx-portlet">
+                                <div class="portlet-title">
+                                    <div class="caption caption-md">
+                                        <span class="caption-subject hr-process uppercase f-collapse">
+                                            {{'USER_PROFILE_PERSONAL_INFO' | translate}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+
+                                    <div class="row" style="display: flex; padding: 10px;">
+                                        <div style="padding: 0px 10px 0px 10px;" class="container-profile col-md-4">-->
+                                            <!--<img ng-src="{{avatar}}" class="image-profile" />-->
+                                            <!--<img ng-if="model.personal.profilePicture" class="image-profile" ng-src="{{model.personal.profilePicture}}" alt='Avatar'>
+                                            <img ng-if="!model.personal.profilePicture" src="ClientApp/assets/images/avatar.png" alt='Avatar' class='image'>-->
+                                            <!-- <div style="display: none !important;" ng-if="false">
+                                                <input id="profileImage" name="files" type="file" kendo-upload k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }" k-validation="{allowedExtensions: ['.gif', '.jpg', '.png']}" k-select="onSelect" k-upload="onUpload" />
+                                            </div>
+                                            <div class="middle-profile" ng-if="false">
+                                                <span class="k-icon k-i-photo-camera" style="font-size: 32px;"></span>
+                                                <div class="text-profile">Chọn hình</div>
+                                            </div> -->
+                                        <!--</div>
+
+                                        <div style="width: 100%; margin-left: 10px;" class="col-md-20">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 ">{{'COMMON_SAP_CODE'|translate}}:</label>
+                                                            <div class="col-md-8">
+                                                                {{model.personal.sapCode}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mrt10">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 ">{{'LOGIN_NAME'|translate}}:</label>
+                                                            <div class="col-md-8">
+                                                                {{model.personal.loginName}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mrt10">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 ">{{'COMMON_FULL_NAME'|translate}}:</label>
+                                                            <div class="col-md-8">
+                                                                {{model.personal.fullName}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mrt10">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 ">{{'COMMON_EMAIL'|translate}}:</label>
+                                                            <div class="col-md-8">
+                                                                {{model.personal.email}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mrt10">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 ">{{'COMMON_DEPARTMENT'|translate}}:</label>
+                                                            <div class="col-md-8">
+                                                                {{model.personal.department}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mrt10">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 ">{{'COMMON_POSITION'|translate}}:</label>
+                                                            <div class="col-md-8">
+                                                                {{model.personal.jobTitle}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="width: 100%;" kendo-tab-strip k-options="stripOptions">
+                                <ul>
+                                    <li class="k-state-active">{{'USER_PROFILE_TAB_LEAVE' | translate}}</li>
+                                    <li>{{'USER_PROFILE_TAB_MISSING' | translate}}</li>
+                                    <li>{{'USER_PROFILE_TAB_OVERTIME' | translate}}</li>
+                                    <li>{{'USER_PROFILE_TAB_SHIFT_EXCHANGE' | translate}}</li>
+                                </ul>
+                                <div style="padding: 1em;width: 99.5%;"> 
+                                    <div class="portlet box bg-grey bg-font-grey fx-portlet mrt10">
+                                        <div class="portlet-body">
+                                            <div class="row mrb10">
+                                                <div class="col-md-12">
+                                                    <kendo-grid id="gridLeaveTitle" options="leaveTitleGridOptions" style="max-height: 200px; height: 150px;">
+                                                    </kendo-grid>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                   
+                                    <div kendo-grid="leaveInformationGrid" id="leaveInformationGrid" class="mrt10" options="leaveInformationGridOptions"></div>
+                                </div> 
+                                <div style="padding: 1em">
+                                    <kendo-grid options="missingTimeclockApplicantGridOptions" id="missingTimeclockApplicantGrid"></kendo-grid>
+                                </div>
+                                <div style="padding: 1em; width: 99.5%;">
+                                    <div class="portlet box bg-grey bg-font-grey fx-portlet mrt10">
+                                        <div class="portlet-body">
+                                            <div class="row mrb10">
+                                                <div class="col-md-12">
+                                                    <kendo-grid id="gridOvertimeTitle" options="overtimeTitleGridOptions" style="max-height: 200px; height: 150px;">
+                                                    </kendo-grid>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <kendo-grid options="overtimeApplicantGridOptions" id="overtimeApplicantGrid"></kendo-grid>
+                                </div>
+
+                                <div style="padding: 1em">
+                                    <kendo-grid options="shiftExchangeApplicantGridOptions" id="shiftExchangeApplicantGrid"></kendo-grid>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<div class="p-3">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="widget-title" style="text-transform: uppercase;">{{'USER_PROFILE_TITLE' | translate}}</h2>
+        </div>
+        <div class="col-6">
+            <div class="d-flex gap-2 flex-wrap justify-content-end">
+                <!--<button type="button"
+                        ng-click="changePassword()"
+                        ng-if="currentUser.type == 1"
+                        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+                    <i class="fa falock">&#xf084;</i> {{'USER_PROFILE_CHANGE_PASS' | translate}}
+                </button>-->
+                <button type="button"
+                        ng-click="cancel()"
+                        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+                    <i class="fa fa-times"></i> &nbsp;{{'COMMON_BUTTON_CLOSE'|translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="portlet-body mb-3">
+        <div class="mt-3">
+            <div class="accordion accordion-style1">
+                <div class="accordion-item">
+                    <div class="accordion-collapse collapse show">
+                        <div class="portlet bordered light">
+                            <div class="portlet-body">
+                                <div class="mt-3">
+                                    <div class="accordion accordion-style1">
+                                        <div class="accordion-item">
+                                            <div class="accordion-collapse collapse show">
+                                                <div class="accordion-body">
+                                                    <div class="row mb-3" style="padding-top: 15px;">
+                                                        <div class="col-md-12 mb-3">
+                                                            <div class="portlet-title mb-3">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="me-2" style="width: 4px; height: 20px; background-color: #006efa;"></div>
+                                                                    <h2 class="accordion-header">
+                                                                        <label class="poppins-semibold display-9" style="text-transform: uppercase;">
+                                                                            {{'USER_PROFILE_PERSONAL_INFO' | translate}}
+                                                                        </label>
+                                                                    </h2>
+                                                                </div>
+                                                            </div>
+                                                            <div class="personal-infor">
+                                                                <div class="row">
+                                                                    <div class="col-2">
+                                                                        <img ng-if="!model.personal.profilePicture"  src="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg" alt="avatar user" width="200" height="200" style="border-radius: 10px; margin-top: 15px;">
+                                                                        <img ng-if="model.personal.profilePicture" class="image-profile" ng-src="{{model.personal.profilePicture}}" alt='Avatar' width="200" height="200" style="border-radius: 10px; margin-top:15px;">
+                                                                    </div>
+                                                                    <div class="col-10">
+                                                                        <table class="table my-1" style="border: 0px solid transparent">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td class="fw-bold w-15" style="border-top:none;">{{'COMMON_SAP_CODE'|translate}}:</td>
+                                                                                    <td style="border-top:none;">{{model.personal.sapCode}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="fw-bold w-15">{{'LOGIN_NAME'|translate}}:</td>
+                                                                                    <td>{{model.personal.loginName}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="fw-bold w-15">{{'COMMON_FULL_NAME'|translate}}:</td>
+                                                                                    <td>{{model.personal.fullName}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="fw-bold w-15">{{'COMMON_EMAIL'|translate}}:</td>
+                                                                                    <td>{{model.personal.email}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="fw-bold w-15">{{'COMMON_DEPARTMENT'|translate}}:</td>
+                                                                                    <td>{{model.personal.department}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="fw-bold w-15">{{'COMMON_POSITION'|translate}}:</td>
+                                                                                    <td>{{model.personal.jobTitle}}</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div style="width: 100%;" kendo-tab-strip k-options="stripOptions">
+                                                            <ul>
+                                                                <li class="k-state-active">{{'USER_PROFILE_TAB_LEAVE' | translate}}</li>
+                                                                <li>{{'USER_PROFILE_TAB_MISSING' | translate}}</li>
+                                                                <li>{{'USER_PROFILE_TAB_OVERTIME' | translate}}</li>
+                                                                <li>{{'USER_PROFILE_TAB_SHIFT_EXCHANGE' | translate}}</li>
+                                                                <li>{{'WORK_HISTORIES' | translate}}</li>
+                                                            </ul>
+                                                            <div style="padding: 1em;width: 99.5%;">
+                                                                <div class="portlet-body mb-3">
+                                                                    <div class="row mrb10">
+                                                                        <div class="col-md-12">
+                                                                            <kendo-grid id="gridLeaveTitle" options="leaveTitleGridOptions" style="max-height: 300px; height: 200px;">
+                                                                            </kendo-grid>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div kendo-grid="leaveInformationGrid" id="leaveInformationGrid" class="mrt10" options="leaveInformationGridOptions"></div>
+                                                            </div>
+                                                            <div style="padding: 1em">
+                                                                <kendo-grid options="missingTimeclockApplicantGridOptions" id="missingTimeclockApplicantGrid"></kendo-grid>
+                                                            </div>
+                                                            <div style="padding: 1em; width: 99.5%;">
+                                                                <div class="portlet-body mb-3">
+                                                                    <div class="row mrb10">
+                                                                        <div class="col-md-12">
+                                                                            <kendo-grid id="gridOvertimeTitle" options="overtimeTitleGridOptions" style="max-height: 300px; height: 200px;">
+                                                                            </kendo-grid>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <kendo-grid options="overtimeApplicantGridOptions" id="overtimeApplicantGrid"></kendo-grid>
+                                                            </div>
+
+                                                            <div style="padding: 1em">
+                                                                <kendo-grid options="shiftExchangeApplicantGridOptions" id="shiftExchangeApplicantGrid"></kendo-grid>
+                                                            </div>
+                                                            <div style="padding: 1em; width: 99.5%;">
+                                                                <div class="portlet-body mb-3">
+                                                                    <div class="row mrb10">
+                                                                        <div class="col-md-3"></div>
+                                                                        <div  class="col-md-6">
+                                                                            <div class="timeline">
+                                                                                <div class="timeline-item" ng-show="findUser.officialResignationDate != null">
+                                                                                    <div class="timeline-content end">
+                                                                                        <h3>{{'USER_OFFICIAL_DATE' | translate}}</h3>
+                                                                                        <p>{{'DATE' | translate}}: <span class="">{{findUser.officialResignationDate | date:'dd/MM/yyyy'}}</span></p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="timeline-item" ng-repeat="pro in findUser.promoteAndTransfers" >
+                                                                                    <div class="timeline-content transfer">
+                                                                                        <h3>{{'DEPARTMENT_TRANSFER_DATE' | translate}}</h3>
+                                                                                        <p>{{'COMMON_DEPARTMENT' | translate}}: <span class="">{{pro.newDeptOrLineCode}} - {{pro.newDeptOrLineName}}</span></p>
+                                                                                        <p>{{'DATE' | translate}}: <span class="">{{pro.effectiveDate | date:'dd/MM/yyyy'}}</span></p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="timeline-item ">
+                                                                                    <div class="timeline-content start">
+                                                                                        <h3>{{'LEAVE_MANAGEMENT_STARTING_DATE' | translate}}</h3>
+                                                                                        <p>{{'DATE' | translate}}: <span class="">{{findUser.startDate | date:'dd/MM/yyyy'}}</span></p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>   
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="changePwdDialog" kendo-dialog="changePwdDialog" options="changePwdDialogOpts">
+    <div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px" ng-if="pwdModel.errors.length != 0">
+        <p class="font-red-thunderbird" ng-repeat="error in pwdModel.errors"> {{error}}</p>
+    </div>
+    <br />
+    <div class="col-md-12">
+        <label class="control-label" for="Current Password">
+            {{'CHANGE_PASSWORD_CURRENT'|translate}}: <span class="text-danger">*</span>
+        </label>
+        <input type="password" data-container-for="CurrentPassword" autocomplete="off" class="k-textbox w100 mb-3" ng-model="pwdModel.oldPassword">
+        <label class="control-label" for="New Password">
+            {{'CHANGE_PASSWORD_NEW_PASSWORD'|translate}}: <span class="text-danger">*</span>
+        </label>
+        <input type="password" data-container-for="NewPassword" autocomplete="off" class="k-textbox w100 mb-3" ng-model="pwdModel.newPassword">
+        <label class="control-label" for="New Password">
+            {{'CHANGE_PASSWORD_VERIFY_PASSWORD'|translate}}: <span class="text-danger">*</span>
+        </label>
+        <input type="password" data-container-for="VerifyPassword" autocomplete="off" class="k-textbox w100 mb-3" ng-model="pwdModel.verifyPassword">
+    </div>
+</div>

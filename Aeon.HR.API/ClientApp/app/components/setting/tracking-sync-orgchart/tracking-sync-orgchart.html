@@ -1,0 +1,447 @@
+﻿<style>
+    k-loading-mask {
+        z-index: 3;
+    }
+
+    #userDepartmentGrid .k-loading-image {
+        background-image: none !important;
+    }
+
+    #userDepartmentGrid .k-loading-color {
+        opacity: 0;
+    }
+
+    .sync-time-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .sync-time-from, .sync-time-to {
+        flex: 1;
+        height: 40px;
+    }
+
+    .date-separator {
+        color: #6c757d;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+</style>
+<div class="row p-3">
+    <div class="portlet bordered light">
+        <div class="portlet-title">
+            <div class="group poppins-medium text-grey-300">
+                <p style=" text-transform: uppercase !important;" class="display-8 m-0">{{title}}</p>
+            </div>
+        </div>
+
+        <!-- USER IN DEPARTMENT -->
+        <div class="table-rounded-toolbar mt-3">
+            <div class="accordion accordion-style1" id="collapseUDM">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button poppins-semibold display-9" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            USER IN DEPARTMENT
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="table-rounded-toolbar">
+                                <div class="toolbar">
+                                    <div class="row">
+                                        <div class="col-8">
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="d-flex align-items-center justify-content-end gap-1">
+                                                <button type="button" class="btn-none" ng-click="toggleFilterPanel('iShowModalSearchUserDepLog', true)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+                                                        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"></path>
+                                                    </svg>
+                                                </button>
+                                                <div class="custom-popup" ng-show="iShowModalSearchUserDepLog">
+                                                    <div class="custom-dialog custom-dialog-centered">
+                                                        <div class="custom-content p-3 rounded-4">
+                                                            <div class="d-flex align-items-center">
+                                                                <h1 class="custom-title fs-5 modal-title-style1" id="exampleModalLabel">SEARCH USER IN DEPARTMENTS LOG</h1>
+                                                                <button type="button" class="btn-close ms-auto" ng-click="toggleFilterPanel('iShowModalSearchUserDepLog', false)" aria-label="Close"></button>
+                                                            </div>
+                                                            <hr />
+                                                            <div class="custom-body">
+                                                                <form>
+                                                                    <div class="row mb-3">
+                                                                        <div class="col">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Keyword:</label>
+                                                                                <input type="text" name="keyword" class="form-control"
+                                                                                       title="DeptCode or DeptName or EmployeeCode..."
+                                                                                       style="width: 100%;" ng-model="searchInfo.keyword" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">User:</label>
+                                                                                <input type="text" name="keyword" class="form-control"
+                                                                                       title="input SapCode or FullName"
+                                                                                       style="width: 100%;" ng-model="searchInfo.userInfo" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mb-3">
+                                                                        <div class="col">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Sync Time:</label>
+                                                                                <div class="row g-2 align-items-center">
+                                                                                    <div class="col-5">
+                                                                                        <input type="date"
+                                                                                               class="form-control sync-time-from"
+                                                                                               style="border-radius: 0.375rem; border-color: #e4e7ea"
+                                                                                               ng-model="searchInfo.fromSyncDate">
+                                                                                    </div>
+                                                                                    <div class="col-2 text-center">
+                                                                                        <span class="date-separator">-</span>
+                                                                                    </div>
+                                                                                    <div class="col-5">
+                                                                                        <input type="date"
+                                                                                               class="form-control sync-time-to"
+                                                                                               style="border-radius: 0.375rem; border-color: #e4e7ea"
+                                                                                               ng-model="searchInfo.toSyncDate">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Action:</label>
+                                                                                <select kendo-drop-down-list id="actionId" name="actionId"
+                                                                                        k-options="masterData.actionOptions" style="width: 100%;"
+                                                                                        k-ng-model="searchInfo.action"
+                                                                                        class="form-select input-default"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex justify-content-end gap-2">
+                                                                        <button type="button" class="btn btn-white rounded-3 poppins-regular display-9" ng-click="action.reset()">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                                                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"></path>
+                                                                                <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"></path>
+                                                                            </svg>
+                                                                            &nbsp;{{'COMMON_BUTTON_RESET' | translate}}
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-primary rounded-3 poppins-regular display-9" ng-click="action.search(1)">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                                                                            </svg>
+                                                                            &nbsp;{{'COMMON_BUTTON_SEARCH' | translate}}
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="display-10 leading-18">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <kendo-grid id="userDepartmentGrid" options="userDepartmentGridOptions" style="border-radius: 15px; overflow: hidden; border-top-left-radius: 0px !important; border-top-right-radius: 0px !important;">
+                                            </kendo-grid>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--DEPARTMENT-->
+        <div class="table-rounded-toolbar mt-3">
+            <div class="accordion accordion-style1" id="collapseDepartment">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button poppins-semibold display-9" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            DEPARTMENTS
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="table-rounded-toolbar">
+                                <div class="toolbar">
+                                    <div class="row">
+                                        <div class="col-8">
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="d-flex align-items-center justify-content-end gap-1">
+                                                <button type="button" class="btn-none" ng-click="toggleFilterPanel('iShowModalSearchDepLog', true)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+                                                        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"></path>
+                                                    </svg>
+                                                </button>
+                                                <div class="custom-popup" ng-show="iShowModalSearchDepLog">
+                                                    <div class="custom-dialog custom-dialog-centered">
+                                                        <div class="custom-content p-3 rounded-4">
+                                                            <div class="d-flex align-items-center">
+                                                                <h1 class="custom-title fs-5 modal-title-style1" id="exampleModalLabel">SEARCH DEPARTMENTS LOG</h1>
+                                                                <button type="button" class="btn-close ms-auto" ng-click="toggleFilterPanel('iShowModalSearchDepLog', false)" aria-label="Close"></button>
+                                                            </div>
+                                                            <hr />
+                                                            <div class="custom-body">
+                                                                <form>
+                                                                    <div class="row mb-3">
+                                                                        <div class="col">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Keyword:</label>
+                                                                                <input type="text" name="keyword" class="form-control"
+                                                                                       title="input EmployeeCode or PostionCode or PositionName..."
+                                                                                       style="width: 100%;" ng-model="searchInfo.keyword" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Sync Time:</label>
+                                                                                <div class="row g-2 align-items-center">
+                                                                                    <div class="col-5">
+                                                                                        <input type="date"
+                                                                                               class="form-control sync-time-from"
+                                                                                               style="border-radius: 0.375rem; border-color: #e4e7ea"
+                                                                                               ng-model="searchInfo.fromSyncDate">
+                                                                                    </div>
+                                                                                    <div class="col-2 text-center">
+                                                                                        <span class="date-separator">-</span>
+                                                                                    </div>
+                                                                                    <div class="col-5">
+                                                                                        <input type="date"
+                                                                                               class="form-control sync-time-to"
+                                                                                               style="border-radius: 0.375rem; border-color: #e4e7ea"
+                                                                                               ng-model="searchInfo.toSyncDate">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mb-3">
+                                                                        <div class="col">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Department:</label>
+                                                                                <input type="text" name="department" class="form-control"
+                                                                                       title="Nhập DeptCode or DeptName..."
+                                                                                       style="width: 100%;" ng-model="searchInfo.department" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Action:</label>
+                                                                                <select kendo-drop-down-list id="actionId" name="actionId"
+                                                                                        k-options="masterData.actionOptions" style="width: 100%;"
+                                                                                        k-ng-model="searchInfo.action"
+                                                                                        class="form-select input-default"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="d-flex justify-content-end gap-2">
+                                                                        <button type="button" class="btn btn-white rounded-3 poppins-regular display-9" ng-click="action.reset()">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                                                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"></path>
+                                                                                <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"></path>
+                                                                            </svg>
+                                                                            &nbsp;{{'COMMON_BUTTON_RESET' | translate}}
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-primary rounded-3 poppins-regular display-9" ng-click="action.search(2)">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                                                                            </svg>
+                                                                            &nbsp;{{'COMMON_BUTTON_SEARCH' | translate}}
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="display-10 leading-18">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <kendo-grid id="departmentGrid" options="departmentOptions" style="border-radius: 15px; overflow: hidden; border-top-left-radius: 0px !important; border-top-right-radius: 0px !important;">
+                                            </kendo-grid>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--USER-->
+        <div class="table-rounded-toolbar mt-3">
+            <div class="accordion accordion-style1" id="collapseUser">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button poppins-semibold display-9" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                            USERS
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="table-rounded-toolbar">
+                                <div class="toolbar">
+                                    <div class="row">
+                                        <div class="col-8">
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="d-flex align-items-center justify-content-end gap-1">
+                                                <button type="button" class="btn-none" ng-click="toggleFilterPanel('iShowModalSearchUserLog', true)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+                                                        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"></path>
+                                                    </svg>
+                                                </button>
+                                                <div class="custom-popup" ng-show="iShowModalSearchUserLog">
+                                                    <div class="custom-dialog custom-dialog-centered">
+                                                        <div class="custom-content p-3 rounded-4">
+                                                            <div class="d-flex align-items-center">
+                                                                <h1 class="custom-title fs-5 modal-title-style1" id="exampleModalLabel">SEARCH USERS LOG</h1>
+                                                                <button type="button" class="btn-close ms-auto" ng-click="toggleFilterPanel('iShowModalSearchUserLog', false)" aria-label="Close"></button>
+                                                            </div>
+                                                            <hr />
+                                                            <div class="custom-body">
+                                                                <form>
+                                                                    <div class="row mb-3">
+                                                                        <div class="col">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Keyword:</label>
+                                                                                <input type="text" name="keyword" class="form-control"
+                                                                                       title="Nhập EmployeeCode hoặc PostionCode..."
+                                                                                       style="width: 100%;" ng-model="searchInfo.keyword" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Sync Time:</label>
+                                                                                <div class="row g-2 align-items-center">
+                                                                                    <div class="col-5">
+                                                                                        <input type="date"
+                                                                                               class="form-control sync-time-from"
+                                                                                               style="border-radius: 0.375rem; border-color: #e4e7ea"
+                                                                                               ng-model="searchInfo.fromSyncDate">
+                                                                                    </div>
+                                                                                    <div class="col-2 text-center">
+                                                                                        <span class="date-separator">-</span>
+                                                                                    </div>
+                                                                                    <div class="col-5">
+                                                                                        <input type="date"
+                                                                                               class="form-control sync-time-to"
+                                                                                               style="border-radius: 0.375rem; border-color: #e4e7ea"
+                                                                                               ng-model="searchInfo.toSyncDate">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mb-3">
+                                                                        <div class="col">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Action:</label>
+                                                                                <select kendo-drop-down-list id="actionId" name="actionId"
+                                                                                        k-options="masterData.actionOptions" style="width: 100%;"
+                                                                                        k-ng-model="searchInfo.action"
+                                                                                        class="form-select input-default"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col"></div>
+                                                                    </div>
+                                                                    <div class="d-flex justify-content-end gap-2">
+                                                                        <button type="button" class="btn btn-white rounded-3 poppins-regular display-9" ng-click="action.reset()">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                                                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"></path>
+                                                                                <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"></path>
+                                                                            </svg>
+                                                                            &nbsp;{{'COMMON_BUTTON_RESET' | translate}}
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-primary rounded-3 poppins-regular display-9" ng-click="action.search(3)">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                                                                            </svg>
+                                                                            &nbsp;{{'COMMON_BUTTON_SEARCH' | translate}}
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="display-10 leading-18">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <kendo-grid id="userGrid" options="userOptions" style="border-radius: 15px; overflow: hidden; border-top-left-radius: 0px !important; border-top-right-radius: 0px !important;">
+                                            </kendo-grid>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--LOG-->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-fixed-center" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-danger">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    Error Details
+                </h5>
+                <button type="button" class="close text-danger" ng-click="action.closeErrorModal()">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-danger mb-3">
+                    Found {{currentErrorList.length}} error(s) in the sync process
+                </div>
+                <div ng-show="currentErrorList.length > 0">
+                    <div class="error-item" ng-repeat="error in currentErrorList">
+                        <div class="d-flex">
+                            <div class="mr-3">
+                                <i class="fas fa-exclamation-circle text-danger"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="error-number">#{{$index + 1}}</div>
+                                <div class="error-message">{{error}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Empty state -->
+                <div ng-show="currentErrorList.length === 0" class="success-state">
+                    <i class="fas fa-check-circle success-icon"></i>
+                    <h5>No Errors Found</h5>
+                    <p class="text-muted">The sync process completed successfully without any errors.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

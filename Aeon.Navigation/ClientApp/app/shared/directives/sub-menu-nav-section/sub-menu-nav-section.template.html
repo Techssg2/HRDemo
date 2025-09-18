@@ -1,0 +1,63 @@
+﻿<style>
+    .remove-text-decoration {
+        text-decoration: none !important;
+    }
+
+    .learnMore {
+        color: #a03b7c !important;
+        font-family: Nova-Regular !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        text-decoration: none !important;
+        text-shadow: 2px 2px #ffffff;
+    }
+</style>
+<div class="row mrt10">
+    <div class="col-md-12 col-sm-12">
+        <div class="row widget-row">
+            <!-- Title -->
+            <div class="caption caption-md">
+                <span class="caption-subject uppercase bold-section-title remove-text-decoration">
+                    {{vm.title | translate}}
+                </span>
+                <a ng-if="vm.url.length" ng-click="openNewWindow(vm.url)" class="learnMore">Learn More?</a>
+                <!--<learn-more group="vm.title"> <a href="">oke</a> </learn-more>-->
+            </div>
+            <!-- Sections -->
+            <div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mrt10 mrb10" ng-repeat="item in vm.listMenu">
+                    <a ng-if="item.ref == 'home.dashboard'" class="remove-text-decoration" ui-sref='{{item.ref}}' ng-click="gotoDashboard1()">
+                        <div class="widget-thumb widget-bg-color-white bordered" style="cursor: pointer;">
+                            <div class="widget-thumb-wrap">
+                                <div class="widget-thumb-icon bg-green img-circle-sidebar"><img class="img-circle-icon" style="padding:0px" ng-src="{{item.icon}}"></div>
+                                <div class="widget-thumb-body">
+                                    <span class="widget-thumb-body-stat section-title">{{item.name | translate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a ng-if="item.ref != 'home.dashboard' && (!item.ref.includes('edoc_l_fin.aeon') && !item.ref.includes('edoc_l_trade'))" href="{{item.ref}}" class="remove-text-decoration">
+                        <div class="widget-thumb widget-bg-color-white bordered" style="cursor: pointer;">
+                            <div class="widget-thumb-wrap">
+                                <div class="widget-thumb-icon bg-green img-circle-sidebar"><img class="img-circle-icon" style="padding:0px" ng-src="{{item.icon}}"></div>
+                                <div class="widget-thumb-body">
+                                    <span class="widget-thumb-body-stat section-title">{{item.name | translate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+					<a ng-if="item.ref != 'home.dashboard' && (item.ref.includes('edoc_l_fin.aeon') || item.ref.includes('edoc_l_trade'))" href="{{item.ref}}" target="_blank" class="remove-text-decoration">
+                        <div class="widget-thumb widget-bg-color-white bordered" style="cursor: pointer;">
+                            <div class="widget-thumb-wrap">
+                                <div class="widget-thumb-icon bg-green img-circle-sidebar"><img class="img-circle-icon" style="padding:0px" ng-src="{{item.icon}}"></div>
+                                <div class="widget-thumb-body">
+                                    <span class="widget-thumb-body-stat section-title">{{item.name | translate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

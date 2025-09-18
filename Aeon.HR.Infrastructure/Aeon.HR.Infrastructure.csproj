@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1D52C6C0-82F2-49A0-A49F-9ED7E9B0D0B6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Aeon.HR.Infrastructure</RootNamespace>
+    <AssemblyName>Aeon.HR.Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Dynamic.Core, Version=1.0.18.0, Culture=neutral, PublicKeyToken=0f07ec44de6ac832, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.Core.1.0.18\lib\net46\System.Linq.Dynamic.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Unity.Abstractions, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net46\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net46\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstracts\AuditableEntity.cs" />
+    <Compile Include="Abstracts\BaseChildEntity.cs" />
+    <Compile Include="Abstracts\Entity.cs" />
+    <Compile Include="Abstracts\LamdaExtensions.cs" />
+    <Compile Include="Abstracts\SoftDeleteEntity.cs" />
+    <Compile Include="Abstracts\WorkflowEntity.cs" />
+    <Compile Include="Attributes\MyClassAttribute.cs" />
+    <Compile Include="Attributes\RepositoryAttribute.cs" />
+    <Compile Include="Constants\AbsenceQuotaTypeConstants.cs" />
+    <Compile Include="Constants\ActionAPIConstants.cs" />
+    <Compile Include="Constants\EdocModule.cs" />
+    <Compile Include="Constants\BusinessTripApplicationOutcomeConstants.cs" />
+    <Compile Include="Constants\JobgradeConst.cs" />
+    <Compile Include="Constants\TrackingHistoryTypeContants.cs" />
+    <Compile Include="Constants\MetadataTypeConstants.cs" />
+    <Compile Include="Constants\ItemTypeContants.cs" />
+    <Compile Include="Constants\UrlConstants.cs" />
+    <Compile Include="Constants\ModuleIntegrationsConstants.cs" />
+    <Compile Include="Constants\RuleValidate.cs" />
+    <Compile Include="Entities\BatchAction.cs" />
+    <Compile Include="Entities\BatchActionArgs.cs" />
+    <Compile Include="Entities\BatchQuery.cs" />
+    <Compile Include="Entities\BatchQueryArgs.cs" />
+    <Compile Include="Entities\CommonEntityAction.cs" />
+    <Compile Include="Entities\QueryArgs.cs" />
+    <Compile Include="Entities\RestrictedProperty.cs" />
+    <Compile Include="Entities\Result.cs" />
+    <Compile Include="Entities\UserContext.cs" />
+    <Compile Include="Enums\ActionExposeAPI.cs" />
+    <Compile Include="Enums\ApplicantType.cs" />
+    <Compile Include="Enums\BloodGroup.cs" />
+    <Compile Include="Enums\BTAErrorEnums.cs" />
+    <Compile Include="Enums\BTAType.cs" />
+    <Compile Include="Enums\CheckBudgetOption.cs" />
+    <Compile Include="Enums\CompanyPolicyEnums.cs" />
+    <Compile Include="Enums\ContractType.cs" />
+    <Compile Include="Enums\DepartmentFilterEnum.cs" />
+    <Compile Include="Enums\DepartmentType.cs" />
+    <Compile Include="Enums\EmailEnum.cs" />
+    <Compile Include="Enums\ForeignerOptions.cs" />
+    <Compile Include="Enums\Gender.cs" />
+    <Compile Include="Enums\LoginType.cs" />
+    <Compile Include="Enums\NavigationType.cs" />
+    <Compile Include="Enums\ObjectToPrintFromType.cs" />
+    <Compile Include="Enums\OperationOptions.cs" />
+    <Compile Include="Enums\OverTimeType.cs" />
+    <Compile Include="Enums\RemoteAPICode.cs" />
+    <Compile Include="Enums\ExtertalType.cs" />
+    <Compile Include="Enums\FieldType.cs" />
+    <Compile Include="Enums\FileProcessingType.cs" />
+    <Compile Include="Enums\Group.cs" />
+    <Compile Include="Enums\HalfDayOption.cs" />
+    <Compile Include="Enums\MaritalStatus.cs" />
+    <Compile Include="Enums\MasterDataFrom.cs" />
+    <Compile Include="Enums\ModuleType.cs" />
+    <Compile Include="Enums\ParticipantType.cs" />
+    <Compile Include="Enums\PositionStatus.cs" />
+    <Compile Include="Enums\Priority.cs" />
+    <Compile Include="Enums\ReasonType.cs" />
+    <Compile Include="Enums\ReportType.cs" />
+    <Compile Include="Enums\ResponseStatus.cs" />
+    <Compile Include="Enums\Right.cs" />
+    <Compile Include="Enums\Role.cs" />
+    <Compile Include="Enums\SAPFunctionalityType.cs" />
+    <Compile Include="Enums\ShuiBooks.cs" />
+    <Compile Include="Enums\StatusChange.cs" />
+    <Compile Include="Enums\HQPositionType.cs" />
+    <Compile Include="Enums\StorePositionType.cs" />
+    <Compile Include="Enums\TargetPlanType.cs" />
+    <Compile Include="Enums\TypeActualTime.cs" />
+    <Compile Include="Enums\TypeOfNeed.cs" />
+    <Compile Include="Enums\TypeTargetPlan.cs" />
+    <Compile Include="Enums\ReasonOptions.cs" />
+    <Compile Include="Enums\UserRole.cs" />
+    <Compile Include="Enums\VoteType.cs" />
+    <Compile Include="Enums\WorkingTimeType.cs" />
+    <Compile Include="Interfaces\IAuditableEntity.cs" />
+    <Compile Include="Interfaces\IAutoHistory.cs" />
+    <Compile Include="Interfaces\IAutoNumber.cs" />
+    <Compile Include="Interfaces\ICBEntity.cs" />
+    <Compile Include="Interfaces\IEntity.cs" />
+    <Compile Include="Interfaces\IEntityBaseRepository.cs" />
+    <Compile Include="Interfaces\IIntegrationEntity.cs" />
+    <Compile Include="Interfaces\IModuleDashboard.cs" />
+    <Compile Include="Interfaces\IOwnerOnly.cs" />
+    <Compile Include="Interfaces\IPermission.cs" />
+    <Compile Include="Interfaces\IRecruimentEntity.cs" />
+    <Compile Include="Interfaces\IRemindResponseInvitationJob.cs" />
+    <Compile Include="Interfaces\IReportBTA.cs" />
+    <Compile Include="Interfaces\IReportDetailBTA.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IRepositoryFactory.cs" />
+    <Compile Include="Interfaces\ISAPEntity.cs" />
+    <Compile Include="Interfaces\IServiceOwnerOnly.cs" />
+    <Compile Include="Interfaces\ISoftDeleteEntity.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\IWorkflowEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\ArgumentHelper.cs" />
+    <Compile Include="Utilities\Binders.cs" />
+    <Compile Include="Utilities\CurrentDirectoryHelper.cs" />
+    <Compile Include="Utilities\DynamicInvoker.cs" />
+    <Compile Include="Utilities\Encryptor.cs" />
+    <Compile Include="Utilities\Enums.cs" />
+    <Compile Include="Utilities\Extensions.cs" />
+    <Compile Include="Utilities\ReflectionHelper.cs" />
+    <Compile Include="Utilities\ServiceLocator.cs" />
+    <Compile Include="Utilities\UtilitiesHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

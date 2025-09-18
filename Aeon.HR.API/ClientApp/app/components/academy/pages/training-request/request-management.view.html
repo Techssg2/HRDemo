@@ -1,0 +1,267 @@
+<style>
+  .training-request-management .caption.caption-md > .caption-subject {
+    color: #b42e83 !important;
+    font-family: Nova-Regular !important;
+    font-size: 18px;
+  }
+
+  .training-request-management .department-detail-item span {
+    display: block;
+  }
+  .training-request-management .department-detail-item .title-detail {
+    font-weight: bold;
+  }
+  .training-request-management .department-detail-item {
+    border: 1px solid #eee;
+    padding: 20px;
+  }
+  .training-request-management .right-content {
+    border-radius: 16px;
+    /* overflow: auto; */
+    height: 100%;
+    padding: 0;
+  }
+  .training-request-management .border-training-grid {
+    border: 2px solid #e5e5e5;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 20px;
+  }
+  .training-request-management .training-request-header,
+  .training-request-management
+    .department-total-details
+    .department-detail-item {
+    margin: 0 0 20px 0;
+  }
+  .training-request-management .left-content {
+    border-radius: 16px;
+    border: 2px solid #e5e5e5;
+    overflow: auto;
+    height: 100%;
+  }
+  .k-grid-content {
+    min-height: 0px !important;
+    max-height: 500px !important;
+  }
+</style>
+<!--<div class="row training-request-management">
+  <div class="col-md-12">
+    <div class="portlet bordered light">
+      <div class="portlet-title">
+        <div class="caption caption-md">
+          <span class="caption-subject uppercase">{{title}} </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="portlet-body">
+            <div class="page-content-wrapper float-none">
+              <div class="row">
+                <div class="col-md-4 left-content" id="body">
+                  <input
+                    style="margin-bottom: 10px; margin-top: 10px"
+                    class="w100"
+                    id="departmentId"
+                    kendo-drop-down-tree="widget.department"
+                    k-options="departmentOptions"
+                    ng-model="departmentTreeId"
+                  />
+                  <div
+                    kendo-tree-view="tree"
+                    k-options="treeViewDepartment"
+                    id="treeview"
+                    k-data-source="dataDepartment"
+                    k-on-change="onchangeItemTreeView(dataItem)"
+                  >
+                    <span k-template>
+                      <span ng-if="dataItem.jobGradeCaption"
+                        >{{dataItem.name}}
+                      </span>
+                      <span ng-if="!dataItem.jobGradeCaption"
+                        >{{dataItem.name}}</span
+                      >
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-8 right-content">
+                  <div class="border-training-grid">
+                    <div class="row">
+                      <div class="training-request-header caption caption-md">
+                        <span class="caption-subject uppercase"
+                          >{{departmentName}}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="department-total-details">
+                        <div class="col-md-3">
+                          <div class="department-detail-item">
+                            <span class="caption-subject uppercase title-detail"
+                              >number of pending request
+                            </span>
+                            <span>{{totalPending}}</span>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="department-detail-item">
+                            <span class="caption-subject uppercase title-detail"
+                              >number of approved request
+                            </span>
+                            <span>{{totalApproved}}</span>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="department-detail-item">
+                            <span class="caption-subject uppercase title-detail"
+                              >total amount pending approval
+                            </span>
+                            <span>{{totalAmountPendingApproval}}</span>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="department-detail-item">
+                            <span class="caption-subject uppercase title-detail"
+                              >total amount approved
+                            </span>
+                            <span class="caption-subject uppercase"
+                              >{{totalAmountApproved}}</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="training-request-header caption caption-md">
+                        <span class="caption-subject uppercase"
+                          >training request
+                        </span>
+                      </div>
+                    </div>
+                    <div class="row" style="margin: 0px">
+                      <kendo-grid
+                        id="departmentGrid"
+                        options="departmentGridOptions"
+                      >
+                      </kendo-grid>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="d-flex align-items-center justify-content-between portlet-title">
+                <div class="group poppins-medium text-grey-300 caption caption-md px-3">
+                    <p style=" text-transform: uppercase !important;" class="display-8 m-0">{{title}}</p>
+
+                </div>
+
+            </div>
+            <div class="portlet-body p-2 bg-neutral-blue-300">
+                <div ng-show="false"><input id="files" name="files" kendo-upload type="file" ng-show="false" class="ng-hide" /></div>
+                <div class="page-content-wrapper float-none table-rounded-toolbar ">
+                    <div class="toolbar">
+                        <div class="row p-3">
+                            <div class="col-md-4 left-content" id="body" style=" border: 2px solid #e5e5e5; padding: 15px; border-radius: 16px;height:fit-content">
+                                <input style="margin-bottom: 10px; margin-top: 10px"
+                                       class="w100"
+                                       id="departmentId"
+                                       kendo-drop-down-tree="widget.department"
+                                       k-options="departmentOptions"
+                                       ng-model="departmentTreeId" />
+                                <div kendo-tree-view="tree"
+                                     k-options="treeViewDepartment"
+                                     id="treeview"
+                                     k-data-source="dataDepartment"
+                                     k-on-change="onchangeItemTreeView(dataItem)">
+                                    <span k-template>
+                                        <span ng-if="dataItem.jobGradeCaption">
+                                            {{dataItem.name}}
+                                        </span>
+                                        <span ng-if="!dataItem.jobGradeCaption">{{dataItem.name}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-8 right-content " >
+                                <div class="border-training-grid" style=" border: 2px solid #e5e5e5; padding: 15px; border-radius: 16px">
+                                    <div class="row">
+                                        <div class="training-request-header caption caption-md ">
+                                            <span style="color: #006efa " class="caption-subject uppercase display-8">
+                                                {{departmentName}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="department-total-details d-flex gap-2">
+                                            <div class="col-md-3 pl-0" >
+                                                <div class="department-detail-item" style="border: 1px solid black; padding: 15px; border-color: #e5e5e5; border-radius: 10px; height: 100% ">
+                                                    <span style=" text-transform: uppercase !important; font-weight:bold" class="caption-subject title-detail">
+                                                        number of pending request
+                                                    </span><br />
+                                                    <span>{{totalPending}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3" >
+                                                <div class="department-detail-item " style="border: 1px solid black; padding: 15px; border-color: #e5e5e5; border-radius: 10px; height: 100% ">
+                                                    <span style=" text-transform: uppercase !important; font-weight: bold" class="caption-subject  title-detail">
+                                                        number of approved request
+                                                    </span><br />
+                                                    <span>{{totalApproved}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3" >
+                                                <div class="department-detail-item" style="border: 1px solid black; padding: 15px; border-color: #e5e5e5; border-radius: 10px; height: 100% ">
+                                                    <span style=" text-transform: uppercase !important; font-weight: bold" class="caption-subject  title-detail">
+                                                        total amount pending approval
+                                                    </span><br />
+                                                    <span>{{totalAmountPendingApproval}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3" style="padding-right:30px">
+                                                <div class="department-detail-item" style="border: 1px solid black; padding: 15px; border-color: #e5e5e5; border-radius: 10px; height: 100% ">
+                                                    <span style=" text-transform: uppercase !important; font-weight: bold" class="caption-subject  title-detail">
+                                                        total amount approved
+                                                    </span><br />
+                                                    <span class="caption-subject uppercase">{{totalAmountApproved}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="training-request-header caption caption-md">
+                                            <span style="color: #006efa; text-transform: uppercase" class="caption-subject uppercase display-8">
+                                                training request
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2" style=" padding-left:11px; padding-right: 19px; ">
+                                    
+                                        <kendo-grid id="departmentGrid"
+                                                    options="departmentGridOptions" style=" padding:0px;overflow: hidden; ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

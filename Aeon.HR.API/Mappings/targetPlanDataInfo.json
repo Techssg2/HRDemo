@@ -1,0 +1,27 @@
+[
+  {
+    "SourceField": "RequestUser",
+    "TargetField": "EdocUser",
+    "Type": 0
+  },
+  {
+    "SourceField": "SapCode",
+    "TargetField": "Pernr",
+    "Type": 0
+  },
+  {
+    "SourceField": "PeriodYear",
+    "TargetField": "Zyear",
+    "Type": 0
+  },
+  {
+    "SourceField": "PeriodMonth",
+    "TargetField": "Period",
+    "Type": 0
+  },
+  {
+    "SourceField": "ReferenceNumber",
+    "TargetField": "RefNum",
+    "Type": 0
+  }
+]

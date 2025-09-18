@@ -1,0 +1,715 @@
+/* ========== HEADER ========== */
+#bst-header {
+    transition: all 0.3s;
+    z-index: 1000;
+    /* horizontal line */
+    border-bottom: 2px solid var(--color-grey-50);
+}
+
+    #bst-header.sync-collapse {
+        width: 100% !important;
+    }
+
+    #bst-header .btn-icon:hover {
+        background-color: var(--color-blue) !important;
+        color: var(--color-white) !important;
+        opacity: 1 !important;
+    }
+
+/* ========== FOOTER ========== */
+#bst-footer .utilities {
+    position: fixed;
+    bottom: 1rem;
+    right: 2rem;
+    /* width: 100%;
+  height: 100%; */
+}
+
+    #bst-footer .utilities .chatbot {
+        width: 100%;
+        height: 100%;
+    }
+
+        #bst-footer .utilities .chatbot .chatbot-tools {
+            position: absolute;
+            bottom: 5rem;
+            left: 0;
+            right: 0;
+        }
+
+        #bst-footer .utilities .chatbot button.dropdown-toggle {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        #bst-footer .utilities .chatbot button.show {
+            visibility: hidden;
+        }
+
+        #bst-footer .utilities .chatbot button:hover {
+            opacity: 0.9;
+        }
+
+        #bst-footer .utilities .chatbot .dropdown-menu {
+            width: 370px;
+            height: 514px;
+            padding: 0;
+            border: 0;
+            border-radius: 15px;
+            transform: translate(0, 0) !important;
+            inset: auto 0px 0px auto !important;
+        }
+
+        #bst-footer .utilities .chatbot .card {
+            border: 0;
+            border-radius: 15px;
+            height: 95%;
+        }
+
+        #bst-footer .utilities .chatbot .card-header {
+            border: 0;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            background-color: var(--color-white);
+        }
+
+        #bst-footer .utilities .chatbot .card-body {
+            border: 0;
+            background-color: var(--color-neutral-blue-300);
+            overflow: auto;
+        }
+
+        #bst-footer .utilities .chatbot .card-footer {
+            border: 0;
+            background-color: var(--color-white);
+            padding: 0;
+        }
+
+        #bst-footer .utilities .chatbot .dot-container {
+            bottom: -6px;
+            right: -3px;
+        }
+
+        #bst-footer .utilities .chatbot .dot {
+            width: 14px;
+            height: 14px;
+        }
+
+        #bst-footer .utilities .chatbot #chatbox.expanded {
+            width: 40vw;
+            height: calc(100% + 92.5vh);
+            transform: translate(2rem, 2rem) !important;
+        }
+
+/* ========== SIDEBAR & SIDEBAR COLLAPSE ========== */
+#bst-sidebar,
+#bst-sidebar-collapse {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: var(--color-white);
+    z-index: 1001;
+    /* vertical line */
+    border-right: 2px solid var(--color-grey-50);
+}
+
+    /* reset boards */
+    #bst-sidebar .board-single,
+    #bst-sidebar .board-collapse,
+    #bst-sidebar-collapse .board-single,
+    #bst-sidebar-collapse .board-collapse,
+    #bst-sidebar-collapse .board-collapse-items {
+        padding: 0;
+        margin: 0;
+    }
+
+        /* add arrow before collapse item */
+        #bst-sidebar .board-collapse .board-item,
+        #bst-sidebar-collapse .board-collapse .board-item {
+            position: relative;
+        }
+
+        #bst-sidebar .board-collapse > .isSubParent::before {
+            content: "\203A";
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(16px, -3px);
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+
+
+        #bst-sidebar-collapse .board-collapse > .isSubParent::before {
+            content: "\203A";
+            position: absolute;
+            top: 0;
+            left: -9px;
+            transform: translate(16px, -3px);
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+    #bst-sidebar .board-me,
+    #bst-sidebar-collapse .group-board {
+        height: 90%;
+    }
+
+    #bst-sidebar-collapse .group-board {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #bst-sidebar .board-collapse-items .board-item {
+        padding-left: 1rem;
+    }
+
+    /* ========== SIDEBAR ========== */
+    /* add color to board title */
+    #bst-sidebar .board-title {
+        color: var(--color-grey-300);
+        opacity: 0.4;
+    }
+
+    /* format item */
+    #bst-sidebar .board-item .board-link {
+        color: var(--color-grey-300);
+        text-wrap: nowrap;
+        padding-left: 2rem;
+        display: flex;
+        align-items: center;
+    }
+
+    /* active item */
+    #bst-sidebar .board-item.active {
+        background-color: var(--color-blue);
+        border-radius: 8px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+        #bst-sidebar .board-item.active .board-link {
+            color: var(--color-white);
+        }
+
+#bst-sidebar {
+    width: 13.5rem !important;
+    overflow-wrap: anywhere;
+}
+
+    #bst-sidebar .board-collapse-items {
+        padding-left: 0;
+    }
+
+    #bst-sidebar .board-link {
+        position: relative;
+    }
+
+        #bst-sidebar .board-link svg {
+            position: absolute;
+            top: 10px;
+        }
+
+        #bst-sidebar .board-link span {
+            text-wrap: wrap;
+            padding-left: 1rem;
+        }
+
+/* ========== SIDEBAR SHADOW ========== */
+#bst-sidebar-shadow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-semiblack-2);
+    z-index: 1000;
+    /* Ensure it appears above other elements */
+}
+
+/* ========== SIDEBAR COLLAPSE ========== */
+#bst-sidebar-collapse {
+    display: none;
+}
+
+    /* add arrow before collapse item: adjust position */
+    #bst-sidebar-collapse .board-collapse > li::before {
+        left: 1rem;
+    }
+
+/* ========== SIDEBAR ADD WIDGET ========== */
+#bst-sidebar-widget {
+    width: 289px;
+    height: calc(100% - 80px);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s;
+}
+
+    #bst-sidebar-widget.bst-collapse {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    #bst-sidebar-widget .input-within-icon input {
+        height: 40px;
+        padding-left: 2rem;
+    }
+
+/* ========== MAIN ========== */
+.bst-main {
+    width: 100%;
+    height: 100%;
+    float: right;
+    padding: 1rem 2rem;
+    background-color: var(--color-white);
+}
+
+/* ========== LOGIN: SLIDER ========== */
+#bst-login .card-slide-background {
+    background-image: url("../images/slide-bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin: 1.3rem;
+    border-radius: 20px;
+}
+
+#bst-login .card-frame {
+    background-color: var(--color-white);
+    opacity: 0.9;
+}
+
+#bst-login .card-slide,
+#bst-login .card-frame {
+    width: calc(100% - 80px);
+    height: 250px;
+    border-radius: 20px;
+    padding: 2rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 40px;
+}
+
+/* ========== UI ========== */
+.bst-ui-wrapper {
+    width: 100%;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+    .bst-ui-wrapper h3.ui-heading {
+        background-color: var(--color-blue);
+        color: var(--color-white);
+        font-size: 18px;
+        padding: 0.5rem 1rem;
+    }
+
+    .bst-ui-wrapper h4.ui-heading {
+        display: block;
+        font-size: 14px;
+    }
+
+/* ========== FINANCE DETAIL ========== */
+#bst-finance-detail .tooltip-style2.tooltip-below .tooltip-text {
+    transform: translate(-5.5%, 40%);
+}
+
+/* ========== FINANCE SCHEDULE ========== */
+#bst-finance-schedule .fc-header-toolbar.fc-toolbar .fc-toolbar-chunk {
+    position: absolute;
+    right: 1.5rem;
+    top: 5.8rem;
+}
+
+/* ========== NOTIFICATIONS ========== */
+#bst-notifications-page .header {
+    /* appearance */
+    background-color: var(--color-grey-50);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 1rem;
+    /* flex */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#bst-notifications-page .header-left,
+#bst-notifications-page .header-right {
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+}
+
+    #bst-notifications-page .header-right .form-select {
+        padding: 0.125rem 2rem 0.125rem 0.5rem;
+    }
+
+    #bst-notifications-page .header-right .dropdown button {
+        background-color: var(--color-white);
+        color: var(--color-blue);
+        font-size: 20px;
+        width: 30px;
+        height: 30px;
+        border-radius: 20px;
+    }
+
+#bst-notifications-page .icon-bell {
+    font-size: 1rem;
+}
+
+#bst-notifications-page .body .options {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#bst-notifications-page .body .list {
+    padding: 1rem;
+}
+
+    #bst-notifications-page .body .list .dropdown-item {
+        padding: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+    }
+
+/* ========== FILTER SEARCH ========== */
+#bst-filter-search-page.bst-main {
+    background-color: var(--color-neutral-blue-300);
+}
+
+#bst-filter-search-page .page-title-wrapper {
+    height: 199px;
+    border-radius: 8px;
+    /* center */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    #bst-filter-search-page .page-title-wrapper .page-title {
+        color: var(--color-white);
+    }
+
+#bst-filter-search-page .heading-wrapper {
+    position: relative;
+    height: 250px;
+}
+
+    #bst-filter-search-page .heading-wrapper form {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(5.5%, 185%);
+        width: 90%;
+    }
+
+/* ========== FINANCE SCHEDULE ========== */
+#bst-finance-schedule .selected-date {
+    padding: 0.25rem 0.35rem !important;
+    background-color: var(--color-blue-opacity-40);
+    border-radius: 50%;
+}
+
+#bst-finance-schedule table.fc-scrollgrid {
+    border-radius: 8px;
+}
+
+#bst-finance-schedule .fc-theme-standard th {
+    vertical-align: middle;
+    overflow-wrap: anywhere;
+}
+
+    #bst-finance-schedule .fc-theme-standard th .fc-timegrid-axis-frame {
+        justify-content: center;
+    }
+
+#bst-finance-schedule .fc-col-header col,
+#bst-finance-schedule .fc-timegrid-slots col,
+#bst-finance-schedule .fc-timegrid-cols col {
+    width: 60px !important;
+}
+
+#bst-finance-schedule .fc-direction-ltr .fc-timegrid-slot-label-frame {
+    text-align: center;
+}
+
+#bst-finance-schedule .fc-timegrid-axis-frame,
+#bst-finance-schedule .fc-timegrid-slot-label-cushion {
+    color: var(--color-black);
+    /* fonts */
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+#bst-finance-schedule .fc-col-header-cell-cushion b {
+    color: var(--color-black);
+    /* fonts */
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+#bst-finance-schedule .fc-col-header-cell-cushion span {
+    color: var(--color-black);
+    /* fonts */
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+#bst-finance-schedule .accordion-button {
+    background-color: unset;
+}
+
+    #bst-finance-schedule .accordion-button:focus {
+        box-shadow: unset;
+        color: unset;
+    }
+
+/* ========== WIDGET: SEARCH FORM ========== */
+#bst-search-form input {
+    /* apperance */
+    height: 100px;
+    padding: 0px 100px;
+    border-radius: 8px;
+    background-color: var(--color-neutral-blue-300);
+    border: 0;
+    /* fonts */
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 20px;
+}
+
+    #bst-search-form input:focus {
+        box-shadow: none;
+    }
+
+#bst-search-form .icon-s,
+#bst-search-form .icon-e {
+    padding: 0 15px;
+}
+
+    #bst-search-form .icon-s i::before {
+        font-size: 50px;
+    }
+
+    #bst-search-form .icon-e i::before {
+        font-size: 16px;
+    }
+
+#bst-search-form.search-form-style1 input {
+    height: 82px;
+    padding: 0 80px;
+    background-color: var(--color-white);
+}
+
+#bst-search-form.search-form-style1 .icon-s {
+    padding: 0 5px;
+}
+
+    #bst-search-form.search-form-style1 .icon-s i::before {
+        font-size: 40px;
+    }
+
+/* ========== WIDGET: GRAND OPEN STORE ========== */
+#bst-grand-open-store {
+    height: 282px;
+}
+
+/* ========== WIDGET: HELP ========== */
+#bst-help .dropdown-menu {
+    width: 260px;
+}
+
+/* ========== WIDGET: NOTIFICATIONS ========== */
+#bst-notifications .dropdown-menu {
+    width: 360px;
+}
+
+/* ========== WIDGET: PROFILE ========== */
+#bst-profile .dropdown-menu {
+    width: 240px;
+}
+
+/* ========== GENERAL ========== */
+.chart-container {
+    border: 0;
+}
+
+a.fc-event {
+    border: 0;
+    border-radius: 8px;
+}
+
+.fc-daygrid-event-harness a.fc-event {
+    height: 100px;
+}
+
+.fc-timegrid-event-harness {
+    margin: 0.25rem 0.125rem;
+    margin-left: 0.3rem;
+    margin-right: 0;
+}
+
+.dropdown-menu {
+    z-index: 1001;
+}
+
+#financeTabContent .tab-options {
+    margin-top: 5rem;
+    width: 100%;
+}
+
+/* ========== DROPDOWN ========== */
+.dropdown-customizer {
+    padding: 1rem;
+    border: 0;
+}
+
+    .dropdown-customizer ul {
+        padding: 0;
+    }
+
+    .dropdown-customizer a {
+        width: 90px;
+        height: 90px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 1rem;
+    }
+
+    .dropdown-customizer img {
+        width: 39px;
+        height: 39px;
+    }
+
+    .dropdown-customizer .title {
+        font-family: "Poppins", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .dropdown-customizer a:hover {
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+        background-color: var(--color-neutral-blue-300);
+    }
+
+/* ========== STICKYBAR ========== */
+.title-wrapper.stickybar-1 {
+    top: 45px;
+    z-index: 1 !important;
+}
+
+.table-wrapper {
+    max-height: 500px;
+}
+
+/* ========== SUBMENU ========== */
+.active-submenu {
+    overflow: unset !important;
+}
+
+    .active-submenu .sidebar-item {
+        width: 100vw;
+    }
+
+.submenu {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 160px;
+    /* Positions submenu to the right of the sidebar */
+    width: 150px;
+    /* Ensures it covers the same width as the sidebar */
+    z-index: 1000;
+}
+
+.sidebar-item:hover > .submenu,
+.submenu-item:hover > .submenu,
+.submenu-item.active > .submenu {
+    display: block; /* Hi?n th? submenu */
+}
+
+.submenu-item:hover > .submenu,
+.submenu:hover {
+    display: block;
+}
+
+.submenu .submenu {
+    left: 150px;
+    /* Ensures deeper submenus are also positioned to the right */
+}
+
+.submenu .submenu-item {
+    color: var(--color-grey-300);
+    text-wrap: nowrap;
+    display: flex;
+    background-color: white;
+    border: 1px solid var(--color-grey-50);
+}
+
+.submenu-collapse-icon {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.submenu .submenu-item:hover {
+    background-color: #f0f0f0 !important;
+    color: #000;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#level3, .level-3-submenu {
+    display: none;
+}
+
+.board-item:hover > .board-collapse-items > .submenu > .submenu-item > .level-3-submenu,
+.board-item:hover > #level3 {
+    display: block;
+    padding-left: 1rem;
+}
+
+/* ========== horizontal scroll cards ========== */
+.scroll-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+}
+
+    .scroll-container .card {
+        flex: 0 0 auto;
+        width: 100%;
+        scroll-snap-align: start;
+    }

@@ -1,0 +1,453 @@
+<style>
+    /* @media (min-height: 800px) {
+        .k-grid-content {
+            min-height: 100px;
+            max-height: 700px;
+        }
+    } */
+    @media screen and (max-height: 700px) and (min-height: 600px) {
+        .k-grid-content {
+            min-height: 100px;
+            height: 400px;
+        }
+    }
+
+    @media screen and (max-height: 992px) and (min-height: 710px) {
+        .k-grid-content {
+            min-height: 100px;
+            height: 700px;
+        }
+    }
+
+    @media screen and (max-height: 3000px) and (min-height: 1000px) {
+        .k-grid-content {
+            min-height: 100px;
+            height: 1000px;
+        }
+    }
+
+    .red {
+        border: 1px solid red;
+    }
+
+        .red:hover {
+            border: 1px solid red;
+        }
+    /* @media (min-height: 500px) {
+        .k-grid-content {
+            min-height: 100px;
+            max-height: 400px;
+        }
+    } */
+</style>
+<!--<div class="row">
+    <div class="p-3">
+        <div class="portlet bordered light">-->
+            <!-- Title -->
+            <!--<div class="d-flex align-items-center justify-content-between">
+                <div class="group poppins-medium text-grey-300">
+                    <span class="display-8 m-0">{{title}}</span>
+                </div>
+                <div class="me-2">
+                    <button type="button" class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1" ng-click="retryAll()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="right-5">
+                            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+                        </svg>&nbsp;Retry All
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal"
+                            ng-click="toggleFilterPanel(true)">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="16"
+                             height="16"
+                             fill="currentColor"
+                             class="bi bi-funnel"
+                             viewBox="0 0 16 16">
+                            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"></path>
+                        </svg>&nbsp;Search
+                    </button>
+
+                    <button type="button" class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1" ng-click="export()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="12" y1="18" x2="12" y2="12"></line>
+                            <line x1="9" y1="15" x2="15" y2="15"></line>
+                        </svg>&nbsp;Export
+                    </button>
+                </div>
+            </div>
+            <div class="portlet-body">-->
+                <!--Search-->
+                <!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-2xl modal-dialog-centered">
+                        <div class="modal-content p-3 rounded-4">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5 modal-title-style1" id="exampleModalLabel">
+                                    SEARCH
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-label">Keyword:</label>
+                                                <input type="text" name="keyword" class="form-control"
+                                                       style="width: 100%;" ng-model="searchInfo.keyword" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-label">Status:</label>
+                                                <select class="form-control" kendo-combo-box k-options="statusOptions"
+                                                        k-ng-model="searchInfo.statusId" style="width:100%; height:100%"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-label">Department:</label>
+                                                <input class="form-select" id="departmentId"
+                                                       kendo-drop-down-tree="widget.department"
+                                                       k-options="departmentOptions"
+                                                       ng-model="searchInfo.departmentCode"
+                                                       style="width: 100%; border-radius: 0.375rem; padding: 1px; overflow: hidden; border-color: #e4e7ea" />
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-label">Action:</label>
+                                                <select class="form-control" kendo-combo-box k-options="actionOptions"
+                                                        k-ng-model="searchInfo.action" style="width: 100%;height:100%"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-label">Created Date:</label>
+                                                </br><range-Date-Of-Date-Picker style="height:100%" d-from="searchInfo.fromDate" d-to="searchInfo.toDate"></range-Date-Of-Date-Picker>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-label">Function Types:</label>
+                                                <select kendo-multi-select class="form-select" k-options="functionTypesOptions" k-ng-model="searchInfo.functionTypes" style="border-radius: 0.375rem; padding: 1px; overflow: hidden; border-color: #e4e7ea"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-label">Tracking Date:</label>
+                                                </br><custom-Date-Range-Picker d-from="searchInfo.fromTrackingDate" d-to="searchInfo.toTrackingDate"></custom-Date-Range-Picker>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-label">Payload:</label>
+                                                <input type="text" name="keyword" class="form-control"
+                                                       style="width: 100%;" ng-model="searchInfo.payload" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <button type="button" class="btn btn-white rounded-3 poppins-regular display-9" ng-click="reset()">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"></path>
+                                                <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"></path>
+                                            </svg>
+                                            &nbsp;{{'COMMON_BUTTON_RESET' | translate}}
+                                        </button>
+                                        <button type="button" class="btn btn-primary rounded-3 poppins-regular display-9" ng-click="search()">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                                            </svg>
+                                            &nbsp;{{'COMMON_BUTTON_SEARCH' | translate}}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <!-- Windows edit -->
+                <!--<div kendo-window="trackingEditWin" id="trackingEditWin" k-title="'Edit Payload'" k-draggable="false" ng-show="isITHelpdesk"
+                     k-visible="false" k-actions="dialogActions" width="600" modal="true" resizable="false"
+                     k-on-close="onClose()" k-on-open="onOpen()">
+                    <div class="row k-popup-edit-form k-window-content k-content" style="padding-bottom:0px">
+                        <div class="col-md-12">
+                            <div class="k-edit-label">
+                                <label for="Payload">
+                                    Payload:
+                                </label>
+                            </div>
+                            <div data-container-for="Note" class="k-edit-field">
+                                <textarea id="payload-text" ng-model="dataItemAfter.payload" autocomplete="off" class="k-textbox form-control" name="Payload" title="Payload" rows="5"> </textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="k-edit-label">
+                                <label for="Comment">
+                                    Comment:
+                                </label>
+                            </div>
+                            <div data-container-for="Note" class="k-edit-field">
+                                <textarea id="comment-text" ng-model="comment" autocomplete="off" class="k-textbox form-control" name="Comment" title="Comment" rows="5"> </textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{'ATTACHMENT_DETAIL'| translate}}:</label>
+                                <div class="col-md-9">
+                                    <input name="files" id="attachmentDetail" type="file" kendo-upload
+                                           k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }"
+                                           k-select="onSelect" k-remove="removeAttach"
+                                           class="input-default" />
+                                </div>
+                                <label class="col-md-3 control-label"
+                                       ng-if="oldAttachmentDetails && oldAttachmentDetails.length"></label>
+                                <div class="col-md-9" style="margin-top: 10px; padding-left: 30px;"
+                                     ng-if="oldAttachmentDetails && oldAttachmentDetails.length">
+                                    <p><b>{{'UPLOADED_FILE_LIST'| translate}}</b></p>
+                                    <ol>
+                                        <li ng-repeat="doc in oldAttachmentDetails">
+                                            <span>
+                                                <a ng-click="downloadAttachment(doc.id)">{{doc.fileDisplayName}}</a>
+                                            </span>
+                                            <span ng-click="viewFileOnline(doc.id)" class="viewAttachmentDetail"
+                                                  style="color: #5b9bd1; cursor: pointer;">
+                                                |
+                                                {{'COMMON_BUTTON_VIEW'| translate}}
+                                            </span>
+                                            <span ng-click="removeOldAttachment(doc)" class="deleteattachmentDetail"
+                                                  style="color: #5b9bd1; cursor: pointer;">
+                                                |
+                                                {{'COMMON_BUTTON_DELETE'| translate}}
+                                            </span>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="k-edit-buttons k-state-default col-md-12"
+                             style="border-top:1px solid #c9c9c9;padding-top:1em;">
+                            <a role="button" ng-click="saveChangeEdit();" style="margin-right:1.5em !important;"
+                               class="float-right btn btn-default btn-sm btn-save-popup">
+                                <span class="k-icon k-i-save font-green-jungle"
+                                      style="font-size: 14px;margin-right: .1em;margin-bottom: .1em;"></span>Save Change
+                            </a>
+                        </div>
+                    </div>
+                </div>-->
+                <!--windows history -->
+                <!--<action-history workflow-instances="workflowInstances"></action-history>-->
+                <!--Grid-->
+                <!--<div class="row">
+                    <div class="col-md-12">
+                        <kendo-grid id="allOrMyRequestGrid" options="allOrMyRequestGridOptions" style="border-radius: 15px; overflow: hidden; border: 1px solid #ddd">
+                        </kendo-grid>
+                    </div>
+                </div>
+            </div>-->
+            <!-- Content -->
+        <!--</div>
+    </div>
+</div>-->
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="group poppins-medium text-grey-300">
+
+                    <p style=" text-transform: uppercase !important;" class="display-8 m-0">{{title}}</p>
+                    <p class="display-11">
+                        <span class="opacity-40">Number of record:</span> {{total}}
+                    </p>
+
+                </div>
+            </div>
+            <div class="table-rounded-toolbar">
+                <div class="toolbar">
+                    <div class="row">
+                        <div class="col-8">
+
+                        </div>
+                        <div class="col-4">
+
+                            <div class="d-flex align-items-center justify-content-end gap-1">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <button type="button" class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1" ng-click="retryAll()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="right-5">
+                                            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+                                        </svg>&nbsp;Retry All
+                                    </button>
+
+
+                                    <button type="button" ng-click="export()" class="btn btn-outline-cyan rounded-3 poppins-regular display-9 py-2 px-3">
+                                        <svg fill="currentColor" class="bi bi-check-square" width="16" height="16" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="m0 1016.081 409.186 409.073 79.85-79.736-272.867-272.979h1136.415V959.611H216.169l272.866-272.866-79.85-79.85L0 1016.082ZM1465.592 305.32l315.445 315.445h-315.445V305.32Zm402.184 242.372-329.224-329.11C1507.042 187.07 1463.334 169 1418.835 169h-743.83v677.647h112.94V281.941h564.706v451.765h451.765v903.53H787.946V1185.47H675.003v564.705h1242.353V667.522c0-44.498-18.07-88.207-49.581-119.83Z" fill-rule="evenodd"></path>
+                                        </svg>
+                                        &nbsp;Export
+                                    </button>
+
+
+                                </div>
+
+                                <button type="button" class="btn-none" ng-click="toggleFilterPanel(true)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+                                        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"></path>
+                                    </svg>
+                                </button>
+
+
+                                <!-- Modal -->
+                                <div class="custom-popup" ng-show="isModalVisible">
+                                    <div class="custom-dialog custom-dialog-centered">
+                                        <div class="custom-content p-3 rounded-4">
+                                            <div class="d-flex align-items-center">
+                                                <h1 class="custom-title fs-5 modal-title-style1" id="exampleModalLabel">SEARCH</h1>
+                                                <button type="button" class="btn-close ms-auto" ng-click="toggleFilterPanel(false)" aria-label="Close"></button>
+                                            </div>
+                                            <hr />
+                                            <div class="custom-body">
+                                                <form>
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Keyword:</label>
+                                                                <input type="text" name="keyword" class="form-control"
+                                                                       style="width: 100%;" ng-model="searchInfo.keyword" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Status:</label>
+                                                                <select class="form-control" kendo-combo-box k-options="statusOptions"
+                                                                        k-ng-model="searchInfo.statusId" style="width:100%; height:100%"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Department:</label>
+                                                                <input class="form-select" id="departmentId"
+                                                                       kendo-drop-down-tree="widget.department"
+                                                                       k-options="departmentOptions"
+                                                                       ng-model="searchInfo.departmentCode"
+                                                                       style="width: 100%; border-radius: 0.375rem; padding: 1px; overflow: hidden; border-color: #e4e7ea" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Action:</label>
+                                                                <select class="form-control" kendo-combo-box k-options="actionOptions"
+                                                                        k-ng-model="searchInfo.action" style="width: 100%;height:100%"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Created Date:</label>
+                                                                </br><range-Date-Of-Date-Picker style="height:100%" d-from="searchInfo.fromDate" d-to="searchInfo.toDate"></range-Date-Of-Date-Picker>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Function Types:</label>
+                                                                <select kendo-multi-select class="form-select" k-options="functionTypesOptions" k-ng-model="searchInfo.functionTypes" style="border-radius: 0.375rem; padding: 1px; overflow: hidden; border-color: #e4e7ea"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Tracking Date:</label>
+                                                                </br><custom-Date-Range-Picker d-from="searchInfo.fromTrackingDate" d-to="searchInfo.toTrackingDate"></custom-Date-Range-Picker>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Payload:</label>
+                                                                <input type="text" name="keyword" class="form-control"
+                                                                       style="width: 100%;" ng-model="searchInfo.payload" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-end gap-2">
+                                                        <button type="button" class="btn btn-white rounded-3 poppins-regular display-9" ng-click="reset()">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"></path>
+                                                                <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"></path>
+                                                            </svg>
+                                                            &nbsp;{{'COMMON_BUTTON_RESET' | translate}}
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary rounded-3 poppins-regular display-9" ng-click="search()">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                                                            </svg>
+                                                            &nbsp;{{'COMMON_BUTTON_SEARCH' | translate}}
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Grid-->
+               
+                <div class="display-10 leading-18">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <kendo-grid id="allOrMyRequestGrid" options="allOrMyRequestGridOptions" style="border-radius: 15px; overflow: hidden; border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; d">
+                            </kendo-grid>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>
+
+
+<tracking-history ng-if="showTrackingHistoryDirective" tracking-history="trackingHistory"></tracking-history>
+
+<div id="dialog" kendo-dialog="editPayloadDialog" options="editPayloadDialogOpts" ng-show="isITHelpdesk">
+    <div class="alert alert-danger-style1" role="alert" style="margin-bottom: 0px" ng-if="!modelEditPayload.isValid && modelEditPayload.errorMessage">
+        <span class="font-red-thunderbird">{{modelEditPayload.errorMessage}}</span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Payload</label>
+        <textarea class="form-control comment-text input-default it-helpdesk" placeholder="" style="width: 100%;" rows="11"
+                  ng-model="modelEditPayload.payload"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">{{'COMMON_COMMENT'|translate}}</label>
+        <textarea class="form-control comment-text input-default it-helpdesk" placeholder="" style="width: 100%;" rows="3"
+                  ng-model="modelEditPayload.comment"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">{{'Attachment'|translate}}</label>
+        <input id="attachmentFieldId" class="form-control k-disabled it-helpdesk" name="files" type="file" kendo-upload k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }" k-select="onSelect" k-remove="removeAttach" />
+    </div>
+</div>

@@ -1,0 +1,433 @@
+<style>
+    .add-child.remove-this {
+        display: none;
+    }
+
+    div.k-edit-form-container {
+        width: 800px;
+    }
+
+    .form-edit-course {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .course-content {
+        flex: 1;
+    }
+
+    .course-image-container {
+        padding-right: 15px;
+    }
+
+        .course-image-container img {
+            max-width: 300px;
+        }
+
+    .form-edit-course input.k-invalid,
+    .form-edit-course select.k-invalid {
+        border: 1px solid #f00;
+    }
+
+    .form-edit-course .form-group {
+        margin: 0;
+        min-height: 50px;
+    }
+
+    .form-edit-course .k-widget.k-tooltip-validation {
+        position: relative;
+        display: block !important;
+        border: none;
+        background-color: #fff;
+        color: #f00;
+        margin: 3px 0 3px 0 !important;
+        padding: 0;
+        text-align: left;
+    }
+
+
+
+    #CoursePopup .k-grid-cancel,
+    #treelist .k-grid-cancel {
+        background-color: #e5e5e5 !important;
+    }
+
+    .form-edit-course .k-widget.k-tooltip-validation[style*="display"] {
+        display: none !important;
+    }
+
+    .form-edit-course .k-widget.k-tooltip-validation .k-callout-n {
+        display: none;
+    }
+
+    .form-group.image-input, .form-group.document-input {
+        margin-top: 16px;
+    }
+
+    #remove-image {
+        margin-top: 5px;
+    }
+
+
+
+    #treelistcourse .no-icon .k-primaryspan.k-icon,
+    #treelist .no-icon .k-primary span.k-icon,
+    #CoursePopup .no-icon .k-primary span.k-icon {
+        display: none;
+    }
+
+    .image-preview {
+        max-width: 240px;
+        max-height: 200px;
+    }
+
+    .k-dropzone {
+        border-color: #e5e5e5;
+    }
+
+    .control-label-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .control-label.sub-label {
+        font-size: 10px;
+    }
+
+    .k-dropzone-hint {
+        display: block !important;
+    }
+
+    .document-command {
+        margin-right: 5px;
+    }
+
+        .document-command.file-name {
+            color: #000;
+        }
+
+    #iframe-document {
+        width: 100%;
+    }
+
+    textarea.description-input {
+        resize: none;
+    }
+
+    .k-widget.k-window.have-close-button .k-window-titlebar {
+        pointer-events: unset;
+    }
+
+    .k-widget.k-window.have-close-button .k-window-actions {
+        display: block;
+    }
+
+    .k-window-titlebar {
+        pointer-events: none;
+    }
+
+    .k-window-actions {
+        display: none;
+    }
+
+    .k-grid td {
+        text-align: left;
+        border: solid 1px #ccc;
+    }
+
+    .k-button-icontext .k-icon {
+        margin-right: -3px !important
+    }
+
+    .k-grid tbody button.k-button {
+        width: 10px;
+        min-width: 35px !important;
+        height: 35px !important;
+        border-radius: 4px;
+        background-color: white
+    }
+
+    .k-command-cell .k-i-edit {
+        color: #97d6fb
+    }
+
+    .k-command-cell .red-stripe {
+        color: #f87878;
+        border-color: #f87878
+    }
+
+    .k-command-cell .blue-stripe {
+        color: #38b6ff;
+        border-color: #38b6ff
+    }
+
+    .k-command-cell .k-i-save {
+        position: absolute;
+        background-color: white;
+        height: 100%;
+        width: 99%;
+        border-radius: 4px;
+    }
+
+    .k-command-cell k-grid-content .k-primary:hover, .blue-stripe:hover {
+        color: #38b6ff;
+        background-color: inherit;
+        transform: none;
+        box-shadow: none;
+        border-color: #97d6fb;
+    }
+
+    .k-command-cell .add-child {
+        width: 111px !important;
+        border-color: black
+    }
+
+
+    k-command-cell .k-i-x {
+        position: absolute;
+        background-color: white;
+        height: 100%;
+        width: 99%;
+        border-radius: 4px;
+    }
+
+    .k-command-cell .k-grid-cancel {
+        font-size: 0;
+        border-color: black;
+    }
+
+        .k-command-cell .k-grid-cancel:hover {
+            font-size: 0;
+            border-color: black;
+        }
+
+
+    .k-grid-toolbar{
+        display:none
+    }
+
+    .k-window-title {
+        font-weight: bold;
+        color: #006efa;
+    }
+
+    .k-edit-buttons > .k-button{
+        border-radius:5px;
+        background-color:white;
+        border-color: black;
+        column-gap:10px;
+        color:black
+    }
+
+        .k-edit-buttons > .k-button:hover {
+            border-radius: 5px;
+            background-color: white;
+            border-color: black;
+            column-gap: 10px;
+            color: black
+        }
+
+    .k-button:hover .k-icon, .k-button:hover .k-tool-icon, .k-field-actions .k-icon, .k-gantt-toolbar .k-icon, .k-grid-toolbar .k-button:hover > .k-i-file-excel, .k-grid-toolbar .k-button:hover > .k-i-file-pdf, .k-grid-toolbar .k-i-file-excel, .k-grid-toolbar .k-i-file-pdf, .k-grid-toolbar .k-icon, .k-grouping-header .k-button-icon:hover > .k-icon.k-i-delete, .k-grouping-header .k-i-arrow-60-down, .k-grouping-header .k-i-arrow-60-up, .k-grouping-header .k-i-delete, .k-grouping-header .k-link:hover > .k-icon.k-i-arrow-60-down, .k-grouping-header .k-link:hover > .k-icon.k-i-arrow-60-up, .k-notification .k-icon, .k-pivot-configurator-settings .k-icon:hover, .k-scheduler-content .k-icon, .k-scheduler-footer .k-icon, .k-scheduler-toolbar .k-icon, .k-splitbar.k-splitbar-horizontal-hover .k-icon, .k-splitbar.k-splitbar-vertical-hover .k-icon, .k-state-focused .k-tool-icon, .k-state-hover .k-tool-icon, .k-state-selected .k-tool-icon, .k-textbox:hover > .k-icon, .k-tool-icon:hover, div.k-splitbar.k-state-focused .k-icon {
+        opacity: inherit !important
+    }
+
+    button:hover, a[role="button"]:hover {
+        opacity: inherit !important
+    }
+</style>
+
+<script type="text/x-kendo-template" id="confirmTemplateCategory">
+    <p id="deleteCategoryText">Delete Category <strong>#= name #</strong> ? </p>
+    <button class="k-button btn btn-sm default blue-stripe no-icon" id="yesButtonCat">Yes</button>
+    <button class="k-button btn btn-sm default red-stripe no-icon" id="noButtonCat"> No</button>
+</script>
+
+<script type="text/x-kendo-template" id="confirmTemplateCourse">
+    <p id="deleteCourseText">Delete Course <strong>#= name #</strong> ? </p>
+    <button class="k-button btn btn-sm default blue-stripe no-icon" id="yesButton">Yes</button>
+    <button class="k-button btn btn-sm default red-stripe no-icon" id="noButton"> No</button>
+</script>
+
+<script id="edit-course-form" type="text/kendo-x-tmpl">
+      <div class="form-edit-course">
+        <div class="course-content">
+            <div class="form-group">
+                <label class="col-md-4 control-label">#: CourseName #</label>
+                <div class="col-md-12">
+                    <input name="CourseName" class="k-textbox form-control input-sm w100" type="text" data-bind="value:name" required="required"/>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <label class="col-md-4 control-label">#: CourseCode #</label>
+                <div class="col-md-12">
+                    <input name="CourseCode" class="k-textbox form-control input-sm w100" type="text" data-bind="value:code" required="required"/>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+              <label class="col-md-4 control-label">#: CourseType #</label>
+              <div class="col-md-12">
+                  <select name="CourseType" id="CourseType" class="k-select form-control" kendo-drop-down-list
+                      data-bind="value:type, source:typeofCourse" data-value-field="value" data-text-field="name"
+                      data-source="typeofCourse" required="required"></select>
+              </div>
+            </div>
+            <div class="form-group mt-3" id="CourseServiceProvider">
+                <label class="col-md-4 control-label">#: SupplierName #</label>
+                <div class="col-md-12">
+                    <select name="CourseServiceProvider" id="CourseServiceProviderInput" class="k-select form-control" kendo-drop-down-list
+                        data-bind="value:serviceProviderCode, source:typeOfSupplier" data-value-field="codeSupplier" data-text-field="nameSupplier"
+                        data-source="typeOfSupplier" required="required"></select>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <label class="col-md-4 control-label">#: Duration #</label>
+                <div class="col-md-12">
+                    <input name="Course Duration" class="k-textbox form-control input-sm w100" type="number" max="999"
+                        data-bind="value:duration" onkeydown="if(event.key==='.'){event.preventDefault();}" onkeypress="return event.keyCode !== 101 && event.keyCode !== 69 && event.keyCode !== 45 && event.keyCode !== 43 && event.keyCode !== 190" required="required"/>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <label class="col-md-4 control-label">#: Category #</label>
+                <div class="col-md-12">
+                    <select name="Category" id="Category" class="k-select form-control" kendo-drop-down-list
+                        data-bind="value:categoryId, source:categoryList" data-value-field="categoryId" data-text-field="name"
+                        data-source="categoryList" required="required"></select>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <label class="col-md-4 control-label">#: Description #</label>
+                <div class="col-md-12">
+                    <textarea data-bind="value:description" class="form-control description-input"></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</script>
+
+<!-- <div class="course-image-container">
+  <img alt="" id="CourseAvatar">
+  <div id="remove-image"></div>
+</div>
+
+<div class="form-group image-input">
+  <div class="col-md-4 control-label-content">
+    <label class="control-label"> Course Image </label>
+    <label class="control-label sub-label">Allow <strong>GIF</strong>, <strong>JPG</strong>, <strong>PNG</strong> files</label>
+  </div>
+  <div class="col-md-8">
+    <input name="CourseImage" class="k-textbox form-control input-sm" type="file" id="CourseImage"/>
+  </div>
+</div>
+
+<div class="form-group document-input">
+  <div class="col-md-4 control-label-content">
+    <label class="control-label"> Document Upload </label>
+    <label class="control-label sub-label">Allow <strong>DOCX</strong>, <strong>XLSX</strong>, <strong>PDF</strong>, <strong>Image</strong> files</label>
+  </div>
+  <div class="col-md-8">
+    <input name="DocumentUpload" class="k-textbox form-control input-sm" type="file" id="DocumentUpload"/>
+    <div class="document-list" id="DocumentList"></div>
+  </div>
+</div> -->
+<!--
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">{{title}} </span>
+                </div>
+            </div>
+            <div class="row">
+                <div id="windowCategory"></div>
+                <div id="windowCourse"></div>
+
+                <div class="col-md-12">
+                    <div class="portlet-body">
+                        <div class="page-content-wrapper float-none">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div id="treelist"></div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row" style="margin-left: 10px">
+                                        <div id="treelistcourse"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="d-flex align-items-center justify-content-between portlet-title">
+                <div class="group poppins-medium text-grey-300 caption caption-md px-3">
+                    <p style="text-transform: uppercase !important;" class="display-8 m-0">{{title}}</p>
+                </div>
+            </div>
+            <div class="portlet-body p-2 bg-neutral-blue-300">
+                <div ng-show="false">
+                    <input id="files" name="files" kendo-upload type="file" ng-show="false" class="ng-hide" />
+                </div>
+                <div class="page-content-wrapper float-none table-rounded-toolbar">
+                    <div class="toolbar">
+                        <div class="row">
+                          
+                            <div class="col-md-12">
+                                <div class="portlet-body">
+                                    <div class="page-content-wrapper float-none">
+                                        <div class="row"style="padding:10px" >
+                                            <div class="col-md-4">
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6">
+                                                        <button style="margin-top:6px" id="create-category-button-1" type="button" class="btn btn-sm default btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1" ng-click="addCate()">
+                                                            Add New Category
+                                                        </button>
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input id="search-category" type="text" placeholder="Search..." class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div id="treelist"></div>
+                                            </div>
+                                            <div class="col-md-8 ">
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6" style="padding:0px">
+                                                        <button style="margin-top:6px" id="create-category-button-1" type="button" class="btn btn-sm default btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1" ng-click="addCourse()">
+                                                            Add New Course
+                                                        </button>
+
+                                                    </div>
+                                                    <div class="col-md-6" style="padding:0px">
+                                                        <input id="search-course" type="text" placeholder="Search..." class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="row" >
+                                                    <div style="padding:0px" id="treelistcourse"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="windowCategory"></div>
+<div id="windowCourse"></div>

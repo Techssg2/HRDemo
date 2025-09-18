@@ -1,0 +1,313 @@
+<style>
+    .actions .btn-default {
+        border: none;
+    }
+
+    .visible {
+        display: none;
+    }
+
+    #loading > .k-loading-mask > .k-loading-image {
+        position: fixed;
+    }
+
+
+    .k-picker-wrap.k-state-default {
+        height: 38px !important
+    }
+
+    .k-datepicker {
+        height: 39px 
+    }
+    .k-autocomplete .k-input, .k-autocomplete.k-state-focused .k-input, .k-dropdown-wrap .k-input, .k-dropdown-wrap.k-state-focused .k-input, .k-numeric-wrap.k-state-focused .k-input, .k-picker-wrap.k-state-focused .k-input, .k-textbox > input {
+        border-color: transparent !important
+    }
+
+    .k-button .k-primary {
+        border-radius: 6px !important;
+        background-color: #006efa !important;
+        color: white !important;
+    }
+
+    .k-numerictextbox .k-numeric-wrap{
+        height:100% !important
+    }
+
+    
+</style>
+
+
+
+
+<style>
+    label {
+        font-size: 12px;
+    }
+</style>
+<div class="p-3">
+    <div class="row title-wrapper stickybar-1">
+        <div class="col-6">
+            <h2 class="widget-title">
+                {{
+ title
+                }}
+            </h2>
+        </div>
+        <div class="col-6">
+            <!--Hard code hi?n form invitation-->
+            <!--<button ng-click="createTrainingInvitation()"> invitation </button>-->
+
+            <div class="d-flex gap-2 flex-wrap justify-content-end">
+                <ng-include src="'training-request/header-actions.partial.html'" />
+
+            </div>
+        </div>
+    </div>
+    <div class="portlet-body mb-3">
+        <div class="mt-3">
+            <div class="accordion accordion-style1">
+                <div class="accordion-item">
+                    <div class="accordion-collapse collapse show">
+                        <div class="portlet bordered light">
+                            <!-- Title -->
+                            <div class="row p-3">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;" ng-if="referenceNumber">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 46 46">
+                                                <path id="_12.File" data-name="12.File" d="M37,47H11a4,4,0,0,1-4-4V5a4,4,0,0,1,4-4H30a.984.984,0,0,1,.776.395l9.829,9.829A.981.981,0,0,1,41,12h0V43A4,4,0,0,1,37,47ZM31,4.381V11h6.619ZM39,13H30a1,1,0,0,1-1-1V3H11A2,2,0,0,0,9,5V43a2,2,0,0,0,2,2H37a2,2,0,0,0,2-2ZM33,39H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Zm0-8H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Zm0-8H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Z" transform="translate(-7 -1)" fill-rule="evenodd"></path>
+                                            </svg>&nbsp {{referenceNumber }}
+                                        </div>
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;" ng-if="requester.requesterName">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 24 24">
+                                                <path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z" fill="#0D0D0D"></path>
+                                            </svg>&nbsp;{{ requester.requesterName }} 
+                                        </div>
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;" ng-if="requester.dateOfSubmission">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 24 24">
+                                                <path d="M9 2a1 1 0 0 1 1 1v1h4V3a1 1 0 1 1 2 0v1h3a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V3a1 1 0 0 1 1-1zM8 6H5v3h14V6h-3v1a1 1 0 1 1-2 0V6h-4v1a1 1 0 0 1-2 0V6zm11 5H5v8h14v-8z" fill="#0D0D0D"></path>
+                                            </svg>&nbsp;{{requester.dateOfSubmission | date:'dd/MM/yyyy HH:mm' }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mt-2 d-flex flex-column flex-lg-row justify-content-end">
+                                        <div class="progresses" ng-repeat="item in workflowInstances1.workflowData.steps">
+                                            <div class="steps badge-green" ng-if="item.stepNumber == 0">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     width="16"
+                                                     height="16"
+                                                     viewBox="0 0 24 24"
+                                                     fill="none"
+                                                     stroke="#ffffff"
+                                                     stroke-width="2"
+                                                     stroke-linecap="round"
+                                                     stroke-linejoin="round">
+                                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                                </svg>
+                                            </div>
+                                            <span class="line" ng-if="item.stepNumber == 0"></span>
+                                            <div class="steps" ng-class="!item.history ? '' : (item.history.action === 'Completed' || item.history.action === 'Approved' || item.history.action === 'Submitted') ? 'badge-green' : 'badge-outline-orange'" ng-if="item.stepNumber != 0">
+
+                                                <div class="tooltip-custom tooltip-style2 tooltip-below">
+                                                    {{item.stepNumber+1}}
+                                                    <span class="tooltip-text">
+                                                        <span class="badge btn-grey rounded-pill poppins-regular display-12 leading-14">Round {{roundWF}}</span>
+                                                        <p class="text-orange poppins-medium display-11" style="text-transform: uppercase;">
+                                                            {{item.stepName}}
+                                                        </p>
+                                                        <p class="display-12" ng-if="(item.history.assignedToUserFullName || item.history.assignedToDepartmentName)">
+                                                            <span class="text-grey">Assign To: </span>
+                                                            <span style="text-transform: uppercase;">
+                                                                {{item.history.assignedToUserFullName ? item.history.assignedToUserFullName: item.history.assignedToDepartmentName}}
+                                                            </span>
+                                                        </p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="line" ng-if="item.stepNumber != 0 && workflowInstances1.workflowData.steps[workflowInstances1.workflowData.steps.length - 1].stepNumber != item.stepNumber"></span>
+                                        </div>
+                                        <a ng-if="workflowInstances1.workflowData.steps.length>0" href="#" style="padding-left: 20px"
+                                           data-bs-toggle="modal"
+                                           data-bs-target="#exampleModalView5">
+                                            View more
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 width="10"
+                                                 height="10"
+                                                 viewBox="0 0 24 24"
+                                                 fill="none"
+                                                 stroke="#0D6EFD"
+                                                 stroke-width="2"
+                                                 stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path d="M9 18l6-6-6-6" />
+                                            </svg>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row p-3" style="padding-left: 0 !important; padding-top: 0 !important;">
+                                <div class="col-6">
+                                    <span class="badge badge-style1 justify-content-start" ng-if="realStatus"
+                                          ng-class="{
+                                                     'badge-orange': realStatus != 'Completed' && realStatus != 'Draft' && realStatus != 'Cancelled' && realStatus != 'Rejected' && realStatus != 'Out Of Period',
+                                                     'badge-green': realStatus == 'Completed',
+                                                     'badge-red': realStatus == 'Cancelled' || realStatus == 'Rejected' || realStatus == 'Out Of Period',
+                                                     '': realStatus == 'Draft'
+                                                   }">
+                                        {{realStatus}}
+                                    </span>
+                                </div>
+                            </div>
+
+                      
+                            <div class="row ng-scope">
+                                <div class="col-sm-12">
+                                    <academy-workflow-comment workflow-instances="workflowInstances"></academy-workflow-comment>
+                                </div>
+                            </div>
+
+                            <div ng-include src="'common/error-summary.partial.html'"></div>
+
+
+
+                            <div class="accordion-body">
+                                <form name="g1Form">
+                                    <div ng-include
+                                         src="'training-request/requester.partial.html'"></div>
+                                    <div ng-include
+                                         src="'training-request/training-details.partial.html'"></div>
+                                    <div ng-include
+                                         src="'training-request/training-duration.partial.html'"></div>
+                                    <div ng-include
+                                         src="'training-request/participant-information.partial.html'"></div>
+                                    <div ng-include
+                                         src="'training-request/purpose-reason.partial.html'"></div>
+                                    <div ng-include
+                                         src="'training-request/training-sponsorship-contract.partial.html'"></div>
+                                    <div ng-include
+                                         src="'training-request/budget-information.partial.html'"></div>
+                                </form>
+
+
+                            </div>
+
+                             <div class="col-12">
+                                <div class="d-flex gap-2 flex-wrap justify-content-end float-end">
+                                    <ng-include src="'training-request/header-actions.partial.html'" />
+                                  
+                                </div>
+                            </div>
+
+                           
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!-- Content -->
+    </div>
+</div>
+</div>
+
+
+    <academy-processing-stage workflow-instances="workflowInstances"></academy-processing-stage>
+<!--===========================================================================================================================================-->
+<!--===========================================================================================================================================-->
+
+
+
+
+
+
+<!--<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">
+                        {{
+formMode == "New" ? title : (titleEdit + referenceNumber + " ("+
+            realStatus + ")")
+                        }}
+                    </span>
+                </div>
+                <ng-include src="'training-request/header-actions.partial.html'" />
+            </div>
+            <div class="row ng-scope">
+                <div class="col-sm-12">
+                    <academy-workflow-comment workflow-instances="workflowInstances"></academy-workflow-comment>
+                </div>
+            </div>
+            <div ng-include src="'common/error-summary.partial.html'"></div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <form name="g1Form">
+                        <div ng-include
+                             src="'training-request/requester.partial.html'"></div>
+                        <div ng-include
+                             src="'training-request/training-details.partial.html'"></div>
+                        <div ng-include
+                             src="'training-request/training-duration.partial.html'"></div>
+                        <div ng-include
+                             src="'training-request/participant-information.partial.html'"></div>
+                        <div ng-include
+                             src="'training-request/purpose-reason.partial.html'"></div>
+                        <div ng-include
+                             src="'training-request/training-sponsorship-contract.partial.html'"></div>
+                        <div ng-include
+                             src="'training-request/budget-information.partial.html'"></div>
+                    </form>
+                </div>
+            </div>
+            <div class="portlet-title">
+                <ng-include src="'training-request/header-actions.partial.html'" />
+            </div>
+        </div>
+    </div>
+</div>-->
+
+
+
+
+
+
+<div id="commentWindow"
+     kendo-dialog="commentWindow"
+     k-on-open="dialogVisible = true"
+     style="height: 100% !important"
+     k-on-close="dialogVisible = false"
+     k-modal="true"
+     k-visible="false"
+     k-title="'Warning'">
+    <div class="note note-danger note-bordered"
+         style="margin-bottom: 0px"
+         ng-if="!commentModel.isValid">
+        <span class="font-red-thunderbird">{{commentModel.errorMessage}}</span>
+    </div>
+    <div class="form-group">
+        <label class="control-label">{{'COMMON_COMMENT'|translate}}</label>
+        <textarea name="workflowComment"
+                  class="k-textbox comment-text input-default form-control"
+                  placeholder=""
+                  style="width: 100%"
+                  rows="6"
+                  ng-model="comment"></textarea>
+    </div>
+</div>
+<div id="attachmentViewDialog"
+     k-modal="true"
+     k-visible="false"
+     class="ng-scope"
+     ng-class="{visible:!isViewOnline}"
+     style="height: 100% !important">
+    <iframe id="attachment_owa"
+            style="width: 100%; height: 97%; padding: 0px !important"
+            allowfullscreen></iframe>
+    <button class="btn btn-default btn-sm k-button pull-right close-owa-dialog"
+            ng-click="owaClose()">
+        <i class="k-icon k-i-close font-green-jungle"></i> Close
+    </button>
+</div>

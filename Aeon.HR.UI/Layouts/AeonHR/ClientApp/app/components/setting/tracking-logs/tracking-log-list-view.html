@@ -1,0 +1,187 @@
+<style>
+    /* @media (min-height: 800px) {
+        .k-grid-content {
+            min-height: 100px;
+            max-height: 700px;
+        }
+    } */
+    @media screen and (max-height: 700px) and (min-height: 600px) {
+        .k-grid-content {
+            min-height: 100px;
+            height: 400px;
+        }
+    }
+    @media screen and (max-height: 992px) and (min-height: 710px) {
+        .k-grid-content {
+            min-height: 100px;
+            height: 700px;
+        }
+    }
+    @media screen and (max-height: 3000px) and (min-height: 1000px) {
+        .k-grid-content {
+            min-height: 100px;
+            height: 1000px;
+        }
+    }
+    /* @media (min-height: 500px) {
+        .k-grid-content {
+            min-height: 100px;
+            max-height: 400px;
+        }
+    } */
+</style>
+<div class="row">
+    <div class="col-md-12 ">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">{{title}}</span>
+                </div>
+                <div class="actions">
+                    <!-- <kendo-button class="btn btn-default btn-sm" ng-click="retry()">
+                        <i class="fa fa-send font-green-jungle right-5"></i> Test Send Request
+                    </kendo-button> -->
+                    <kendo-button class="btn btn-default btn-sm" ng-click="retryAll()">
+                        <i class="fa fa-send font-green-jungle right-5"></i> Retry All
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="toggleFilterPanel(true)"
+                        ng-show="!advancedSearchMode">
+                        <i class="k-icon k-i-filter font-green-jungle"></i> Search
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="toggleFilterPanel(false)"
+                        ng-show="advancedSearchMode">
+                        <i class="k-icon k-i-close font-green-jungle"></i> Close
+                    </kendo-button>
+                    <div add-class class="btn-group" current-class="btn-group" added-class="open">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="true" style="padding: 0px !important"><img
+                                src="ClientApp/assets/images/icon/more.png" style="position: relative;top: -2px"
+                                class="ng-isolate-scope"></button>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a ng-click="export()" class="ng-binding"><i class="fa fa-table font-blue right-5"></i>
+                                    Export excel</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <!--Search-->
+                <div ng-if='advancedSearchMode'>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-horizontal">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Keyword:</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="keyword" class="k-textbox"
+                                                        style="width: 100%;" ng-model="searchInfo.keyword"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Status:</label>
+                                                <div class="col-md-8">
+                                                    <select class="w100" kendo-combo-box k-options="statusOptions"
+                                                        k-ng-model="searchInfo.statusId"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Department:</label>
+                                                <div class="col-md-8">
+                                                    <input class="w100" id="departmentId"
+                                                        kendo-drop-down-tree="widget.department"
+                                                        k-options="departmentOptions"
+                                                        ng-model="searchInfo.departmentCode" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Action:</label>
+                                                <div class="col-md-8">
+                                                    <select class="w100" kendo-combo-box k-options="actionOptions"
+                                                        k-ng-model="searchInfo.action"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Created Date:</label>
+                                                <div class="col-md-8">
+                                                    <range-Date-Of-Date-Picker d-from="searchInfo.fromDate" d-to="searchInfo.toDate"></range-Date-Of-Date-Picker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Function Types:</label>
+                                                <div class="col-md-8">
+                                                    <select kendo-multi-select k-options="functionTypesOptions" k-ng-model="searchInfo.functionTypes"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Tracking Date:</label>
+                                                <div class="col-md-8">
+                                                    <custom-Date-Range-Picker d-from="searchInfo.fromTrackingDate" d-to="searchInfo.toTrackingDate"></custom-Date-Range-Picker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Payload:</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="keyword" class="k-textbox"
+                                                           style="width: 100%;" ng-model="searchInfo.payload" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-8 btn-group">
+                                                    <kendo-button class="btn btn-default btn-sm"
+                                                        ng-click="search()">
+                                                        <i class="k-icon k-i-search font-green-jungle"></i> Search
+                                                    </kendo-button>
+                                                    <kendo-button class="btn btn-default btn-sm"
+                                                        ng-click="reset()">
+                                                        <i style="font-size: 12px; padding-right: 3px;"
+                                                            class="fa fa-refresh"></i> Reset
+                                                    </kendo-button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Grid-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <kendo-grid id="allOrMyRequestGrid" options="allOrMyRequestGridOptions">
+                        </kendo-grid>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>

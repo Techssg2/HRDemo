@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">New Staffs Onboard
+                    </span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <kendo-button class="btn btn-default btn-sm" type="submit"
+                                ng-click="toggleFilterPanel(true)" ng-show="!advancedSearchMode">
+                                <i class="k-icon k-i-filter font-green-jungle"></i> Search
+                            </kendo-button>
+                            <kendo-button class="btn btn-default btn-sm" ng-click="toggleFilterPanel(false)"
+                                ng-show="advancedSearchMode">
+                                <i class="k-icon k-i-close font-green-jungle"></i> Close
+                            </kendo-button>
+
+                            <div add-class class="btn-group" current-class="btn-group" added-class="open">
+                                <button type="button" class="btn btn-default dropdown-toggle"
+                                    data-toggle="dropdown" aria-expanded="true"
+                                    style="padding: 0px !important"><img
+                                        src="ClientApp/assets/images/icon/more.png"
+                                        style="position: relative;top: -2px"
+                                        class="ng-isolate-scope"></button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a ng-click="export()"
+                                            class="ng-binding"><i class="fa fa-table font-blue right-5"></i>
+                                            Export excel</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portlet-body">
+                <div ng-show='advancedSearchMode'>
+                    <div class="form-horizontal">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Keyword:</label>
+                                        <div class="col-md-8">
+                                            <input type="text" maxlength="50" class="k-textbox" style="width: 100%;" ng-model="searchNewStaffOnboard.Keyword">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Department:</label>
+                                        <div class="col-md-8">
+                                            <input kendo-drop-down-tree k-options="departmentOptions" id="departmentDropdown"
+                                                   k-ng-model="searchNewStaffOnboard.Department"
+                                                   style="width: 100%;" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Position:</label>
+                                        <div class="col-md-8">
+
+                                            <select kendo-drop-down-list style="width: 100%;" id="position"
+                                                    k-options="positionOptions" name="Position"
+                                                    ng-model="searchNewStaffOnboard.Position">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-6 btn-group">
+                                            <kendo-button class="btn btn-default btn-sm" ng-click="search(searchNewStaffOnboard)">
+                                                <i class="k-icon k-i-search font-green-jungle"></i> Search
+                                            </kendo-button>
+                                            <kendo-button class="btn btn-default btn-sm" ng-click="resetSearch()">
+                                                <i style="font-size: 12px; padding-right: 3px;" class="fa fa-refresh"></i>Reset
+                                            </kendo-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <kendo-grid id="grid" options="newStaffOnboardGridOptions">
+                        </kendo-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

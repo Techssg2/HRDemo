@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="e3554d0f-f8ce-4e8b-a7c8-efa7392bb8bc" solutionId="e3554d0f-f8ce-4e8b-a7c8-efa7392bb8bc" resetWebServer="false" sharePointProductVersion="16.0" name="AeonHR" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="fd075416-f64e-4a7e-8bfa-fb807dc0b130" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="830a0c89-e53c-42ad-a459-57d8f2e1cb0b" />
+    <projectItemReference itemId="d0986bcc-f670-4818-97bf-99d1fbbb2b43" />
+    <projectItemReference itemId="0ea71bd6-56f9-4fa9-959e-08cd80362c50" />
+  </projectItems>
+</package>

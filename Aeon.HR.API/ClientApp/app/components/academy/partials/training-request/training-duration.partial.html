@@ -1,0 +1,285 @@
+
+<div class="row mb-3" style="padding-top: 5px;">
+    <div class="col-md-12">
+        <div style="overflow:hidden;">
+            <div class="p-2 mb-2" style="border-left: 5px solid #006efa;">
+                <span class="display-8 m-0 fw-bold">{{'TRAINING_REQUEST_TRAINING_DURATION'|translate}}</span>
+            </div>
+
+            <div class="p-3">
+                <div class="row ">
+                    <div class="col">
+                        <div class="form-group d-flex">
+                            <label class="form-label text-secondary">{{'TRAINING_REQUEST_TRAINING_METHOD'|translate}}:</label>
+
+                            <div class="col d-flex" style="margin-left:70px">
+                                <div class="col-md-3">
+
+                                    <input type="radio"
+                                           name="trainingMethod"
+                                           id="onl"
+                                           class="form-check-input"
+                                           ng-model="trainingDuration.trainingMethod"
+                                           ng-change="onChangeTrainingMethod(($event)"
+                                           value="Online"
+                                           ng-disabled="!isEditable" />
+                                    <label style="color: #9b9b9b"
+                                           class="form-check-label"
+                                           for="onl">Online</label>
+
+                                </div>
+                                <div class="col-md-3">
+
+                                    <input type="radio"
+                                           name="trainingMethod"
+                                           id="off"
+                                           class="form-check-input"
+                                           ng-model="trainingDuration.trainingMethod"
+                                           ng-change="onChangeTrainingMethod()"
+                                           value="Offline"
+                                           ng-disabled="!isEditable" />
+                                    <label style="color: #9b9b9b"
+                                           class="form-check-label"
+                                           for="off">Offline</label>
+
+                                </div>
+                                <div class="col-md-3">
+
+                                    <input type="radio"
+                                           name="trainingMethod"
+                                           id="onlAndOff"
+                                           class="form-check-input"
+                                           ng-model="trainingDuration.trainingMethod"
+                                           ng-change="onChangeTrainingMethod($event)"
+                                           value="Online & Offline"
+                                           ng-disabled="!isEditable" />
+                                    <label style="color: #9b9b9b"
+                                           class="form-check-label"
+                                           for="onlAndOff">Online & Offline</label>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row ">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label text-secondary">
+                                {{'TRAINING_REQUEST_ESTIMATED_DAY'|translate}}:
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="row align-items-end mt-3">
+                                <div class="col-md-12">
+                                    <input kendo-numeric-text-box
+                                           name="Estimated Training Days"
+                                           k-format="'#'"
+                                           decimals="0"
+                                           restrict-decimals="true"
+                                           data-min="0"
+                                           data-role="numerictextbox"
+                                           aria-valuemin="1"
+                                           aria-valuemax="3"
+                                           style="background-color:white"
+                                           class="form-control"
+                                           ng-model="trainingDuration.estimatedTrainingDays"
+                                           ng-disabled="!isEditable" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label text-secondary">
+                                {{'TRAINING_REQUEST_ESTIMATED_HOURS'|translate}}:
+                            </label>
+                            <div class="row align-items-end mt-3">
+                                <div class="col-md-12">
+                                    <input kendo-numeric-text-box
+                                           k-format="'#'"
+                                           decimals="0"
+                                           restrict-decimals="true"
+                                           data-min="0"
+                                           data-role="numerictextbox"
+                                           aria-valuemin="1"
+                                           aria-valuemax="3"
+                                           class="w100"
+                                           ng-model="trainingDuration.estimatedTrainingHours"
+                                           ng-disabled="!isEditable" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr style="margin-top: 7px; margin-bottom: 7px" />
+                <!-- Online Method area -->
+                <div ng-if="trainingDuration.trainingMethod =='Online' || trainingDuration.trainingMethod =='Online & Offline' "
+                     class="online-area">
+                    <course-duration-detail title="{{'TRAINING_REQUEST_ONLINE_DURATION'|translate}}"
+                                            course-duration-model="durationOnlineMethod"
+                                            is-offline-course="false"
+                                            is-disabled="!isEditable"></course-duration-detail>
+                </div>
+                <!-- End -->
+                <!-- Offline Method area -->
+                <div ng-if="trainingDuration.trainingMethod =='Offline' || trainingDuration.trainingMethod =='Online & Offline' "
+                     class="online-area">
+                    <course-duration-detail title="{{'TRAINING_REQUEST_OFF_DURATION'|translate}}"
+                                            course-duration-model="durationOfflineMethod"
+                                            is-offline-course="true"
+                                            is-disabled="!isEditable"></course-duration-detail>
+                </div>
+                <!-- End -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!--<div class="portlet box bg-grey bg-font-grey fx-portlet">
+    <div class="portlet-title">
+        <div class="caption">
+            <span class="caption-subject hr-process uppercase f-collapse">{{'TRAINING_REQUEST_TRAINING_DURATION'|translate}}</span>
+        </div>
+    </div>
+</div>
+<div class="page-content-wrapper float-none">
+    <div class="page-content">
+        <div class="form-horizontal">
+            <div class="form-body">-->
+                <!-- Start Register Soure -->
+                <!--<div class="register-area">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="col-md-4 control-label">{{'TRAINING_REQUEST_TRAINING_METHOD'|translate}}:</label>
+                                <div class="col-md-2">
+                                    <div class="col-md-8">
+                                        <input type="radio"
+                                               name="trainingMethod"
+                                               id="onl"
+                                               class="k-radio"
+                                               ng-model="trainingDuration.trainingMethod"
+                                               ng-change="onChangeTrainingMethod(($event)"
+                                               value="Online"
+                                               ng-disabled="!isEditable" />
+                                        <label style="color: #9b9b9b"
+                                               class="k-radio-label"
+                                               for="onl">Online</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="col-md-8">
+                                        <input type="radio"
+                                               name="trainingMethod"
+                                               id="off"
+                                               class="k-radio"
+                                               ng-model="trainingDuration.trainingMethod"
+                                               ng-change="onChangeTrainingMethod()"
+                                               value="Offline"
+                                               ng-disabled="!isEditable" />
+                                        <label style="color: #9b9b9b"
+                                               class="k-radio-label"
+                                               for="off">Offline</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-8">
+                                        <input type="radio"
+                                               name="trainingMethod"
+                                               id="onlAndOff"
+                                               class="k-radio"
+                                               ng-model="trainingDuration.trainingMethod"
+                                               ng-change="onChangeTrainingMethod($event)"
+                                               value="Online & Offline"
+                                               ng-disabled="!isEditable" />
+                                        <label style="color: #9b9b9b"
+                                               class="k-radio-label"
+                                               for="onlAndOff">Online & Offline</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">
+                                    {{'TRAINING_REQUEST_ESTIMATED_DAY'|translate}}:
+                                    <span class="font-red-thunderbird">*</span>
+                                </label>
+                                <div class="col-md-6">
+                                    <input kendo-numeric-text-box
+                                           name="Estimated Training Days"
+                                           k-format="'#'"
+                                           decimals="0"
+                                           restrict-decimals="true"
+                                           data-min="0"
+                                           data-role="numerictextbox"
+                                           aria-valuemin="1"
+                                           aria-valuemax="3"
+                                           class="w100"
+                                           ng-model="trainingDuration.estimatedTrainingDays"
+                                           ng-disabled="!isEditable" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-5 control-label">
+                                    {{'TRAINING_REQUEST_ESTIMATED_HOURS'|translate}}:
+                                </label>
+                                <div class="col-md-7">
+                                    <input kendo-numeric-text-box
+                                           k-format="'#'"
+                                           decimals="0"
+                                           restrict-decimals="true"
+                                           data-min="0"
+                                           data-role="numerictextbox"
+                                           aria-valuemin="1"
+                                           aria-valuemax="3"
+                                           class="w100"
+                                           ng-model="trainingDuration.estimatedTrainingHours"
+                                           ng-disabled="!isEditable" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr style="margin-top: 7px; margin-bottom: 7px" />-->
+                <!-- End -->
+                <!-- Online Method area -->
+                <!--<div ng-if="trainingDuration.trainingMethod =='Online' || trainingDuration.trainingMethod =='Online & Offline' "
+                     class="online-area">
+                    <course-duration-detail title="{{'TRAINING_REQUEST_ONLINE_DURATION'|translate}}"
+                                            course-duration-model="durationOnlineMethod"
+                                            is-offline-course="false"
+                                            is-disabled="!isEditable"></course-duration-detail>
+                </div>-->
+                <!-- End -->
+                <!-- Offline Method area -->
+                <!--<div ng-if="trainingDuration.trainingMethod =='Offline' || trainingDuration.trainingMethod =='Online & Offline' "
+                     class="online-area">
+                    <course-duration-detail title="{{'TRAINING_REQUEST_OFF_DURATION'|translate}}"
+                                            course-duration-model="durationOfflineMethod"
+                                            is-offline-course="true"
+                                            is-disabled="!isEditable"></course-duration-detail>
+                </div>-->
+                <!-- End -->
+            <!--</div>
+        </div>
+    </div>
+</div>-->

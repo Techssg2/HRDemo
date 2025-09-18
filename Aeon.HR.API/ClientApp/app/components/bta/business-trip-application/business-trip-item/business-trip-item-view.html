@@ -1,0 +1,2537 @@
+<style>
+    label {
+        font-size: 12px;
+    }
+
+    input[type="text"]:disabled {
+        color: #bdbdbd;
+        border-color: #ececec;
+        background: white;
+    }
+
+    #userGridReview .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+
+    #userGrid .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+
+    #userGrid .k-resize-handle {
+        display: none !important;
+    }
+
+    #userGridReview .k-resize-handle {
+        display: none !important;
+    }
+
+    #userGrid .k-loading-image {
+        background-image: none !important;
+    }
+
+    #userGrid .k-loading-color {
+        opacity: 0;
+    }
+
+    .k-grid-content-locked {
+        overflow: hidden;
+        min-height: 50px !important;
+    }
+
+    #btaListDetailGrid .k-input{
+        height: 33px;
+    }
+    #btaListDetailGrid .k-dropdown {
+        height: 33px;
+    }
+
+    #btaListChangeOrCancelGrid .k-input {
+        height: 33px;
+    }
+
+    #btaListChangeOrCancelGrid .k-dropdown {
+        height: 33px;
+    }
+    
+    /*.k-grid-content-locked {
+        float: right;
+        text-align: center;
+    }
+
+    .k-grid-header-locked {
+        float: right;
+        text-align: center;
+    }*/
+    /*.k-grid-header-locked table thead tr .k-header {
+        text-align: center;
+    }*/
+    .k-grid-content {
+        min-height: 0px !important;
+        max-height: 500px !important;
+    }
+
+    #headerRoom {
+        background-color: #E5E5E5;
+        margin-right: 0px !important;
+        margin-left: 0px;
+    }
+
+    #textHeader {
+        color: #333;
+        font-weight: bold !important;
+        text-transform: uppercase;
+    }
+
+    .k-list-scroller {
+        overflow-y: scroll;
+    }
+
+    #loading_bta {
+        width: 100%;
+        height: 100%;
+        bottom: 35% !important;
+        top: unset !important;
+        z-index: 1000;
+    }
+
+    #dialog_Detail .k-auto-scrollable {
+        max-height: 300px !important;
+        min-height: 0px !important;
+        overflow-y: auto !important;
+    }
+
+    .k-state-selected {
+        background-color: transparent;
+        border-color: transparent;
+        background-image: none;
+    }
+
+    td.k-state-focused.k-state-selected {
+        box-shadow: none;
+    }
+
+    .k-state-selected > .k-link {
+        color: black;
+    }
+
+    .selected {
+        background-color: #F35800;
+        border-color: #F85A00;
+        background-image: none, linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0px, rgba(255, 255, 255, 0) 100%);
+    }
+
+        .selected > .k-link {
+            color: #FFF;
+        }
+
+    #dialog_Detail_Review .k-auto-scrollable {
+        max-height: 300px !important;
+        min-height: 0px !important;
+    }
+
+    .rOverBudget {
+        background-color: #F9F1C7 !important;
+    }
+
+    .cOverBudgetNumber {
+        color: #006EFA;
+        font-size: 0.9em !important;
+    }
+
+    #attachmentViewDialog {
+        min-height: 40vh !important;
+        height: 96vh !important;
+    }
+
+    .close-owa-dialog {
+        margin: 5px;
+    }
+
+    .ssg-download-text {
+        font-family: SF-Pro-Display;
+        font-size: 13px;
+    }
+
+    .k-grid-header-wrap.sync-collapse {
+        width: calc(100% - 540px) !important;
+    }
+
+    .k-grid-content.sync-collapse {
+        width: calc(100% - 540px) !important;
+    }
+</style>
+<!--<div class="row">
+    <div id="loading_bta"></div>
+    <div class="col-md-12">
+        <div class="portlet bordered light" style="padding-bottom: 50px !important;">
+
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">
+                        {{title}}
+                    </span>
+                </div>
+                <div class="actions">
+                    <kendo-button class="btn btn-default btn-sm" ng-click="printForm()"
+                                  ng-if="businessTripApplicationStatus == 'Completed' || businessTripApplicationStatus == 'Completed Changing'">
+                        <i style="font-size: 12px; padding-right: 3px;" class="fa fa-file-pdf-o font-green-jungle"></i>
+                        {{'COMMON_BUTTON_PRINT'|translate}}
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="roomAdminChecker()"
+                                  ng-if="(model.status == 'Waiting for Booking Flight' && checkAdminDeptView && checkBookingViewConfirms)
+                                  ">
+                        <i style="font-size: 12px; padding-right: 3px;" class="fa fa-check font-green-jungle right-5"></i>
+                        {{'ROOM_ORGANIZATION'|translate}}
+                    </kendo-button>
+                    <action-items model="model" save="save" form="btaForm" set-room="setRooms"></action-items>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="viewBTAGuid()"
+                                  ng-if="(model.status != 'Completed' || model.status != 'Rejected')
+                                  ">
+                        <i style="font-size: 12px; padding-right: 3px;" class="fa fa-info-circle"></i>
+                        {{'COMMON_BTA_GUID'|translate}}
+                    </kendo-button>
+                    <div add-class class="btn-group" current-class="btn-group" added-class="open">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                aria-expanded="true" style="padding: 0px !important">
+                            <img src="ClientApp/assets/images/icon/more.png" style="position: relative;top: -2px"
+                                 class="ng-isolate-scope">
+                        </button>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a data-toggle="modal" class="ng-binding" ng-click="showProcessingStages()">
+                                    <i class="fa fa-recycle right-5" style="color: #b42e83"></i>
+                                    {{'COMMON_PROCESSING_STAGE' | translate}}
+                                </a>
+                            </li>
+                            <li>
+                                <a data-toggle="modal" class="ng-binding" ng-click="showTrackingHistory()" ng-if="isITHelpdesk">
+                                    <i class="fa fa-book right-5" style="color: #b42e83"></i>
+                                    {{'COMMON_TRACKING_HISTORY' | translate}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="portlet-body">-->
+                <!-- FORM1 -->
+                <!--<div class="row ng-scope" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <workflow-comment></workflow-comment>
+                    </div>
+                </div>
+                <div class="row ng-scope" ng-if="resignationInProgress" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-warning note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase">{{'COMMON_WARNING'|translate}}:</h5>
+                            <p></p>
+                            <ul>
+                                {{warning}}
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ng-scope" ng-if="bookingDateTripWeekes && warningWeekBooking.length > 0 && (model.type == 2 || model.type == 3)" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-warning note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase">{{'COMMON_WARNING'|translate}}:</h5>
+                            <p></p>
+                            <ul>
+                                <li ng-repeat="warning in warningWeekBooking track by $index">
+                                    {{warning.message}}
+                                </li>
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ng-scope" ng-if="errors.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase">
+                                {{'COMMON_ENTER_FIELD' | translate}} <span class="font-red-thunderbird">*</span>:
+                            </h5>
+                            <p></p>
+                            <ul>
+                                <li ng-repeat="error in errors track by $index">
+                                    <span class="bold ">{{error.controlName}}</span>{{error.message  ?error.message: ''}}
+                                </li>
+                                <br />
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ng-scope" ng-if="errorChangings.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase">
+                                {{'COMMON_ENTER_FIELD' | translate}}
+                                <span class="font-red-thunderbird">*</span>:
+                            </h5>
+                            <p></p>
+                            <ul>
+                                <li ng-repeat="error in errorChangings" style="margin-left: 1em;">
+                                    <span class="bold">{{error.controlName}}</span>
+                                    <zt ng-if="!error.isRule">
+                                        : {{error.errorDetail}}
+                                    </zt>
+                                    <span ng-if="error.isRule">
+                                        {{error.errorDetail}}
+                                    </span>
+                                </li>
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content-wrapper float-none">
+                    <form name="btaForm">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="row align-middle" style="flex-wrap: wrap;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'COMMON_DEPT_LINE'|translate}}:</label>
+                                            <div class="col-md-8 ">
+                                                <select kendo-drop-down-list name="dept_line_name" id="dept_line_id"
+                                                        k-options="deptLineOptions" k-ng-model="model.deptLineId"
+                                                        class="w100">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'COMMON_DIVISION_GROUP'|translate}}:</label>
+                                            <div class="col-md-8 ">
+                                                <input kendo-drop-down-tree="divisionTree" class="w100"
+                                                       k-on-change="onChangeDivision(model.deptDivisionId)"
+                                                       k-options="divisionOptions" k-ng-model="model.deptDivisionId"
+                                                       id="division_id" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'COMMON_TYPE'|translate}}:<span class="font-red-thunderbird">*</span></label>
+                                            <div class="col-md-8 ">
+                                                <select kendo-drop-down-list style="width: 100%;"
+                                                        ng-class="{'k-state-disabled': allowDisabledBTAType()}"
+                                                        ng-model="model.type"
+                                                        k-data-text-field="'name'"
+                                                        k-data-value-field="'value'"
+                                                        k-data-source="businessTypeOption"
+                                                        ng-disabled="allowDisabledBTAType()"
+                                                        k-on-change="ctrlMembership.changeTypeBooking()"
+                                                        class="w100">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label ng-if="model.type == 2 || model.type == 3" class="col-md-2 control-label">{{'COMMON_TICKETTYPE'|translate}}:<span class="font-red-thunderbird">*</span></label>
+                                            <div ng-if="model.type == 2 || model.type == 3" class="col-md-2">
+                                                <select kendo-drop-down-list style="width: 100%;"
+                                                        ng-model="model.dataRoundTrip"
+                                                        k-data-text-field="'name'"
+                                                        k-data-value-field="'value'"
+                                                        k-data-source="roundTripOption"
+                                                        ng-change="changeRoundTrip()"
+                                                        class="w100">
+                                                </select>-->
+                                                <!--<input type="checkbox" id="isGroundTrip" ng-model="model.isRoundTrip" class="k-checkbox" />
+                                                <label class="k-checkbox-label" for="isGroundTrip"></label>-->
+                                            <!--</div>
+                                            <div ng-if="model.type == 2 || model.type == 3">
+                                                <label class="col-md-2 control-label">{{'COMMON_STATUS'|translate}}:</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control input-default" id='statusTicket' style="width: 100%;"
+                                                           ng-model="model.status" ng-disabled="true" />
+                                                </div>
+                                            </div>
+                                            <div ng-if="model.type == 1 || model.type == 4">
+                                                <label class="col-md-4 control-label">{{'COMMON_STATUS'|translate}}:</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input-default" id='statusTicket' style="width: 100%;"
+                                                           ng-model="model.status" ng-disabled="true" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mrb10">
+                                    <div class="col-md-12">-->
+                                        <!--<span class="input-group-btn">
+                                            <a class="btn btn-sm btn-primary btn-add-user" id="create" ng-if="perm"
+                                               style="background-color: #b42e83"
+                                               ng-click="addItemsUser(employeesDataSource)">
+                                                {{'ADD_USER_TITLE_DIALOG'| translate}}
+                                            </a>
+                                        </span>
+                                        <span class="input-group-btn" id="viewBookingFlights">
+                                        </span>-->
+                                        <!--<span>
+                                            <a class="btn btn-sm btn-primary btn-add-user" id="create" ng-if="perm && model.type != ''"
+                                               style="background-color: #b42e83"
+                                               ng-click="addItemsUser(employeesDataSource)">
+                                                {{'ADD_USER_TITLE_DIALOG'| translate}}
+                                            </a>
+                                        </span>
+                                        <span id="viewBookingFlights">
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="row mrt10">
+                                    <div class="col-md-12">
+                                        <kendo-grid id="btaListDetailGrid" options="btaListDetailGridOptions">
+                                        </kendo-grid>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row" style="margin-top: 40px;">-->
+
+                                    <!-- <div class="col-md-12">
+                                        <div class="form-group control-label">
+                                            <input type="checkbox" id="argree_id" ng-model="model.isAgree"
+                                                class="k-checkbox">
+                                            <label class="k-checkbox-label" for="argree_id">
+                                                <p style="font-style: italic;">
+                                                    Tôi cam kết tuân thủ các quy định về thời gian và địa điểm đến xe.
+                                                    Nếu có thay đổi, tôi sẽ thông báo cho phòng Nhân sự và Hành chính
+                                                    trước ngày 20 hàng tháng.
+                                                    <br />(I commit to comply with rules on time and bus stop. If there
+                                                    is any change, I will inform HR & Admin Department before the 20th
+                                                    day of each month.)
+                                                </p>
+                                            </label>
+                                        </div>
+                                    </div> -->
+                                    <!--<div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-4 control-label">{{'ATTACHMENT_DETAIL'| translate}}:</label>
+                                                    <div class="col-md-8">
+                                                        <input name="files" id="attachmentDetail" type="file" kendo-upload
+                                                               k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }"
+                                                               k-select="onSelect" k-remove="removeAttach"
+                                                               class="input-default" />
+                                                    </div>
+                                                    <label class="col-md-4 control-label"
+                                                           ng-if="oldAttachmentDetails && oldAttachmentDetails.length"></label>
+                                                    <div class="col-md-8" style="margin-top: 10px; padding-left: 30px;"
+                                                         ng-if="oldAttachmentDetails && oldAttachmentDetails.length">
+                                                        <p><b>{{'UPLOADED_FILE_LIST'| translate}}</b></p>
+                                                        <ol>
+                                                            <li ng-repeat="doc in oldAttachmentDetails">
+                                                                <span>
+                                                                    <a ng-click="downloadAttachment(doc.id)">{{doc.fileDisplayName}}</a>
+                                                                </span>
+                                                                <span ng-click="viewFileOnline(doc.id)" class="viewAttachmentDetail"
+                                                                      style="color: #5b9bd1; cursor: pointer;">
+                                                                    |
+                                                                    {{'COMMON_BUTTON_VIEW'| translate}}
+                                                                </span>
+                                                                <span ng-click="removeOldAttachment(doc)" class="deleteattachmentDetail"
+                                                                      style="color: #5b9bd1; cursor: pointer;">
+                                                                    |
+                                                                    {{'COMMON_BUTTON_DELETE'| translate}}
+                                                                </span>
+                                                            </li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">
+                                                        {{'COMMON_REQUESTOR_NOTE'|translate}}:<span class="font-red-thunderbird">*</span>
+                                                    </label>
+                                                    <div class="col-md-10">
+                                                        <select kendo-drop-down-list style="width: 450px;"
+                                                                k-options="reasonOfListOptions"
+                                                                k-ng-model="reasonSelected" id="reasonDropdown"
+                                                                k-on-change="changeReason(reasonSelected)"
+                                                                name="">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row form-group">
+                                                    <div class="col-md-2">
+                                                        <label class="control-label">
+                                                            {{'COMMON_REQUESTOR_NOTE_DETAIL'|translate}}:<span class="font-red-thunderbird">*</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <textarea style="border-color: #8f8f8f; height: 80px;"
+                                                                  ng-model="model.requestorNoteDetail" ng-readonly="!readReason"
+                                                                  class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row form-group">
+                                                    <div class="col-md-2">
+                                                        <input type="checkbox" id="carRental_id" ng-model="isChecked"
+                                                               class="k-checkbox">
+                                                        <label class="k-checkbox-label control-label" for="carRental_id"
+                                                               style="padding-top: 2px !important;">
+                                                            {{'CAR_RENTAL'|translate}}:
+                                                        </label>
+                                                    </div>-->
+                                                    <!--<div class="col-md-10">
+                                                        <textarea ng-show="isChecked" style="border-color: #8f8f8f; height: 80px;"
+                                                                  ng-model="model.carRental" class="form-control"></textarea>
+                                                    </div>-->
+                                                    <!--<div class="col-md-2">
+                                                        <a ng-show="isChecked" class="ssg-download-text" href="/Download/RentalCarRequestForm.xlsx">Download Template</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-if="isChecked">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-4 control-label">{{'CAR_RENTAL_ATTACHMENT_DETAIL'| translate}}:<span class="font-red-thunderbird">*</span></label>
+                                                    <div class="col-md-8">
+                                                        <input name="files" id="carAttachmentDetail" type="file" kendo-upload
+                                                               k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }"
+                                                               k-select="carRentalCtrl.onSelect" k-remove="carRentalCtrl.removeAttach"
+                                                               class="input-default" />
+                                                    </div>
+                                                    <label class="col-md-4 control-label"
+                                                           ng-if="carRentalCtrl.oldCarRentalAttachmentDetails && carRentalCtrl.oldCarRentalAttachmentDetails.length"></label>
+                                                    <div class="col-md-8" style="margin-top: 10px; padding-left: 30px;"
+                                                         ng-if="carRentalCtrl.oldCarRentalAttachmentDetails && carRentalCtrl.oldCarRentalAttachmentDetails.length">
+                                                        <p><b>{{'UPLOADED_FILE_LIST'| translate}}</b></p>
+                                                        <ol>
+                                                            <li ng-repeat="doc in carRentalCtrl.oldCarRentalAttachmentDetails">
+                                                                <span>
+                                                                    <a ng-click="carRentalCtrl.downloadAttachment(doc.id)">{{doc.fileDisplayName}}</a>
+                                                                </span>
+                                                                <span ng-click="viewFileOnline(doc.id)" class="viewAttachmentDetail"
+                                                                      style="color: #5b9bd1; cursor: pointer;">
+                                                                    |
+                                                                    {{'COMMON_BUTTON_VIEW'| translate}}
+                                                                </span>
+                                                                <span ng-click="carRentalCtrl.removeOldAttachment(doc)" class="deleteCarAttachmentDetail"
+                                                                      style="color: #5b9bd1; cursor: pointer;">
+                                                                    |
+                                                                    {{'COMMON_BUTTON_DELETE'| translate}}
+                                                                </span>
+                                                            </li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-if="isVisaChecked || model.type == 2 || model.type == 4">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-4 control-label">{{'VISA_ATTACHMENT_DETAIL'| translate}}:<span class="font-red-thunderbird">*</span></label>
+                                                    <div class="col-md-8">
+                                                        <input name="files" id="visaAttachmentDetail" type="file" kendo-upload
+                                                               k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }"
+                                                               k-select="visaCtrl.onSelect" k-remove="visaCtrl.removeAttach"
+                                                               class="input-default" />
+                                                    </div>
+                                                    <label class="col-md-4 control-label"
+                                                           ng-if="visaCtrl.oldVisaAttachmentDetails && visaCtrl.oldVisaAttachmentDetails.length"></label>
+                                                    <div class="col-md-8" style="margin-top: 10px; padding-left: 30px;"
+                                                         ng-if="visaCtrl.oldVisaAttachmentDetails && visaCtrl.oldVisaAttachmentDetails.length">
+                                                        <p><b>{{'UPLOADED_FILE_LIST'| translate}}</b></p>
+                                                        <ol>
+                                                            <li ng-repeat="doc in visaCtrl.oldVisaAttachmentDetails">
+                                                                <span>
+                                                                    <a ng-click="visaCtrl.downloadAttachment(doc.id)">{{doc.fileDisplayName}}</a>
+                                                                </span>
+                                                                <span ng-click="viewFileOnline(doc.id)" class="viewAttachmentDetail"
+                                                                      style="color: #5b9bd1; cursor: pointer;">
+                                                                    |
+                                                                    {{'COMMON_BUTTON_VIEW'| translate}}
+                                                                </span>
+                                                                <span ng-click="visaCtrl.removeOldAttachment(doc)" class="deleteVisaAttachmentDetail"
+                                                                      style="color: #5b9bd1; cursor: pointer;">
+                                                                    |
+                                                                    {{'COMMON_BUTTON_DELETE'| translate}}
+                                                                </span>
+                                                            </li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a class="ssg-download-text" href="/Download/VISA, TRAVEL INSURANCE, COMMUNICATION FEE REQUEST FORM.xlsx">Download Template</a>
+                                            </div>
+                                        </div>
+                                    </div>-->
+
+                                    <!-- From Booking Contact -->
+                                    <!--<div class="col-md-12" ng-if="model.type == 2 || model.type == 3">
+                                        <div class="title_panel caption caption-md">
+                                            <span class="caption-subject uppercase">
+                                                {{'BTA_BOOKING_CONTACT'| translate}}
+                                            </span>
+                                        </div>
+                                        <div class="row mrt10">
+                                            <div class="col-md-12">
+                                                <kendo-grid id="bookingContactGrid" options="ctrlMembership.bookingContactOptions">
+                                                </kendo-grid>
+                                            </div>
+                                        </div>
+                                    </div>-->
+
+                                    <!-- <div class="row form-group">
+                                        <div class="col-md-2">
+                                            <label class="control-label">{{'COMMON_REQUESTOR_NOTE'|translate}}:</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <textarea ng-readonly="model.id" ng-model="model.requestorNote"
+                                                class="form-control"></textarea>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="row form-group">
+                                        <div class="col-md-2">
+                                            <input type="checkbox" id="carRental_id"
+                                                ng-model="isChecked" class="k-checkbox">
+                                            <label class="k-checkbox-label control-label"
+                                                for="carRental_id" style="padding-top: 2px !important;">
+                                                Car Rental:
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <textarea ng-show="isChecked || model.id" ng-readonly="model.id"
+                                                ng-model="model.carRental" class="form-control"></textarea>
+                                        </div>
+                                    </div> -->
+                                    <!--<div class="col-md-12">
+                                        <p><b>{{'COMMON_NOTE'|translate}}: </b><span>*</span></p>
+                                        <p>
+                                            - <b>Gửi thông tin Lệnh điều động công tác cho Phòng Hành Chính ít nhất 10 ngày trước ngày khởi hành. Tính từ thời điểm General Manager duyệt đơn BTA.</b> <br />
+                                            <i>Send BTA form to Admin Department at least before 10 days since the time General Manager approves the BTA form.</i>
+                                        </p>
+                                        <p>
+                                            - <b>
+                                                Nhân viên Hành Chính chỉ xuất vé và đặt khách sạn khi nhận được BTA với
+                                                đầy đủ chữ ký của Senior GM/ GM.
+                                            </b> <br />
+                                            <i>
+                                                Admin Staff only process of booking air ticket, hotel on receiving BTA
+                                                form with signature of Senior General Manager/ General Manager.
+                                        </p>
+                                        </i>
+                                        <p>
+                                            - <b>
+                                                Trường hợp thay đổi, hủy lịch công tác với lý do cá nhân: cá nhân sẽ
+                                                chịu chi phí phát sinh.
+                                            </b><br />
+                                            <i>
+                                                In case of changing, cancelling business trip due to private matter:
+                                                Staff shall pay directly this extra amount to related supplier
+                                                accordingly.
+                                            </i>
+                                        </p>
+                                        <p>
+                                            - <b>
+                                                Trường hợp các vé thuộc loại không huỷ được, Phí huỷ vé (Cancellation fee) sẽ bằng với giá trị của vé.
+                                            </b><br />
+                                            <i>
+                                                In case the tickets cannot be canceled, the Cancellation fee will be equal to the value of the ticket.
+                                            </i>
+                                        </p>
+                                    </div>
+                                </div>-->
+                                <!-- From 3 model.roomOrganizations-->
+                                <!--<div ng-class="{'disable-div': disableChangeOrCancel}" ng-if="model.roomOrganizations">
+                                    <div class="title_panel caption caption-md">
+                                        <span class="caption-subject uppercase">
+                                            {{'ROOM_ORGANIZATION'|translate}}
+                                        </span>
+                                    </div>
+                                    <div class="row mrt10">
+                                        <div class="col-md-12">
+                                            <kendo-grid id="roomViewGrid" options="roomViewOptions">
+                                            </kendo-grid>
+                                        </div>
+                                    </div>
+                                </div>-->
+
+                                <!-- <div class="row" style="margin-top: 40px; padding-left: 10px;">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div style="font-weight: bold;">Ghi chú/Note</div>
+                                            <div>1. Gửi thông tin Lệnh điều động công tác cho Hành Chính ít nhất 7 ngày
+                                                trước ngày khởi hành/ Send BTA form to Admin Department at least before
+                                                7 days since departure date</div>
+                                            <div>2. Nhân viên hành chính chỉ xuất vé và đặt khách sạn khi nhận được BTA
+                                                với đầy đủ chữ ký của Senior GM/ GM/ Admin Staff only process of booking
+                                                air ticket, hotel on receiving BTA form with signature of Senior General
+                                                Manager/ General Manager</div>
+                                            <div>3. Trường hợp thay đổi, hủy lịch công tác với lý do cá nhân: cá nhân sẽ
+                                                chịu chi phí phát sinh/ In case of changing, cancelling business trip
+                                                due to private matter. Staff shall pay directly this extra amount to
+                                                related supplier accordingly. </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            <!--</div>
+                        </div>
+                    </form>
+                </div>-->
+
+                <!-- FORM 2 -->
+                <!--<div ng-class="{'disable-div': disableChangeOrCancel}">
+                    <div class="title_panel caption caption-md">
+                        <span class="caption-subject uppercase">
+                            {{'BTA_CHANGING_CACELLING_BUSNESS_TRIP'|translate}}
+                        </span>
+                    </div>
+                    <div class="row mrt10">
+                        <div class="col-md-12">
+                            <kendo-grid id="btaListChangeOrCancelGrid" options="btaListChangeOrCancelGridOptions">
+                            </kendo-grid>
+                        </div>
+                    </div>
+
+                    <div class="row mrb10" ng-if="model.status == 'Completed' || forceChangeBusinessTrip">
+                        <div class="col-md-12" style="margin-top: 10px;">
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-primary btn-add-user" id="addMore"
+                                        style="background-color: #b42e83" ng-click="addMore()">
+                                    {{'COMMON_BUTTON_ADD_MORE'| translate}}
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>-->
+
+
+                <!-- From 4 -->
+                <!--<div class="mrt10"></div>
+                <div ng-class="{'disable-div': disableChangeOrCancel}" ng-if="model.changedRoomOrganizations.length">
+                    <div class="title_panel caption caption-md">
+                        <span class="caption-subject uppercase">
+                            {{'CHANGE_ROOM_ORGANIZATION'| translate}}
+                        </span>
+                    </div>
+                    <div class="row mrt10">
+                        <div class="col-md-12">
+                            <kendo-grid id="changeRoomViewGrid" options="changeRoomViewOptions">
+                            </kendo-grid>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-body" style="margin-top: 20px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label"
+                                       style="padding-left: 0 !important;">{{'ATTACHMENT_CHANGING'| translate}}:</label>
+                                <div class="col-md-8">
+                                    <input name="files" id="attachmentChanging" type="file"
+                                           style="padding-left: 0 !important;" kendo-upload
+                                           k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }"
+                                           k-select="onSelectChange" k-remove="removeAttachChange" disabled="disabled"
+                                           class="input-default" />
+                                </div>
+                                <label class="col-md-4 control-label"
+                                       ng-if="oldAttachmentChanges && oldAttachmentChanges.length"></label>
+                                <div class="col-md-8" style="margin-top: 10px; padding-left: 30px;"
+                                     ng-if="oldAttachmentChanges && oldAttachmentChanges.length">
+                                    <p><b>{{'UPLOADED_FILE_LIST'| translate}}</b></p>
+                                    <ol>
+                                        <li ng-repeat="doc in oldAttachmentChanges">
+                                            <a ng-click="downloadAttachmentChange(doc.id)">{{doc.fileDisplayName}}</a>
+                                            <span ng-click="removeOldAttachmentChange(doc)" class="deleteattachmentChanging"
+                                                  style="color: #5b9bd1; cursor: pointer;">
+                                                |
+                                                {{'COMMON_BUTTON_DELETE'| translate}}
+                                            </span>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                <div class="mrt10"></div>
+                <div class="page-content-wrapper float-none" ng-if="model.isCheckRe">
+                    <form name="btaForm">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="row align-middle" style="flex-wrap: wrap;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" style="text-decoration:none;">RE ReferenceNumber:</label>
+                                            <label class="col-md-8 control-label" style="text-decoration:none;"><a ng-click="openWindow(model.url_RE)">{{model.referenceNumberRE}}</a></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>-->
+
+                <!-- FORM 3 Over Budget-->
+                <!--<div ng-class="{'disable-div': false}" ng-if="model.businessOverBudgets.length">
+                    <div class="title_panel caption caption-md">
+                        <span class="caption-subject uppercase">
+                            {{'BTA_OVER_BUDGET'|translate}}
+                        </span>
+                    </div>
+                    <div class="row mrt10">
+                        <div class="col-md-12">
+                            <kendo-grid id="btaOverBudgetGrid" options="btaListOverBudgetGridOptions">
+                            </kendo-grid>
+                        </div>
+                    </div>
+                </div>-->
+
+                <!-- tuhm: BTA Confirm -->
+                <!-- FORM 3 -->
+                <!--<div class="row mrt10" ng-if="model.status == 'Waiting for Confirm BTA'">
+                    <div class="title_panel caption caption-md">
+                        <span class="caption-subject uppercase">
+                            {{'BUSINESS_CONFIRM_TRIP_APPLICATION'|translate}}
+                        </span>
+                    </div>
+                    <div class="row mrt10">
+                        <div class="col-md-12">
+                            <kendo-grid id="btaListConfirmGridData" options="btaConfirmGridOptions">
+                            </kendo-grid>
+                        </div>
+                    </div>
+
+                    <div class="row mrb10" ng-if="model.status == 'Waiting for Confirm BTA'">
+                        <div class="col-md-12" style="margin-top: 10px;">
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-primary btn-add-user" id="sendConfirm" disabled="disabled"
+                                        style="background-color: #b42e83" ng-click="sendConfirm()">
+                                    {{'COMMON_BUTTON_SEND_CONFIRM'| translate}}
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>-->
+                <!-- end tuhm -->
+
+            <!--</div>
+            <div class="portlet-title">
+                <div class="actions">
+
+                    <kendo-button class="btn btn-default btn-sm" ng-click="roomAdminChecker()"
+                                  ng-if="(model.status == 'Waiting for Booking Flight' && checkAdminDeptView && checkBookingViewConfirms)
+                                  ">
+                        <i style="font-size: 12px; padding-right: 3px;" class="fa fa-check font-green-jungle right-5"></i>
+                        {{'ROOM_ORGANIZATION'|translate}}
+                    </kendo-button>
+                    <action-items model="model" save="save" form="g1" set-room="setRooms"></action-items>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>-->
+
+<div class="p-3">
+    <div class="row title-wrapper stickybar-1">
+        <div class="col-6">
+            <h2 class="widget-title">{{titleHeader}}</h2>
+        </div>
+        <div class="col-6">
+            <div class="d-flex gap-2 flex-wrap justify-content-end">
+                <action-items class="d-flex flex-wrap justify-content-end align-items-center" style="flex: 1 1 auto; gap: 4px;" model="model" save="save" form="btaForm" set-room="setRooms"></action-items>
+                <!--<button type="button" ng-click="printForm()"  ng-if="businessTripApplicationStatus == 'Completed' || businessTripApplicationStatus == 'Completed Changing'" class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1 ng-binding">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                        <rect x="6" y="14" width="12" height="8"></rect>
+                    </svg>&nbsp;{{'COMMON_BUTTON_PRINT'|translate}}
+                </button>-->
+                <button class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1" ng-click="roomAdminChecker()"
+                        ng-if="(model.status == 'Waiting for Booking Flight' && checkAdminDeptView && checkBookingViewConfirms)">
+                    <!--<i style="font-size: 12px; padding-right: 3px;" class="fa fa-check font-green-jungle right-5"></i>-->
+                    {{'ROOM_ORGANIZATION'|translate}}
+                </button>
+                <!--<button class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1" ng-click="viewBTAGuid()"
+                        ng-if="(model.status != 'Completed' || model.status != 'Rejected')">-->
+                    <!--<i style="font-size: 12px; padding-right: 3px;" class="fa fa-info-circle"></i>-->
+                    <!--{{'COMMON_BTA_GUID'|translate}}
+                </button>-->
+                <!--<button type="button" class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1" ng-click="showTrackingHistory()" ng-if="isITHelpdesk">
+        <svg width="16" height="16" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <g fill="currentColor" fill-rule="evenodd" transform="translate(2 1)">
+                <path fill-rule="nonzero" d="M3 4C3 3.44772 3.44772 3 4 3 4.55228 3 5 3.44772 5 4 5 4.55228 4.55228 5 4 5 3.44772 5 3 4.55228 3 4zM7 3C6.44772 3 6 3.44772 6 4 6 4.55228 6.44771 5 7 5L8 5C8.5523 5 9 4.55228 9 4 9 3.44772 8.5523 3 8 3L7 3zM6 7C6 6.44772 6.44772 6 7 6L8 6C8.5523 6 9 6.44772 9 7 9 7.55228 8.5523 8 8 8L7 8C6.44771 8 6 7.55228 6 7zM3 7C3 6.44772 3.44772 6 4 6 4.55228 6 5 6.44772 5 7 5 7.55228 4.55228 8 4 8 3.44772 8 3 7.55228 3 7zM6 10C6 9.4477 6.44772 9 7 9L8 9C8.5523 9 9 9.4477 9 10 9 10.5523 8.5523 11 8 11L7 11C6.44771 11 6 10.5523 6 10zM3 10C3 9.4477 3.44772 9 4 9 4.55228 9 5 9.4477 5 10 5 10.5523 4.55228 11 4 11 3.44772 11 3 10.5523 3 10z"></path>
+                <path d="M0,1 C0,0.44772 0.44772,0 1,0 L11,0 C11.5523,0 12,0.44772 12,1 L12,13 C12,13.5523 11.5523,14 11,14 L1,14 C0.44772,14 0,13.5523 0,13 L0,1 Z M2,12 L2,2 L10,2 L10,12 L2,12 Z"></path>
+            </g>
+        </svg>&nbsp;{{'COMMON_TRACKING_HISTORY'|translate}}
+    </button>-->
+            </div>
+        </div>
+    </div>
+    <div class="portlet-body mb-3">
+        <div class="mt-3">
+            <div class="accordion accordion-style1">
+                <div class="accordion-item">
+                    <div class="accordion-collapse collapse show">
+                        <div class="portlet bordered light">
+                            <!-- Title -->
+                            <div class="row p-3">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;" ng-if="title">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 46 46">
+                                                <path id="_12.File" data-name="12.File" d="M37,47H11a4,4,0,0,1-4-4V5a4,4,0,0,1,4-4H30a.984.984,0,0,1,.776.395l9.829,9.829A.981.981,0,0,1,41,12h0V43A4,4,0,0,1,37,47ZM31,4.381V11h6.619ZM39,13H30a1,1,0,0,1-1-1V3H11A2,2,0,0,0,9,5V43a2,2,0,0,0,2,2H37a2,2,0,0,0,2-2ZM33,39H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Zm0-8H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Zm0-8H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Z" transform="translate(-7 -1)" fill-rule="evenodd"></path>
+                                            </svg>&nbsp;{{title}}
+                                        </div>
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 24 24">
+                                                <path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z" fill="#0D0D0D"></path>
+                                            </svg>&nbsp;{{ model.userCreatedFullName }} <!--({{ model.employeeCode }})-->
+                                        </div>
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;" ng-if="model.created">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 24 24">
+                                                <path d="M9 2a1 1 0 0 1 1 1v1h4V3a1 1 0 1 1 2 0v1h3a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V3a1 1 0 0 1 1-1zM8 6H5v3h14V6h-3v1a1 1 0 1 1-2 0V6h-4v1a1 1 0 0 1-2 0V6zm11 5H5v8h14v-8z" fill="#0D0D0D"></path>
+                                            </svg>&nbsp;{{ model.created | date:'dd/MM/yyyy HH:mm' }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 d-flex flex-wrap justify-content-end">
+                                    <button class="btn-none dropdown-toggle"
+                                            type="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             width="16"
+                                             height="16"
+                                             fill="currentColor"
+                                             class="bi bi-three-dots-vertical"
+                                             viewBox="0 0 16 16">
+                                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                        </svg>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-end dropdown-menu-text-link display-11 text-center">
+                                        <li>
+                                            <a class="dropdown-item" href="" ng-click="showTrackingHistory()" ng-if="isITHelpdesk">
+                                                <svg width="16" height="16" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                                    <g fill="currentColor" fill-rule="evenodd" transform="translate(2 1)">
+                                                        <path fill-rule="nonzero" d="M3 4C3 3.44772 3.44772 3 4 3 4.55228 3 5 3.44772 5 4 5 4.55228 4.55228 5 4 5 3.44772 5 3 4.55228 3 4zM7 3C6.44772 3 6 3.44772 6 4 6 4.55228 6.44771 5 7 5L8 5C8.5523 5 9 4.55228 9 4 9 3.44772 8.5523 3 8 3L7 3zM6 7C6 6.44772 6.44772 6 7 6L8 6C8.5523 6 9 6.44772 9 7 9 7.55228 8.5523 8 8 8L7 8C6.44771 8 6 7.55228 6 7zM3 7C3 6.44772 3.44772 6 4 6 4.55228 6 5 6.44772 5 7 5 7.55228 4.55228 8 4 8 3.44772 8 3 7.55228 3 7zM6 10C6 9.4477 6.44772 9 7 9L8 9C8.5523 9 9 9.4477 9 10 9 10.5523 8.5523 11 8 11L7 11C6.44771 11 6 10.5523 6 10zM3 10C3 9.4477 3.44772 9 4 9 4.55228 9 5 9.4477 5 10 5 10.5523 4.55228 11 4 11 3.44772 11 3 10.5523 3 10z"></path>
+                                                        <path d="M0,1 C0,0.44772 0.44772,0 1,0 L11,0 C11.5523,0 12,0.44772 12,1 L12,13 C12,13.5523 11.5523,14 11,14 L1,14 C0.44772,14 0,13.5523 0,13 L0,1 Z M2,12 L2,2 L10,2 L10,12 L2,12 Z"></path>
+                                                    </g>
+                                                </svg>&nbsp;{{'COMMON_TRACKING_HISTORY'|translate}}
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider" ng-show="(model.status != 'Completed' || model.status != 'Rejected')" /></li>
+                                        <li>
+                                            <a class="dropdown-item" href="" ng-click="viewBTAGuid()" ng-if="(model.status != 'Completed' || model.status != 'Rejected')">
+                                                <svg width="16" height="16" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                                    <g fill="currentColor" fill-rule="evenodd" transform="translate(2 1)">
+                                                        <path fill-rule="nonzero" d="M3 4C3 3.44772 3.44772 3 4 3 4.55228 3 5 3.44772 5 4 5 4.55228 4.55228 5 4 5 3.44772 5 3 4.55228 3 4zM7 3C6.44772 3 6 3.44772 6 4 6 4.55228 6.44771 5 7 5L8 5C8.5523 5 9 4.55228 9 4 9 3.44772 8.5523 3 8 3L7 3zM6 7C6 6.44772 6.44772 6 7 6L8 6C8.5523 6 9 6.44772 9 7 9 7.55228 8.5523 8 8 8L7 8C6.44771 8 6 7.55228 6 7zM3 7C3 6.44772 3.44772 6 4 6 4.55228 6 5 6.44772 5 7 5 7.55228 4.55228 8 4 8 3.44772 8 3 7.55228 3 7zM6 10C6 9.4477 6.44772 9 7 9L8 9C8.5523 9 9 9.4477 9 10 9 10.5523 8.5523 11 8 11L7 11C6.44771 11 6 10.5523 6 10zM3 10C3 9.4477 3.44772 9 4 9 4.55228 9 5 9.4477 5 10 5 10.5523 4.55228 11 4 11 3.44772 11 3 10.5523 3 10z"></path>
+                                                        <path d="M0,1 C0,0.44772 0.44772,0 1,0 L11,0 C11.5523,0 12,0.44772 12,1 L12,13 C12,13.5523 11.5523,14 11,14 L1,14 C0.44772,14 0,13.5523 0,13 L0,1 Z M2,12 L2,2 L10,2 L10,12 L2,12 Z"></path>
+                                                    </g>
+                                                </svg>&nbsp;{{'COMMON_BTA_GUID'|translate}}
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider" ng-show="businessTripApplicationStatus == 'Completed' || businessTripApplicationStatus == 'Completed Changing'" /></li>
+                                        <li>
+                                            <a class="dropdown-item" href="" ng-click="printForm()" ng-if="businessTripApplicationStatus == 'Completed' || businessTripApplicationStatus == 'Completed Changing'">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                                                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                                                    <rect x="6" y="14" width="12" height="8"></rect>
+                                                </svg>&nbsp;{{'COMMON_BUTTON_PRINT'|translate}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding-left: 0 !important; padding-top: 0 !important;">
+                                <div class="col-6">
+                                    <span class="badge badge-style1 justify-content-start" ng-if="model.status"
+                                          ng-class="{
+                                                     'badge-orange': model.status != 'Completed' && model.status != 'Draft' && model.status != 'Cancelled' && model.status != 'Reject' && model.status != 'Out Of Period',
+                                                     'badge-green': model.status == 'Completed',
+                                                     'badge-red': model.status == 'Cancelled' || model.status == 'Reject' || model.status == 'Out Of Period',
+                                                     '': model.status == 'Draft'
+                                                   }">
+                                        {{statusTranslate}}
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mt-2 d-flex flex-column flex-lg-row justify-content-end">
+                                        <div class="progresses" ng-repeat="item in currentInstanceProcessingStage.workflowData.steps">
+                                            <div class="steps badge-green" ng-if="item.stepNumber == 1">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     width="16"
+                                                     height="16"
+                                                     viewBox="0 0 24 24"
+                                                     fill="none"
+                                                     stroke="#ffffff"
+                                                     stroke-width="2"
+                                                     stroke-linecap="round"
+                                                     stroke-linejoin="round">
+                                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                                </svg>
+                                            </div>
+                                            <span class="line" ng-if="item.stepNumber == 1"></span>
+                                            <div class="steps" ng-class="!item.histories ? '' : {'badge-green': item.histories.voteType == 1 && item.histories.isStepCompleted,
+                                                   'badge-yellow-60': item.histories.voteType == 3,
+                                                   'badge-outline-orange': item.histories.voteType == 0 && !item.histories.isStepCompleted,
+                                                   'badge-red': (item.histories.voteType == 2 || item.histories.voteType == 4)}" ng-if="item.stepNumber != 1">
+                                                <div class="tooltip-custom tooltip-style2 tooltip-below">
+                                                    {{item.stepNumber}}
+                                                    <span class="tooltip-text">
+                                                        <span class="badge btn-grey rounded-pill poppins-regular display-12 leading-14">Round {{processingStageRound}}</span>
+                                                        <p class="text-orange poppins-medium display-11" style="text-transform: uppercase;">
+                                                            {{item.stepName}}
+                                                        </p>
+                                                        <p class="display-12" ng-if="(item.histories.assignedToUserFullName || item.histories.assignedToDepartmentName)">
+                                                            <span class="text-grey">Assign To: </span>
+                                                            <span style="text-transform: uppercase;">
+                                                                {{item.histories.assignedToUserFullName ? item.histories.assignedToUserFullName: item.histories.assignedToDepartmentName}}
+                                                            </span>
+                                                        </p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="line" ng-if="item.stepNumber != 1 && currentInstanceProcessingStage.workflowData.steps[currentInstanceProcessingStage.workflowData.steps.length - 1].stepNumber != item.stepNumber"></span>
+                                        </div>
+                                        <a href="#" style="padding-left: 20px"
+                                           data-bs-toggle="modal"
+                                           data-bs-target="#exampleModalView5">
+                                            View more
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 width="10"
+                                                 height="10"
+                                                 viewBox="0 0 24 24"
+                                                 fill="none"
+                                                 stroke="#0D6EFD"
+                                                 stroke-width="2"
+                                                 stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path d="M9 18l6-6-6-6" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="row ng-scope" style="padding: 15px 0;margin-bottom:15px">
+                                <div class="col-sm-12">
+                                    <workflow-comment></workflow-comment>
+                                </div>
+                            </div>-->
+
+                            <div class="row ng-scope" ng-if="resignationInProgress" style="padding: 15px 0;margin-bottom:15px">
+                                <div class="col-sm-12">
+                                    <div class="alert-warning" style="margin-bottom: 0px">
+                                        <h5 class="bold uppercase">{{'COMMON_WARNING'|translate}}:</h5>
+                                        <p></p>
+                                        <ul>
+                                            {{warning}}
+                                        </ul>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row ng-scope" ng-if="bookingDateTripWeekes && warningWeekBooking.length > 0 && (model.type == 2 || model.type == 3)" style="padding: 15px 0;margin-bottom:15px">
+                                <div class="col-sm-12">
+                                    <div class="alert-warning" style="margin-bottom: 0px">
+                                        <h5 class="bold uppercase">{{'COMMON_WARNING'|translate}}:</h5>
+                                        <p></p>
+                                        <ul>
+                                            <li ng-repeat="warning in warningWeekBooking track by $index">
+                                                {{warning.message}}
+                                            </li>
+                                        </ul>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-danger-style1 ng-scope" ng-if="errors.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                                <div class="col-sm-12">
+                                    <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                                        <h5 class="bold uppercase">
+                                            {{'COMMON_ENTER_FIELD' | translate}} <span class="font-red-thunderbird">*</span>:
+                                        </h5>
+                                        <p></p>
+                                        <ul>
+                                            <li ng-repeat="error in errors track by $index">
+                                                <span class="bold ">{{error.controlName}}</span>{{error.message  ?error.message: ''}}
+                                            </li>
+                                            <br />
+                                        </ul>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="alert alert-danger-style1 ng-scope" ng-if="errorChangings.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                                <div class="col-sm-12">
+                                    <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                                        <h5 class="bold uppercase">
+                                            {{'COMMON_ENTER_FIELD' | translate}}
+                                            <span class="font-red-thunderbird">*</span>:
+                                        </h5>
+                                        <p></p>
+                                        <ul>
+                                            <li ng-repeat="error in errorChangings" style="margin-left: 1em;">
+                                                <span class="bold">{{error.controlName}}</span>
+                                                <zt ng-if="!error.isRule">
+                                                    : {{error.errorDetail}}
+                                                </zt>
+                                                <span ng-if="error.isRule">
+                                                    {{error.errorDetail}}
+                                                </span>
+                                            </li>
+                                        </ul>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-body">
+                                <form name="btaForm">
+                                    <div class="form-horizontal">
+                                        <div class="form-body">
+                                            <div class="row align-middle" style="flex-wrap: wrap;">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label text-secondary">
+                                                            {{'COMMON_DEPT_LINE'|translate}}:
+                                                        </label>
+                                                        <select kendo-drop-down-list name="dept_line_name" id="dept_line_id"
+                                                                k-options="deptLineOptions" k-ng-model="model.deptLineId"
+                                                                class="form-control w100">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label text-secondary">
+                                                            {{'COMMON_DIVISION_GROUP'|translate}}:
+                                                        </label>
+
+                                                        <input kendo-drop-down-tree="divisionTree" class="form-control w100"
+                                                               k-on-change="onChangeDivision(model.deptDivisionId)"
+                                                               k-options="divisionOptions" k-ng-model="model.deptDivisionId"
+                                                               id="division_id" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label text-secondary">
+                                                            {{'COMMON_TYPE'|translate}}:
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+
+                                                        <select kendo-drop-down-list style="width: 100%;"
+                                                                ng-class="{'k-state-disabled': allowDisabledBTAType()}"
+                                                                ng-model="model.type"
+                                                                k-data-text-field="'name'"
+                                                                k-data-value-field="'value'"
+                                                                k-data-source="businessTypeOption"
+                                                                ng-disabled="allowDisabledBTAType()"
+                                                                k-on-change="ctrlMembership.changeTypeBooking()"
+                                                                class="form-control w100">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group" ng-if="model.type == 2 || model.type == 3">
+                                                        <label class="form-label text-secondary" ng-if="model.type == 2 || model.type == 3">
+                                                            {{'COMMON_TICKETTYPE'|translate}}:
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+
+                                                        <select kendo-drop-down-list style="width: 100%;"
+                                                                id="dataRoundTripId"
+                                                                ng-model="model.dataRoundTrip"
+                                                                k-data-text-field="'name'"
+                                                                k-data-value-field="'value'"
+                                                                k-data-source="roundTripOption"
+                                                                ng-change="changeRoundTrip()"
+                                                                class="form-control w100"
+                                                                ng-if="model.type == 2 || model.type == 3">
+                                                        </select>
+                                                        <!--<div ng-if="model.type == 2 || model.type == 3">
+                                                            <label class="control-label">{{'COMMON_STATUS'|translate}}:</label>
+                                                            <input type="text" class="form-control input-default" id='statusTicket' style="width: 100%;"
+                                                            ng-model="model.status" ng-disabled="true" />
+                                                        </div>
+                                                        <div ng-if="model.type == 1 || model.type == 4">
+                                                            <label class="control-label">{{'COMMON_STATUS'|translate}}:</label>
+                                                            <input type="text" class="form-control input-default" id='statusTicket' style="width: 100%;"
+                                                                   ng-model="model.status" ng-disabled="true" />
+                                                        </div>-->
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex gap-2 flex-wrap justify-content-end">
+                                                <div class="mb-3">
+                                                    <button type="button" id="create"
+                                                            class="btn btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1" ng-if="perm && model.type != ''" ng-click="addItemsUser(employeesDataSource)">
+                                                        {{'ADD_USER_TITLE_DIALOG'| translate}}
+                                                    </button>
+                                                    <span id="viewBookingFlights">
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mrt10">
+                                                <div class="col-md-12">
+                                                    <kendo-grid id="btaListDetailGrid" options="btaListDetailGridOptions">
+                                                    </kendo-grid>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="margin-top: 40px;">
+
+                                                <!-- <div class="col-md-12">
+                                                    <div class="form-group control-label">
+                                                        <input type="checkbox" id="argree_id" ng-model="model.isAgree"
+                                                            class="k-checkbox">
+                                                        <label class="k-checkbox-label" for="argree_id">
+                                                            <p style="font-style: italic;">
+                                                                Tôi cam kết tuân thủ các quy định về thời gian và địa điểm đến xe.
+                                                                Nếu có thay đổi, tôi sẽ thông báo cho phòng Nhân sự và Hành chính
+                                                                trước ngày 20 hàng tháng.
+                                                                <br />(I commit to comply with rules on time and bus stop. If there
+                                                                is any change, I will inform HR & Admin Department before the 20th
+                                                                day of each month.)
+                                                            </p>
+                                                        </label>
+                                                    </div>
+                                                </div> -->
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label text-secondary">{{'ATTACHMENT_DETAIL'| translate}}:</label>
+                                                                <input name="files" id="attachmentDetail" type="file" kendo-upload
+                                                                       k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }"
+                                                                       k-select="onSelect" k-remove="removeAttach"
+                                                                       class="input-default" />
+
+                                                                <label class="control-label"
+                                                                       ng-if="oldAttachmentDetails && oldAttachmentDetails.length"></label>
+                                                                <div style="margin-top: 10px; padding-left: 30px;"
+                                                                     ng-if="oldAttachmentDetails && oldAttachmentDetails.length">
+                                                                    <p><b>{{'UPLOADED_FILE_LIST'| translate}}</b></p>
+                                                                    <ol>
+                                                                        <li ng-repeat="doc in oldAttachmentDetails">
+                                                                            <span>
+                                                                                <a href="" ng-click="downloadAttachment(doc.id)">{{doc.fileDisplayName}}</a>
+                                                                            </span>
+                                                                            <span href="" ng-click="viewFileOnline(doc.id)" class="viewAttachmentDetail"
+                                                                                  style="color: #5b9bd1; cursor: pointer;">
+                                                                                |
+                                                                                {{'COMMON_BUTTON_VIEW'| translate}}
+                                                                            </span>
+                                                                            <span href="" ng-click="removeOldAttachment(doc)" class="deleteattachmentDetail"
+                                                                                  style="color: #5b9bd1; cursor: pointer;">
+                                                                                |
+                                                                                {{'COMMON_BUTTON_DELETE'| translate}}
+                                                                            </span>
+                                                                        </li>
+                                                                    </ol>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label text-secondary">
+                                                                    {{'COMMON_REQUESTOR_NOTE'|translate}}:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <select kendo-drop-down-list
+                                                                        style="width:100px;"
+                                                                        k-options="reasonOfListOptions"
+                                                                        k-ng-model="reasonSelected" id="reasonDropdown"
+                                                                        k-on-change="changeReason(reasonSelected)"
+                                                                        name=""
+                                                                        class="w100">
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label text-secondary">
+                                                                    {{'COMMON_REQUESTOR_NOTE_DETAIL'|translate}}:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <textarea ng-model="model.requestorNoteDetail" class="form-control" id="reasonOfPromotion" rows="2" ng-readonly="!readReason"></textarea>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="col-md-6">
+                                                                <input type="checkbox" id="carRental_id" ng-model="isChecked"
+                                                                       class="form-check-input">
+                                                                <label class="form-check-label" for="carRental_id"
+                                                                       style="padding-top: 2px !important;">
+                                                                    {{'CAR_RENTAL'|translate}}:
+                                                                </label>
+                                                            </div>
+                                                            <a ng-show="isChecked" class="ssg-download-text" href="/Download/RentalCarRequestForm.xlsx">Download Template</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" ng-if="isChecked">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="form-label text-secondary">
+                                                                {{'CAR_RENTAL_ATTACHMENT_DETAIL'| translate}}:
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+
+                                                            <input name="files" id="carAttachmentDetail" type="file" kendo-upload
+                                                                   k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }"
+                                                                   k-select="carRentalCtrl.onSelect" k-remove="carRentalCtrl.removeAttach"
+                                                                   class="input-default" />
+
+                                                            <label class="control-label"
+                                                                   ng-if="carRentalCtrl.oldCarRentalAttachmentDetails && carRentalCtrl.oldCarRentalAttachmentDetails.length"></label>
+                                                            <div class="col-md-8" style="margin-top: 10px; padding-left: 30px;"
+                                                                 ng-if="carRentalCtrl.oldCarRentalAttachmentDetails && carRentalCtrl.oldCarRentalAttachmentDetails.length">
+                                                                <p><b>{{'UPLOADED_FILE_LIST'| translate}}</b></p>
+                                                                <ol>
+                                                                    <li ng-repeat="doc in carRentalCtrl.oldCarRentalAttachmentDetails">
+                                                                        <span>
+                                                                            <a href="" ng-click="carRentalCtrl.downloadAttachment(doc.id)">{{doc.fileDisplayName}}</a>
+                                                                        </span>
+                                                                        <span href="" ng-click="viewFileOnline(doc.id)" class="viewAttachmentDetail"
+                                                                              style="color: #5b9bd1; cursor: pointer;">
+                                                                            |
+                                                                            {{'COMMON_BUTTON_VIEW'| translate}}
+                                                                        </span>
+                                                                        <span href="" ng-click="carRentalCtrl.removeOldAttachment(doc)" class="deleteCarAttachmentDetail"
+                                                                              style="color: #5b9bd1; cursor: pointer;">
+                                                                            |
+                                                                            {{'COMMON_BUTTON_DELETE'| translate}}
+                                                                        </span>
+                                                                    </li>
+                                                                </ol>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" ng-if="isVisaChecked || model.type == 2 || model.type == 4">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="form-label text-secondary">
+                                                                {{'VISA_ATTACHMENT_DETAIL'| translate}}:
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                            <input name="files" id="visaAttachmentDetail" type="file" kendo-upload
+                                                                   k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }"
+                                                                   k-select="visaCtrl.onSelect" k-remove="visaCtrl.removeAttach"
+                                                                   class="input-default" />
+                                                            <label class="control-label"
+                                                                   ng-if="visaCtrl.oldVisaAttachmentDetails && visaCtrl.oldVisaAttachmentDetails.length"></label>
+                                                            <div class="col-md-8" style="margin-top: 10px; padding-left: 30px;"
+                                                                 ng-if="visaCtrl.oldVisaAttachmentDetails && visaCtrl.oldVisaAttachmentDetails.length">
+                                                                <p><b>{{'UPLOADED_FILE_LIST'| translate}}</b></p>
+                                                                <ol>
+                                                                    <li ng-repeat="doc in visaCtrl.oldVisaAttachmentDetails">
+                                                                        <span>
+                                                                            <a href="" ng-click="visaCtrl.downloadAttachment(doc.id)">{{doc.fileDisplayName}}</a>
+                                                                        </span>
+                                                                        <span href="" ng-click="viewFileOnline(doc.id)" class="viewAttachmentDetail"
+                                                                              style="color: #5b9bd1; cursor: pointer;">
+                                                                            |
+                                                                            {{'COMMON_BUTTON_VIEW'| translate}}
+                                                                        </span>
+                                                                        <span href="" ng-click="visaCtrl.removeOldAttachment(doc)" class="deleteVisaAttachmentDetail"
+                                                                              style="color: #5b9bd1; cursor: pointer;">
+                                                                            |
+                                                                            {{'COMMON_BUTTON_DELETE'| translate}}
+                                                                        </span>
+                                                                    </li>
+                                                                </ol>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <a class="ssg-download-text" href="/Download/VISA, TRAVEL INSURANCE, COMMUNICATION FEE REQUEST FORM.xlsx">Download Template</a>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <!-- From Booking Contact -->
+                                                    <div class="col-md-12" ng-if="model.type == 2 || model.type == 3">
+                                                        <div class="portlet-title mb-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="me-2" style="width: 4px; height: 20px; background-color: #006efa;"></div>
+                                                                <h2 class="accordion-header">
+                                                                    <label class="poppins-semibold display-9" style="text-transform: uppercase;">
+                                                                        {{'BTA_BOOKING_CONTACT'| translate}}
+                                                                    </label>
+                                                                </h2>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mrt10">
+                                                            <div class="col-md-12">
+                                                                <kendo-grid id="bookingContactGrid" options="ctrlMembership.bookingContactOptions">
+                                                                </kendo-grid>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-md-12">
+                                                        <p><b>{{'COMMON_NOTE'|translate}}: </b><span>*</span></p>
+                                                        <p>
+                                                            - <b>Gửi thông tin Lệnh điều động công tác cho Phòng Hành Chính ít nhất 10 ngày trước ngày khởi hành. Tính từ thời điểm General Manager duyệt đơn BTA.</b> <br />
+                                                            <i>Send BTA form to Admin Department at least before 10 days since the time General Manager approves the BTA form.</i>
+                                                        </p>
+                                                        <p>
+                                                            - <b>
+                                                                Nhân viên Hành Chính chỉ xuất vé và đặt khách sạn khi nhận được BTA với
+                                                                đầy đủ chữ ký của Senior GM/ GM.
+                                                            </b> <br />
+                                                            <i>
+                                                                Admin Staff only process of booking air ticket, hotel on receiving BTA
+                                                                form with signature of Senior General Manager/ General Manager.
+                                                        </p>
+                                                        </i>
+                                                        <p>
+                                                            - <b>
+                                                                Trường hợp thay đổi, hủy lịch công tác với lý do cá nhân: cá nhân sẽ
+                                                                chịu chi phí phát sinh.
+                                                            </b><br />
+                                                            <i>
+                                                                In case of changing, cancelling business trip due to private matter:
+                                                                Staff shall pay directly this extra amount to related supplier
+                                                                accordingly.
+                                                            </i>
+                                                        </p>
+                                                        <p>
+                                                            - <b>
+                                                                Trường hợp các vé thuộc loại không huỷ được, Phí huỷ vé (Cancellation fee) sẽ bằng với giá trị của vé.
+                                                            </b><br />
+                                                            <i>
+                                                                In case the tickets cannot be canceled, the Cancellation fee will be equal to the value of the ticket.
+                                                            </i>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <!-- From 3 model.roomOrganizations-->
+                                                    <div ng-class="{'disable-div': disableChangeOrCancel}" ng-if="model.roomOrganizations">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="me-2" style="width: 4px; height: 20px; background-color: #006efa;"></div>
+                                                            <h2 class="accordion-header">
+                                                                <label class="poppins-semibold display-9" style="text-transform: uppercase;">
+                                                                    {{'ROOM_ORGANIZATION'|translate}}
+                                                                </label>
+                                                            </h2>
+                                                        </div>
+                                                        <div class="row mrt10">
+                                                            <div class="col-md-12">
+                                                                <kendo-grid id="roomViewGrid" options="roomViewOptions">
+                                                                </kendo-grid>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- <div class="row" style="margin-top: 40px; padding-left: 10px;">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <div style="font-weight: bold;">Ghi chú/Note</div>
+                                                                <div>1. Gửi thông tin Lệnh điều động công tác cho Hành Chính ít nhất 7 ngày
+                                                                    trước ngày khởi hành/ Send BTA form to Admin Department at least before
+                                                                    7 days since departure date</div>
+                                                                <div>2. Nhân viên hành chính chỉ xuất vé và đặt khách sạn khi nhận được BTA
+                                                                    với đầy đủ chữ ký của Senior GM/ GM/ Admin Staff only process of booking
+                                                                    air ticket, hotel on receiving BTA form with signature of Senior General
+                                                                    Manager/ General Manager</div>
+                                                                <div>3. Trường hợp thay đổi, hủy lịch công tác với lý do cá nhân: cá nhân sẽ
+                                                                    chịu chi phí phát sinh/ In case of changing, cancelling business trip
+                                                                    due to private matter. Staff shall pay directly this extra amount to
+                                                                    related supplier accordingly. </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <!-- FORM 2 -->
+                                                    <div ng-class="{'disable-div': disableChangeOrCancel}">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="me-2" style="width: 4px; height: 20px; background-color: #006efa;"></div>
+                                                            <h2 class="accordion-header">
+                                                                <label class="poppins-semibold display-9" style="text-transform: uppercase;">
+                                                                    {{'BTA_CHANGING_CACELLING_BUSNESS_TRIP'|translate}}
+                                                                </label>
+                                                            </h2>
+                                                        </div>
+                                                        <div class="row mrt10">
+                                                            <div class="col-md-12">
+                                                                <kendo-grid id="btaListChangeOrCancelGrid" options="btaListChangeOrCancelGridOptions">
+                                                                </kendo-grid>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mrb10" ng-if="model.status == 'Completed' || forceChangeBusinessTrip">
+                                                            <div class="col-md-12" style="margin-top: 10px;">
+                                                                <span class="input-group-btn">
+                                                                    <button type="button" id="addMore"
+                                                                            class="btn btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1" ng-click="addMore()">
+                                                                        {{'COMMON_BUTTON_ADD_MORE'| translate}}
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <!-- From 4 -->
+                                                    <div class="mrt10"></div>
+                                                    <div ng-class="{'disable-div': disableChangeOrCancel}" ng-if="model.changedRoomOrganizations.length">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="me-2" style="width: 4px; height: 20px; background-color: #006efa;"></div>
+                                                            <h2 class="accordion-header">
+                                                                <label class="poppins-semibold display-9" style="text-transform: uppercase;">
+                                                                    {{'CHANGE_ROOM_ORGANIZATION'| translate}}
+                                                                </label>
+                                                            </h2>
+                                                        </div>
+                                                        <div class="row mrt10">
+                                                            <div class="col-md-12">
+                                                                <kendo-grid id="changeRoomViewGrid" options="changeRoomViewOptions">
+                                                                </kendo-grid>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-body" style="margin-top: 20px;">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"
+                                                                           style="padding-left: 0 !important;">{{'ATTACHMENT_CHANGING'| translate}}:</label>
+                                                                    <input name="files" id="attachmentChanging" type="file"
+                                                                           style="padding-left: 0 !important;" kendo-upload
+                                                                           k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }"
+                                                                           k-select="onSelectChange" k-remove="removeAttachChange" disabled="disabled"
+                                                                           class="input-default" />
+                                                                    <label class="control-label"
+
+                                                                           ng-if="oldAttachmentChanges && oldAttachmentChanges.length"></label>
+                                                                    <div class="col-md-8" style="margin-top: 10px; padding-left: 30px;"
+                                                                         ng-if="oldAttachmentChanges && oldAttachmentChanges.length">
+                                                                        <p><b>{{'UPLOADED_FILE_LIST'| translate}}</b></p>
+                                                                        <ol>
+                                                                            <li ng-repeat="doc in oldAttachmentChanges">
+                                                                                <a ng-click="downloadAttachmentChange(doc.id)">{{doc.fileDisplayName}}</a>
+                                                                                <span ng-click="removeOldAttachmentChange(doc)" class="deleteattachmentChanging"
+                                                                                      style="color: #5b9bd1; cursor: pointer;">
+                                                                                    |
+                                                                                    {{'COMMON_BUTTON_DELETE'| translate}}
+                                                                                </span>
+                                                                            </li>
+                                                                        </ol>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="mrt10"></div>
+                                                    <div class="page-content-wrapper float-none" ng-if="model.isCheckRe">
+                                                        <form name="btaForm">
+                                                            <div class="form-horizontal">
+                                                                <div class="form-body">
+                                                                    <div class="row align-middle" style="flex-wrap: wrap;">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label class="col-md-4 control-label" style="text-decoration:none;">RE ReferenceNumber:</label>
+                                                                                <label class="col-md-8 control-label" style="text-decoration:none;"><a ng-click="openWindow(model.url_RE)">{{model.referenceNumberRE}}</a></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <!-- FORM 3 Over Budget-->
+                                                    <div ng-class="{'disable-div': false}" ng-if="model.businessOverBudgets.length">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="me-2" style="width: 4px; height: 20px; background-color: #006efa;"></div>
+                                                            <h2 class="accordion-header">
+                                                                <label class="poppins-semibold display-9" style="text-transform: uppercase;">
+                                                                    {{'BTA_OVER_BUDGET'|translate}}
+                                                                </label>
+                                                            </h2>
+                                                        </div>
+                                                        <div class="row mrt10">
+                                                            <div class="col-md-12">
+                                                                <kendo-grid id="btaOverBudgetGrid" options="btaListOverBudgetGridOptions">
+                                                                </kendo-grid>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- tuhm: BTA Confirm -->
+                            <!-- FORM 3 -->
+                            <!--<div class="row mrt10" ng-if="model.status == 'Waiting for Confirm BTA'">
+                                    <div class="title_panel caption caption-md">
+                                        <span class="caption-subject uppercase">
+                                            {{'BUSINESS_CONFIRM_TRIP_APPLICATION'|translate}}
+                                        </span>
+                                    </div>
+                                    <div class="row mrt10">
+                                        <div class="col-md-12">
+                                            <kendo-grid id="btaListConfirmGridData" options="btaConfirmGridOptions">
+                                            </kendo-grid>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mrb10" ng-if="model.status == 'Waiting for Confirm BTA'">
+                                        <div class="col-md-12" style="margin-top: 10px;">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-sm btn-primary btn-add-user" id="sendConfirm" disabled="disabled"
+                                                        style="background-color: #b42e83" ng-click="sendConfirm()">
+                                                    {{'COMMON_BUTTON_SEND_CONFIRM'| translate}}
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            <!-- end tuhm -->
+
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="group poppins-medium text-grey-300">
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2" style="margin-bottom:12px">
+                                        <action-items model="model" save="save" form="g1" set-room="setRooms"></action-items>
+                                    </div>
+                                    <kendo-button class="btn btn-default btn-sm" ng-click="roomAdminChecker()"
+                                                  ng-if="(model.status == 'Waiting for Booking Flight' && checkAdminDeptView && checkBookingViewConfirms)">
+                                        <i style="font-size: 12px; padding-right: 3px;" class="fa fa-check font-green-jungle right-5"></i>
+                                        {{'ROOM_ORGANIZATION'|translate}}
+                                    </kendo-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Content -->
+    </div>
+</div>
+<processing-stage workflow-instances="workflowInstances" model="model"></processing-stage>
+<tracking-history tracking-history="trackingHistory"></tracking-history>
+
+<!-- View File Online -->
+<div id="attachmentViewDialog" style="height: 100% !important; display: none;" k-modal="true" k-visible="false">
+    <iframe id="attachment_owa" style="width:100%;height:97%;padding:0px!important;"></iframe>
+    <button class="btn btn-default btn-sm k-button pull-right close-owa-dialog" ng-click="owaClose()"><i class="k-icon k-i-close font-green-jungle"></i> Close</button>
+</div>
+
+
+<!-- popup add user -->
+<!--Add-->
+<div id="dialog_Detail" kendo-dialog="dialogDetailCode" k-on-open="dialogVisible = true"
+     style="height: 100% !important;" k-on-close="dialogVisible = false" k-width="950" k-modal="true" k-visible="false"
+     options="dialogDetailOption">
+    <div class="row">
+        <label class="col-md-3 control-label"></label>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <div class="d-flex align-items-center" style="width: 100%;">
+                    <input type="text" class="form-control" id='FieldFilter' placeholder="Search for..."
+                           style="width: 100%; border-bottom-right-radius: 0; border-top-right-radius: 0; " ng-keypress="ifEnter($event, 'addUser')" ng-model="gridUser.keyword">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="button" ng-click="searchGridUser()" style="border: 1px solid #dadada;
+                 height: 38px; border-bottom-left-radius: 0; border-top-left-radius: 0;">
+                            <span class="k-icon k-i-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mrb10">
+        <div class="col-md-12">
+        </div>
+    </div>
+
+    <div>
+        <div kendo-grid id="userGrid" style="width:900px;" options="userListGridOptions">
+        </div>
+    </div>
+
+</div>
+<!--Review -->
+<div id="dialog_Detail_Review" kendo-dialog="dialogDetailCodeReview" k-on-open="dialogVisible = true"
+     style="height: 100% " k-on-close="closeReviewDialog(false)" k-width="950" k-modal="true" k-visible="false"
+     options="dialogDetailReviewOption">
+    <!-- row 1 -->
+    <div class="row">
+        <!-- <label class="col-md-5"></label> -->
+        <div class="col-md-6 mb-3" style="padding-right: 30px;">
+            <div class="d-flex align-items-center" style="width: 380px;">
+                <input type="text" class="form-control" id='FieldFilter' placeholder="Search for..."
+                       style="width: 100%; border-bottom-right-radius: 0; border-top-right-radius: 0;" ng-keypress="ifEnter($event, 'review')" ng-model="gridUserReview.keyword">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="button" ng-click="searchGridUserReview()" style="border: 1px solid #dadada;
+                            height: 38px; border-bottom-left-radius: 0; border-top-left-radius: 0;">
+                        <span class="k-icon k-i-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- row 2 -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">{{'BTA_TRIP_FROM_DATE'|translate}}:</label>
+                <input style="width: 100%;" kendo-date-time-picker id="fromDate" name="fromDate"
+                       k-ng-model="date.fromDate" k-on-change="fromDateChanged()" k-date-input="true"
+                       k-format="'dd/MM/yyyy HH:mm'" k-time-format="'HH:mm'" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">{{'BTA_TRIP_TO_DATE'|translate}}:</label>
+                <input style="width: 100%;" kendo-date-time-picker id="toDate" name="toDate" k-on-change="toDateChanged()"
+                       k-ng-model="date.toDate" k-date-input="true" k-format="'dd/MM/yyyy HH:mm'" k-time-format="'HH:mm'" timeFormat="HH:mm" />
+            </div>
+        </div>
+    </div>
+    <div class="row mrb10">
+        <div class="col-md-12">
+        </div>
+    </div>
+    <div class="alert-warning" style="margin-bottom: 0px" ng-if="!isWarningMessage && (model.type == 2 || model.type == 3)">
+        <span class="font-red-thunderbird">{{'BTA_WARNING_MESSAGE'|translate}}</span>
+    </div>
+
+    <div>
+        <div kendo-grid id="userGridReview" style="width:900px;" options="userListGridReviewOptions">
+        </div>
+    </div>
+</div>
+
+<!-- end -->
+<!-- Room organization has booking-->
+<div id="dialog_Room" kendo-dialog="dialogRoom" k-on-open="dialogVisibleRoom = true" style="height: 100% !important;"
+     k-on-close="dialogVisibleRoom = false" k-width="1000" k-modal="true" k-visible="false" options="dialogRoomOption">
+    <ul>
+        <div class="alert alert-danger-style1 mb-3" style="clear: both; margin-top: 10px;"
+             ng-if="roomOrganizationErrorsMessages.length">
+            <p ng-repeat="error in roomOrganizationErrorsMessages">
+                <span ng-if="error.row">
+                    {{'COMMON_ROW_NO'|translate}} {{error.row}} : {{error.message}}
+                </span>
+                <span ng-if="!error.row">
+                    {{error.message}}
+                </span>
+            </p>
+        </div>
+    </ul>
+    <div class="mrb10 mb-3">
+        <div kendo-grid id="roomGrid" style="max-width: 970px;" options="roomOptions">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex gap-2 flex-wrap justify-content-end">
+                <button type="button" id="addMore"
+                        class="btn btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1" ng-click="addRoomBookingFlight(tripGroupRoom)">
+                    {{'COMMON_BUTTON_ADD_MORE'| translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- end -->
+<!-- confirm Room organization -->
+<div id="dialog_RoomConfirm" kendo-dialog="dialogRoomConfirm" k-on-open="dialogVisibleRoomConfirm  = true"
+     style="height: 100% !important;" k-on-close="dialogVisibleRoomConfirm  = false" k-width="600" k-modal="true"
+     k-visible="false" options="dialogRoomConfirmOption">
+    <div class="alert alert-danger-style1 mb-3" style="clear: both; margin-top: 10px;">
+        {{'BTA_ROOM_ORGANIZATION_CONFIRM_MESSAGE'| translate}}
+    </div>
+</div>
+<!-- end -->
+<!-- changing/ canceling-->
+<div id="dialog_changing_cancel" kendo-dialog="dialogDetailCodeChangingCancel" k-on-open="dialogVisible = true"
+     style="height: 100% !important;" k-on-close="dialogVisible = false" k-width="890" k-modal="true" k-visible="false"
+     options="dialogUserGridChangingCancelOption">
+
+    <div>
+        <div kendo-grid id="userGridChangingCancel" style="width:850px;" options="userGridChangingCancelOptions">
+        </div>
+    </div>
+
+</div>
+
+<!-- Room organization no booking-->
+<div id="dialog_Room_NotBookingId" kendo-dialog="dialogRoom_NotBooking" k-on-open="dialogVisibleRoomNotBooking = true" style="height: 100% !important;"
+     k-on-close="dialogVisibleRoomNotBooking = false" k-width="1000" k-modal="true" k-visible="false" options="dialog_Room_NotBookingOption">
+    <ul>
+        <div class="alert alert-danger-style1 mb-3" style="clear: both; margin-top: 10px;"
+             ng-if="roomOrganizationErrorsMessages.length">
+            <p ng-repeat="error in roomOrganizationErrorsMessages">
+                <span ng-if="error.row">
+                    {{'COMMON_ROW_NO'|translate}} {{error.row}} : {{error.message}}
+                </span>
+                <span ng-if="!error.row">
+                    {{error.message}}
+                </span>
+            </p>
+        </div>
+    </ul>
+    <div class="mrb10 mb-3">
+        <div kendo-grid id="roomNotBookingGrid" style="max-width: 970px;" options="roomNotBookingOptions">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex gap-2 flex-wrap justify-content-end">
+                <button type="button" id="addMore"
+                        class="btn btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1" ng-click="addRoom()">
+                    {{'COMMON_BUTTON_ADD_MORE'| translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- end -->
+<!-- confirm Room organization not Booking-->
+<div id="dialog_RoomConfirmNotBooking" kendo-dialog="dialog_RoomConfirmNotBooking" k-on-open="dialogVisibleRoomConfirmNotBooking  = true"
+     style="height: 100% !important;" k-on-close="dialogVisibleRoomConfirmNotBooking  = false" k-width="600" k-modal="true"
+     k-visible="false" options="dialog_RoomConfirmNotBookingOption">
+
+    <div class="alert alert-danger-style1 mb-3" style="clear: both; margin-top: 10px;">
+        {{'BTA_ROOM_ORGANIZATION_CONFIRM_MESSAGE'| translate}}
+    </div>
+</div>
+<!-- end -->
+<!--dialog select Employee Group-->
+<div id="dialog_TripGroup" kendo-dialog="dialogTripGroup" k-on-open="dialogVisible = true"
+     k-on-close="dialogVisible = false" k-modal="true" k-visible="false" options="dialogTripGroupOption" k-width="1920">
+    <div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px" ng-if="tripGroupPopup.errorMessages && tripGroupPopup.errorMessages.message.length > 0">
+        <b class="font-red-thunderbird" ng-if="tripGroupPopup.errorMessages.bookingNumber">Booking Number: {{tripGroupPopup.errorMessages.bookingNumber}}</b> <br>
+        <b class="font-red-thunderbird">Error Message: </b>
+        <ul style="list-style-type: disclosure-closed;">
+            <li ng-if="isArray(tripGroupPopup.errorMessages.message)"
+                ng-repeat="msg in tripGroupPopup.errorMessages.message track by $index">
+                {{ msg }}
+            </li>
+            <li ng-if="!isArray(tripGroupPopup.errorMessages.message)">
+                {{ tripGroupPopup.errorMessages.message }}
+            </li>
+        </ul>
+        <i ng-show="tripGroupPopup.errorMessages.bookingNumber">{{contactAdmin}}</i>
+    </div>
+
+    <div id="tabstrip" kendo-tab-strip="tabstrip">
+        <ul>
+            <li class="k-state-active"><p>{{'Wait Booking'| translate}}</p></li>
+            <li><p>{{'Booked Tickets'| translate}}</p></li>
+        </ul>
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tripGroupGrid" kendo-grid id="btaTripGroupGrid" options="btaTripGroupGridOptions"></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="col-md-12">
+                <div class="tripGroupHasTicketGrid" kendo-grid id="btaTripGroupHasTicketGrid" options="tripGroupHasTicketGridOptions"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- confirm remove the ticket -->
+<div id="dialog_RemoveTicketConfirm" kendo-dialog="dialogRemoveTicketConfirm" k-on-open="dialogVisibleRemoveTicketConfirm = true"
+     style="height: 100% !important;" k-on-close="dialogVisibleRemoveTicketConfirm = false" k-width="600" k-modal="true"
+     k-visible="false" options="dialogRemoveTicketConfirmOption">
+    <div class="alert alert-danger-style1 mb-3" style="clear: both; margin-top: 10px;">
+        {{'BTA_REMOVE_TICKET_CONFIRM_MESSAGE'| translate}}
+    </div>
+</div>
+<!-- end -->
+
+<style>
+    .k-dialog {
+        top: 10px !important;
+    }
+
+    .k-grid-content {
+        max-height: 100% !important;
+        overflow-y: hidden;
+    }
+
+    #dialog_TripGroup {
+        overflow: auto;
+    }
+
+    #dialog_ConfirmBTA {
+        overflow: auto;
+    }
+
+    #btaTripGroupGrid {
+        width: 1900px;
+    }
+
+        #btaTripGroupGrid .k-grid-content {
+            width: 1900px;
+            padding-right: 17px;
+        }
+
+        #btaTripGroupGrid .k-grid-header {
+            width: 1900px;
+        }
+
+        #btaTripGroupGrid .k-auto-scrollable {
+            max-height: 300px !important;
+            min-height: 0px !important;
+            height: auto !important;
+            overflow-y: visible !important;
+        }
+
+    #btaTripGroupHasTicketGrid {
+        width: 1900px;
+    }
+
+        #btaTripGroupHasTicketGrid .k-grid-content {
+            width: 1900px;
+            padding-right: 17px;
+        }
+
+        #btaTripGroupHasTicketGrid .k-grid-header {
+            width: 1900px;
+        }
+
+        #btaTripGroupHasTicketGrid .k-auto-scrollable {
+            max-height: 300px !important;
+            min-height: 0px !important;
+            height: auto !important;
+            overflow-y: visible !important;
+        }
+</style>
+<!--dialog Search Ticket-->
+<div id="dialog_SearchTicket" kendo-dialog="dialogSearchTicket" k-on-open="dialogVisible = true" style="max-height:625px;"
+     k-on-close="dialogVisible = false" k-modal="true" k-visible="false" options="dialogSearchTicketOption" k-width="1500">
+
+    <div class="col-md-12">
+        <search-flight search-ticket-scope="searchTicketScope" id="searchTicketPanel" />
+    </div>
+</div>
+
+<div id="requestOverBudgetDialogId" kendo-dialog="requestOverBudgetDialog" options="requestOverBudgetDialogOption">
+    <div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px" ng-if="commentModel.errorMessages && commentModel.errorMessages.length > 0">
+        <div ng-repeat="currentErrorMessage in commentModel.errorMessages">
+            <span class="font-red-thunderbird">{{currentErrorMessage}}</span>
+        </div>
+    </div>
+    <div class="col-md-12" style="font-size: 14px;">
+        <p>
+            - <b>
+                Bạn yêu cầu vượt ngân sách chỉ khi BTA được duyệt trước ít nhất 10 ngày.
+            </b><br />
+            <i>
+                You request overbudget only when your BTA is approved at least 10 days in advance.
+            </i> <br />
+        </p>
+    </div>
+    <div class="col-md-12">
+        <div class="row form-group">
+            <div class="col-md-4">
+                <label class="control-label" style="font-size:12px; color:black">
+                    {{'BTA_GROUP_REQUEST_BUGET'|translate}}:
+                </label>
+            </div>
+            <div class="col-md-8">
+                <select kendo-multi-select style="width: 100%;" rows="6"
+                        id="tripGroupBudgetId"
+                        k-ng-model="commentModel.tripGroup"
+                        k-data-text-field="'name'"
+                        k-data-value-field="'code'"
+                        k-options=" tripGroupBudgetOptions"
+                        k-data-source="tripGroupBudgetData">
+                </select>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <label class="control-label" style="color:black;">
+                    {{'BTA_OVER_BUDGET_REASON'|translate}}:<span class="text-danger">*</span>
+                </label>
+            </div>
+            <div class="col-md-8">
+                <textarea id="budgetNote" style="border-color: #8f8f8f; height: 80px;"
+                          ng-model="commentModel.comment"
+                          class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="requestOverBudgetDeleteDialogId" kendo-dialog="requestOverBudgetDeleteDialog" options="requestOverBudgetDeleteOption">
+    <div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px" ng-if="deleteModel.errorMessages && deleteModel.errorMessages.length > 0">
+        <span class="font-red-thunderbird">{{deleteModel.errorMessages}}</span>
+    </div>
+    <div class="col-md-12">
+        <div class="row form-group">
+            <div class="col-md-4">
+                <label class="control-label" style="font-size:12px; color:black">
+                    {{'BTA_GROUP_DELETE_DETAIL'|translate}}
+                </label>
+            </div>
+            <div class="col-md-8">
+                <select kendo-multi-select style="width: 100%;" rows="6"
+                        id="tripGroupBudgetDeleteId"
+                        k-ng-model="deleteModel.tripGroup"
+                        k-data-text-field="'name'"
+                        k-data-value-field="'code'"
+                        k-options=" tripGroupBudgetOptions"
+                        k-data-source="tripGroupBudgetData">
+                </select>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Room booking organization -->
+<!--<div id="dialog_RoomBooking" kendo-dialog="dialogRoomBooking" k-on-open="dialogVisibleRoom = true" style="height: 100% !important;"
+     k-on-close="dialogVisibleRoom = false" k-width="1000" k-modal="true" k-visible="false" options="dialogRoomBookingOption">
+    <ul>
+        <div class="note note-danger note-bordered" style="clear: both; margin-top: 10px;"
+             ng-if="roomBookingErrorsMessages.length">
+            <p ng-repeat="error in roomBookingErrorsMessages">
+                <span ng-if="error.row">
+                    {{'COMMON_ROW_NO'|translate}} {{error.row}} : {{error.message}}
+                </span>
+                <span ng-if="!error.row">
+                    {{error.message}}
+                </span>
+            </p>
+        </div>
+    </ul>
+    <div class="mrb10">
+        <div kendo-grid id="roomBookingGrid" style="max-width: 970px;" options="roomBookingOptions">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="input-group-btn">
+                <a class="btn btn-sm btn-primary btn-add-user" id="create" style="background-color: #b42e83"
+                   ng-click="addRoom()">
+                    {{'COMMON_BUTTON_ADD_MORE'| translate}}
+                </a>
+            </span>
+        </div>
+    </div>
+
+</div>-->
+<!--dialog View Ticket-->
+<div id="dialog_ViewTicket" kendo-dialog="dialogViewTicket" k-on-open="dialogVisible = true" k-width="1500"
+     k-on-close="dialogVisible = false" k-modal="true" k-visible="false" options="dialogViewTicketOption">
+
+    <div class="row">
+        <div class="col-md-12">
+            <flight-ticket view-ticket-scope="viewTicketScope" id="viewTicketPanel" />
+        </div>
+    </div>
+</div>
+
+<!--dialog View Change Cancel Ticket-->
+<div id="dialog_ViewChangeCancelTicket" kendo-dialog="dialogViewChangeCancelTicket" k-on-open="dialogVisible = true" k-width="1500"
+     k-on-close="dialogVisible = false" k-modal="true" k-visible="false" options="dialogViewChangeCancelTicketOption">
+
+    <div class="row">
+        <div class="col-md-12">
+            <view-change-cancel-ticket view-change-cancel-ticket-scope="viewChangeCancelTicketScope" id="viewChangeCancelTicket" />
+        </div>
+    </div>
+</div>
+
+<div id="dialog_ApprovalOverBudget" kendo-dialog="dialogApprovalOverBudget" options="dialogApprovalOverBudgetOption">
+    <div class="note note-danger note-bordered" style="margin-bottom: 0px" ng-if="!approvalOverBudget.isValid">
+        <span class="font-red-thunderbird">{{approvalOverBudget.errorMessage}}</span>
+    </div>
+    <label class="control-label">{{'COMMON_COMMENT'|translate}}</label>
+    <textarea class="k-textbox comment-text input-default" placeholder="" style="width: 100%;" rows="6"
+              ng-model="approvalOverBudget.comment"></textarea>
+</div>
+
+<style>
+    .ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 150px;
+        height: 150px;
+        background: transparent;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 150px;
+        font-family: sans-serif;
+        font-size: 20px;
+        color: #FF00DC;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-top: 10px;
+    }
+
+        .ring:before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid transparent;
+            border-top: 3px solid #FF00DC;
+            border-right: 3px solid #FF00DC;
+            border-radius: 50%;
+            animation: animateC 2s linear infinite;
+        }
+
+    .loading1 {
+        display: block;
+        position: absolute;
+        top: calc(50% - 2px);
+        left: 50%;
+        width: 50%;
+        height: 4px;
+        background: transparent;
+        transform-origin: left;
+        animation: animate 2s linear infinite;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+        .loading1:before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #006EFA;
+            top: -6px;
+            right: -8px;
+        }
+
+    @keyframes animateC {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes animate {
+        0% {
+            transform: rotate(45deg);
+        }
+
+        100% {
+            transform: rotate(405deg);
+        }
+    }
+
+    .dialog_LoadingBooking {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+
+    .dialog_BTAGuid {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+
+    .dialog_BTAConfirmInfo {
+        width: 100%;
+        height: auto;
+        overflow: auto;
+    }
+
+    .dialog_LoadingSearchTicket {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+</style>
+
+<!-- Dialog Loading -->
+<div id="dialog_LoadingBooking" kendo-dialog="dialogLoadingBooking" options="dialogLoadingBookingOption">
+    <!--<div class="note note-danger note-bordered" style="margin-bottom: 0px" ng-if="tripGroupPopup.errorMessages && tripGroupPopup.errorMessages.length > 0">
+        <div ng-repeat="currentErrorMessage in tripGroupPopup.errorMessages">
+            <span class="font-red-thunderbird">{{currentErrorMessage}}</span>
+        </div>
+    </div>-->
+    <!--<div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px" ng-if="tripGroupPopup.errorMessages && tripGroupPopup.errorMessages.message.length > 0">
+        <b class="font-red-thunderbird">Booking Number: {{tripGroupPopup.errorMessages.bookingNumber}}</b> <br>
+        <b class="font-red-thunderbird">Error Message: </b>
+        <ul style="list-style-type: disclosure-closed;">
+            <li ng-repeat="msg in tripGroupPopup.errorMessages.message">
+                {{ msg }}
+            </li>
+        </ul>
+        <i>{{contactAdmin}}</i>
+    </div>-->
+    <div class="alert alert-warning" style="clear: both; margin-top: 10px; margin-bottom: 10px; font-size: 14px;">
+        <strong>Warning!</strong> <p>{{'COMMON_WAITING_BOOKING_FLIGHT'|translate}}</p>
+    </div>
+
+    <div style=" margin-top:10px;">
+        <ul>
+            <div class="row">
+                <div class="ring" style=" margin-top:30px;">
+                    Loading
+                    <span id="loading1"></span>
+                </div>
+            </div>
+        </ul>
+        <!--<ul >
+            <div class="row">
+                <div class="ring" style=" margin-top:30px;">
+                    Loading
+                    <span id="loading1"></span>
+                </div>
+            </div>
+        </ul>-->
+    </div>
+</div>
+
+<!-- Dialog Guid  -->
+<div id="dialog_BTAGuid" kendo-dialog="dialogBTAGuid" options="dialog_BTAGuidOption">
+    <div class="col-md-12" style="font-size: 16px;">
+        <p ng-if="model.status == 'Waiting for Booking Flight' || model.status == 'Waiting for Admin Checker' || model.status == 'Requested To Change'">
+            - <b>
+                Khi hoàn tất bước book vé, anh/chị vui lòng đợi một lát để hệ thống thông báo đã hoàn tất bước đặt vé, vé sẽ tự động xuất về email,
+                anh/chị KHÔNG TẮT MÀN HÌNH HOẶC BẤM F5, việc này sẽ dẫn đến trình trạng status của BTA vẫn ở bước “Waiting for booking flight” và không thể proceed các bước kế tiếp mặc dù vé đã xuất rồi.
+            </b> <br />
+            <i>
+                When completing the booking step, please wait a moment for the system to notify that the booking is completed, the ticket will automatically be sent to your email,
+                do not turn off the screen OR press F5, this will lead to the status of BTA still in the "Waiting for booking flight" step and unable to proceed to the next steps even though the ticket has already been issued.
+            </i>
+        </p>
+        <p ng-if="model.status == 'Waiting for Booking Flight' || model.status == 'Waiting for Admin Checker' || model.status == 'Requested To Change'">
+            - <b>
+                Khi đã chọn xong vé, anh/chị vui lòng chờ hệ thống xuất vé về email, KHÔNG BẤM CHỌN VÉ 2 LẦN, việc này sẽ dẫn đến vé bị xuất 2 lần,
+                ANH/CHỊ SẼ PHẢI TỰ THANH TOÁN CHI PHÍ PHÁT SINH CHO VIỆC NÀY.
+            </b> <br />
+            <i>
+                Once you have selected tickets, please wait for the ticket system to return to your email, DO NOT CHOOSE TICKETS 2 TIMES,
+                this will result in tickets being issued 2 times, YOU WILL HAVE TO PAY YOURSELF DISTRIBUTION COST BORN FOR THIS.
+            </i>
+        </p>
+        <p ng-if="model.status == null || model.status == ''">
+            - <b>
+                Khi làm BTA, “Given name” & “Surname” của anh/chị đã được mặc định sẵn trên hệ thống, anh/ chị TUYỆT ĐỐI KHÔNG CHỈNH SỬA THÔNG TIN này để tránh làm sai thông tin hiển thị trên vé máy bay.
+                Trường hợp anh/chị tự chỉnh sửa thông tin, dẫn đến việc sai tên trên vé, ANH/CHỊ SẼ PHẢI TỰ THANH TOÁN CHI PHÍ PHÁT SINH CHO VIỆC SỬA ĐỔI THÔNG TIN NÀY (nếu có).
+            </b><br />
+            <i>
+                When doing BTA, your "Given name" & "Surname" are already defaulted on the system, you absolutely DO NOT edit this information to avoid erroneous information displayed on the flight ticket.
+                In case you edit the information yourself, leading to the wrong name on the ticket, YOU WILL HAVE TO PAY FOR THE COST INCREASED FOR MODIFICATION OF THIS INFORMATION (if any)..
+            </i> <br />
+            <img src="ClientApp\assets\images\bta_given_name.png" class="image"><br />
+        </p>
+        <p ng-if="model.status == null || model.status == '' || model.status == 'Waiting for Admin Checker' || model.status == 'Requested To Change' || model.status == 'Waiting for Booking Flight'">
+            - <b>
+                Trường hợp anh/chị có nhu cầu ở khách sạn trong chuyến đi công tác, anh/chị tick vào ô “Stay Hotel” và chọn khách sạn trong mục “Hotel”,
+                Admin sẽ không nhận được thông tin để hỗ trợ book phòng khách sạn nếu anh/chị không tick vào phần này.
+            </b><br />
+            <i>
+                In case you have a need to stay at a hotel during your business trip, you tick the box "Stay Hotel" and select the hotel in the "Hotel" section,
+                the Admin will not receive information to assist in booking the guest room. hotel if you do not tick this section.
+            </i> <br />
+            <img src="ClientApp\assets\images\bta_stay_hotel.png" class="image"><br />
+        </p>
+        <p ng-if="model.status == 'Waiting for Booking Flight' || model.status == 'Waiting for Admin Checker' || model.status == 'Requested To Change'">
+            - <b>
+                Trường hợp anh/chị thay đổi, hủy vé với lý do cá nhân => anh/chị vui lòng tự liên hệ trực tiếp với hãng bay để đổi, hủy vé.
+            </b><br />
+            <i>
+                If you change or cancel your ticket for personal reasons, please contact the airline directly to change or cancel your ticket.
+            </i>
+        </p>
+        <p ng-if="model.status == 'Waiting for Booking Flight' || model.status == 'Waiting for Admin Checker' || model.status == 'Requested To Change'">
+            - <b>
+                Trường hợp anh/chị thay đổi, hủy vé với lý do công việc => Admin Dept chỉ thực hiện khi BTA changing COMPLETED trên hệ thống e-doc.
+                Trong trường hợp khẩn cấp phải được sự xác nhận đổi, hủy vé qua email của cấp có thẩm quyền duyệt BTA (G6 up).
+            </b><br />
+            <i>
+                In case you change or cancel your ticket for work reasons => Admin Dept will only do it when BTA changes COMPLETED on the e-doc system.
+                In case of emergency, the confirmation of ticket exchange or cancellation must be obtained via email from the BTA approval authority (G6 up).
+            </i>
+        </p>
+        <p ng-if="model.status == null || model.status == ''">
+            - <b>
+                Mục lý do công tác: anh/ chị cần ghi chi tiết mục đích chuyến đi để thuận tiện cho G6 up xem xét và phê duyệt, đồng thời hỗ trợ việc phân tích báo cáo công tác được chính xác.
+            </b><br />
+            <i>
+                Business reason section: you need to detail the purpose of your trip to facilitate G6 up's review and approval, and assist in the analysis of the work report accurately.
+            </i> <br />
+            <img src="ClientApp\assets\images\bta_reason.png" class="image"><br />
+        </p>
+    </div>
+</div>
+
+<!-- Dialog Confirm infor  -->
+<div id="dialog_BTAConfirmInfo" kendo-dialog="dialogBTAConfirmInfo" options="dialog_BTAConfirmInfoOption">
+    <div class="col-md-12" style="font-size: 16px;">
+        <p>
+            - <b>
+                Vui lòng kiểm tra lại chính xác các thông tin (Họ, tên , email, số điện thoại,...) trước khi bấm xác nhận!
+                Trường hợp sai thông tin dẫn đến việc sai tên trên vé, ANH/CHỊ SẼ PHẢI TỰ THANH TOÁN CHI PHÍ PHÁT SINH CHO VIỆC SAI THÔNG TIN NÀY (nếu có).
+            </b><br />
+            <i>
+                Please check the correct information (Given name,sur name, email, phone number,...) before clicking confirmation!
+                In case the wrong information leads to the wrong name on the ticket, YOU WILL HAVE TO PAY FOR YOUR OWN COSTS FOR THIS WRONG INFORMATION (if any).
+            </i> <br />
+        </p>
+    </div>
+</div>
+
+<!-- Dialog Loading -->
+<div id="dialog_LoadingBooking" kendo-dialog="dialogLoadingBooking" options="dialogLoadingBookingOption">
+    <!--<div class="note note-danger note-bordered" style="margin-bottom: 0px" ng-if="tripGroupPopup.errorMessages && tripGroupPopup.errorMessages.length > 0">
+        <div ng-repeat="currentErrorMessage in tripGroupPopup.errorMessages">
+            <span class="font-red-thunderbird">{{currentErrorMessage}}</span>
+        </div>
+    </div>-->
+    <div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px" ng-if="tripGroupPopup.errorMessages && tripGroupPopup.errorMessages.message.length > 0">
+        <b class="font-red-thunderbird" ng-if="tripGroupPopup.errorMessages.bookingNumber">Booking Number: {{tripGroupPopup.errorMessages.bookingNumber}}</b> <br>
+        <b class="font-red-thunderbird">Error Message: </b>
+        <ul style="list-style-type: disclosure-closed;">
+            <li ng-if="isArray(tripGroupPopup.errorMessages.message)"
+                ng-repeat="msg in tripGroupPopup.errorMessages.message track by $index">
+                {{ msg }}
+            </li>
+            <li ng-if="!isArray(tripGroupPopup.errorMessages.message)">
+                {{ tripGroupPopup.errorMessages.message }}
+            </li>
+        </ul>
+        <i ng-show="tripGroupPopup.errorMessages.bookingNumber">{{contactAdmin}}</i>
+    </div>
+    <div class="alert alert-warning" style="clear: both; margin-top: 10px; margin-bottom: 10px; font-size: 14px;">
+        <strong>Warning!</strong> <p>{{'COMMON_WAITING_BOOKING_FLIGHT'|translate}}</p>
+    </div>
+    <div class="row">
+        <div class="ring" style=" margin-top:30px;">
+            Loading
+            <span id="loading1"></span>
+        </div>
+    </div>
+    <!--<ul >
+        <div class="row">
+            <div class="ring" style=" margin-top:30px;">
+                Loading
+                <span id="loading1"></span>
+            </div>
+        </div>
+    </ul>-->
+</div>
+<!-- Dialog Loading -->
+<div id="dialog_LoadingSearchTicket" kendo-dialog="dialogLoadingSearchTicket" options="dialogLoadingSearchOption">
+    <div style=" margin-top:10px;">
+        <ul>
+            <div class="alert alert-warning" style="clear: both; margin-top: 10px; margin-bottom: 10px; font-size: 14px;">
+                <p>{{'COMMON_WAITING_SEARCH_TICKET'|translate}}</p>
+            </div>
+            <div class="row">
+                <div class="ring">
+                    Loading
+                    <span id="loading1"></span>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>
+<!-- Dialog Membership -->
+<div id="membershipid" kendo-dialog="membershipDialog" k-title="'Membership'" k-on-open="dialogVisible = true"
+     k-visible="false" width="800" k-on-close="dialogVisible = false;onCloseUserWindow()">
+    <div class="row">
+        <div class="col-md-12">
+            <div kendo-grid id="membershipGrid" style="width:100%;"
+                 options="ctrlMembership.membershipOptions">
+            </div>
+        </div>
+        <div class="col-md-12 mt-2">
+            <div class="d-flex gap-2 flex-wrap justify-content-end">
+                <button ng-if="(!model.id || model.status === 'Draft' || model.status === 'Waiting for Booking Flight')" ng-disabled="!ctrlMembership.hasEditingMemberShip()" ng-click="ctrlMembership.addMembership()"
+                        style="margin-right: 2.4em;" class="btn btn-sm btn-primary">
+                    Add More
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Dialog Check Status booking -->
+<div id="checkStatusBookingDialogId" kendo-dialog="checkStatusBookingDialog" k-title="'Status Booking'" k-on-open="dialogVisible = true"
+     k-visible="false" width="1000" k-on-close="dialogVisible = false;onCloseUserWindow()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row" style="font-size:14px; color:black">
+                <div class="col-md-2">
+                    <label class="control-label" style="font-size: 14px; color: black; font-weight: bold;">
+                        {{'BTA_COMMITBOOKING_MEANING'|translate}}:
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <span>{{ datacheckStatusBooking.meaning}} </span>
+                </div>
+
+            </div>
+            <div class="row" style="font-size:14px; color:black">
+                <div class="col-md-2">
+                    <label class="control-label" style="font-size: 14px; color: black; font-weight: bold; ">
+                        {{'BTA_COMMITBOOKING_INFORMATION'|translate}}:
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <span>{{ datacheckStatusBooking.information}} </span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-responsive-lg">
+                    <table class="table table-borderless table-rounded display-10 leading-18" style="min-width: 600px; font-size: 14px;">
+                        <thead>
+                            <tr>
+                                <th width="15%"> {{'BTA_COMMITBOOKING_BOOKING_STATUS'|translate}} </th>
+                                <th width="15%"> {{'BTA_COMMITBOOKING_PAYMENT_STATUS'|translate}} </th>
+                                <th width="15%"> {{'BTA_COMMITBOOKING_ISSUED_STATUS'|translate}} </th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span ng-style="{'background-color': datacheckStatusBooking.bookingStatus === 'BOOKED' ? 'aquamarine' :
+                                          datacheckStatusBooking.bookingStatus === 'PENDING' ? 'lightgrey' :
+                                          datacheckStatusBooking.bookingStatus === 'FAILED' ? 'bisque' :
+                                          datacheckStatusBooking.bookingStatus === 'EXPIRED' ? 'lightcoral' :
+                                          'lightgrey'}">
+                                        {{datacheckStatusBooking.bookingStatus}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span ng-style="{'background-color': datacheckStatusBooking.paymentStatus === 'SUCCEEDED' ? 'aquamarine' :
+                                          datacheckStatusBooking.paymentStatus === 'PENDING' ? 'lightgrey' :
+                                          datacheckStatusBooking.paymentStatus === 'FAILED' ? 'bisque' :
+                                          datacheckStatusBooking.paymentStatus === 'EXPIRED' ? 'lightcoral' :
+                                          datacheckStatusBooking.paymentStatus === 'REFUNDED' ? 'lightgray' :
+                                          'lightgrey'}">
+                                        {{datacheckStatusBooking.paymentStatus}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span ng-style="{'background-color': datacheckStatusBooking.issuedStatus === 'SUCCEEDED' ? 'aquamarine' :
+                                          datacheckStatusBooking.issuedStatus === 'PENDING' ? 'lightgrey' :
+                                          datacheckStatusBooking.issuedStatus === 'FAILED' ? 'bisque' :
+                                          datacheckStatusBooking.issuedStatus === 'CANCELLED' ? 'lightgoldenrodyellow' :
+                                          datacheckStatusBooking.issuedStatus === 'TICKET_ON_PROCESS' ? 'lightblue' :
+                                          'lightgrey'}">
+                                        {{datacheckStatusBooking.issuedStatus}}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mt-2">
+            <div class="col-md-8" style="font-size:14px; color:black">
+                <i ng-if="['CANCELLED','EXPIRED','FAILED','PENDING'].includes(datacheckStatusBooking.bookingStatus)
+                    || (datacheckStatusBooking.bookingStatus === 'CANCELLED' && datacheckStatusBooking.paymentStatus === 'SUCCEEDED' && datacheckStatusBooking.issuedStatus ==='SUCCEEDED')
+                    || (datacheckStatusBooking.bookingStatus === 'CANCELLED' && datacheckStatusBooking.paymentStatus === 'SUCCEEDED' && datacheckStatusBooking.issuedStatus ==='TICKET_ON_PROCESS')
+                    || (datacheckStatusBooking.bookingStatus === 'CANCELLED' && datacheckStatusBooking.paymentStatus === 'REFUNDED' && datacheckStatusBooking.issuedStatus ==='TICKET_ON_PROCESS')
+                    || (datacheckStatusBooking.bookingStatus === 'CANCELLED' && datacheckStatusBooking.paymentStatus === 'REFUNDED' && datacheckStatusBooking.issuedStatus ==='SUCCEEDED')">
+                    {{'BTA_COMMITBOOKING_PLS_BOOK_OTHER'|translate}}
+                </i>
+                <i ng-if="['BOOKED'].includes(datacheckStatusBooking.bookingStatus) || !['CANCELLED','EXPIRED','FAILED','PENDING','BOOKED'].includes(datacheckStatusBooking.bookingStatus)">
+                    {{'BTA_COMMITBOOKING_PLS_WAIT_STATUS'|translate}}
+                </i>
+            </div>
+        </div>
+        <div class="col-md-12 mt-2">
+            <div class="d-flex gap-2 flex-wrap justify-content-end">
+                <button style="margin-right: 2.4em;" class="btn btn-sm btn-primary"
+                        ng-click="checkStatusBookingCtrl.closeDialog()">
+                    Close
+                </button>
+                <button ng-if="['CANCELLED','EXPIRED','FAILED','PENDING'].includes(datacheckStatusBooking.bookingStatus)
+                    || (datacheckStatusBooking.bookingStatus === 'CANCELLED' && datacheckStatusBooking.paymentStatus === 'SUCCEEDED' && datacheckStatusBooking.issuedStatus ==='SUCCEEDED')
+                    || (datacheckStatusBooking.bookingStatus === 'CANCELLED' && datacheckStatusBooking.paymentStatus === 'SUCCEEDED' && datacheckStatusBooking.issuedStatus ==='TICKET_ON_PROCESS')
+                    || (datacheckStatusBooking.bookingStatus === 'CANCELLED' && datacheckStatusBooking.paymentStatus === 'REFUNDED' && datacheckStatusBooking.issuedStatus ==='TICKET_ON_PROCESS')
+                    || (datacheckStatusBooking.bookingStatus === 'CANCELLED' && datacheckStatusBooking.paymentStatus === 'REFUNDED' && datacheckStatusBooking.issuedStatus ==='SUCCEEDED')"
+                        ng-click="checkStatusBookingCtrl.newBooking()"
+                        style="margin-right: 2.4em; width:auto;" class="btn btn-sm btn-primary">
+                    {{'COMMON_BUTTON_DELETE_TICKET'|translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

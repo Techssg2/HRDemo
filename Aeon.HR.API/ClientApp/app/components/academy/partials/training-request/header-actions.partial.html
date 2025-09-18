@@ -1,0 +1,47 @@
+<div class="actions" style="float: right">
+  <div class="row">
+    <div class="col-sm-12">
+        <span>
+
+
+            <button type="button" ng-disabled="isInprocess" ng-click="performAction(fa.name)" ng-repeat="fa in ALL_FORM_ACTIONS" ng-if="(fa.statuses.indexOf(status) != -1 && enabledActions.indexOf(fa.name) != -1) || fa.statuses.length == 0" class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1 ng-binding ng-scope">
+                <i class="{{fa.icon}} right-5"
+                   ng-style="{'color':
+                   fa.name == 'Save' ? '#18aa7e' :
+                   fa.name == 'Submit' ? '#18aa7e' :
+                   fa.name == 'Approve' ? '#18aa7e' :
+                   fa.name == 'Reject' ? '#ff4c4c' :
+                   fa.name == 'RequestToChange' ? '#ffb200' :
+                   fa.name == 'Cancel' ? '#ff4c4c' :
+                   'black'}">
+                </i>
+
+                {{fa.displayName|translate}}
+            </button>
+            <!--<div add-class
+                 class="btn-group"
+                 current-class="btn-group"
+                 added-class="open">
+                <button type="button"
+                        class="btn btn-default dropdown-toggle"
+                        data-toggle="dropdown"
+                        aria-expanded="true"
+                        style="padding: 0px !important">
+                    <img src="ClientApp/assets/images/icon/more.png"
+                         class="ng-isolate-scope" />
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                        <a data-toggle="modal"
+                           class="ng-binding"
+                           ng-click="showProcessingStages()">
+                            <i class="fa fa-recycle right-5" style="color: #b42e83"></i>
+                            {{'COMMON_PROCESSING_STAGE' | translate}}
+                        </a>
+                    </li>
+                </ul>
+            </div>-->
+        </span>
+    </div>
+  </div>
+</div>

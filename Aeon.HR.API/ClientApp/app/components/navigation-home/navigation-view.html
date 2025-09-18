@@ -1,0 +1,303 @@
+﻿<style>
+    .page-container-navigation {
+        padding-top: 0px;
+        height: 100%;
+        padding-left: 18px;
+    }
+
+    .k-dialog-title {
+        color: #b42e83 !important;
+        font-family: Nova-Regular !important;
+        font-size: 18px !important;
+        font-weight: 700;
+        margin: 10px 0;
+        margin: 0;
+        line-height: 1.42857143;
+        text-transform: uppercase !important;
+    }
+
+    .k-dialog {
+        position: absolute;
+        top: 65px !important;
+    }
+
+    .confirm-btn {
+        margin-top: 10px;
+        float: right;
+    }
+
+    @media (max-width: 1199px) {
+    }
+
+    @media (min-width: 1200px) {
+
+        #nav li {
+            list-style: none inside;
+            display: block;
+            position: relative;
+            float: left;
+        }
+
+        #nav ul {
+            position: absolute;
+            padding: 0;
+            left: 0;
+            display: none;
+            /* hides sublists */
+        }
+
+        /* hides sub-sublists */
+        #nav li:hover ul {
+            display: block;
+            padding: 0px 10px;
+            border-radius: 5px !important;
+            background-color: #b42e83;
+            width: auto;
+            margin-left: 210px;
+            margin-top: -35px
+        }
+
+        #nav_child li {
+            list-style: none inside;
+            display: contents;
+            position: relative;
+            /*float: left;*/
+        }
+
+        #nav_child ul {
+            position: absolute;
+            padding: 0;
+            left: 0;
+            display: none;
+            /* hides sublists */
+        }
+
+            #nav_child ul.custom-menu {
+                left: 4% !important;
+            }
+        /* hides sub-sublists */
+        #nav_child li:hover ul {
+            display: block;
+            padding: 0px 10px;
+            border-radius: 5px !important;
+            background-color: #b42e83;
+            width: auto;
+            margin-left: 190px;
+            margin-top: -35px
+        }
+
+        .last-child-menu-responsive {
+            visibility: hidden
+        }
+    }
+</style>
+<div class="page-header navbar navbar-fixed-top bg-blue bg-white">
+    <div class="page-header-inner ng-scope">
+        <div class="page-header-inner ng-scope">
+            <div class="page-logo">
+                <div class="menu-toggler sidebar-toggler" title="Toggle left menu"></div>
+            </div>
+            <a collapse-menu class="menu-toggler responsive-toggler" title="Toggle left menu" data-toggle="collapse"
+               data-target="#navbar-collapse" current-class="collapseA" added-class="in"></a>
+            <div class="page-top">
+                <div style="margin-right:10px;" class="top-menu">
+                    <user-info current-user="currentUser" avatar="avatar"></user-info>
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="dropdown" title="Try new eDoc" style="padding-right: 0px; padding-left: 0px" ng-click="switchLayout()">
+                            <a class="dropdown-toggle">
+                                <svg fill="#BCCCDC" width="32px" height="32px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <g transform="translate(0, -2)">
+                                        <g transform="scale(-1,-1)" transform-origin="12 12">
+                                            <path d="m24 11.617c0 3.763-3.05 6.814-6.813 6.817h-10.371c-3.765 0-6.817-3.052-6.817-6.817s3.052-6.817 6.817-6.817h10.366c3.763 0 6.814 3.05 6.817 6.813zm-6.817-4.545c-2.507.001-4.54 2.034-4.54 4.542s2.033 4.542 4.542 4.542 4.542-2.033 4.542-4.542c0-1.252-.507-2.386-1.327-3.208-.822-.824-1.959-1.334-3.215-1.334-.001 0-.001 0-.002 0z" />
+                                        </g>
+                                        <text x="18" y="14" text-anchor="middle" font-family="Poppins" font-weight="bold" font-size="6"
+                                              fill="#000">
+                                            New
+                                        </text>
+                                    </g>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="dropdown list-item-t add-menu" style="padding-right: 0px; padding-left: 0px"
+                            excutejq>
+                            <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                               class="dropdown-toggle">
+                                <i class="fa fa-plus-circle add-menu"
+                                   style="font-size: 24px !important;margin-top: 6px"></i>
+                            </a>
+                            <ul class="dropdown-menu child-menu" id="nav" ng-if="navigationRight.length > 0"
+                                style="width: 220px; padding: 0px 3px 0px 10px !important;">
+                                <li ng-repeat="item in navigationRight">
+                                    <a style="width:205px">
+                                        {{item.title}}
+                                        <span style="position: absolute; right: -5px">
+                                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                        </span>
+                                    </a>
+                                    <ul>
+                                        <li style="width:100%;" ng-repeat="child in item.values">
+                                            <a ng-if="child.url" href="{{child.url}}">
+                                                {{child.title| translate}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" title="User Guide" style="padding-right: 0px; padding-left: 0px">
+                            <a ng-href="http://kb.aeon.com.vn/index.php/vi/edocument"
+                               target="_blank" class="dropdown-toggle"
+                               style="color: #0073bb !important;height:59px !important"
+                               href="http://kb.aeon.com.vn/index.php/vi/edocument">
+                                <i class="icon-question"></i>
+                            </a>
+                        </li>
+                        <li class="dropdown" title="Change log" style="padding-right: 0px; padding-left: 0px">
+                            <a href="/Shared%20Documents/change_log.txt" target="_blank" class="dropdown-toggle">
+                                <img class="img-circle-icon" style="width: 23px"
+                                     src="ClientApp/assets/images/logIcon.png">
+                            </a>
+                        </li>
+                        <li class="dropdown" title="Language"
+                            style="padding-right: 0px; padding-left: 0px; padding-top:3px;" ng-click="switchLang()">
+                            <a class="dropdown-toggle">
+                                {{getLang() == "en_US"? 'VN':'ENG'}}
+                            </a>
+                        </li>
+                    </ul>
+                    <a style="display: none;" class="page-quick-sidebar-toggler" ng-click="closeNotificationPanel();">
+                        <i class="icon-login"></i>
+                    </a>
+                </div>
+                <notification></notification>
+            </div>
+        </div>
+        <div class="app-logo ng-scope">
+            <a ui-sref="home.navigation-home" class="ng-binding">
+                <img alt="" class="img-responsive"
+                     src="ClientApp/assets/images/logo.png">
+            </a>
+        </div>
+        <nav class="navbar navbar-default nav-sidebar-style2 ng-scope">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown brand-dropdown" excutejq>
+                            <a class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="true">
+                                <i class="fa fa-align-left"></i> {{title|translate}}
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu child-menu" ng-if="navigationLeft.length > 0">
+                                <li ng-repeat="menu in navigationLeft">
+                                    <a href="{{menu.url}}">{{menu.title | translate}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ng-repeat="item in childMenusLeft" class="dropdown" excutejq>
+                            <a ui-sref="{{item.url}}" class="dropdown-toggle"
+                               data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="true">
+                                {{item.name | translate}}
+                                <span class="caret" ng-if="item.actions"></span>
+                            </a>
+                            <ul class="dropdown-menu child-menu" ng-if="item.actions" id="nav_child">
+                                <li ng-repeat='action in item.actions' ng-click='changeToChildView()' ng-if="width >= 1200">
+                                    <a ui-sref='{{action.state}}({action: action})'>
+                                        {{action.name | translate}}
+                                        <span style="position: absolute; right: -5px;" ng-if="action.children">
+                                            <i class="fa fa-caret-right"></i>
+                                        </span>
+                                    </a>
+                                    <ul ng-if="action.children" style="width: 210px;"
+                                        ng-class="{'custom-menu': action.name === 'Shift Plan'}">
+                                        <li style="width:100%;" ng-repeat="child in action.children">
+                                            <a ng-if="child.state" ui-sref='{{child.state}}'
+                                               ui-sref-opts="{ reload: true }">
+                                                {{child.name| translate}}
+                                            </a>
+                                            <a ng-if="child.url" href="{{child.url}}">
+                                                {{child.name| translate}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li ng-repeat='action in item.actions' ng-if="width < 1200">
+                                    <a ui-sref="{{action.state}}" aria-expanded="true">
+                                        {{action.name | translate}}
+                                        <span class="caret" ng-if="action.children"></span>
+                                    </a>
+                                    <ul style="padding-left: 40px;" ng-if="action.children">
+                                        <li ng-repeat='child in action.children' ng-click='changeToChildView()'>
+                                            <a ui-sref='{{child.state}}'>
+                                                {{child.name | translate}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<div>
+    <div class="page-content-wrapper">
+        <div>
+            <sub-menu-nav-section ng-repeat="item in listNavigation" title-section="item.title" url-section="item.url"
+                                  list-menu="item.sections">
+            </sub-menu-nav-section>
+        </div>
+        <div>
+            <div class="portlet bordered light">
+                <div class="portlet-title">
+                    <div class="caption caption-md">
+                        <span class="caption-subject uppercase">
+                            {{'COMMON_TO_DO_LIST'|translate}}
+                        </span>
+                    </div>
+                    <div class="actions">
+                        <div class="row">
+                            <div class="col-sm-12">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <kendo-grid k-scope-field="toDoListGrid" options="toDoListGridOptions" id="toDoListGridId">
+                </kendo-grid>
+            </div>
+        </div>
+        <div class="row">
+            <div class="portlet bordered light">
+                <div class="portlet-title">
+                    <div class="caption caption-md">
+                        <span class="caption-subject uppercase">
+                            {{'COMMON_MY_ITEMS'|translate}}
+                        </span>
+                    </div>
+                    <div class="actions">
+                        <div class="row">
+                            <div class="col-sm-12">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <kendo-grid k-scope-field="myItemsGrid" options="myItemsGridOptions"></kendo-grid>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).on("click", function (event) {
+        if ($("#nav").is(":visible") == true) {
+            $('#nav').css("display", "grid");
+        }
+        var $trigger = $(".dropdown");
+        if ($trigger !== event.target && !$trigger.has(event.target).length) {
+            $(".child-menu").slideUp("fast");
+        }
+    });
+    $('.k-button').addClass('fas fa-icon');
+</script>

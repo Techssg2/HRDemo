@@ -1,0 +1,383 @@
+<style type="text/css">
+    #attachmentViewDialog {
+        min-height: 40vh !important;
+        height: 98vh !important;
+    }
+
+    .close-owa-dialog {
+        margin: 5px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase" ng-if="!itemForm.id">
+                        {{title}}
+                    </span>
+                    <span class="caption-subject uppercase" ng-if="itemForm.id">
+                        {{titleDetail}}
+                    </span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <kendo-button class="btn btn-default btn-sm" ng-click="printForm()" ng-if="mode=='Edit' && itemForm.status == 'Completed'">
+                                <i style="font-size: 12px; padding-right: 3px;" class="fa fa-file-pdf-o font-green-jungle"></i> Print
+                            </kendo-button>
+                            <action-items model="model" save="save" form="g1"></action-items>
+                            <div add-class class="btn-group" current-class="btn-group" added-class="open">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="padding: 0px !important">
+                                    <img src="ClientApp/assets/images/icon/more.png" style="position: relative;top: -2px"
+                                         class="ng-isolate-scope">
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a data-toggle="modal" class="ng-binding" ng-click="showProcessingStages()">
+                                            <!-- <i class="fa fa-recycle right-5" style="color: #b42e83"></i> Processing Stages -->
+                                            <i class="fa fa-recycle right-5" style="color: #b42e83"></i> {{'COMMON_PROCESSING_STAGE'|translate}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- <button class="btn btn-default" ng-click="printForm()">PrintForm</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row ng-scope" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <workflow-comment></workflow-comment>
+                    </div>
+                </div>
+                <div class="row ng-scope" ng-if="errors.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase">Please enter all required fields <span class="font-red-thunderbird">*</span>:</h5>
+                            <p></p>
+                            <ul>
+                                <li ng-repeat="error in errors"><span class="bold">{{error.controlName}}</span>: Field is required</li>
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <form name="g1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-horizontal">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Type:<span class="font-red-thunderbird ng-scope"> *</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <select class="w100" kendo-drop-down-list name="typeCode" id="typeCode"
+                                                            k-options="typesDataSource"
+                                                            ng-model="itemForm.typeCode"
+                                                            k-on-change="onchangeType(itemForm.typeCode)">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Effective Date:<span class="font-red-thunderbird ng-scope"> *</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input class="w100" kendo-date-picker id="effectiveDate" name="effectiveDate"
+                                                           k-ng-model="itemForm.effectiveDate"
+                                                           k-format="'dd/MM/yyyy'"
+                                                           k-date-input="true" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Request from && new salary-->
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Request From:<span class="font-red-thunderbird ng-scope"> *</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <ul class="fieldlist form-control-static">
+                                                        <li ng-repeat="request in requestFromDataSource">
+                                                            <input type="radio" class="k-radio" name="requestFrom" value="{{request.code}}" id="{{request.code}}" ng-model="itemForm.requestFrom" ng-change="onChangeRequestFrom(itemForm.requestFrom)">
+                                                            <label class="k-radio-label" for="{{request.code}}">{{request.name}}</label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    New Salary/ Benefits:<span class="font-red-thunderbird ng-scope"></span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input kendo-numeric-text-box id="newSalaryOrBenefit" k-min="0" name="newSalaryOrBenefit" k-format="'#,0'" ng-model="itemForm.newSalaryOrBenefit" style="width: 100%;" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    SAP Code:<span class="font-red-thunderbird ng-scope"> *</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <select class="w100" kendo-drop-down-list id="userId" name="userId"
+                                                            k-options="usersDataSource"
+                                                            ng-model="itemForm.userId">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    New Position:<span class="font-red-thunderbird ng-scope"> *</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <select class="w100" kendo-drop-down-list name="positionId" id="positionId"
+                                                            k-options="jobTitlesDataSource"
+                                                            k-ng-model="itemForm.positionName"
+                                                            style="width: 100%">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Full Name:</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" maxlength="50" class="k-textbox form-control input-sm" ng-model="itemForm.fullName" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    New Department:<span class="font-red-thunderbird ng-scope"> *</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <!-- <input type="text" class="form-control input-sm" ng-model="itemForm.newDeptOrLineName" readonly> -->
+                                                    <input class="w100" kendo-drop-down-tree k-options="departmentOptions" name="newDeptOrLineId" id="newDeptOrLineId" k-ng-model="itemForm.newDeptOrLineId" k-value-primitive="true" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Current Position:</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input-sm" ng-model="itemForm.currentTitle" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    New Job Grade:<span class="font-red-thunderbird ng-scope"></span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input-sm input-default" ng-model="itemForm.newJobGradeName" readonly>
+                                                    <!-- <input type="text" class="form-control input-sm" ng-model="itemForm.newJobGradeName" readonly> -->
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Current Job Grade:</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input-sm" ng-model="itemForm.currentJobGrade" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    New Work Location:<span class="font-red-thunderbird ng-scope"></span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input-sm input-default" ng-model="itemForm.newWorkLocationName" readonly>
+                                                    <!-- <input type="text" class="form-control input-sm" ng-model="itemForm.newWorkLocationName" readonly> -->
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Current Department:</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input-sm" ng-model="itemForm.currentDepartment" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Report To:<span class="font-red-thunderbird ng-scope"> *</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <select kendo-drop-down-list name="reportToId" id="reportToId"
+                                                            k-options="reportToDataSource"
+                                                            ng-model="itemForm.reportToId"
+                                                            style="width: 100%">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Current Work Location:</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input-sm" ng-model="itemForm.currentWorkLocation" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Employee group:<span class="font-red-thunderbird ng-scope">*</span></label>
+                                                <div class="col-md-8">
+                                                    <select class="w100 input-default" kendo-drop-down-list name="employeeGroup" id="employeeGroup"
+                                                            k-options="employeeSubGroupDataSource"
+                                                            ng-model="itemForm.employeeGroup" disabled="disabled">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Attachments:</label>
+                                                <div class="col-md-8">
+                                                    <input name="files"
+                                                           id="attachmentDetail"
+                                                           type="file"
+                                                           kendo-upload
+                                                           k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }"
+                                                           k-select="onSelect"
+                                                           k-remove="removeAttach" />
+                                                </div>
+                                                <label class="col-md-4 control-label" ng-if="oldAttachments && oldAttachments.length"></label>
+                                                <div class="col-md-8" style="margin-top: 10px; padding-left: 30px;" ng-if="oldAttachments && oldAttachments.length">
+                                                    <p><b>Uploaded Files</b></p>
+                                                    <ol>
+                                                        <li ng-repeat="doc in oldAttachments">
+                                                            <a ng-click="downloadAttachment(doc.id)">{{doc.fileDisplayName}}</a>
+                                                            <a ng-click="viewFileOnline(doc.id)">| {{'COMMON_BUTTON_VIEW'| translate}}</a>
+                                                            <a ng-click="removeOldAttachment(doc)">| {{'COMMON_BUTTON_DELETE'| translate}}</a>
+                                                        </li>
+                                                    </ol>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Employee Subgroup:</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input-sm" ng-model="itemForm.employeeSubgroup" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Pay Scale Area:</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input-sm" ng-model="itemForm.payScaleArea" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Reason of Promotion/ Transfer:<span class="font-red-thunderbird ng-scope" ng-if="checkManager"> *</span></label>
+                                                <div class="col-md-8">
+                                                    <textarea ng-model="itemForm.reasonOfPromotion" class="form-control" id="reasonOfPromotion" rows="2" ng-readonly="!checkManager"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="portlet-title">
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <action-items model="model" save="save" form="g1"></action-items>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>
+
+
+<!-- View File Online -->
+<div id="attachmentViewDialog" style="height: 100% !important; display: none;" k-modal="true" k-visible="false">
+    <iframe id="attachment_owa" style="width:100%;height:97%;padding:0px!important;"></iframe>
+    <button class="btn btn-default btn-sm k-button pull-right close-owa-dialog" ng-click="owaClose()"><i class="k-icon k-i-close font-green-jungle"></i> Close</button>
+</div>
+
+<!-- <div class="demo-section k-content">
+    <button class="k-button" ng-show="!dialogVisible" ng-click="dialog.open()">Open Dialog</button>
+</div>
+<div kendo-dialog="dialog" k-title="'Software Update'" k-on-open="dialogVisible = true"
+     k-on-close="dialogVisible = false" k-width="450"
+     k-actions="modalActions" k-modal="true">
+    <p>A new version of <strong>Kendo UI</strong> is available. Would you like to download and install it now?<p>
+</div> -->
+
+<processing-stage workflow-instances="workflowInstances" model="itemForm"></processing-stage>

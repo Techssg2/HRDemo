@@ -1,0 +1,234 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">{{title}}
+                    </span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span>
+                                <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                                    ng-click="showPopup('modalInfo', actionNeedShowPopup[0], '#dialogReason', actions.approve)">
+                                    <i class="fa fa-check font-green-jungle right-5"></i> {{'COMMON_BUTTON_APPROVE'|translate}}</kendo-button>
+                                <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                                    ng-click="showPopup('modalInfo', actionNeedShowPopup[1], '#dialogReason', actions.requestedToChange)">
+                                    <i class="fa fa-minus-circle font-red right-5"></i> {{'COMMON_BUTTON_REQUEST_TO_CHANGE'|translate}}
+                                </kendo-button>
+                                <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                                    ng-click="showPopup('modalInfo', actionNeedShowPopup[2], '#dialogReason', actions.reject)">
+                                    <i class="fa fa-minus-circle font-red right-5"></i> {{'COMMON_BUTTON_REJECT'|translate}}</kendo-button>
+                                <kendo-button class="btn btn-default btn-sm" ng-click="cancel(state)">
+                                    <i class="k-icon k-i-close font-green-jungle"></i> {{'COMMON_BUTTON_CLOSE'|translate}}
+                                </kendo-button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row ng-scope" ng-if="errors.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase">{{'COMMON_ENTER_FIELD'|translate}} <span class="font-red-thunderbird">*</span>:</h5>
+                            <p></p>
+                            <ul ng-repeat="error in errors">
+                                <li><span class="bold">{{error.controlName}}</span>: {{'COMMON_FIELD_IS_REQUIRED'|translate}}</li>
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form name="g1Form">
+                            <div class="form-horizontal">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">{{'COMMON_SAP_CODE'|translate}}:</label>
+                                                <div class="col-md-8">
+                                                    <label class="form-control-static">{{itemForm.sapCode}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    {{'RESIGNATION_APPLICATION_JOINING_DATE'|translate}}:<span class="font-red-thunderbird ng-scope"> *</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <label class="form-control-static">{{model.JoiningDate | date:'dd-MM-yyyy'}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">{{'COMMON_FULL_NAME'|translate}}:</label>
+                                                <div class="col-md-8">
+                                                    <label class="form-control-static">{{itemForm.staffFullName}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    {{'RESIGNATION_APPLICATION_OFFICAL_RESINATION_DATE'|translate}}:<span class="font-red-thunderbird ng-scope"> *</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <label class="form-control-static">{{model.OfficialResignationDate | date:'dd-MM-yyyy'}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">{{'COMMON_POSITION'|translate}}:</label>
+                                                <div class="col-md-8">
+                                                    <label class="form-control-static">{{itemForm.position}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-7 control-label">{{'RESIGNATION_APPLICATION_UNUSE_ANNUAL_LEAVE'|translate}}:</label>
+                                                <div class="col-md-2">
+                                                    <label class="form-control-static">{{model.UnusedLeaveDate}}</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">{{'COMMON_DEPT_LINE'|translate}}:</label>
+                                                <div class="col-md-8">
+                                                    <label class="form-control-static">{{itemForm.deptLine}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">{{'RESIGNATION_APPLICATION_SHUI_BOOK'|translate}}:</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">{{'COMMON_DIVISION_GROUP'|translate}}</label>
+                                                <div class="col-md-8">
+                                                    <label class="form-control-static">{{itemForm.divisionGroup}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div ng-repeat="data in shuiBooks" class="col-md-4 control-label">
+                                                    <input type="radio" class="k-radio" name="shuibook" value="{{data.name}}" id="{{data.name}}" ng-model="model.SHUIBookName" disabled="true">
+                                                    <label class="k-radio-label" for="{{data.name}}">{{data.name}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 line-divided">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">{{'COMMON_LOCATION'|translate}}:</label>
+                                                <div class="col-md-8">
+                                                    <label class="form-control-static">{{itemForm.location}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">{{'RESIGNATION_APPLICATION_Reason'|translate}}:</label>
+                                                <div class="col-md-8">
+                                                    <label class="form-control-static">{{model.ReasonForActionName}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-9 control-label">Đề nghị ngày làm việc cuối cùng /
+                                                    Suggestion for last working day:</label>
+                                                <div class="col-md-3">
+                                                    <label class="form-control-static">{{model.SuggestionForLastWorkingDay | date:'dd-MM-yyyy'}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-12 control-label">
+                                                    <input type="checkbox" id="eq7" ng-model="model.IsAgree" class="k-checkbox" disabled="true">
+                                                    <label class="k-checkbox-label" for="eq7">Tôi đồng ý bồi thường tiền
+                                                        lương của những ngày không báo trước <br /> I agree to
+                                                        compensate
+                                                        for un - notice days as required by law</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-md-6 control-label">
+                                            <b>Nhân viên không được nghỉ không lương trong giai đoạn kể từ ngày viết đơn
+                                                đến
+                                                thời điểm chính thức nghỉ việc</b> <br />
+                                            Employee don't take unpaid leave from applying resgnation letter date until
+                                            to
+                                            offcial resignation date
+                                            </h3>
+                                        </label>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <div class="form-group row" style="background-color: white;">
+                                                <div ng-repeat="data in contracts" class="col-md-5 control-label">
+                                                    <input type="radio" class="k-radio" name="data.nameVN" ng-value="{{data.code}}" id="{{data.nameVN}}" ng-model="model.ContractTypeCode" disabled="true">
+                                                    <label class="k-radio-label" for="{{data.nameVN}}">{{data.nameVN}}
+                                                        <br /> {{data.nameEN}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="portlet-title">
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <kendo-button type="button" class="btn btn-default btn-sm right-5" ng-click="showPopup('modalInfo', actionNeedShowPopup[0], '#dialogReason', actions.approve)">
+                                <i class="fa fa-check font-green-jungle right-5"></i> {{'COMMON_BUTTON_APPROVE'|translate}}</kendo-button>
+                            <kendo-button type="button" class="btn btn-default btn-sm right-5" ng-click="showPopup('modalInfo', actionNeedShowPopup[1], '#dialogReason', actions.requestedToChange)">
+                                <i class="fa fa-minus-circle font-red right-5"></i> {{'COMMON_BUTTON_REQUEST_TO_CHANGE'|translate}}
+                            </kendo-button>
+                            <kendo-button type="button" class="btn btn-default btn-sm right-5" ng-click="showPopup('modalInfo', actionNeedShowPopup[2], '#dialogReason', actions.reject)">
+                                <i class="fa fa-minus-circle font-red right-5"></i> {{'COMMON_BUTTON_REJECT'|translate}}</kendo-button>
+                            <kendo-button class="btn btn-default btn-sm" ng-click="cancel(state)">
+                                <i class="k-icon k-i-close font-green-jungle"></i> {{'COMMON_BUTTON_CLOSE'|translate}}
+                            </kendo-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>

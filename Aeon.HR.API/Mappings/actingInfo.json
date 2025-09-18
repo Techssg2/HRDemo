@@ -1,0 +1,62 @@
+[
+  {
+    "SourceField": "RequestFrom",
+    "TargetField": "Edoc_user",
+    "Type": 0
+  },
+  {
+    "SourceField": "EmployeeCode",
+    "TargetField": "Pernr",
+    "Type": 0
+  },
+  {
+    "SourceField": "EffectiveDate",
+    "TargetField": "Begda",
+    "Type": 0
+  },
+  {
+    "SourceField": "NewTitle",
+    "TargetField": "Stell",
+    "Type": 0
+  },
+  {
+    "SourceField": "Reason",
+    "TargetField": "Massg",
+    "Type": 0
+  },
+  {
+    "SourceField": "Type",
+    "TargetField": "Massn",
+    "Type": 0
+  },
+  {
+    "SourceField": "Position",
+    "TargetField": "Plans",
+    "Type": 0
+  },
+  {
+    "SourceField": "PersonelArea",
+    "TargetField": "Werks",
+    "Type": 0
+  },
+  {
+    "SourceField": "PersonelSubarea",
+    "TargetField": "Btrtl",
+    "Type": 0
+  },
+  {
+    "SourceField": "EmployeeGroupCode",
+    "TargetField": "Persg",
+    "Type": 0
+  },
+  {
+    "SourceField": "EmployeeSubGroupCode",
+    "TargetField": "Persk",
+    "Type": 0
+  },
+  {
+    "SourceField": "NewDeptLine",
+    "TargetField": "Zdept",
+    "Type": 0
+  }
+]

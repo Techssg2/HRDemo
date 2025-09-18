@@ -1,0 +1,250 @@
+<style>
+  .step-round-container {
+    width: 391px !important;
+    border-right: 1px #ddd solid !important;
+    padding-top: 71px !important;
+    padding-right: 20px !important;
+    padding-bottom: 0 !important;
+    padding-left: 20px !important;
+  }
+
+  .white-space {
+    white-space: normal;
+  }
+</style>
+<!--<div class="step-round-container">
+  <div class="workflow-history-task" ng-class="roundStyle">
+    <div class="task-info" ng-if="round.id">
+      <div class="task-info-line">
+         <span class="info-label ">Assign To:</span> 
+        <span class="info-label" ng-if="round.assignedToUserFullName"
+          >{{'COMMON_ASSIGN_TO'|translate}}:</span
+        >
+        <span class="info-label" ng-if="!round.assignedToUserFullName"
+          >{{'COMMON_ASSIGN_TO_DEPARTMENT'|translate}}:</span
+        >
+        <span class="info-data white-space ng-binding"
+          >{{round.assignedToUserFullName? round.assignedToUserFullName:
+          round.assignedToDepartmentName}}</span
+        >
+      </div>
+      <div class="task-info-line">
+         <span class="info-label ">Start day:</span> 
+        <span class="info-label">{{'COMMON_START_DAY'|translate}}:</span>
+        <span class="info-data ng-binding ng-scope">
+          {{round.startDate | date: formatDate}}
+        </span>
+      </div>
+      <div class="task-info-line ng-scope">
+         <span class="info-label ">Completed date:</span> 
+        <span class="info-label">{{'COMMON_COMPLETED_DATE'|translate}}:</span>
+        <span class="info-data ng-binding">
+          {{round.created| date: formatDate}}
+        </span>
+      </div>
+    </div>
+    <div class="task-info task-info-more" ng-if="round.id">
+      <div class="task-info-line ng-scope">
+         <span class="info-label ">Completed By:</span> 
+        <span class="info-label">{{'COMMON_COMPLETED_BY'|translate}}:</span>
+        <span class="info-data ng-binding" ng-if="round.action"
+          >{{round.createdByFullName}}</span
+        >
+      </div>
+      <div class="task-info-line">
+         <span class="info-label ">Status:</span> 
+        <span class="info-label">{{'COMMON_STATUS'|translate}}:</span>
+        <span class="info-data" ng-if="!round.action">In Progress</span>
+        <span class="info-data" ng-if="round.action">{{round.action}}</span>
+      </div>
+
+      <div class="task-info-line ng-scope">
+         <span class="info-label ">Due date:</span> 
+        <span class="info-label">{{'COMMON_DUE_DATE'|translate}}:</span>
+        <span class="info-data ng-binding"
+          >{{round.dueDate|date: formatDate}}</span
+        >
+      </div>
+      <div class="task-info-line ng-scope">
+         <span class="info-label">Comment:</span> 
+        <span class="info-label">{{'COMMON_COMMENT'|translate}}:</span>
+        <academy-show-more
+          class="info-data ng-binding"
+          number="30"
+          text="round.comment"
+          more=" View more"
+          less=" View less"
+        >
+        </academy-show-more>
+      </div>
+    </div>
+    <div class="task-icon">
+      <i
+        data-toggle="tooltip"
+        class="fa fa-spinner task-icon-not-started"
+        title="Not Started"
+      ></i>
+      <i
+        data-toggle="tooltip"
+        class="fa fa-refresh task-icon-in-progress"
+        title="In Progress"
+      ></i>
+      <i
+        data-toggle="tooltip"
+        class="fa fa-check-square-o task-icon-approved"
+        style="font-size: 29px; position: relative; top: 3px"
+        title="Approved"
+      ></i>
+      <i
+        data-toggle="tooltip"
+        class="fa fa-times task-icon-rejected"
+        style="font-size: 30px; position: relative; top: 1px; left: 3px"
+        title="Rejected"
+      ></i>
+      <i
+        data-toggle="tooltip"
+        class="fa fa-power-off task-icon-cancelled"
+        style="font-size: 26px; position: relative; top: 1px"
+        title="Cancelled"
+      ></i>
+      <i
+        data-toggle="tooltip"
+        class="fa fa-edit task-icon-requested-to-change"
+        style="font-size: 29px; position: relative; top: 3px"
+        title="Request To Change"
+      ></i>
+      <i
+        data-toggle="tooltip"
+        class="fa fa-file-word-o task-icon-requested-to-document-supplement"
+        style="position: relative; top: -1px"
+        title="Request To Document"
+      ></i>
+      <i
+        data-toggle="tooltip"
+        class="fa fa-user-times task-icon-rejected-to-applicant"
+        title="Rejected"
+      ></i>
+      <i
+        data-toggle="tooltip"
+        class="fa fa-exclamation task-icon-overdue"
+        style="font-size: 29px; position: relative; top: 2px"
+      ></i>
+    </div>
+  </div>
+</div>-->
+
+
+
+<div class="mt-3 d-grid grid-cols-5">
+    <div class="d-flex">
+        <div class="progresses progresses-style1 vertical">
+            <div class="steps"
+                ng-class="{
+                           'badge-green': step.rounds[0].stepNumber == round.stepNumber && (round.action == 'Completed' || round.action == 'Approved' || round.action == 'Submitted'),
+                           'badge-yellow-60': step.rounds[0].stepNumber == round.stepNumber && round.action == 'Requested To Change',
+                           'badge-red': step.rounds[0].stepNumber == round.stepNumber && (round.action == 'Cancelled' || round.action == 'Rejected'),
+                           'badge-orange': step.rounds[0].stepNumber == round.stepNumber && (round.action == 'Approve' || (!round.action && (round.assignedToUserFullName ||  round.assignedToDepartmentName) )), 
+                           '': (!round.action && !round.id && !round.createdByFullName)
+                        }"
+                        >
+                {{step.rounds[0].stepNumber }}
+            </div>
+
+            <span class="dashed-line active"></span>
+        </div>
+    </div>
+    <div class="card card-style1 col-span-4">
+        <div class="card-header"
+           ng-class="{
+                           'badge-green': step.rounds[0].stepNumber == round.stepNumber && (round.action == 'Completed' || round.action == 'Approved' || round.action == 'Submitted'),
+                           'badge-yellow-60': step.rounds[0].stepNumber == round.stepNumber && round.action == 'Requested To Change',
+                           'badge-red': step.rounds[0].stepNumber == round.stepNumber && (round.action == 'Cancelled' || round.action == 'Rejected'),
+                           'badge-orange': step.rounds[0].stepNumber == round.stepNumber && (round.action == 'Approve' || (!round.action && (round.assignedToUserFullName ||  round.assignedToDepartmentName) )), 
+                           '': (!round.action && !round.id && !round.createdByFullName)
+                        }">
+                        <span style="text-transform: uppercase;">{{step.stepName}}</span>
+                    </div>
+
+        <div class="card-body d-grid">
+            <div class="card-group-style1">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <span class="card-title" ng-if="round.assignedToUserFullName">{{'COMMON_ASSIGN_TO'|translate}}:</span>
+                        <span class="card-title" ng-if="!round.assignedToUserFullName">{{'COMMON_ASSIGN_TO_DEPARTMENT'|translate}}:</span>
+                        <span ng-if="round.assignedToUserFullName || round.assignedToDepartmentName" class="info-data white-space ng-binding" k-content="'{{round.assignedToUserFullName? round.assignedToUserFullName: round.assignedToDepartmentName }}'" kendo-tooltip>{{round.assignedToUserFullName? round.assignedToUserFullName: round.assignedToDepartmentName }}</span>
+                        <span ng-if="!round.assignedToUserFullName && !round.assignedToDepartmentName">-/-</span>
+                    </div>
+                    <div class="col">
+                        <span class="card-title">
+                            Completed By:
+                        </span>
+                        <span ng-if="round.action">{{round.createdByFullName}}</span>
+                        <span ng-if="!round.action">-/-</span>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mt-3">
+                            <span class="card-title">
+                                Start day:
+                            </span>
+                            <span ng-if="round.startDate">{{round.startDate | date: formatDate}}</span>
+                            <span ng-if="!round.startDate">-/-</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mt-3">
+                            <span class="card-title">
+                                Status:
+                            </span>
+                            <span class="info-data" ng-if="round.action">{{round.action}}</span>
+                            <span class="info-data" ng-if="!round.action">In Progress</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mt-3">
+                            <span class="card-title">
+                                Completed date:
+                            </span>
+                            <span ng-if="round.created">{{round.created| date: formatDate}}</span>
+                            <span ng-if="!round.created">-/-</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mt-3" ng-if="round.dueDate">
+                            <span class="card-title">
+                                Due date:
+                            </span>
+                            {{round.dueDate|date: formatDate}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mt-3" ng-if="round.comment">
+                            <span class="card-title">
+                                Comment:
+                            </span>
+                            <academy-show-more class="info-data ng-binding"
+                                               number="30"
+                                               text="round.comment"
+                                               more=" View more"
+                                               less=" View less">
+                            </academy-show-more>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

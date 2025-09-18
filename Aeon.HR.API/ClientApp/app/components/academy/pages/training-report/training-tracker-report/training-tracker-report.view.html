@@ -1,0 +1,377 @@
+<style>
+    .k-grid-toolbar {
+        text-align: right;
+    }
+
+    .k-i-file-excel {
+        display: inline-block;
+        font-size: 14px;
+        line-height: 14px;
+        -webkit-font-smoothing: antialiased;
+        width: 1.25em;
+        text-align: center;
+        font: normal normal normal 14px/1 FontAwesome;
+        text-rendering: auto;
+        color: #3598dc !important;
+    }
+
+        .k-i-file-excel:before {
+            content: "\f0ce" !important;
+        }
+
+    .k-grid td {
+        text-align: left;
+        border: solid 1px #ccc;
+    }
+
+    .k-grid-toolbar {
+        display: none
+    }
+
+    .k-textbox{
+        height:39px !important
+    }
+    .k-picker-wrap .k-input{
+        height: 37px
+    }
+
+</style>
+<!-- end -->
+<!--<div class="row">-->
+    <!-- <span class="k-i-loading k-icon" style="font-size: 64px;"></span> -->
+    <!--<div class="col-md-12 col-sm-12">
+        <div class="portlet bordered light">-->
+            <!-- Title -->
+            <!--<div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">
+                        {{title}}
+                    </span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <kendo-button class="btn btn-default btn-sm" ng-click="toggleFilterPanel(true)"
+                                          ng-show="!advancedSearchMode">
+                                <i class="k-icon k-i-filter font-green-jungle" id="search"></i>
+                                {{'COMMON_BUTTON_SEARCH' | translate}}
+                            </kendo-button>
+                            <kendo-button class="btn btn-default btn-sm" ng-click="toggleFilterPanel(false)"
+                                          ng-show="advancedSearchMode">
+                                <i class="k-icon k-i-close font-green-jungle"></i>
+                                {{'COMMON_BUTTON_CLOSE' | translate}}
+                            </kendo-button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div ng-show='advancedSearchMode'>
+
+                    <div class="row">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">{{'COMMON_SAP_CODE' | translate}}:</label>
+                                        <div class="col-md-8">-->
+                                            <!-- <select kendo-multi-select k-options="statusOptions" k-ng-model="query.status"></select> -->
+                                            <!--<input type="text" maxlength="50" class="k-textbox" style="width: 100%;"
+                                                   ng-model="query.sapCode">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-4 control-label">{{'COMMON_FULL_NAME' | translate}}:</label>
+                                    <div class="col-md-8">
+                                        <input type="text" maxlength="50" class="k-textbox" style="width: 100%;"
+                                               ng-model="query.fullName">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">
+                                            {{
+'TRAINING_REQUEST_SUPPLIER_NAME' |
+                                            translate
+                                            }}:
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input type="text" maxlength="50" class="k-textbox" style="width: 100%;"
+                                                   ng-model="query.supplierName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-4 control-label">
+                                        {{
+'TRAINING_REQUEST_TYPE_OFF_TRAINING' |
+                                        translate
+                                        }}:
+                                    </label>
+                                    <div class="col-md-8">
+                                        <select kendo-multi-select k-options="typeofTrainingOptions"
+                                                k-ng-model="query.typeofTraining"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">{{'STARTING_DATE' | translate}}:</label>
+                                        <div class="col-md-8">
+                                            <range-Date-Of-Date-Picker d-from="query.startingDateFrom"
+                                                                       d-to="query.startingDateTo"></range-Date-Of-Date-Picker>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-4 control-label">{{'ENDING_DATE' | translate}}:</label>
+                                    <div class="col-md-8">
+                                        <range-Date-Of-Date-Picker d-from="query.endingDateFrom"
+                                                                   d-to="query.endingDateTo"></range-Date-Of-Date-Picker>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mrb10">
+                        <div class="col-md-2"> </div>
+                        <div class="col-md-4 btn-group">
+                            <kendo-button class="btn btn-default btn-sm" ng-click="search()">
+                                <i class="k-icon k-i-search font-green-jungle"></i>
+                                {{'COMMON_BUTTON_SEARCH' | translate}}
+                            </kendo-button>
+                            <kendo-button class="btn btn-default btn-sm" ng-click="clearSearch()">
+                                <i style="font-size: 12px; padding-right: 3px;" class="fa fa-refresh"></i>
+                                {{'COMMON_BUTTON_RESET' | translate}}
+                            </kendo-button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <kendo-grid id="grid" options="allItemGridOptions" class="participant-grid">
+                    </div>
+                </div>
+            </div>-->
+            <!-- Content -->
+        <!--</div>
+    </div>
+</div>-->
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="d-flex align-items-center justify-content-between portlet-title">
+                <div class="group poppins-medium text-grey-300 caption caption-md px-3">
+                    <p style=" text-transform: uppercase !important;" class="display-8 m-0">{{title}}</p>
+                    <p class="display-11">
+                        <span class="opacity-40">Number of record:</span> {{total}}
+                    </p>
+                </div>
+
+            </div>
+            <div class="portlet-body p-2 bg-neutral-blue-300">
+                <div ng-show="false"><input id="files" name="files" kendo-upload type="file" ng-show="false" class="ng-hide" /></div>
+                <div class="page-content-wrapper float-none table-rounded-toolbar ">
+                    <div class="toolbar pb-2">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <button type="button" ng-click="exportToExcel()" class="btn btn-outline-cyan rounded-3 poppins-regular display-9 py-2 px-3">
+                                        <svg fill="currentColor" class="bi bi-check-square" width="16" height="16" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="m0 1016.081 409.186 409.073 79.85-79.736-272.867-272.979h1136.415V959.611H216.169l272.866-272.866-79.85-79.85L0 1016.082ZM1465.592 305.32l315.445 315.445h-315.445V305.32Zm402.184 242.372-329.224-329.11C1507.042 187.07 1463.334 169 1418.835 169h-743.83v677.647h112.94V281.941h564.706v451.765h451.765v903.53H787.946V1185.47H675.003v564.705h1242.353V667.522c0-44.498-18.07-88.207-49.581-119.83Z" fill-rule="evenodd"></path>
+                                        </svg>
+                                        &nbsp;Export
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex align-items-center justify-content-end gap-1">
+                                    <button type="button"
+                                            class="btn-none"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal"
+                                            ng-click="toggleFilterPanel(true)">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             width="16"
+                                             height="16"
+                                             fill="currentColor"
+                                             class="bi bi-funnel"
+                                             viewBox="0 0 16 16">
+                                            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"></path>
+                                        </svg>
+                                    </button>
+                                    <!-- Modal -->
+
+                                    <div class="custom-popup" ng-show="advancedSearchMode">
+                                        <div class="custom-dialog custom-dialog-centered">
+                                            <div class="custom-content p-3 rounded-4">
+                                                <div class="d-flex align-items-center">
+                                                    <h1 class="custom-title fs-5 modal-title-style1" id="exampleModalLabel">SEARCH</h1>
+                                                    <button type="button" class="btn-close ms-auto" ng-click="toggleFilterPanel(false)" aria-label="Close"></button>
+
+                                                </div>
+                                                <hr />
+                                                <div class="custom-body">
+                                                    <div class="row">
+                                                        <div class="form-horizontal">
+                                                            <div class="form-body d-flex">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label control-label">{{'COMMON_SAP_CODE' | translate}}:</label>
+                                                                        <div class="">
+                                                                            <!-- <select kendo-multi-select k-options="statusOptions" k-ng-model="query.status"></select> -->
+                                                                            <input type="text" maxlength="50" class="k-textbox" style="width: 100%;"
+                                                                                   ng-model="query.sapCode">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label control-label">{{'COMMON_FULL_NAME' | translate}}:</label>
+                                                                    <div class="">
+                                                                        <input type="text" maxlength="50" class="k-textbox" style="width: 100%;"
+                                                                               ng-model="query.fullName">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-horizontal">
+                                                            <div class="form-body d-flex">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label control-label">
+                                                                            {{
+'TRAINING_REQUEST_SUPPLIER_NAME' |
+                                            translate
+                                                                            }}:
+                                                                        </label>
+                                                                        <div class="">
+                                                                            <input type="text" maxlength="50" class="k-textbox" style="width: 100%;"
+                                                                                   ng-model="query.supplierName">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label control-label">
+                                                                        {{
+'TRAINING_REQUEST_TYPE_OFF_TRAINING' |
+                                        translate
+                                                                        }}:
+                                                                    </label>
+                                                                    <div class="">
+                                                                        <select kendo-multi-select k-options="typeofTrainingOptions"
+                                                                                k-ng-model="query.typeofTraining"></select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-horizontal">
+                                                            <div class="form-body d-flex">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label control-label">{{'STARTING_DATE' | translate}}:</label>
+                                                                        <div class="">
+                                                                            <range-Date-Of-Date-Picker d-from="query.startingDateFrom"
+                                                                                                       d-to="query.startingDateTo"></range-Date-Of-Date-Picker>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label control-label">{{'ENDING_DATE' | translate}}:</label>
+                                                                    <div class="">
+                                                                        <range-Date-Of-Date-Picker d-from="query.endingDateFrom"
+                                                                                                   d-to="query.endingDateTo"></range-Date-Of-Date-Picker>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3 d-flex align-items-center justify-content-lg-between">
+                                                        <div class="form-group">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="button" ng-click="clearSearch()"
+                                                                    class="btn btn-white rounded-3 poppins-regular display-9">
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     width="16"
+                                                                     height="16"
+                                                                     fill="currentColor"
+                                                                     class="bi bi-arrow-repeat"
+                                                                     viewBox="0 0 16 16">
+                                                                    <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"></path>
+                                                                    <path fill-rule="evenodd"
+                                                                          d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"></path>
+                                                                </svg>
+                                                                &nbsp;{{'COMMON_BUTTON_RESET'|translate}}
+                                                            </button>
+                                                            &nbsp;
+                                                            <button type="button" ng-click="search()"
+                                                                    class="btn btn-primary rounded-3 poppins-regular display-9">
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     width="16"
+                                                                     height="16"
+                                                                     fill="currentColor"
+                                                                     class="bi bi-search"
+                                                                     viewBox="0 0 16 16">
+                                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                                                                </svg>
+                                                                &nbsp;{{'COMMON_BUTTON_SEARCH'|translate}}
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="display-10 leading-18">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <kendo-grid id="grid" options="allItemGridOptions" class="participant-grid" style=" overflow: hidden; border-top-left-radius: 0px !important; border-top-right-radius: 0px !important;">
+                                </kendo-grid>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

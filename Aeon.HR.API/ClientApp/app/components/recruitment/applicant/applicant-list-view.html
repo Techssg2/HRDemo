@@ -1,0 +1,254 @@
+
+
+<style>
+    #applicantGrid .k-grid-header th {
+        background-color: #E8E8E8;
+        color: #000;
+    }
+
+    #applicantGrid .k-grid-header {
+        background-color: #E8E8E8;
+        color: #000;
+    }
+
+    .k-dropdown {
+        padding: 1px;
+        border-radius: 7px;
+        border: solid 1px;
+        border-color: #DEE2E6
+    }
+
+
+
+        .k-dropdown .k-dropdown-wrap {
+            border-radius: 7px;
+            border-color: transparent
+        }
+
+    .k-dropdowntree {
+        padding: 1px;
+        border-radius: 7px;
+        border: solid 1px;
+        border-color: #DEE2E6
+    }
+
+        .k-dropdowntree .k-dropdown-wrap {
+            border-radius: 7px;
+            border-color: transparent
+        }
+
+    .k-numerictextbox {
+        padding: 1px;
+        border-radius: 7px;
+        border: solid 1px;
+        border-color: #DEE2E6
+    }
+
+        .k-numerictextbox .k-numeric-wrap {
+            border-radius: 7px;
+            border-color: transparent;
+            height: 50%
+        }
+
+    .k-picker-wrap {
+        border-radius: 7px;
+        border: solid 1px;
+        border-color: #dee2e6 !important;
+        height:39px !important
+          
+    }
+
+    .k-grid-header-wrap.sync-collapse {
+        width: calc(100% - 522px) !important;
+    }
+
+    .k-grid-content.sync-collapse {
+        width: calc(100% - 522px) !important;
+    }
+
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="d-flex align-items-center justify-content-between portlet-title">
+                <div class="group poppins-medium text-grey-300 caption caption-md px-3">
+                    <p style=" text-transform: uppercase !important;" class="display-8 m-0">{{title}}</p>
+                    <p class="display-11">
+                        <span class="opacity-40">Number of request:</span> {{total}}
+                    </p>
+                </div>
+                <div class="group">
+                    <a href="#!/home/applicant/item/?id=" role="button" class="btn btn-primary rounded-3 poppins-regular display-8 py-2 px-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"></path>
+                        </svg>
+                        &nbsp;Create Request
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body p-2 bg-neutral-blue-300">
+                <div ng-show="false"><input id="files" name="files" kendo-upload type="file" ng-show="false" class="ng-hide" /></div>
+                <div class="page-content-wrapper float-none table-rounded-toolbar ">
+                    <div class="toolbar">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="d-flex gap-2 align-items-center">
+
+                                    <select id="mySelect" class="form-select poppins-medium display-9 leading-16 py-2 select-style1 mw-25"
+                                            aria-label="Default select example" ng-model="selectedTab" ng-change="onTabChange()">
+                                        <option value="0">All Requests</option>
+                                        <option value="1">My Requests</option>
+                                    </select>
+                                    <button type="button" class="btn btn-outline-cyan rounded-3 poppins-regular display-9 py-2 px-3" ng-click="export()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class=" bi bi-check-square" viewBox="0 0 1920 1920">
+                                            <path d="m0 1016.081 409.186 409.073 79.85-79.736-272.867-272.979h1136.415V959.611H216.169l272.866-272.866-79.85-79.85L0 1016.082ZM1465.592 305.32l315.445 315.445h-315.445V305.32Zm402.184 242.372-329.224-329.11C1507.042 187.07 1463.334 169 1418.835 169h-743.83v677.647h112.94V281.941h564.706v451.765h451.765v903.53H787.946V1185.47H675.003v564.705h1242.353V667.522c0-44.498-18.07-88.207-49.581-119.83Z" fill-rule="evenodd"></path>
+                                        </svg>
+                                        &nbsp;Export
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="d-flex align-items-center justify-content-end gap-1">
+                                    <button type="button" class="btn-none" ng-click="toggleModal(true)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+                                            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"></path>
+                                        </svg>
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="custom-popup" ng-show="isModalVisible">
+                                        <div class="custom-dialog custom-dialog-centered">
+                                            <div class="custom-content p-3 rounded-4">
+                                                <div class="d-flex align-items-center">
+                                                    <h1 class="custom-title fs-5 modal-title-style1" id="exampleModalLabel">SEARCH</h1>
+                                                    <button type="button" class="btn-close ms-auto" ng-click="toggleModal(false)" aria-label="Close"></button>
+                                                </div>
+                                                <hr />
+                                                <div class="custom-body">
+                                                    <form>
+                                                        <div class="row mb-3">
+                                                            <div class="col">
+                                                                <label for="exampleInputText1"
+                                                                       class="form-label">{{'COMMON_KEYWORD'|translate}}</label>
+
+                                                                <input type="text" maxlength="50" class="form-control" style="width: 100%;"
+                                                                       ng-model="filter.keyword">
+
+                                                            </div>
+                                                            <div class="col">
+                                                                <label for="exampleSelect1" class="form-label">{{'COMMON_DEPARTMENT'|translate}}</label>
+                                                                <input kendo-drop-down-tree class="form-select" k-options="optionGroup.departmentTreeOptions"
+                                                                       id="departmentsearch" ng-model="filter.department" style="width: 100%; height:37px" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3">
+                                                            <div class="col">
+                                                                <label for="exampleInputText1"
+                                                                       class="form-label">{{'COMMON_POSITION'|translate}}</label>
+                                                                <select kendo-drop-down-list style="width: 100%;" class="form-select"
+                                                                        k-options="optionGroup.positionForListOptions"
+                                                                        ng-model="filter.position">
+                                                                </select>
+                                                            </div>
+                                                            <div class="col">
+                                                                <label for="exampleSelect1" class="form-label">{{'COMMON_CREATED_DATE'|translate}}</label><br />
+
+                                                                <range-Date-Of-Date-Picker d-from="filter.fromDate" d-to="filter.toDate">
+                                                                </range-Date-Of-Date-Picker>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-3">
+                                                            <div class="col">
+                                                                <label for="exampleInputText1"
+                                                                       class="form-label">Gender</label>
+                                                                <ul class="fieldlist mrt10 d-flex gap-5">
+                                                                    <li>
+                                                                        <input type="radio" name="gender" id="male" ng-value="'1'"
+                                                                               class="form-check-input" ng-model="filter.gender" ng-value="true">
+                                                                        <label class="form-check-label" for="male">Male</label>
+                                                                    </li>
+                                                                    <li>
+                                                                        <input type="radio" name="gender" id="female" ng-value="'4'"
+                                                                               class="form-check-input" ng-model="filter.gender" ng-value="false">
+                                                                        <label class="form-check-label" for="female">Female</label>
+                                                                    </li>
+                                                                </ul>
+
+                                                            </div>
+                                                            <div class="col">
+
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="mb-3 d-flex align-items-center justify-content-lg-between">
+                                                            <div class="form-group">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <button type="button" ng-click="clearSearch(searchNewStaffOnboard)"
+                                                                        class="btn btn-white rounded-3 poppins-regular display-9">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         width="16"
+                                                                         height="16"
+                                                                         fill="currentColor"
+                                                                         class="bi bi-arrow-repeat"
+                                                                         viewBox="0 0 16 16">
+                                                                        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"></path>
+                                                                        <path fill-rule="evenodd"
+                                                                              d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"></path>
+                                                                    </svg>
+                                                                    &nbsp;{{'COMMON_BUTTON_RESET'|translate}}
+                                                                </button>
+                                                                &nbsp;
+                                                                <button type="button" ng-click="search()"
+                                                                        class="btn btn-primary rounded-3 poppins-regular display-9">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         width="16"
+                                                                         height="16"
+                                                                         fill="currentColor"
+                                                                         class="bi bi-search"
+                                                                         viewBox="0 0 16 16">
+                                                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                                                                    </svg>
+                                                                    &nbsp;{{'COMMON_BUTTON_SEARCH'|translate}}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                  
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="display-10 leading-18">
+                        <div class="row">
+
+
+                            <div class="col-md-12">
+                                <kendo-grid id="applicantGrid" options="applicantGridOptions" k-scope-field="widget.applicantList" style=" overflow: hidden; border: 1px solid #ddd;">
+                                </kendo-grid>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

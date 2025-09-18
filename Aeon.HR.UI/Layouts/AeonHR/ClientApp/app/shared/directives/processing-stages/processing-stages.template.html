@@ -1,0 +1,58 @@
+<style>
+    .k-dialog-title {
+        color: #b42e83 !important;
+        font-family: Nova-Regular !important;
+        font-size: 18px !important;
+        font-weight: 700;
+        margin: 10px 0;
+        margin: 0;
+        line-height: 1.42857143;
+        text-transform: uppercase !important;
+    }
+
+    .workflow-history {
+        white-space: nowrap;
+        overflow-x: auto !important;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        color: black;
+        font-family: Roboto;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        padding: 5px;
+    }
+
+    .modal-body {
+        max-height: calc(100vh - 15vw) !important;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+    .k-dialog {
+        top: calc(10%) !important;
+    }  
+</style>
+<div id="processingStates" kendo-dialog="processingStates" class="pd0" k-visible="false">
+    <!-- <h4 class="modal-title uppercase font-red-haze bold"></h4> -->
+    <div class="modal-body" style="overflow-x: auto;">
+        <div class="reset-mp">
+           
+            <div style="display: inline-flex;"
+                ng-if="workflowStatus && workflowStatus.workflowInstances && workflowStatus.workflowInstances.length > 0">
+                <div class="workflow-history" ng-repeat="flow in reverseArray(workflowStatus.workflowInstances)">
+                    <div class="workflow-history-header">
+                        <div class="flag-header-container">
+                            <div class="flag-header"></div>
+                        </div>
+                        <div class="round-header-container">
+                            <div class="round-header">
+                                <span class="caption">{{'COMMON_ROUND'|translate}} {{$index+1}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <workflow-step ng-repeat="step in flow.workflowData.steps" model="model" step="step" flow="flow">
+                    </workflow-step>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,343 @@
+<style>
+    k-loading-mask {
+        z-index: 3;
+        /* must be larger than the z-index:2 of #container */
+    }
+
+    .k-dialog {
+        position: fixed;
+        top: calc(25%) !important;
+    }
+
+    #userGridReview .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+
+    #userGrid .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+
+    #userGrid .k-loading-image {
+        background-image: none !important;
+    }
+
+    #userGrid .k-loading-color {
+        opacity: 0;
+    }
+
+    #userGrid .k-grid-content {
+        min-height: 0px !important;
+        max-height: 160px !important;
+    }
+
+    #userGrid .k-grid-content-locked {
+        overflow: hidden !important;
+    }
+
+    .k-grid-content {
+        min-height: 0px !important;
+        max-height: 500px !important;
+    }
+
+    .k-grid-content-locked {
+        overflow: hidden !important;
+        min-height: 50px !important;
+    }
+
+    tr.separate td {
+        border-bottom: 1px solid #dedbdb !important;
+    }
+
+    .table-cell {
+        border: 1px solid #dedbdb !important;
+    }
+
+    .k-grid-header th {
+        border-bottom: 1px solid #000000; /* Adds a border between header and table cells */
+        border-right: 1px solid #000000; /* Adds a border between header columns */
+    }
+
+    #userGrid .k-resize-handle {
+        display: none !important;
+    }
+
+    .k-grid-header-wrap.sync-collapse {
+        width: calc(100% - 620px) !important;
+    }
+
+    .k-grid-content.sync-collapse {
+        width: calc(100% - 620px) !important;
+    }
+</style>
+<div id="loading"></div>
+<div class="p-3">
+    <div class="row title-wrapper stickybar-1">
+        <div class="col-6">
+            <h2 class="widget-title">{{titleHeader}}</h2>
+        </div>
+        <div class="col-6">
+            <div class="d-flex gap-2 flex-wrap justify-content-end">
+                <action-items class="d-flex flex-wrap justify-content-end align-items-center" style="flex: 1 1 auto; gap: 4px; width:100%;" model="model" save="appove" form="formItem"></action-items>
+            </div>
+        </div>
+    </div>
+    <div class="portlet-body mb-3">
+        <div class="mt-3">
+            <div class="accordion accordion-style1">
+                <div class="accordion-item">
+                    <div class="accordion-collapse collapse show">
+                        <div class="portlet bordered light">
+                            <!-- Title -->
+                            <div class="row p-3">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;" ng-if="title">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 46 46">
+                                                <path id="_12.File" data-name="12.File" d="M37,47H11a4,4,0,0,1-4-4V5a4,4,0,0,1,4-4H30a.984.984,0,0,1,.776.395l9.829,9.829A.981.981,0,0,1,41,12h0V43A4,4,0,0,1,37,47ZM31,4.381V11h6.619ZM39,13H30a1,1,0,0,1-1-1V3H11A2,2,0,0,0,9,5V43a2,2,0,0,0,2,2H37a2,2,0,0,0,2-2ZM33,39H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Zm0-8H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Zm0-8H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Z" transform="translate(-7 -1)" fill-rule="evenodd"></path>
+                                            </svg>&nbsp;{{title}}
+                                        </div>
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 24 24">
+                                                <path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z" fill="#0D0D0D"></path>
+                                            </svg>&nbsp;{{ model.createdByFullName }} <!--({{ model.employeeCode }})-->
+                                        </div>
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;" ng-if="model.created">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 24 24">
+                                                <path d="M9 2a1 1 0 0 1 1 1v1h4V3a1 1 0 1 1 2 0v1h3a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V3a1 1 0 0 1 1-1zM8 6H5v3h14V6h-3v1a1 1 0 1 1-2 0V6h-4v1a1 1 0 0 1-2 0V6zm11 5H5v8h14v-8z" fill="#0D0D0D"></path>
+                                            </svg>&nbsp;{{ model.created | date:'dd/MM/yyyy HH:mm' }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 d-flex flex-wrap justify-content-end">
+                                    <button class="btn-none dropdown-toggle"
+                                            type="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             width="16"
+                                             height="16"
+                                             fill="currentColor"
+                                             class="bi bi-three-dots-vertical"
+                                             viewBox="0 0 16 16">
+                                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                        </svg>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-end dropdown-menu-text-link display-11 text-center">
+                                        <li>
+                                            <a class="dropdown-item" href="" ng-click="showTrackingHistory()" ng-if="isITHelpdesk">
+                                                <svg width="16" height="16" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                                    <g fill="currentColor" fill-rule="evenodd" transform="translate(2 1)">
+                                                        <path fill-rule="nonzero" d="M3 4C3 3.44772 3.44772 3 4 3 4.55228 3 5 3.44772 5 4 5 4.55228 4.55228 5 4 5 3.44772 5 3 4.55228 3 4zM7 3C6.44772 3 6 3.44772 6 4 6 4.55228 6.44771 5 7 5L8 5C8.5523 5 9 4.55228 9 4 9 3.44772 8.5523 3 8 3L7 3zM6 7C6 6.44772 6.44772 6 7 6L8 6C8.5523 6 9 6.44772 9 7 9 7.55228 8.5523 8 8 8L7 8C6.44771 8 6 7.55228 6 7zM3 7C3 6.44772 3.44772 6 4 6 4.55228 6 5 6.44772 5 7 5 7.55228 4.55228 8 4 8 3.44772 8 3 7.55228 3 7zM6 10C6 9.4477 6.44772 9 7 9L8 9C8.5523 9 9 9.4477 9 10 9 10.5523 8.5523 11 8 11L7 11C6.44771 11 6 10.5523 6 10zM3 10C3 9.4477 3.44772 9 4 9 4.55228 9 5 9.4477 5 10 5 10.5523 4.55228 11 4 11 3.44772 11 3 10.5523 3 10z"></path>
+                                                        <path d="M0,1 C0,0.44772 0.44772,0 1,0 L11,0 C11.5523,0 12,0.44772 12,1 L12,13 C12,13.5523 11.5523,14 11,14 L1,14 C0.44772,14 0,13.5523 0,13 L0,1 Z M2,12 L2,2 L10,2 L10,12 L2,12 Z"></path>
+                                                    </g>
+                                                </svg>&nbsp;{{'COMMON_TRACKING_HISTORY'|translate}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-left: 0 !important; padding-top: 0 !important;">
+                                <div class="col-6">
+                                    <span class="badge badge-style1 justify-content-start" ng-if="model.status"
+                                          ng-class="{
+                                                     'badge-orange': model.status != 'Completed' && model.status != 'Draft' && model.status != 'Cancelled' && model.status != 'Reject' && model.status != 'Out Of Period',
+                                                     'badge-green': model.status == 'Completed',
+                                                     'badge-red': model.status == 'Cancelled' || model.status == 'Reject' || model.status == 'Out Of Period',
+                                                     '': model.status == 'Draft'
+                                                       }">
+                                        {{statusTranslate}}
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mt-2 d-flex flex-column flex-lg-row justify-content-end">
+                                        <div class="progresses" ng-repeat="item in currentInstanceProcessingStage.workflowData.steps">
+                                            <div class="steps badge-green" ng-if="item.stepNumber == 1">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     width="16"
+                                                     height="16"
+                                                     viewBox="0 0 24 24"
+                                                     fill="none"
+                                                     stroke="#ffffff"
+                                                     stroke-width="2"
+                                                     stroke-linecap="round"
+                                                     stroke-linejoin="round">
+                                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                                </svg>
+                                            </div>
+                                            <span class="line" ng-if="item.stepNumber == 1"></span>
+                                            <div class="steps" ng-class="!item.histories ? '' : {'badge-green': item.histories.voteType == 1 && item.histories.isStepCompleted,
+                                                   'badge-yellow-60': item.histories.voteType == 3,
+                                                   'badge-outline-orange': item.histories.voteType == 0 && !item.histories.isStepCompleted,
+                                                   'badge-red': (item.histories.voteType == 2 || item.histories.voteType == 4)}" ng-if="item.stepNumber != 1">
+                                                <div class="tooltip-custom tooltip-style2 tooltip-below">
+                                                    {{item.stepNumber}}
+                                                    <span class="tooltip-text">
+                                                        <span class="badge btn-grey rounded-pill poppins-regular display-12 leading-14">Round {{processingStageRound}}</span>
+                                                        <p class="text-orange poppins-medium display-11" style="text-transform: uppercase;">
+                                                            {{item.stepName}}
+                                                        </p>
+                                                        <p class="display-12" ng-if="(item.histories.assignedToUserFullName || item.histories.assignedToDepartmentName)">
+                                                            <span class="text-grey">Assign To: </span>
+                                                            <span style="text-transform: uppercase;">
+                                                                {{item.histories.assignedToUserFullName ? item.histories.assignedToUserFullName: item.histories.assignedToDepartmentName}}
+                                                            </span>
+                                                        </p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="line" ng-if="item.stepNumber != 1 && currentInstanceProcessingStage.workflowData.steps[currentInstanceProcessingStage.workflowData.steps.length - 1].stepNumber != item.stepNumber"></span>
+                                        </div>
+                                        <a href="#" style="padding-left: 20px"
+                                           data-bs-toggle="modal"
+                                           data-bs-target="#exampleModalView5">
+                                            View more
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 width="10"
+                                                 height="10"
+                                                 viewBox="0 0 24 24"
+                                                 fill="none"
+                                                 stroke="#0D6EFD"
+                                                 stroke-width="2"
+                                                 stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path d="M9 18l6-6-6-6" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <!--<div class="row ng-scope" style="padding: 15px 0;margin-bottom:15px">
+                                    <div class="col-sm-12">
+                                        <workflow-comment></workflow-comment>
+                                    </div>
+                                </div>-->
+                                <div class="alert alert-danger-style1 mb-3" ng-if="errors.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                                    <div class="col-sm-12">
+                                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                                            <ul>
+                                                <li ng-repeat="error in errors track by $index">
+                                                    <span class="bold ">{{error.controlName}}: </span>{{error.message?error.message: ''}}
+                                                </li>
+                                                <br>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="accordion accordion-style1">
+                                        <div class="accordion-item">
+                                            <div class="accordion-collapse collapse show">
+                                                <div class="accordion-body">
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label text-secondary">{{'COMMON_DEPT_LINE'|translate}}:</label>
+                                                                <select kendo-drop-down-list name="dept_line_name" id="dept_line_id"
+                                                                        k-options="deptLineOptions" k-ng-model="model.deptId"
+                                                                        class="form-control"
+                                                                        style="width: 100%;">
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label text-secondary">{{'COMMON_DIVISION_GROUP'|translate}}:</label>
+                                                                <input kendo-drop-down-tree="divisionTree" class="form-control w100"
+                                                                       name="division_name"
+                                                                       k-on-change="onChangeDivision(model.divisionId)"
+                                                                       k-options="divisionOptions" k-ng-model="model.divisionId"
+                                                                       id="division_id" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label text-secondary">{{'SHIFT_PLAN_PERIOD'|translate}}:</label>
+                                                                <select id="period_source_id" kendo-drop-down-list
+                                                                        k-options="targetPlans" style="width: 100%;"
+                                                                        name="period_source_name" k-ng-model="model.periodId"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label text-secondary">{{'TARGET_PLAN_NOTE_ALERT'|translate}}:</label>
+                                                                </br><img kendo-tooltip k-content="colorContent" k-position="'right'"
+                                                                          k-width="'400px'" class="img-circle"
+                                                                          src="ClientApp/assets/images/icon/color-picker-icon.png" style="height:22.5px;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mrt10">
+                                                        <div class="col-md-12">
+                                                            <kendo-grid id="grid_user_id" k-options="gridUsers" k-rebind="gridUsers">
+                                                            </kendo-grid>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="group poppins-medium text-grey-300">
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2" style="margin-bottom:12px">
+                                        <action-items model="model" save="appove" form="formItem"></action-items>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<processing-stage workflow-instances="workflowInstances"></processing-stage>
+<tracking-history tracking-history="trackingHistory"></tracking-history>
+<div id="dialog_Detail" kendo-dialog="dialogDetailCode" k-on-open="dialogVisible = true"
+     style="height: 100% !important;" k-on-close="dialogVisible = false" k-width="890" k-modal="true" k-visible="false"
+     options="dialogDetailOption">
+    <div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px" ng-if="target.errorMessage">
+        <span class="font-red-thunderbird">{{target.errorMessage}}</span>
+    </div>
+    </br>
+    <div class="row mrb10 mb-3">
+        <label class="col-md-12 control-label">{{'COMMON_COMMENT'|translate}}</label>
+        <div class="col-md-12">
+            <div class="input-group" style="width: 100%;">
+                <textarea class="form-control comment-text input-default" placeholder="" style="width: 100%;" rows="6"
+                          ng-model="comment"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="input-group" style="width: 100%;">
+                <input type="text" class="form-control enable-to-edit" id='FieldFilter' placeholder="Search for..."
+                       style="width: 80%; " ng-keypress="ifEnter($event, 'addUser')" ng-model="gridUser.keyword">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="button" ng-click="searchGridUser()" style="border: 1px solid #dadada;
+                    margin-bottom: 10px;height: 38px;">
+                        <span class="k-icon k-i-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row mrb10">
+        <div class="col-md-12">
+        </div>
+    </div>
+    <div>
+        <div kendo-grid id="userGrid" class="grid-enable-select" options="userListGridOptions">
+        </div>
+    </div>
+</div>

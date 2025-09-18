@@ -1,0 +1,108 @@
+<style>
+    .k-dialog-title {
+        color: #006efa !important;
+        font-family: Nova-Regular !important;
+        font-size: 18px !important;
+        font-weight: 700;
+        margin: 10px 0;
+        margin: 0;
+        line-height: 1.42857143;
+        text-transform: uppercase !important;
+    }
+
+    .workflow-history {
+        white-space: nowrap;
+        overflow-x: auto !important;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        color: black;
+        font-family: Roboto;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        padding: 5px;
+    }
+
+    .modal-body {
+        max-height: calc(100vh - 15vw) !important;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+
+    .k-dialog {
+        top: calc(10%) !important;
+    }
+</style>
+
+
+<!--<div id="processingStates" kendo-dialog="processingStates" class="pd0" k-visible="false">
+    <h4 class="modal-title uppercase font-red-haze bold"></h4>
+    <div class="modal-body" style="overflow-x: auto">
+        <div class="reset-mp">
+            <div style="display: inline-flex"
+                 ng-if="workflowInstances && workflowInstances.histories.length && workflowInstances.workflowData.steps.length">
+                <div class="workflow-history" ng-repeat="flow in historysArray">
+                    <div class="workflow-history-header">
+                        <div class="flag-header-container">
+                            <div class="flag-header"></div>
+                        </div>
+                        <div class="round-header-container">
+                            <div class="round-header">
+                                <span class="caption">
+                                    {{'COMMON_ROUND' | translate}} {{$index + 1}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <academy-workflow-step ng-repeat="step in workflowInstances.workflowData.steps"
+                                           step="step"
+                                           flow="flow"></academy-workflow-step>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+
+
+
+<div class="modal fade right"
+     id="exampleModalView5"
+     tabindex="-1"
+     aria-labelledby="exampleModalViewLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-2md">
+        <div class="modal-content rounded-3 rounded-start-0 p-3">
+            <div class="modal-header border-0">
+                <h1 class="modal-title fs-5 modal-title-style1" id="exampleModalLabel">
+                    PROCESSING STAGES
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center"  ng-if="workflowInstances && workflowInstances.histories.length && workflowInstances.workflowData.steps.length">
+                    <div class="nav nav-tabs border-0 d-inline-flex"
+                         id="myTab"
+                         role="tablist">
+                        <button type="button"
+                                class="nav-item btn btn-tab rounded-start-0"
+                                ng-class="($index+1) == selectedTab ? 'active' : ''"
+                                ng-repeat="flow in historysArray"
+                                ng-click="changeRound($index+1)">
+                            {{'COMMON_ROUND' | translate}} {{$index + 1}}
+                        </button>
+                    </div>
+                    <div  ng-repeat="flow in historysArray">
+                        <div class="tab-content" ng-show="($index + 1) == selectedTab">
+                            <div role="tabpanel" aria-labelledby="nav-tab{{$index}}" tabindex="0">
+                                <academy-workflow-step ng-repeat="step in workflowInstances.workflowData.steps"
+                                                       step="step"
+                                                       flow="flow"></academy-workflow-step>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,62 @@
+<ul class="nav navbar-nav pull-right">
+    <li class="dropdown dropdown-user" style="padding-left: 0px" excutejq>
+        <span class="dropdown-toggle" data-toggle="dropdown" id="user-info" data-close-others="true" aria-expanded="false"
+            style="padding-left: 0px">
+            <img alt="{{vm.currentUser.Title}}" class="img-circle" src="{{avatar}}">
+            <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </span>
+        <ul class="dropdown-menu dropdown-menu-default child-menu"
+            style="max-width: 400px;margin: auto ;margin-top: 9px;width: max-content;">
+            <li class="user-info">
+                <a ui-sref="home.user-setting.user-profile({referenceValue: vm.currentUser.id})" ui-sref-opts="{reload: true}" class="dropdown-toggle"
+                   data-toggle="dropdown" id="user-info" data-close-others="true" aria-expanded="false"
+                   style="padding-left: 0px">
+                    <img alt="{{vm.currentUser.Title}}" class="img-circle" src="{{avatar}}">
+                    <span class="username username-hide-on-mobile" style="font-family: roboto !important">
+                        {{vm.currentUser?vm.currentUser.fullName: 'Admin'}}
+                    </span>
+                </a>
+            </li>
+            <!--<li class="divider"></li>
+    <li><a href="javascript:SuiteOnClick("STSNavigate2\u0028event,\u0027\u002f_layouts\u002f15\u002fSignOut.aspx\u0027\u0029;")"><i class="icon-login"></i> Login as
+            different account</a></li>-->
+            <li class="divider"></li>
+            <li><a ng-if="currentUser.type == 1" ng-click="changePassword()"><i class="fa falock">&#xf084;</i> {{'USER_PROFILE_CHANGE_PASS' | translate}}</a></li>
+            <li><a ng-click="refresh()"><i class="icon-refresh"></i>{{'COMMON_REFRESH_PAGE' | translate}}</a></li>
+            <li><a ng-click="vm.signOut()"><i class="icon-power"></i>{{'LOGOUT_TITLE' | translate}}</a></li>
+        </ul>
+    </li>
+</ul>
+
+<div id="changePwdDialog" kendo-dialog="changePwdDialog" options="changePwdDialogOpts">
+    <div class="note note-danger note-bordered" style="margin-bottom: 0px" ng-if="pwdModel.errors.length != 0">
+        <p class="font-red-thunderbird" ng-repeat="error in pwdModel.errors"> {{error}}</p>
+    </div>
+    <br />
+    <div class="col-md-12">
+        <div class="k-edit-label">
+            <label for="Current Password">
+                {{'CHANGE_PASSWORD_CURRENT'|translate}}: <span class="font-red-thunderbird">*</span>
+            </label>
+        </div>
+        <div data-container-for="CurrentPassword" class="k-edit-field">
+            <input type="password" autocomplete="off" class="k-textbox" ng-model="pwdModel.oldPassword">
+        </div>
+        <div class="k-edit-label">
+            <label for="New Password">
+                {{'CHANGE_PASSWORD_NEW_PASSWORD'|translate}}: <span class="font-red-thunderbird">*</span>
+            </label>
+        </div>
+        <div data-container-for="NewPassword" class="k-edit-field">
+            <input type="password" autocomplete="off" class="k-textbox" ng-model="pwdModel.newPassword">
+        </div>
+        <div class="k-edit-label">
+            <label for="New Password">
+                {{'CHANGE_PASSWORD_VERIFY_PASSWORD'|translate}}: <span class="font-red-thunderbird">*</span>
+            </label>
+        </div>
+        <div data-container-for="VerifyPassword" class="k-edit-field">
+            <input type="password" autocomplete="off" class="k-textbox" ng-model="pwdModel.verifyPassword">
+        </div>
+    </div>
+</div>

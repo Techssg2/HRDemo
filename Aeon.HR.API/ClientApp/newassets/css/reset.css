@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* background-color: var(--color-semiblack); */
+  color: var(--color-grey-300);
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+input,
+button {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+}
+
+button {
+  cursor: pointer;
+  text-wrap: nowrap;
+}
+
+input::placeholder {
+  color: var(--color-grey) !important;
+}
+
+/* hide eye icon from Edge browser by default */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
+
+/* FORM */
+.form-control:disabled,
+.form-select:disabled {
+  background-color: var(--color-grey-50);
+}
+

@@ -1,0 +1,168 @@
+<style>
+    #itemsTrackingLogOnGrid .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">{{title}}
+                    </span>
+                    <!-- for testting -->
+                    <!-- <kendo-button class="btn btn-default btn-sm" ng-click="actions.additionalApplicantDialogClick()"> additionalApplicantDialog
+                    </kendo-button> -->
+                </div>
+                <div class="actions">
+                    <kendo-button ng-style="hasListView && {'border':'1px solid pink'}" ng-click="changeToListView()"
+                        icon="'k-icon k-i-align-justify'" style="color: pink;">
+                    </kendo-button>
+                    <kendo-button ng-style="hasGridView && {'border':'1px solid pink'}" ng-click="changeToGridView()"
+                        icon="'k-icon k-i-table'" style="color: pink;"></kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="toggleSearch()" ng-show="!showSearch">
+                        <i class="k-icon k-i-filter font-green-jungle"></i> Search
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="toggleSearch()" ng-show="showSearch">
+                        <i class="k-icon k-i-close font-green-jungle"></i> Close
+                    </kendo-button>
+                    <div add-class class="btn-group" current-class="btn-group" added-class="open">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="true" style="padding: 0px !important"><img
+                                src="ClientApp/assets/images/icon/more.png" style="position: relative;top: -2px"
+                                class="ng-isolate-scope"></button>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a ng-click="export()" class="ng-binding"><i class="fa fa-table font-blue right-5"></i>
+                                    Export excel</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+
+                <div class="container-fluid" ng-show="showSearch">
+                    <div class="row" style="display: flex; align-items: center;">
+                        <div class="col-md-2"> Keyword: </div>
+                        <div class="col-md-4">
+                            <input type="text" class="k-textbox" style="width: 100%;" ng-model="filter.keyword" />
+                        </div>
+                        <div class="col-md-2"> Position: </div>
+                        <div class="col-md-4">
+                            <select kendo-drop-down-list="widget.positionListForFilter" id="positionDropdownlist"
+                                style="width: 100%;" k-options="dataPositions" ng-model="filter.position">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mrt10" style="display: flex; align-items: center;">
+                        <div class="col-md-2"> Department: </div>
+                        <div class="col-md-4">
+                            <input kendo-drop-down-tree k-options="departmentOptions" id="departmentSearch"
+                                k-ng-model="filter.department" style="width: 100%;" />
+                        </div>
+                        <div class="col-md-2"> Has No Applicant: </div>
+                        <div class="col-md-4">
+                            <input type="checkbox" id="hasApplicant" name="hasApplicant" class="k-checkbox"
+                                ng-model="filter.hasApplicant">
+                            <label class="k-checkbox-label" for="hasApplicant"></label>
+                        </div>
+                    </div>
+
+                    <div class="row mrt10">
+                        <div class="col-md-2"> </div>
+                        <div class="col-md-4 btn-group">
+                            <kendo-button class="btn btn-default btn-sm" ng-click="search()">
+                                <i class="k-icon k-i-search font-green-jungle"></i> Search
+                            </kendo-button>
+                            <kendo-button class="btn btn-default btn-sm" ng-click="onClickReset()">
+                                <i style="font-size: 12px; padding-right: 3px;" class="fa fa-refresh"></i>Reset
+                            </kendo-button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mrt10"></div>
+
+                <ul class="fieldlist" ng-if="hasListView">
+                    <li>
+                        <input type="radio" name="engine" id="engine1" class="k-radio" ng-value="'0'"
+                            ng-model="checkStatus.value" ng-change="onCheckStatus()" checked="checked">
+                        <label class="k-radio-label" for="engine1">All</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="engine" id="engine2" ng-value="'1'" ng-model="checkStatus.value"
+                            ng-change="onCheckStatus()" class="k-radio">
+                        <label class="k-radio-label" for="engine2">Open</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="engine" id="engine3" ng-value="'2'" ng-model="checkStatus.value"
+                            ng-change="onCheckStatus()" class="k-radio">
+                        <label class="k-radio-label" for="engine3">Closed</label>
+                    </li>
+                </ul>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <kendo-grid id="positionGrid" k-scope-field="widget.positionList" ng-if="hasListView"
+                            options="positionGridOptions"></kendo-grid>
+                        <kendo-grid id="positionThumbGrid" ng-if="hasGridView" k-scope-field="widget.positionThumbnail"
+                            options="positionGridThumbnailOptions"></kendo-grid>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>
+
+<div id="dialogReassign" kendo-dialog="dialogReassign" k-title="titleModal" k-on-open="dialogVisible = true"
+    k-on-close="dialogVisible = false" k-width="1000" k-modal="true" k-visible="false" >
+    <div class="portlet-body">
+        <div class="form-horizontal">
+            <div class="actions" style="float: right!important;">
+                <kendo-button class="btn btn-default btn-sm" type="button"
+                    ng-click="saveReAssignee()">
+                    <i class="k-icon k-i-save font-green-jungle"></i> {{'COMMON_BUTTON_SAVE'|translate}}
+                </kendo-button>
+            </div>
+            <div class="note note-danger note-bordered" style="clear: both; margin-top: 10px;" ng-if="errorSameAssignee">
+                <p>{{errorSameAssignee}}</p>
+            </div>
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Current Assignee:</label>
+                            <div class="col-md-6" style="padding-top: calc(.350rem + 1px) !important;">
+                                <span>{{assigneeDetail.assignToSAPCode}} - {{assigneeDetail.assignToFullName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">New Assignee:</label>
+                            <div class="col-md-6">
+                                <select kendo-drop-down-list name="newAssignee_Id" id="newAssignee_Id"
+                                    k-options="newAssigneeOptions" k-ng-model="assigneeDetail.newAssigneeId"
+                                    style="width: 100%" class="input-default">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mrt10">
+                    <div class="col-md-12">
+                        <kendo-grid id="itemsTrackingLogOnGrid" options="itemsTrackingLogListGridOptions">
+                        </kendo-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

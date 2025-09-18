@@ -1,0 +1,237 @@
+﻿[
+  {
+    "SourceField": "EdocId",
+    "TargetField": "Edoc_id",
+    "Type": 0
+  },
+  {
+    "SourceField": "EdocUser",
+    "TargetField": "Edoc_user",
+    "Type": 0
+  },
+  {
+    "SourceField": "EmployeeGroupCode",
+    "TargetField": "Persg",
+    "Type": 0
+  },
+  {
+    "SourceField": "ReasonHiringCode",
+    "TargetField": "Massg",
+    "Type": 0
+  },
+  {
+    "SourceField": "ActionType",
+    "TargetField": "Massn",
+    "Type": 0
+  },
+  {
+    "SourceField": "EmployeeSybGroupCode",
+    "TargetField": "Persk",
+    "Type": 0
+  },
+  {
+    "SourceField": "FirstName",
+    "TargetField": "Vorna",
+    "Type": 0
+  },
+  {
+    "SourceField": "LastName",
+    "TargetField": "Nachn",
+    "Type": 0
+  },
+  {
+    "SourceField": "Title",
+    "TargetField": "Plans",
+    "Type": 0
+  },
+  {
+    "SourceField": "WorkLocation",
+    "TargetField": "Btrtl",
+    "Type": 0
+  },
+  {
+    "SourceField": "DateOfBirth",
+    "TargetField": "Gbdat",
+    "Type": 0
+  },
+  {
+    "SourceField": "Gender",
+    "TargetField": "Titel",
+    "Type": 0
+  },
+  {
+    "SourceField": "PlaceOfBirth",
+    "TargetField": "Gbdep",
+    "Type": 0
+  },
+  {
+    "SourceField": "CityCode",
+    "TargetField": "Gblnd",
+    "Type": 0
+  },
+  {
+    "SourceField": "Ethnic",
+    "TargetField": "Racky",
+    "Type": 0
+  },
+  {
+    "SourceField": "Religion",
+    "TargetField": "Konfe",
+    "Type": 0
+  },
+  {
+    "SourceField": "Nationality",
+    "TargetField": "Natio",
+    "Type": 0
+  },
+  {
+    "SourceField": "SecondNationanlity",
+    "TargetField": "Nati2",
+    "Type": 0
+  },
+  {
+    "SourceField": "IDCardType",
+    "TargetField": "Inum_Ictyp",
+    "Type": 0
+  },
+  {
+    "SourceField": "IDCardNo",
+    "TargetField": "Inum_Icnum",
+    "Type": 0
+  },
+  {
+    "SourceField": "IDCardDate",
+    "TargetField": "Inum_Fpdat",
+    "Type": 0
+  },
+  {
+    "SourceField": "IDCardPlace",
+    "TargetField": "Inum_Isspl",
+    "Type": 0
+  },
+  {
+    "SourceField": "Marital",
+    "TargetField": "Fatxt",
+    "Type": 0
+  },
+  {
+    "SourceField": "EmailAdress", // Email ca nhan
+    "TargetField": "Usrid_CN",
+    "Type": 0
+  },
+  {
+    "SourceField": "ComEmailAdress", // Email cong ty
+    "TargetField": "Usrid_CTY",
+    "Type": 0
+  },
+  {
+    "SourceField": "PersonnelArea", // Email cong ty
+    "TargetField": "Werks",
+    "Type": 0
+  },
+  {
+    "SourceField": "StartDate", // Email cong ty
+    "TargetField": "Begda",
+    "Type": 0
+  },
+  {
+    "SourceField": "AddressType",
+    "TargetField": "Add_Anssa",
+    "Type": 0
+  },
+  {
+    "SourceField": "Address",
+    "TargetField": "Add_Stras",
+    "Type": 0
+  },
+  {
+    "SourceField": "WardCode",
+    "TargetField": "Add_Wards",
+    "Type": 0
+  },
+  {
+    "SourceField": "DistrictCode",
+    "TargetField": "Add_District",
+    "Type": 0
+  },
+  {
+    "SourceField": "ProvinceCode",
+    "TargetField": "Add_Province",
+    "Type": 0
+  },
+  {
+    "SourceField": "CountryCode",
+    "TargetField": "Add_Land1",
+    "Type": 0
+  },
+  {
+    "SourceField": "EducationStartDate",
+    "TargetField": "Edu_Begda",
+    "Type": 0
+  },
+  {
+    "SourceField": "EducationEndDate",
+    "TargetField": "Edu_Endda",
+    "Type": 0
+  },
+  {
+    "SourceField": "EducationSchoolName",
+    "TargetField": "Edu_Insti",
+    "Type": 0
+  },
+  {
+    "SourceField": "EducationCertificate",
+    "TargetField": "Edu_Slabs",
+    "Type": 0
+  },
+  {
+    "SourceField": "EducationLevel",
+    "TargetField": "Edu_Slart",
+    "Type": 0
+  },
+  {
+    "SourceField": "EmergencyContactRelationship",
+    "TargetField": "Ec_Famsa",
+    "Type": 0
+  },
+  {
+    "SourceField": "EmergencyContactLastName",
+    "TargetField": "Ec_Nachn",
+    "Type": 0
+  },
+  {
+    "SourceField": "EmergencyContactFirstName",
+    "TargetField": "Ec_Vorna",
+    "Type": 0
+  },
+  {
+    "SourceField": "FamilyMemberRelationShip",
+    "TargetField": "Fml_Famsa",
+    "Type": 0
+  },
+  {
+    "SourceField": "FamilyMemberFirstName",
+    "TargetField": "Fml_Vonra",
+    "Type": 0
+  },
+  {
+    "SourceField": "FamilyMemberLastName",
+    "TargetField": "Fml_Nachn",
+    "Type": 0
+  },
+  {
+    "SourceField": "FamilyMemberGender",
+    "TargetField": "Fml_Fasex",
+    "Type": 0
+  },
+  {
+    "SourceField": "UpdateEmployee",
+    "TargetField": "Update_Emp",
+    "Type": 0
+  },
+  {
+    "SourceField": "SapCode",
+    "TargetField": "Pernr",
+    "Type": 0
+  }
+]

@@ -1,0 +1,28 @@
+﻿[
+  {
+    "LeaveKinds": [ "AL", "ALH1", "ALH2" ],
+    "QuotaKinds": [ "10", "11" ],
+    "Key": "LeaveKindGroups1"
+  },
+  {
+    "LeaveKinds": [ "LSL" ],
+    "QuotaKinds": [ "08" ],
+    "Key": "LeaveKindGroups2"
+  },
+  {
+    "LeaveKinds": [ "HCP" ],
+    "QuotaKinds": [ "09" ],
+    "Key": "LeaveKindGroups3"
+  },
+  {
+    //"LeaveKinds": [ "ERD","ERD1","ERD2" ],
+    "Leavekinds": [],
+    "QuotaKinds": [ "12" ],
+    "Key": "LeaveKindGroups4"
+  },
+  {
+    "LeaveKinds": [ "DOFL", "DOH1", "DOH2" ],
+    "QuotaKinds": [ "13" ],
+    "Key": "LeaveKindGroups5"
+  }
+]

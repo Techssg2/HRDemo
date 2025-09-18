@@ -1,0 +1,109 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title title-wrapper stickybar-1">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">{{titleEdit}}
+                    </span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <span>
+                                <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                                              ng-click="showPopup('modalInfo', actionNeedShowPopup[0], '#dialogReason', actions.approve)">
+                                    <i class="fa fa-check font-green-jungle right-5"></i> {{'COMMON_BUTTON_APPROVE'|translate}}
+                                </kendo-button>
+                                <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                                              ng-click="showPopup('modalInfo', actionNeedShowPopup[1], '#dialogReason', actions.requestedToChange)">
+                                    <i class="fa fa-minus-circle font-red right-5"></i> {{'COMMON_BUTTON_REQUEST_TO_CHANGE'|translate}}
+                                </kendo-button>
+                                <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                                              ng-click="showPopup('modalInfo', actionNeedShowPopup[2], '#dialogReason', actions.reject)">
+                                    <i class="fa fa-minus-circle font-red right-5"></i> {{'COMMON_BUTTON_REJECT'|translate}}
+                                </kendo-button>
+                                <kendo-button class="btn btn-default btn-sm" ng-click="cancel(stateParams)">
+                                    <i class="k-icon k-i-close font-green-jungle"></i> {{'COMMON_BUTTON_CLOSE'|translate}}
+                                </kendo-button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row ng-scope" ng-if="errors.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase">{{'COMMON_ENTER_FIELD'|translate}} <span
+                                    class="font-red-thunderbird">*</span>:</h5>
+                            <p></p>
+                            <ul ng-repeat="error in errors">
+                                <li><span class="bold">{{error.controlName}}</span>: {{'COMMON_FIELD_IS_REQUIRED'|translate}}</li>
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'COMMON_SAP_CODE'|translate}}:</label>
+                                            <div class="col-md-8">
+                                                <label
+                                                class="form-control-static">{{missingTimelockForm.sapCode}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'COMMON_DEPT_LINE'|translate}}:</label>
+                                            <div class="col-md-8">
+                                                <label
+                                                class="form-control-static">{{missingTimelockForm.deptLine}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'COMMON_FULL_NAME'|translate}}:</label>
+                                            <div class="col-md-8">
+                                                <label
+                                                class="form-control-static">{{missingTimelockForm.staffFullName}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'COMMON_DIVISION_GROUP'|translate}}:</label>
+                                            <div class="col-md-8">
+                                                <label
+                                                class="form-control-static">{{missingTimelockForm.divisionGroup}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <kendo-grid options="reasonDetailApproveGridOptions" id="grid"
+                        k-on-change="onChange(data)" >
+                    </kendo-grid>
+                    </div>
+                </div>
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>

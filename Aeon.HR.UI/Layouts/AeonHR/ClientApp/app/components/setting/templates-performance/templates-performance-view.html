@@ -1,0 +1,165 @@
+<style>
+    .k-window-title {
+        color: #b42e83 !important;
+        font-family: 'Nova-Regular' !important;
+        font-size: 18px;
+    }
+
+    .k-grid-content-locked {
+        float: right;
+        text-align: center;
+    }
+
+    .k-grid-header-locked {
+        float: right;
+        text-align: center;
+    }
+
+    .k-grid-header-locked table thead tr .k-header {
+        text-align: center;
+    }
+
+    /* .k-grid-content{
+        overflow-y: hidden;
+    } */
+
+    .k-grid-content-locked {
+        overflow: hidden;
+        min-height: 50px !important;
+    }
+
+    .k-grid-content {
+        min-height: 0px !important;
+        max-height: 200px !important;
+    }
+
+    #create:hover {
+        background-color: #3175af !important;
+        color: white !important;
+        border-bottom: 1px solid #3175af !important;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">{{title}}</span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-md-7">
+
+                        </div>
+                        <div class="col-md-5 align-right-btn-group">
+                            <div class="input-group" style="width: 400px">
+                                <input type="text" class="form-control" ng-model="searchText"
+                                    placeholder="Search for..." ng-keypress="ifEnter($event)" style="width: 100%; ">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default btn-sm" ng-click="search()" type="button" style="border: 1px solid #dadada;
+                                    margin-bottom: 10px;"><span class="k-icon k-i-search"></span></button>
+                                </span>
+                            </div>
+                            <div add-class class="btn-group" current-class="btn-group" added-class="open"
+                                style="margin-top:3px">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-expanded="true" style="padding: 0px !important"><img
+                                        src="ClientApp/assets/images/icon/more.png" style="position: relative;top: -2px"
+                                        class="ng-isolate-scope"></button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a ng-click="export()" class="ng-binding"><i
+                                                class="fa fa-table font-blue right-5"></i>
+                                            Export excel</a></li>
+                                    <!-- <li><a  ng-click="import()" class="ng-binding"><i class="fa fa-table font-blue right-5"></i>
+                                            Import excel</a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="page-content-wrapper float-none">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <kendo-grid id="templatesPerformanceListGrid" options="templatesPerformanceListGridOptions">
+                            </kendo-grid>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="input-group-btn"
+                                style="width: 100%; margin-top: 20px;display: flex; justify-content: flex-end;">
+                                <a class="btn btn-sm btn-primary" id="create"
+                                    style="margin-bottom: 10px;color: white; padding-top: 7px !important"
+                                    ng-click="createTemplate()">
+                                    <i class="fa fa-plus right-5"></i>Create</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Create Template Dialog-->
+<div id="dialog_Detail" kendo-dialog="dialogDetailCode" k-on-open="dialogVisible = true"
+    style="height: 100% !important;" k-on-close="dialogVisible = false" k-width="1200" k-modal="true" k-visible="false"
+    options="dialogDetailOption">
+    <div class="row">
+        <div class="form-horizontal">
+            <div class="form-body">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Type:</label>
+                        <div class="col-md-9">
+                            <select kendo-drop-down-list name="type" id="performanceTemplate_id" k-options="typePerformanceTemplate"  k-ng-model="model.type" style="width: 100%;">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="col-md-3 control-label">Effective Period:</label>
+                    <div class="col-md-9">
+                        <!-- <range-date-for-filter-kendo-model d-from="query.fromDate" d-to="query.toDate"></range-date-for-filter-kendo-model> -->
+                        <input kendo-date-picker id="fromDate_id" k-date-input="true" k-format="'dd/MM/yyyy'" k-ng-model="model.effectivePeriodFrom" k-rebind="maxDate" k-on-change="fromDateChanged()"/>
+                        - 
+                        <input kendo-date-picker id="toDate_id" k-date-input="true" k-format="'dd/MM/yyyy'" k-ng-model="model.effectivePeriodTo" k-rebind="minDate" k-on-change="toDateChanged()"/>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-horizontal">
+            <div class="form-body">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label ng-binding">Name:</label>
+                        <div class="col-md-9">
+                            <!-- <input type="text" maxlength="50" class="form-control input-sm" ng-model="searchLeaveManagement.keyword"> -->
+                            <input type="text" class="k-textbox ng-pristine ng-valid ng-empty ng-valid-maxlength ng-touched" 
+                                ng-model="model.name" style="width: 100%;"> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div>
+        <kendo-grid id="templatePerformanceGrid" options="templatePerformanceGridOptions">
+        </kendo-grid>
+        <div class="row mrb10">
+            <div class="col-md-12" style="margin-top: 10px;">
+                <kendo-button style="background-color: #b42e83; color: white;"
+                    class="btn btn-default btn-sm pull-right"
+                    ng-click="addRow(data)">
+                    Add More
+                </kendo-button>
+            </div>
+        </div>
+    </div>
+</div>

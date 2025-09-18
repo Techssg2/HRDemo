@@ -1,0 +1,196 @@
+<!--<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">
+                        {{title}}
+                    </span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <kendo-grid id="grid" options="daysConfigurationOptions">
+                        </kendo-grid>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <kendo-grid id="grid" options="daysConfigurationCABOptions">
+                        </kendo-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">
+                        TIMES CONFIGURATION
+                    </span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <kendo-grid id="grid-otSetting" options="timeConfigurationOptions">
+                        </kendo-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">
+                        BOOKING CONTRACT
+                    </span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <kendo-grid id="grid" options="bookingContractOptions">
+                        </kendo-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+
+
+
+
+<style>
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="d-flex align-items-center justify-content-between portlet-title">
+                <div class="group poppins-medium text-grey-300 caption caption-md px-3">
+                    <p style=" text-transform: uppercase !important;" class="display-8 m-0">{{title}}</p>
+                </div>
+            </div>
+            <div class="portlet-body p-2 bg-neutral-blue-300">
+                <div ng-show="false"><input id="files" name="files" kendo-upload type="file" ng-show="false" class="ng-hide" /></div>
+                <div class="page-content-wrapper float-none table-rounded-toolbar ">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="display-10 leading-18">
+                                <div class="row">
+
+
+                                    <div class="col-md-12">
+                                        <kendo-grid id="grid" options="daysConfigurationOptions" style="overflow: hidden; border: 1px solid #ddd;">
+                                        </kendo-grid>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="display-10 leading-18">
+                                <div class="row">
+
+
+                                    <div class="col-md-12">
+                                        <kendo-grid id="grid" options="daysConfigurationCABOptions" style="overflow: hidden; border: 1px solid #ddd;">
+                                        </kendo-grid>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+
+            <div class="d-flex align-items-center justify-content-between portlet-title">
+                <div class="group poppins-medium text-grey-300 caption caption-md px-3">
+                    <p style=" text-transform: uppercase !important;" class="display-8 m-0">TIMES CONFIGURATION</p>
+                </div>
+            </div>
+            <div class="portlet-body p-2 bg-neutral-blue-300">
+                <div ng-show="false"><input id="files" name="files" kendo-upload type="file" ng-show="false" class="ng-hide" /></div>
+                <div class="page-content-wrapper float-none table-rounded-toolbar ">
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="display-10 leading-18">
+                                <div class="row">
+
+
+                                    <div class="col-md-12">
+                                        <kendo-grid id="grid-otSetting" options="timeConfigurationOptions" style="overflow: hidden; border: 1px solid #ddd;">
+                                        </kendo-grid>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="d-flex align-items-center justify-content-between portlet-title">
+                <div class="group poppins-medium text-grey-300 caption caption-md px-3">
+                    <p style=" text-transform: uppercase !important;" class="display-8 m-0">BOOKING CONTRACT</p>
+                </div>
+            </div>
+            <div class="portlet-body p-2 bg-neutral-blue-300">
+                <div ng-show="false"><input id="files" name="files" kendo-upload type="file" ng-show="false" class="ng-hide" /></div>
+                <div class="page-content-wrapper float-none table-rounded-toolbar ">
+               
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="display-10 leading-18">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <kendo-grid id="grid" options="bookingContractOptions" style="overflow: hidden; border: 1px solid #ddd;">
+                                        </kendo-grid>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

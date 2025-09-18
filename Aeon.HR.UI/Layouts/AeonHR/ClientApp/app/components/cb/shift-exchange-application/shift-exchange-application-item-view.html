@@ -1,0 +1,353 @@
+<style>
+    k-loading-mask {
+        z-index: 3;
+        /* must be larger than the z-index:2 of #container */
+    }
+
+    .k-dialog {
+        position: fixed;
+        top: calc(25%) !important;
+    }
+
+    #userGridReview .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+
+    #userGrid .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+
+    #userGrid .k-loading-image {
+        background-image: none !important;
+    }
+
+    #userGrid .k-loading-color {
+        opacity: 0;
+    }
+</style>
+<div id="loading"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md tabbable-line">
+                    <span class="caption-subject uppercase">{{title}}</span>
+                </div>
+                <div class="actions">
+                    <!-- <kendo-button class="btn btn-default btn-sm" ng-click="actions.submit(formItem)">
+                        <i style="font-size: 12px; padding-right: 3px;" class="fa fa-paper-plane font-green-jungle"></i>Submit
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="actions.saveItem(formItem)">
+                        <i class="k-icon k-i-save font-green-jungle"></i> Save
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="cancel(state)">
+                        <i class="k-icon k-i-close font-green-jungle"></i> Close
+                    </kendo-button> -->
+                    <action-items model="model" save="actions.saveItem" form="formItem"></action-items>
+                    <div add-class class="btn-group" current-class="btn-group" added-class="open">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="true" style="padding: 0px !important"><img
+                                src="ClientApp/assets/images/icon/more.png" style="position: relative;top: -2px"
+                                class="ng-isolate-scope"></button>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a data-toggle="modal" class="ng-binding" ng-click="showProcessingStages()"><i
+                                        class="fa fa-recycle right-5" style="color: #b42e83"></i>
+                                    {{'COMMON_PROCESSING_STAGE' | translate}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row ng-scope" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <workflow-comment></workflow-comment>
+                    </div>
+                </div>
+                <div class="row ng-scope" ng-if="warning && warning.length" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-warning note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase">{{'COMMON_WARNING'|translate}}:</h5>
+                            <p></p>
+                            <ul ng-if="warning.length > 0">
+                                <li ng-repeat="war in warning">
+                                    <span ng-bind-html="renderHtml(war)"></span>
+                                </li>
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ng-scope" ng-if="getLengthObjectKeys(errorsTwo) > 0"
+                     style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12" ng-repeat="(key, value) in errorsTwo">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase" ng-if="key">
+                                {{key}}<span ng-switch-when="key"
+                                             class="font-red-thunderbird">*:</span>
+                            </h5>
+                            <ul ng-if="value.length > 0">
+                                <li ng-repeat="error in value">
+                                    <span ng-bind-html="renderHtml(error.message)"></span>
+                                </li>
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="row ng-scope" ng-if="errors.length > 0"
+                         style="padding: 15px 0;margin-bottom:15px">
+                        <div class="col-sm-12">
+                            <div class="note note-danger note-bordered"
+                                 style="margin-bottom: 0px">
+                                <h5 class="bold uppercase">
+                                    {{'COMMON_ENTER_FIELD' | translate}}
+                                    <span class="font-red-thunderbird">*</span>:
+                                </h5>
+                                <p></p>
+                                <ul>
+                                    <li ng-repeat="error in errors"
+                                        style="margin-left: 1em;">
+                                        <span class="bold">{{error.controlName}}</span>
+                                        <zt ng-if="!error.isRule">
+                                            : {{error.errorDetail}}
+                                        </zt>
+                                        <span ng-if="error.isRule">
+                                            {{error.errorDetail}}
+                                        </span>
+                                    </li>
+                                </ul>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="page-content-wrapper float-none">
+                    <form name="formItem">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="row align-middle">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'SHIFT_EXCHANGE_APPLICATION_APPLY_DATE'|translate}}:</label>
+                                            <div class="col-md-8 ">
+                                                <input class="w100" kendo-date-picker k-date-input="true"
+                                                       k-format="'dd/MM/yyyy'" name="applyDate"
+                                                       id="applyDate"
+                                                       k-ng-model="form.applyDate" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <!-- <div class="form-group">
+                                <label
+                                    class="col-md-4 control-label">{{'COMMON_DEPT_LINE'|translate}}:</label>
+                                <div class="col-md-8 ">
+                                    <input readonly class="k-input w100" type="text"
+                                        ng-model="form.dept_LineName" />
+                                </div>
+                            </div> -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'COMMON_DEPT_LINE'|translate}}:</label>
+                                            <div class="col-md-8 ">
+                                                <select kendo-drop-down-list name="deptLineOptionName"
+                                                        id="deptLineOptionId" k-options="deptLineOption"
+                                                        k-ng-model="form.dept_Line" style="width: 100%;">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'COMMON_DIVISION_GROUP'|translate}}:</label>
+                                            <div class="col-md-8 ">
+                                                <input kendo-drop-down-tree="divisionTree" class="w100"
+                                                       k-on-change="onChangeDivision(form.dept_Division)"
+                                                       k-options="searchOptions.divisionOptions"
+                                                       k-ng-model="form.dept_Division" id="deptDivision" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mrb10">
+                                    <div class="col-md-12">
+                                        <span class="input-group-btn">
+                                            <a class="btn btn-sm btn-primary" id="create" ng-if="perm"
+                                               style="color: white; padding-top: 7px !important;background-color: #b42e83;float: right"
+                                               ng-click="addItemsUser(employeesDataSource)">
+                                                {{'ADD_USER_TITLE_DIALOG'| translate}}
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="row mrt10">
+                                    <div class="col-md-12">
+                                        <kendo-grid id="shiftExchangeEditListGrid"
+                                                    options="shiftExchangeEditListGridOptions">
+                                        </kendo-grid>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="portlet-title">
+                <div class="actions">
+                    <!-- <kendo-button class="btn btn-default btn-sm" ng-click="actions.submit(formItem)">
+                        <i style="font-size: 12px; padding-right: 3px;" class="fa fa-paper-plane font-green-jungle"></i>Submit
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="actions.saveItem(formItem)">
+                        <i class="k-icon k-i-save font-green-jungle"></i> Save
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="cancel(state)">
+                        <i class="k-icon k-i-close font-green-jungle"></i> Close
+                    </kendo-button> -->
+                    <action-items model="model" save="actions.saveItem" form="formItem"></action-items>
+                </div>
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>
+
+<!--begin dialog-->
+
+<div id="dialog_Detail" kendo-dialog="dialogDetailCode" k-on-open="dialogVisible = true"
+    style="height: 100% !important;" k-on-close="dialogVisible = false" k-width="890" k-modal="true" k-visible="false"
+    options="dialogDetailOption">
+    <div class="row">
+        <label class="col-md-3 control-label"></label>
+        <div class="col-md-8 ">
+            <div class="input-group" style="width: 400px">
+                <input type="text" class="form-control" id='FieldFilter' placeholder="Search for..."
+                    style="width: 100%; " ng-keypress="ifEnter($event, 'addUser')" ng-model="gridUser.keyword">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="button" ng-click="searchGridUser()" style="border: 1px solid #dadada;
+                    margin-bottom: 10px;height: 34px;"><span class="k-icon k-i-search"></span></button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mrb10">
+        <div class="col-md-12">
+        </div>
+    </div>
+
+    <div>
+        <div kendo-grid id="userGrid" style="width:850px;" options="userListGridOptions">
+        </div>
+    </div>
+
+</div>
+
+<!--end dialog-->
+
+
+<!-- dialog review -->
+<div id="dialog_Detail_Review" kendo-dialog="dialogDetailCodeReview" k-on-open="dialogVisible = true"
+    style="height: 100% !important;" k-on-close="closeReviewDialog(false)" k-width="890" k-modal="true"
+    k-visible="isShow" options="dialogDetailReviewOption">
+    <div class="note note-danger note-bordered" style="margin-bottom: 0px" ng-if="review.errorMessage">
+        <span class="font-red-thunderbird">{{review.errorMessage}}</span>
+    </div>
+    </br>
+    <!-- row 1 -->
+    <!-- <div class="row">
+        <label class="col-md-3 control-label"></label>
+        <div class="col-md-8 ">
+            <div class="input-group" style="width: 400px">
+                <input type="text" class="form-control" id='FieldFilter' placeholder="Search for..."
+                    style="width: 100%; " ng-keypress="ifEnter($event, 'review')" ng-model="gridUserReview.keyword">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="button" ng-click="searchGridUserReview()" style="border: 1px solid #dadada;
+                    margin-bottom: 10px;height: 34px;"><span class="k-icon k-i-search"></span></button>
+                </span>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- row 1 -->
+    <div class="row">
+        <!-- <label class="col-md-5"></label> -->
+        <div class="col-md-12" style="padding-right: 30px;">
+            <div class="input-group" style="width: 433px; float: right;">
+                <input type="text" class="form-control" id='FieldFilter' placeholder="Search for..."
+                    style="width: 100%; " ng-keypress="ifEnter($event, 'review')" ng-model="gridUserReview.keyword">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="button" ng-click="searchGridUserReview()" style="border: 1px solid #dadada;
+                    margin-bottom: 10px;height: 34px;"><span class="k-icon k-i-search"></span></button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- row 2 -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5 control-label">From Date:</label>
+                <div class="col-md-7 ">
+                    <!-- <input class="w100" kendo-date-picker k-date-input="true" k-format="'dd/MM/yyyy'" name="applyDate"
+                        k-ng-model="date.fromDate" k-on-change="fromDateChanged()" k-rebind="maxDate" /> -->
+                    <input style="width: 100%;" kendo-date-picker id="fromDate" name="fromDate"
+                        k-ng-model="date.fromDate" k-on-change="fromDateChanged()" k-date-input="true"
+                        k-format="'dd/MM/yyyy'" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-5 control-label">To Date:</label>
+                <div class="col-md-7 ">
+                    <!-- <input class="w100" kendo-date-picker k-date-input="true" k-format="'dd/MM/yyyy'" name="applyDate"
+                        k-min="minDate" k-ng-model="date.toDate" k-on-change="toDateChanged()" k-min="minDate"
+                        k-rebind="minDate" /> -->
+                    <input style="width: 100%;" kendo-date-picker id="toDate" name="toDate" k-ng-model="date.toDate"
+                        k-date-input="true" k-format="'dd/MM/yyyy'" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mrb10">
+        <div class="col-md-12">
+        </div>
+    </div>
+
+    <!-- <div class="row">
+        <div class="col-md-12">
+            <kendo-grid id="userGridReview" options="userListGridReviewOptions">
+            </kendo-grid>
+        </div>
+    </div> -->
+
+    <!-- <div style="max-height: 300px;">
+        <kendo-grid id="userGridReview" options="userListGridReviewOptions" style="max-height: 300px;min-height: 0px; overflow: auto;">
+        </kendo-grid>
+    </div> -->
+
+    <div>
+        <div kendo-grid id="userGridReview" style="width:850px;" options="userListGridReviewOptions">
+        </div>
+    </div>
+
+</div>
+<!-- end diaglog review -->
+
+<processing-stage workflow-instances="workflowInstances"></processing-stage>

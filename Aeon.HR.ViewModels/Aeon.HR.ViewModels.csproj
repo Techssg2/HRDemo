@@ -1,0 +1,503 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4107A398-5774-43D6-B193-67D98F0875BD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Aeon.HR.ViewModels</RootNamespace>
+    <AssemblyName>Aeon.HR.ViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Args\ITSaveBTAArgs.cs" />
+    <Compile Include="BTAErrorMessageViewModel.cs" />
+    <Compile Include="Args\BTAErrorMessageArgs.cs" />
+    <Compile Include="Args\TodoListArgs.cs" />
+    <Compile Include="Args\ValidateBTADetailsArgs.cs" />
+    <Compile Include="Args\UserForDWSArg.cs" />
+    <Compile Include="BTAReasonViewModel.cs" />
+    <Compile Include="Args\ReasonArg.cs" />
+    <Compile Include="Args\Edoc1ArgV2.cs" />
+    <Compile Include="Args\OverTimeBalanceArgs.cs" />
+    <Compile Include="Args\TrackingImportArgs.cs" />
+    <Compile Include="DepartmentSyncHistoryViewModel.cs" />
+    <Compile Include="DTOs\ITDepartmentDTO.cs" />
+    <Compile Include="Edoc1TaskViewModelV2.cs" />
+    <Compile Include="eDocIT\ITWorkflowInstance.cs" />
+    <Compile Include="eDocIT\ITWorkflowTemplate.cs" />
+    <Compile Include="UserDepartmentSyncHistoryViewModel.cs" />
+    <Compile Include="UserShiftCount.cs" />
+    <Compile Include="Args\BusinessModelUnitMappingArgs.cs" />
+    <Compile Include="Args\DataToImportRequestToHireTemplateArgs.cs" />
+    <Compile Include="Args\ITSaveActingArgs.cs" />
+    <Compile Include="Args\ITSaveResignationArgs.cs" />
+    <Compile Include="Args\ITSavePromoteAndTransferArgs.cs" />
+    <Compile Include="Args\ITSaveTargetPlanArgs.cs" />
+    <Compile Include="Args\ITSaveShiftExchangeArgs.cs" />
+    <Compile Include="Args\ImportRequestToHireArg.cs" />
+    <Compile Include="Args\BusinessModelArgs.cs" />
+    <Compile Include="Args\ShiftCodeAgrs.cs" />
+    <Compile Include="Args\TargetPlanSpecialArgs.cs" />
+    <Compile Include="Args\UpdatePayloadArgs.cs" />
+    <Compile Include="Args\CreatePayloadArgs.cs" />
+    <Compile Include="Args\EditPayloadArgs.cs" />
+    <Compile Include="Args\FareRulesRequestArgs.cs" />
+    <Compile Include="Args\SKUArgs.cs" />
+    <Compile Include="Args\TrackingHistoryArgs.cs" />
+    <Compile Include="Args\TradeContractArgs.cs" />
+    <Compile Include="Args\NavigationArgs.cs" />
+    <Compile Include="Args\NavigationDataForCreatingArgs.cs" />
+    <Compile Include="Args\CommonArgs.cs" />
+    <Compile Include="Args\GlobalLocationArgs.cs" />
+    <Compile Include="Args\PartitionArgs.cs" />
+    <Compile Include="Args\TravellerArgs.cs" />
+    <Compile Include="Args\ChangeStepWorkflowArgs.cs" />
+    <Compile Include="Args\UpdateAssignToWorkflowArgs.cs" />
+    <Compile Include="Args\UpdateStatusArgs.cs" />
+    <Compile Include="Args\ValidateExistTargetPlanArgs.cs" />
+    <Compile Include="BTA\BTAOverBudgetGroupViewModel.cs" />
+    <Compile Include="BTA\BusinessTripOverBudgetDetailViewModel.cs" />
+    <Compile Include="BTA\BusinessTripOverBudgetItemViewModel.cs" />
+    <Compile Include="BTA\ReportBTAOverBudgetViewModel.cs" />
+    <Compile Include="BusinessModelUnitMappingViewModel.cs" />
+    <Compile Include="BusinessModelViewModel.cs" />
+    <Compile Include="BusinessTripItemViewModel_API.cs" />
+    <Compile Include="CommonViewModel.cs" />
+    <Compile Include="CustomSection\SkuSettingsSection.cs" />
+    <Compile Include="CustomSection\TradeContractSettingsSection.cs" />
+    <Compile Include="DataFileDTO.cs" />
+    <Compile Include="DepartmentTreeAPIViewModel.cs" />
+    <Compile Include="DTOs\AirlineCodeInfo.cs" />
+    <Compile Include="DTOs\BTAAdminDeptDTO.cs" />
+    <Compile Include="DTOs\BtaDTO.cs" />
+    <Compile Include="DTOs\BTALogDTO.cs" />
+    <Compile Include="DTOs\BusinessOverBudgetDetailDTO.cs" />
+    <Compile Include="DTOs\BusinessOverBudgetDTO.cs" />
+    <Compile Include="DTOs\BusinessTripDetail_API_DTO.cs" />
+    <Compile Include="DTOs\CommonDTO.cs" />
+    <Compile Include="DTOs\MembershipDTO.cs" />
+    <Compile Include="DTOs\RequestOverBudgetDTO.cs" />
+    <Compile Include="DTOs\UserDepartmentMappingAPI_DTO.cs" />
+    <Compile Include="EntityItemViewModel.cs" />
+    <Compile Include="ExportTargetPlanSpecialViewModel.cs" />
+    <Compile Include="ExternalItem\ParseInfo\ShiftExchangeJsonInfo.cs" />
+    <Compile Include="ExternalItem\ParseInfo\ResignationJsonInfo.cs" />
+    <Compile Include="ImportData\ShiftCodeImportFileDTO.cs" />
+    <Compile Include="LogHistoryViewModel.cs" />
+    <Compile Include="ImportData\RequestToHireFromImportFileDTO.cs" />
+    <Compile Include="ImportTrackingViewModel.cs" />
+    <Compile Include="MailWaitList.cs" />
+    <Compile Include="MassResponseAPIViewModel.cs" />
+    <Compile Include="ShiftCodeViewModel.cs" />
+    <Compile Include="TargetPlanSpecialViewModel.cs" />
+    <Compile Include="TrackingHistoryViewModel.cs" />
+    <Compile Include="TradeContractResult.cs" />
+    <Compile Include="SkuViewModel.cs" />
+    <Compile Include="TradeContractViewModel.cs" />
+    <Compile Include="NavigationListUserDepartmentViewModel.cs" />
+    <Compile Include="NavigationViewModel.cs" />
+    <Compile Include="GlobalLocationViewModels.cs" />
+    <Compile Include="PartitionViewModel.cs" />
+    <Compile Include="TradeContractViewModel.cs" />
+    <Compile Include="UpdateApprovalWorkflowViewModel.cs" />
+    <Compile Include="UserListAPIViewModel.cs" />
+    <Compile Include="CustomSection\FacilitySettingsSection.cs" />
+    <Compile Include="FacilityTaskViewModel.cs" />
+    <Compile Include="UserLockedStatusViewModel.cs" />
+    <Compile Include="LockedUser.cs" />
+    <Compile Include="UserSyncHistoryViewModel.cs" />
+    <Compile Include="WrongStatusItemInfo.cs" />
+    <Compile Include="ArrivalAirport.cs" />
+    <Compile Include="BTA\BTAUserFlightTicketViewModel.cs" />
+    <Compile Include="CancellationFeeObject.cs" />
+    <Compile Include="Args\BookingContractArgs.cs" />
+    <Compile Include="Args\BookingFlightArg.cs" />
+    <Compile Include="BookingContractViewModel.cs" />
+    <Compile Include="BTA\CommitBooking.cs" />
+    <Compile Include="BTA\AdultFare.cs" />
+    <Compile Include="BTA\AirItineraryPricingInfo.cs" />
+    <Compile Include="BTA\BookingFlightViewModel.cs" />
+    <Compile Include="BTA\BTAPassengerViewModel.cs" />
+    <Compile Include="ActingGoalViewModel.cs" />
+    <Compile Include="ActivityViewModel.cs" />
+    <Compile Include="AirFlightSearchResult.cs" />
+    <Compile Include="AirlineViewModel.cs" />
+    <Compile Include="ApplicantFromMassDetailByIdViewModel.cs" />
+    <Compile Include="ApplicantFromMassViewModel.cs" />
+    <Compile Include="ApplicantWorkingProcessViewModel.cs" />
+    <Compile Include="Args\BTAPolicyArgs.cs" />
+    <Compile Include="Args\BTAPolicySpecialArgs.cs" />
+    <Compile Include="Args\PromoteAndTranferPrintArgs.cs" />
+    <Compile Include="Args\ShiftCodeByDateArg.cs" />
+    <Compile Include="Args\DataToPrintTemplateArgs.cs" />
+    <Compile Include="Args\ActingArgs.cs" />
+    <Compile Include="Args\ActingRequestArgs.cs" />
+    <Compile Include="Args\ActualPendingTargetPlanArg.cs" />
+    <Compile Include="Args\AirlineArg.cs" />
+    <Compile Include="Args\ApplicantArgs.cs" />
+    <Compile Include="Args\ApplicantSearchArgs.cs" />
+    <Compile Include="Args\ApplicantStatusRecruitmentArgs.cs" />
+    <Compile Include="Args\AppreciationListRecruitmentArgs.cs" />
+    <Compile Include="Args\AvailableLeaveBalanceArg.cs" />
+    <Compile Include="Args\BusinessTripLocationArgs.cs" />
+    <Compile Include="Args\CancelPendingTargetArg.cs" />
+    <Compile Include="Args\ChangePasswordArgs.cs" />
+    <Compile Include="Args\CostCenterRecruitmentArgs.cs" />
+    <Compile Include="Args\CurrentShiftArg.cs" />
+    <Compile Include="Args\DateValueArgs.cs" />
+    <Compile Include="Args\DepartmentArgs.cs" />
+    <Compile Include="Args\DivisionSearchByDeptLine.cs" />
+    <Compile Include="Args\DivisonTargetPlanViewModel.cs" />
+    <Compile Include="Args\Edoc1Arg.cs" />
+    <Compile Include="Args\EmailNotificationArgs.cs" />
+    <Compile Include="Args\ExportReportArg.cs" />
+    <Compile Include="Args\ExportRevokingArg.cs" />
+    <Compile Include="Args\FlightNumberArg.cs" />
+    <Compile Include="Args\GetUsersForTargetPlanViewModel.cs" />
+    <Compile Include="Args\HandoverDataForCreatingArgs.cs" />
+    <Compile Include="Args\HeadCountArgs.cs" />
+    <Compile Include="Args\HolidayScheduleArgs.cs" />
+    <Compile Include="Args\HotelArgs.cs" />
+    <Compile Include="Args\ItemListViewRecruitmentArgs.cs" />
+    <Compile Include="Args\JobGradeArgs.cs" />
+    <Compile Include="Args\LeaveApplicationForCreatingArgs.cs" />
+    <Compile Include="Args\LoginArgs.cs" />
+    <Compile Include="Args\MasterActingArgs.cs" />
+    <Compile Include="Args\MasterdataArgs.cs" />
+    <Compile Include="Args\MetadataTypeArgs.cs" />
+    <Compile Include="Args\MissingTimelockArgs.cs" />
+    <Compile Include="Args\NewStaffOnBoardArgs.cs" />
+    <Compile Include="Args\ObjectToCheckValidLeaveManagemetDTO.cs" />
+    <Compile Include="Args\OvertimeApplicationArgs.cs" />
+    <Compile Include="Args\OvertimeQuerySAPCodeArg.cs" />
+    <Compile Include="Args\ParticipantArgs.cs" />
+    <Compile Include="Args\PeriodArgs.cs" />
+    <Compile Include="Args\PositionArgs.cs" />
+    <Compile Include="Args\PositionDetailArgs.cs" />
+    <Compile Include="Args\PositionDetailItemArgs.cs" />
+    <Compile Include="Args\PositionForCreatingArgs.cs" />
+    <Compile Include="Args\PositionRecruitmentArgs.cs" />
+    <Compile Include="Args\PositionStatusArgs.cs" />
+    <Compile Include="Args\PromoteAndTransferDataForCreatingArgs.cs" />
+    <Compile Include="Args\QueryArgs.cs" />
+    <Compile Include="Args\ReAssigneeInPositionArgs.cs" />
+    <Compile Include="Args\RecruitmentCategoryArgs.cs" />
+    <Compile Include="Args\ReferencyNumberArgs.cs" />
+    <Compile Include="Args\RequestToHireDataForCreatingArgs.cs" />
+    <Compile Include="Args\ResignationApplicationArgs.cs" />
+    <Compile Include="Args\RevokingArg.cs" />
+    <Compile Include="Args\RoomOrganizationArg.cs" />
+    <Compile Include="Args\RoomTypeArgs.cs" />
+    <Compile Include="Args\SalaryDayConfigurationArg.cs" />
+    <Compile Include="Args\SAPArgs.cs" />
+    <Compile Include="Args\ShiftPlanSubmitPersonArg.cs" />
+    <Compile Include="Args\StatusApplicantArgs.cs" />
+    <Compile Include="Args\StatusArgs.cs" />
+    <Compile Include="Args\SubmitDetailPendingTartgetPlanSAPArg.cs" />
+    <Compile Include="Args\SubmitTargetPlanArg.cs" />
+    <Compile Include="Args\TargetPlanArg.cs" />
+    <Compile Include="Args\TargetPlanDetailQueryArg.cs" />
+    <Compile Include="Args\TargetPlanQueryArg.cs" />
+    <Compile Include="Args\TargetPlanQueryPermissionInfo.cs" />
+    <Compile Include="Args\TargetPlanQuerySAPCodeArg.cs" />
+    <Compile Include="Args\TargetPlanRequestToChangeArg.cs" />
+    <Compile Include="Args\TaskArg.cs" />
+    <Compile Include="Args\TrackingLogArgs.cs" />
+    <Compile Include="Args\UpdateNewStaffOnBoardArgs.cs" />
+    <Compile Include="Args\UpdateUserDepartmentMappingArgs.cs" />
+    <Compile Include="Args\SAPUserDataForCreatingArgs.cs" />
+    <Compile Include="Args\UserDataForCreatingArgs.cs" />
+    <Compile Include="Args\UserForCheckDataArg.cs" />
+    <Compile Include="Args\UserForTargetArg.cs" />
+    <Compile Include="Args\UserInDepartmentArgs.cs" />
+    <Compile Include="Args\UserInfoCABArg.cs" />
+    <Compile Include="Args\UserSAPArg.cs" />
+    <Compile Include="Args\VoteArgs.cs" />
+    <Compile Include="Args\WorkingAddressRecruimentArgs.cs" />
+    <Compile Include="Args\WorkingTimeRecruimentArgs.cs" />
+    <Compile Include="BTA\BTAPolicySpecialViewModel.cs" />
+    <Compile Include="BTA\BTAPolicyViewModel.cs" />
+    <Compile Include="BTA\DataFightViewModel.cs" />
+    <Compile Include="BTA\FlightDetailViewModel.cs" />
+    <Compile Include="BTA\ItinTotalFareViewModel.cs" />
+    <Compile Include="BTA\PassengerFare.cs" />
+    <Compile Include="BTA\PassengerTypeQuantities.cs" />
+    <Compile Include="BTA\PricedItinerariesViewModel.cs" />
+    <Compile Include="BTA\ReportForBookingFlightViewModel.cs" />
+    <Compile Include="BTA\RevokeBTAInfoViewModel.cs" />
+    <Compile Include="BTA\StopQuantityInfoViewModel.cs" />
+    <Compile Include="BTA\Surcharge.cs" />
+    <Compile Include="BTA\TaxInfo.cs" />
+    <Compile Include="DepartureAirport.cs" />
+    <Compile Include="DTOs\FlightDetailDTO.cs" />
+    <Compile Include="OperatingAirlineViewModel.cs" />
+    <Compile Include="FlightSegmentViewModel.cs" />
+    <Compile Include="OriginDestinationViewModel.cs" />
+    <Compile Include="BaggageItemViewModel.cs" />
+    <Compile Include="BTA\BTAPolicySpecialViewModel.cs" />
+    <Compile Include="BTA\BTAPolicyViewModel.cs" />
+    <Compile Include="BTA\BusinessTripApplicantionDetailViewModel.cs" />
+    <Compile Include="BTA\BusinessTripApplicantionViewModel.cs" />
+    <Compile Include="BTA\BusinessTripItemViewModel.cs" />
+    <Compile Include="BTA\ChangeCancelBusinessTripDetailViewModel.cs" />
+    <Compile Include="BTA\ExportBusinessTripApplicationViewModel.cs" />
+    <Compile Include="BTA\ReportDetailUserInFlightNumberViewModel.cs" />
+    <Compile Include="BTA\ReportDetailUserInRoomViewModel.cs" />
+    <Compile Include="BTA\ReportDetailUserInStatusViewModel.cs" />
+    <Compile Include="BTA\ReportForFightNumberViewModel.cs" />
+    <Compile Include="BTA\ReportForHotelDetailViewModel.cs" />
+    <Compile Include="BTA\ReportForHotelViewModel.cs" />
+    <Compile Include="BTA\ReportForStatusViewModel.cs" />
+    <Compile Include="BusinessTripLocationViewModel.cs" />
+    <Compile Include="CBUserInfoViewModel.cs" />
+    <Compile Include="CharacterRefereeViewModel.cs" />
+    <Compile Include="ConfigurationViewModel.cs" />
+    <Compile Include="CostCenterRecruitmentViewModel.cs" />
+    <Compile Include="CreatedByUserViewModel.cs" />
+    <Compile Include="CustomSection\GotadiSettingsSection.cs" />
+    <Compile Include="DTOs\BusinessTripFileDTO.cs" />
+    <Compile Include="DTOs\PermissionInfoOnPendingTargetPlan.cs" />
+    <Compile Include="DTOs\QuotaDataJsonDTO.cs" />
+    <Compile Include="DTOs\RedundantPRDDTO.cs" />
+    <Compile Include="DTOs\RequestToChangeTargetDTO.cs" />
+    <Compile Include="DTOs\CheckingResult.cs" />
+    <Compile Include="DTOs\BaseHandlerResultDTO.cs" />
+    <Compile Include="DTOs\TargetPlanImportArg.cs" />
+    <Compile Include="DTOs\TargetPlanValidMapping.cs" />
+    <Compile Include="DTOs\UploadTargetPlanDTO.cs" />
+    <Compile Include="DTOs\ValidUserForTargetPlanDTO.cs" />
+    <Compile Include="EmployeeSubGroupViewModel.cs" />
+    <Compile Include="ExportReportTargetPlan.cs" />
+    <Compile Include="ExportShiftPlanSubmitPersonViewModel.cs" />
+    <Compile Include="ExternalItem\TargetPlanInfo.cs" />
+    <Compile Include="FlightSegmentViewModel.cs" />
+    <Compile Include="GroupPricedItineraryViewModel.cs" />
+    <Compile Include="ImportData\OvertimeApplicationImportFileDTO.cs" />
+    <Compile Include="ImportData\TargetPlanFromImportFileDTO.cs" />
+    <Compile Include="NewWorkLocationViewModel.cs" />
+    <Compile Include="OperatingAirlineViewModel.cs" />
+    <Compile Include="OriginDestinationViewModel.cs" />
+    <Compile Include="PricedItineraryViewModel.cs" />
+    <Compile Include="PromoteAndTranferPrintViewModel.cs" />
+    <Compile Include="RegionViewModel.cs" />
+    <Compile Include="ShiftSetResponceSAPViewModel.cs" />
+    <Compile Include="PositionFromMassViewModel.cs" />
+    <Compile Include="PrintFormViewModel\BTAPrintFormViewModel.cs" />
+    <Compile Include="MassLocationViewModel.cs" />
+    <Compile Include="MissingTimeClockDetailViewModel.cs" />
+    <Compile Include="PrintFormViewModel\TargetPlanPrintFormViewModel.cs" />
+    <Compile Include="RecruitmentCategoryViewModel.cs" />
+    <Compile Include="PositionMassViewModel.cs" />
+    <Compile Include="ResultValidateTargetPlanViewModel.cs" />
+    <Compile Include="SalaryDayConfigurationViewModel.cs" />
+    <Compile Include="DepartmentTree\DepartmentForTreeViewModel.cs" />
+    <Compile Include="DepartmentTree\UserForTreeViewModel.cs" />
+    <Compile Include="DTOs\BusinessTripDetailDTO.cs" />
+    <Compile Include="DTOs\BusinessTripDTO.cs" />
+    <Compile Include="DTOs\BusinessTripValidateArg.cs" />
+    <Compile Include="DTOs\ChangeCancelBusinessTripDTO.cs" />
+    <Compile Include="DTOs\LeaveKindQuotaMapping.cs" />
+    <Compile Include="DTOs\RoomOrganizationDTO.cs" />
+    <Compile Include="DTOs\SimpleUserDTO.cs" />
+    <Compile Include="Edoc1Result.cs" />
+    <Compile Include="Edoc1TaskViewModel.cs" />
+    <Compile Include="EdocTaskViewModel.cs" />
+    <Compile Include="EmailTemplateViewModel.cs" />
+    <Compile Include="EmergencyContactViewModel.cs" />
+    <Compile Include="AddressInfomationViewModel.cs" />
+    <Compile Include="EducationViewModel.cs" />
+    <Compile Include="EmployeeNodeViewModel.cs" />
+    <Compile Include="EmploymentHistoryViewModel.cs" />
+    <Compile Include="ExportActing.cs" />
+    <Compile Include="ExportApplicant.cs" />
+    <Compile Include="ExportPositionViewModel.cs" />
+    <Compile Include="ExportPromoteAndTransfer.cs" />
+    <Compile Include="FamilyMemberViewModel.cs" />
+    <Compile Include="ActingRequestViewModel.cs" />
+    <Compile Include="ActingResponeViewModel.cs" />
+    <Compile Include="ApplicantEducationViewModel.cs" />
+    <Compile Include="ApplicantRelativeInAeonViewModel.cs" />
+    <Compile Include="ApplicantViewModel.cs" />
+    <Compile Include="ActingViewModel.cs" />
+    <Compile Include="ActionTypeViewModel.cs" />
+    <Compile Include="ApplicantStatusRecruitmentViewModel.cs" />
+    <Compile Include="AppreciationListRecruitmentViewModel.cs" />
+    <Compile Include="AttachmentFileViewModel.cs" />
+    <Compile Include="CAB.ShiftExchange\ShifExchangeForAddOrUpdateViewModel.cs" />
+    <Compile Include="CAB.ShiftExchange\ShiftExchangeDetailForAddOrUpdateViewModel.cs" />
+    <Compile Include="CAB.ShiftExchange\ShiftExchangeRequestViewModel.cs" />
+    <Compile Include="CAB.ShiftExchange\ShiftExchangeViewByReferenceNumberViewModel.cs" />
+    <Compile Include="DepartmentTreeViewModel.cs" />
+    <Compile Include="DepartmentViewModel.cs" />
+    <Compile Include="DTOs\FieldMappingDTO.cs" />
+    <Compile Include="DTOs\FileResultDto.cs" />
+    <Compile Include="DTOs\RemoteMasterDataDetailInformation.cs" />
+    <Compile Include="DTOs\ResponseExternalDataMappingDTO.cs" />
+    <Compile Include="DTOs\ResultDTO.cs" />
+    <Compile Include="DTOs\TokenDTO.cs" />
+    <Compile Include="DTOs\UrlInfoDTO.cs" />
+    <Compile Include="DTOs\UserDTO.cs" />
+    <Compile Include="DTOs\ValidationResultDto.cs" />
+    <Compile Include="EmployeeResponsSearchingViewModel.cs" />
+    <Compile Include="EmployeeViewModel.cs" />
+    <Compile Include="ExternalItem\ActingInfo.cs" />
+    <Compile Include="ExternalItem\DTO\FileMapping.cs" />
+    <Compile Include="ExternalItem\EmployeeInfo.cs" />
+    <Compile Include="ExternalItem\LeaveBalanceInfo.cs" />
+    <Compile Include="ExternalItem\MissingTimeClockInfo.cs" />
+    <Compile Include="ExternalItem\OvertimeInfo.cs" />
+    <Compile Include="ExternalItem\PromoteAndTransferInfo.cs" />
+    <Compile Include="ExternalItem\ResignationDataInfo.cs" />
+    <Compile Include="ExternalItem\ShiftExchangeDataInfo.cs" />
+    <Compile Include="FlightNumberViewModel.cs" />
+    <Compile Include="HandoverDetailItemViewModel.cs" />
+    <Compile Include="HandoverViewModel.cs" />
+    <Compile Include="HolidayScheduleViewModel.cs" />
+    <Compile Include="HotelViewModel.cs" />
+    <Compile Include="ItemListApplicantViewModel.cs" />
+    <Compile Include="ItemListDepartmentForBudgetViewModel.cs" />
+    <Compile Include="ItemListDepartmentViewModel.cs" />
+    <Compile Include="ItemListHeadCountViewModel.cs" />
+    <Compile Include="ItemListOvertimeApplicationViewModel.cs" />
+    <Compile Include="ItemListRecruitmentViewModel.cs" />
+    <Compile Include="ItemListViewRecruitmentViewModel.cs" />
+    <Compile Include="JobGradeForAddOrUpdateItemViewModel.cs" />
+    <Compile Include="JobGradeItemRecruitmentMappingInHandoverViewModel.cs" />
+    <Compile Include="JobGradePairItem.cs" />
+    <Compile Include="JobGrades\GetItemsArgs.cs" />
+    <Compile Include="JobGrades\ItemListRecruitmentForDropDownOfJobGradeViewModel.cs" />
+    <Compile Include="JobGrades\JobGradeItemRecruitmentMappingForAddOrUpdateItemViewModel.cs" />
+    <Compile Include="JobGradeViewModel.cs" />
+    <Compile Include="LanguageProficiencyEntryViewModel.cs" />
+    <Compile Include="LeaveApplicationViewModel.cs" />
+    <Compile Include="LeaveBalanceResponceSAPViewModel.cs" />
+    <Compile Include="MappingFieldToExport.cs" />
+    <Compile Include="MasterDataViewModel.cs" />
+    <Compile Include="MasterExternalDataViewModel.cs" />
+    <Compile Include="MetadataTypeViewModelForCABSetting.cs" />
+    <Compile Include="MissingTimeClockItemDetail.cs" />
+    <Compile Include="MissingTimelockGridViewModel.cs" />
+    <Compile Include="MissingTimelockViewModel.cs" />
+    <Compile Include="MyItemViewModel.cs" />
+    <Compile Include="NewStaffOnBoardViewModel.cs" />
+    <Compile Include="NotificationUserViewModel.cs" />
+    <Compile Include="OpenPositionViewModel.cs" />
+    <Compile Include="OvertimeApplicationViewModel.cs" />
+    <Compile Include="PendingTargetPlanDetailViewModel.cs" />
+    <Compile Include="PendingTargetPlanViewModel.cs" />
+    <Compile Include="PeriodViewModel.cs" />
+    <Compile Include="PermissionMappingViewModel.cs" />
+    <Compile Include="PositionDetailViewModel.cs" />
+    <Compile Include="PositionApplicantMappingViewModel.cs" />
+    <Compile Include="PositionForFilterViewModel.cs" />
+    <Compile Include="PositionViewModel.cs" />
+    <Compile Include="PrintFormViewModel\ActingPrintFormViewModel.cs" />
+    <Compile Include="PrintFormViewModel\OvertimePrintFormViewModel.cs" />
+    <Compile Include="PrintFormViewModel\PromoteTransferPrintFormViewModel.cs" />
+    <Compile Include="PrintFormViewModel\TargetListViewModel.cs" />
+    <Compile Include="PromoteAndTransferViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProvinceMasterDataViewModel.cs" />
+    <Compile Include="ReasonViewModelForAddOfCABSetting.cs" />
+    <Compile Include="ReasonViewModelForCABSetting.cs" />
+    <Compile Include="ReasonViewModelForUpdateOfCABSetting.cs" />
+    <Compile Include="ReferencyNumberViewModel.cs" />
+    <Compile Include="RequestToHireViewModel.cs" />
+    <Compile Include="ResignationApplicantGridViewModel.cs" />
+    <Compile Include="ResignationApplicationViewModel.cs" />
+    <Compile Include="CustomSection\SAPSettingsSection.cs" />
+    <Compile Include="DTOs\ShiftCodeDetailDTO.cs" />
+    <Compile Include="ShiftPlanSubmitPersonViewModel.cs" />
+    <Compile Include="RoomTypeViewModel.cs" />
+    <Compile Include="TableCompulsoryViewModel.cs" />
+    <Compile Include="DTOs\TargetDateDetailModel.cs" />
+    <Compile Include="TargetPlanDetailViewModel.cs" />
+    <Compile Include="TargetPlanExportViewModel.cs" />
+    <Compile Include="TargetPlanPeriodViewModel.cs" />
+    <Compile Include="TargetPlanResultDTO.cs" />
+    <Compile Include="TargetPlanViewModel.cs" />
+    <Compile Include="TrackingLogViewModel.cs" />
+    <Compile Include="TrackingRequestForGetListViewModel.cs" />
+    <Compile Include="UserDepartmentMappingViewModel.cs" />
+    <Compile Include="UserInAllDepartmentViewModel.cs" />
+    <Compile Include="UserInfoCABViewModel.cs" />
+    <Compile Include="UserSelectViewModel.cs" />
+    <Compile Include="UserSubmitPersonDepartmentMappingViewModel.cs" />
+    <Compile Include="UserViewModel.cs" />
+    <Compile Include="ValidateERDShiftExchangeViewModel.cs" />
+    <Compile Include="ValidateHalfdayModel.cs" />
+    <Compile Include="WorkflowConditionViewModel.cs" />
+    <Compile Include="WorkflowDataViewModel.cs" />
+    <Compile Include="WorkflowHistoryViewModel.cs" />
+    <Compile Include="WorkflowInstanceListViewModel .cs" />
+    <Compile Include="WorkflowInstanceViewModel.cs" />
+    <Compile Include="WorkflowStatusViewModel.cs" />
+    <Compile Include="StepConditionViewModel.cs" />
+    <Compile Include="WorkflowStepViewModel.cs" />
+    <Compile Include="WorkflowTaskViewModel.cs" />
+    <Compile Include="WorkflowTemplateListViewModel.cs" />
+    <Compile Include="WorkflowTemplateViewModel.cs" />
+    <Compile Include="WorkingAddressRecruitmentViewModel.cs" />
+    <Compile Include="WorkingTimeRecruimentViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aeon.HR.DataCommon\Aeon.HR.Data.csproj">
+      <Project>{f9cb3b6c-ec91-431f-a675-3a0ab6d17630}</Project>
+      <Name>Aeon.HR.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aeon.HR.Infrastructure\Aeon.HR.Infrastructure.csproj">
+      <Project>{1d52c6c0-82f2-49a0-a49f-9ed7e9b0d0b6}</Project>
+      <Name>Aeon.HR.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

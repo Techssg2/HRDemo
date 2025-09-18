@@ -1,0 +1,263 @@
+<style>
+    label {
+        font-size: 12px;
+    }
+
+    #loading>.k-loading-mask>.k-loading-image {
+        background-position-x: 50% !important;
+        background-position-y: 400px !important;
+    }
+
+    .note {
+        border-left: none;
+    }
+
+    .k-picker-wrap {
+        border-radius: 0.375rem;
+        border-color: #e4e7ea;
+        height:39px !important
+    }
+
+    .k-picker-wrap .k-input {
+        border-radius: 0.375rem;
+        border-color: #e4e7ea;
+    }
+
+    .k-picker-wrap.k-state-default {
+        border-color: #e4e7ea;
+    }
+
+    #applicantsFromMass .k-grid-header th {
+        background-color: #E8E8E8;
+        color: #000;
+        font-weight: 500 !important;
+        text-transform: uppercase !important;
+    }
+
+    #applicantsFromMass .k-grid-header {
+        background-color: #E8E8E8;
+        color: #000;
+    }
+
+    .k-dropdown {
+        padding: 1px;
+        border-radius: 7px;
+        border: solid 1px;
+        border-color: #DEE2E6
+    }
+
+
+
+    .k-dropdown .k-dropdown-wrap {
+        border-radius: 7px;
+        border-color: transparent
+    }
+
+    .k-dropdowntree {
+        padding: 1px;
+        border-radius: 7px;
+        border: solid 1px;
+        border-color: #DEE2E6
+    }
+
+    .k-dropdowntree .k-dropdown-wrap {
+        border-radius: 7px;
+        border-color: transparent
+    }
+
+    .k-numerictextbox {
+        padding: 1px;
+        border-radius: 7px;
+        border: solid 1px;
+        border-color: #DEE2E6
+    }
+
+    .k-numerictextbox .k-numeric-wrap {
+        border-radius: 7px;
+        border-color: transparent;
+        height: 50%
+    }
+
+    .k-numeric-wrap.k-state-focused .k-input {
+        height: 100% !important
+    }
+
+    span.k-dropdown{
+        height:38px !important
+    }
+</style>
+<div class="row" ng-if="model.type">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title d-flex title-wrapper stickybar-1">
+                <div class="caption caption-md">
+                    <h2 class="widget-title" style="margin-top:11px">APPLICANT</h2>
+                      
+                </div>
+                <div class="actions  ms-auto">
+                    <action-items model="model" save="submit" form="g1Form"></action-items>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <!--<div class="col-md-12 mrb10">
+        <div class="row" style="float:right">
+            <kendo-button class="k-primary app-button " ng-click="submit(g1Form)">Submit</kendo-button>
+            <kendo-button class="k-primary app-button" ng-click="cancel('home.recruitment')">Cancel </kendo-button>
+        </div>
+    </div>-->
+
+            
+
+
+                <div class="row ng-scope" ng-if="errors.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase">
+                                Please enter all required fields <span class="font-red-thunderbird">*</span>:
+                            </h5>
+                            <p></p>
+                            <ul>
+                                <!-- ngRepeat: error in vm.errors -->
+                                <li ng-repeat="error in errors">
+                                    <span class="bold ">{{error.controlName}}</span>:
+                                    {{error.message ? error.message : 'Field is required'}}
+                                </li>
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="white-background" style="font-size: 12px;">
+
+                    <div class="custom-panel" style="clear: both;">
+                       
+                        <form name="g1Form" autocomplete="off">
+                            <applicant-item-g1 ng-if="model.type == '1'" widget="widget" model="model" form="g1Form"
+                                               bind="removeSubItem" district-data="districtData" ward-data="wardData"
+                                               master-datas="masterDatas"></applicant-item-g1>
+                            <applicant-item-g2 ng-if="model.type == '2'" model="model" form="g1Form"
+                                               bind="removeSubItem" district-data="districtData" ward-data="wardData"
+                                               master-datas="masterDatas"></applicant-item-g2>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="portlet-title d-flex">
+                <div class="actions ms-auto">
+                    <action-items model="model" save="submit" form="g1Form"></action-items>
+                </div>
+            </div>
+
+            <!-- Content -->
+        </div>
+    </div>
+</div>
+<div id="confirmGrade" kendo-dialog="confirmGrade" k-visible="false">
+    <div class="note" style="margin-bottom: 0px">
+        <ul class="fieldlist d-flex gap-5">
+            <!-- <li>Create New Applicant For</li> -->
+            <li>
+                <input type="radio" name="engine" id="engine1" class="form-check-input" ng-value="'1'" ng-model="applicantType">
+                <label class="form-check-label" for="engine1">G1</label>
+            </li>
+            <li>
+                <input type="radio" name="engine" id="engine2" class="form-check-input" ng-value="'2'" ng-model="applicantType">
+                <label class="form-check-label" for="engine2">G2 Up</label>
+            </li>
+            <li>
+                <input type="radio" name="engine" id="engine3" class="form-check-input" ng-value="'3'" ng-model="applicantType">
+                <label class="form-check-label" for="engine3">Import from Mass</label>
+            </li>
+        </ul>
+    </div>
+    <div class="d-flex gap-2 flex-wrap justify-content-end">
+        <button class="btn btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1" type="button" ng-click="confirm()">
+            <i class="fa fa-check right-5 font-green-jungle text-success"></i> OK
+        </button>
+    </div>
+</div>
+
+
+<div id="dialogImportApplicantFromMass" kendo-dialog="dialogImportApplicantFromMass" k-on-open="dialogVisible = true"
+     style="height: 100% !important; border-radius:7px;" k-on-close="closeSearchDialog(true)" k-width="1250" k-modal="true"
+     k-visible="false" options="dialogImportApplicantFromMassOption">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="col-md-3 control-label">Keyword:</label>
+                    <div class="col-md-12">
+                        <input type="text" class="form-control" id='FieldFilter' placeholder="Applicant Name/Identity Card No"
+                               style="width: 100%; height:80%; " ng-keypress="ifEnter($event)" ng-model="searchInfo.keyword">
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Position:</label>
+                        <div class="col-md-12">
+                            <select kendo-drop-down-list style="width: 100%;" k-options="optionGroup.positionForImportApplicant" id="positionId" class="form-select"
+                                    ng-model="searchInfo.position">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="col-md-3 control-label">Status:</label>
+                    <div class="col-md-12">
+                        <select kendo-drop-down-list style="width: 100%;" k-options="optionGroup.statusForListOptions" class="form-select"
+                                ng-model="searchInfo.status">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="col-md-3 control-label">Store:</label>
+                    <div class="col-md-12">
+                        <select kendo-drop-down-list style="width: 100%;" k-options="optionGroup.storeForListOptions" id="storeId" class="form-select"
+                                ng-model="searchInfo.store">
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3 d-flex align-items-center justify-content-lg-between">
+                <div class="form-group">
+                </div>
+                <div class="form-group">
+                    <button type="button" ng-click="searchApplicant()" class="btn btn-primary rounded-3 poppins-regular display-9 ng-binding">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                        </svg>
+                        &nbsp;{{'COMMON_BUTTON_SEARCH' | translate}}
+                    </button>
+
+
+                    <button type="button" ng-click="reset()" class="btn btn-white rounded-3 poppins-regular display-9 ng-binding">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"></path>
+                            <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"></path>
+                        </svg>
+                        {{'COMMON_BUTTON_RESET' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+   
+
+    <div class="display-10 leading-18">
+        <div class="row">
+            <div ng-show="false"><input id="files" name="files" kendo-upload type="file" ng-show="false" class="ng-hide" /></div>
+
+            <div class="col-md-12">
+                <kendo-grid id="applicantsFromMass" options="applicantsFromMassOptions" k-on-change="onChange(data)" style="overflow: hidden; border: 1px solid #ddd;">
+                </kendo-grid>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿<style>
+    .k-dialog-title {
+        color: #b42e83 !important;
+        font-family: Nova-Regular !important;
+        font-size: 18px !important;
+        font-weight: 700;
+        margin: 10px 0;
+        margin: 0;
+        line-height: 1.42857143;
+        text-transform: uppercase !important;
+    }
+
+    .workflow-history {
+        white-space: nowrap;
+        overflow-x: auto !important;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        color: black;
+        font-family: Roboto;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        padding: 5px;
+    }
+
+    .modal-body {
+        max-height: calc(100vh - 15vw) !important;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+
+    .k-dialog {
+        top: calc(10%) !important;
+    }
+</style>
+<div id="actionHitories" kendo-dialog="actionHitories" class="pd0" k-visible="false">
+    <div class="modal-body" style="overflow-x: auto;">
+        <div class="reset-mp">
+            <div ng-if="trackingHistory && trackingHistory.length > 0">
+                <table class="table table-hover" style="width:100%">
+                    <thead>
+                        <tr style="width:100%">
+                            <th>{{'COMMON_TYPE' | translate}}</th>
+                            <th>{{'COMMON_CREATED_DATE' | translate}}</th>
+                            <th>{{'COMMON_CREATED_BY' | translate}}</th>
+                            <th>{{'COMMON_COMMENT' | translate}}</th>
+                            <th>{{'COMMON_ACTION' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="history in trackingHistory">
+                        <tr>
+                            <td>{{history.type | translate}}</td>
+                            <td>{{history.created}}</td>
+                            <td><a style="text-decoration:none;" data-toggle="tooltip" data-placement="right" title="{{history.createdBy}}">{{history.createdByFullName}}</a> </td>
+                            <td>{{history.comment}}</td>
+                            <td>
+                                <a style="text-decoration: none;" ng-click="viewHistoryDetail(history.type, history.dataStr)"> {{'COMMON_VIEW_DETAIL' | translate}}</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

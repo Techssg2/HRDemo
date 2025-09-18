@@ -1,0 +1,40 @@
+﻿{
+  "EmployeeResponseSearching": [
+    {
+      "SourceField": "SAPCode",
+      "TargetField": "Pernr"
+    },
+    {
+      "SourceField": "FirstName",
+      "TargetField": "Vorna"
+    },
+    {
+      "SourceField": "LastName",
+      "TargetField": "Nachn"
+    },
+    {
+      "SourceField": "GenderCode",
+      "TargetField": "Titel"
+    },
+    {
+      "SourceField": "WorkLocationCode",
+      "TargetField": "Btrtl"
+    },
+    {
+      "SourceField": "JobGradeCode",
+      "TargetField": "Trfgb"
+    },
+    {
+      "SourceField": "PositionCode",
+      "TargetField": "Plans"
+    },
+    {
+      "SourceField": "JoiningDate",
+      "TargetField": "Begda"
+    },
+    {
+      "SourceField": "JobTitle",
+      "TargetField": "Stell"
+    }
+  ]
+}

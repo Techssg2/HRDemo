@@ -1,0 +1,164 @@
+<div>
+
+    <div class="row ">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-label text-secondary">{{title}}:</label>
+                <div class="row align-items-end mt-3">
+                    <div class="col-md-10">
+                        <input kendo-numeric-text-box
+                               k-format="'#'"
+                               decimals="0"
+                               restrict-decimals="true"
+                               data-min="0"
+                               data-role="numerictextbox"
+                               aria-valuemin="1"
+                               aria-valuemax="3"
+                               class="k-input w100"
+                               ng-model="courseDurationModel.duration"
+                               ng-disabled="isDisabled" />
+                    </div>
+                    <label class="col-md-2 control-label">Days</label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row ">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-label text-secondary">
+                    {{'TRAINING_REQUEST_FROM_DATE' | translate}}:
+                </label>
+                <div class="row align-items-end mt-3">
+                    <div class="col-md-10">
+                        <input style="width: 100%"
+                               kendo-date-picker
+                               k-ng-model="courseDurationModel.from"
+                               k-date-input="true"
+                               k-format="'dd/MM/yyyy'"
+                               ng-disabled="isDisabled"
+                               id="trainingFromDateId"
+                               k-on-change="changeFromToDate()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-label text-secondary">
+                    {{'TRAINING_REQUEST_TO_DATE' | translate}}:
+                </label>
+                <div class="row align-items-end mt-3">
+                    <div class="col-md-10">
+                        <input style="width: 100%"
+                               kendo-date-picker
+                               k-ng-model="courseDurationModel.to"
+                               k-date-input="true"
+                               k-format="'dd/MM/yyyy'"
+                               ng-disabled="isDisabled"
+                               id="trainingToDateId"
+                               k-on-change="changeFromToDate()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" ng-If="isOfflineCourse">
+            <div class="form-group">
+                <label class="form-label text-secondary">
+                    {{'TRAINING_REQUEST_TRAINING_LOCATION'|translate}}:
+                </label>
+                <div class="row align-items-end mt-3">
+                    <div class="col-md-10">
+                        <input type="text"
+                               name="Extension"
+                               class="k-textbox form-control input-sm"
+                               ng-model="courseDurationModel.trainingLocation"
+                               style="width: 100%"
+                               ng-disabled="isDisabled"
+                               maxlength="30" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--<div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="col-md-4 control-label">{{title}}:</label>
+                <div class="col-md-6 d-flex">
+                    <input kendo-numeric-text-box
+                           k-format="'#'"
+                           decimals="0"
+                           restrict-decimals="true"
+                           data-min="0"
+                           data-role="numerictextbox"
+                           aria-valuemin="1"
+                           aria-valuemax="3"
+                           class="k-input w100"
+                           ng-model="courseDurationModel.duration"
+                           ng-disabled="isDisabled" /> <label class="col-md-2 control-label">Days</label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="col-md-4 control-label">
+                    {{'TRAINING_REQUEST_FROM_DATE' | translate}}:
+                </label>
+                <div class="col-md-6">
+                    <input style="width: 100%"
+                           kendo-date-picker
+                           k-ng-model="courseDurationModel.from"
+                           k-date-input="true"
+                           k-format="'dd/MM/yyyy'"
+                           ng-disabled="isDisabled"
+                           id="trainingFromDateId"
+                           k-on-change="changeFromToDate()" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+                    {{'TRAINING_REQUEST_TO_DATE' | translate}}:
+                </label>
+                <div class="col-md-6">
+                    <input style="width: 100%"
+                           kendo-date-picker
+                           k-ng-model="courseDurationModel.to"
+                           k-date-input="true"
+                           k-format="'dd/MM/yyyy'"
+                           ng-disabled="isDisabled"
+                           id="trainingToDateId"
+                           k-on-change="changeFromToDate()" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" ng-If="isOfflineCourse">
+            <div class="form-group">
+                <label class="col-md-4 control-label">
+                    {{'TRAINING_REQUEST_TRAINING_LOCATION'|translate}}:
+                </label>
+                <div class="col-md-8">
+                    <input type="text"
+                           name="Extension"
+                           class="k-textbox form-control input-sm"
+                           ng-model="courseDurationModel.trainingLocation"
+                           style="width: 100%"
+                           ng-disabled="isDisabled"
+                           maxlength="30" />
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <hr />
+</div>

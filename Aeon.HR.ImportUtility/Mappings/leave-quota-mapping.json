@@ -1,0 +1,27 @@
+﻿[
+    {
+        "AbsenceQuotaType": "07",
+        "AbsenceQuotaTypeText": "Rearing a child<12 months (Chế độ con nhỏ < 12 tháng tuổi)"
+    },
+    {
+        "AbsenceQuotaType": "08",
+        "AbsenceQuotaTypeText": "Long term sick leave (Phép nghỉ bệnh dài hạng)"
+    },{
+        "AbsenceQuotaType": "09",
+        "AbsenceQuotaTypeText": "Health Check Pregnency (Nghỉ khám thai)"
+    },{
+        "AbsenceQuotaType": "10",
+        "AbsenceQuotaTypeText": "Carry Forward (Phép tồn)"
+    },{
+        "AbsenceQuotaType": "11",
+        "AbsenceQuotaTypeText": "Annual Leave (Phép năm)"
+    },
+    {
+        "AbsenceQuotaType": "12",
+        "AbsenceQuotaTypeText": "Extra Rest Day (Nghỉ bù thứ bảy)"
+    },
+    {
+        "AbsenceQuotaType": "13",
+        "AbsenceQuotaTypeText": "Day Off In Lieu (Nghỉ bù)"
+    }
+]

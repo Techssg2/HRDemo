@@ -1,0 +1,43 @@
+<div class="d-flex gap-4" style="margin-left:10px">
+    <div>
+        <input type="radio"
+               name="{{dataItem.surveyQuestion}}"
+               id="{{dataItem.surveyQuestion + '-' + 1}}"
+               class="form-check-input"
+               ng-model="dataItem.value"
+               value="1"
+               ng-click="changeEvent($event)"
+               ng-disabled="!isEditable" />
+        <label style="color: #9b9b9b; padding-right: 15px"
+               class="form-check-label"
+               for="{{dataItem.surveyQuestion + '-' + 1}}">Không đồng ý</label>
+    </div>
+    <div>
+        <input type="radio"
+               name="{{dataItem.surveyQuestion}}"
+               id="{{dataItem.surveyQuestion + '-' + 2}}"
+               class="form-check-input"
+               ng-model="dataItem.value"
+               value="2"
+               ng-click="changeEvent($event)"
+               ng-disabled="!isEditable" />
+        <label style="color: #9b9b9b; padding-right: 15px"
+               class="form-check-label"
+               for="{{dataItem.surveyQuestion + '-' + 2}}">Không chắc</label>
+    </div>
+    <div>
+        <input type="radio"
+               name="{{dataItem.surveyQuestion}}"
+               id="{{dataItem.surveyQuestion + '-' + 3}}"
+               class="form-check-input"
+               ng-model="dataItem.value"
+               value="3"
+               ng-click="changeEvent($event)"
+               ng-disabled="!isEditable" />
+        <label style="color: #9b9b9b"
+               class="form-check-label"
+               for="{{dataItem.surveyQuestion + '-' + 3}}">Đồng ý</label>
+    </div>
+
+
+</div>

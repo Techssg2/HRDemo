@@ -1,0 +1,750 @@
+<style type="text/css">
+    #attachmentViewDialog {
+        min-height: 40vh !important;
+        height: 98vh !important;
+    }
+
+    .close-owa-dialog {
+        margin: 5px;
+    }
+
+    #tooltipText {
+        position: absolute;
+        left: 50%;
+        top: -40px;
+        transform: translateX(-50%);
+        background-color: #fff;
+        color: #000;
+        white-space: nowrap;
+        padding: 5px 10px;
+        border-radius: 10px;
+        border: 1px solid #000;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+        #tooltipText::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            transform: translateX(-50%);
+            border: 10px solid;
+            border-color: #808080 #0000 #0000 #0000;
+        }
+
+    #tooltip:hover #tooltipText {
+        top: -140%;
+        visibility: visible;
+        opacity: 1;
+    }
+</style>
+<div class="p-3">
+    <div class="row title-wrapper stickybar-1">
+        <div class="col-6">
+            <h2 class="widget-title">{{titleHeader}}</h2>
+        </div>
+        <div class="col-6">
+            <div class="d-flex gap-2 flex-wrap justify-content-end" style="width: 100%;">
+                <action-items class="d-flex flex-wrap justify-content-end align-items-center" style="flex: 1 1 auto; gap: 4px;" model="model" save="save" form="g1"></action-items>
+                <!--<button type="button" ng-click="printForm()" ng-if="model.id && model.status == 'Completed'" class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1 ng-binding">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                        <rect x="6" y="14" width="12" height="8"></rect>
+                    </svg>&nbsp;Print
+                </button>-->
+            </div>
+        </div>
+    </div>
+    <div class="portlet-body mb-3">
+        <div class="mt-3">
+            <div class="accordion accordion-style1">
+                <div class="accordion-item">
+                    <div class="accordion-collapse collapse show">
+                        <div class="portlet bordered light">
+                            <!-- Title -->
+                            <div class="row p-3">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;" ng-if="title">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 46 46">
+                                                <path id="_12.File" data-name="12.File" d="M37,47H11a4,4,0,0,1-4-4V5a4,4,0,0,1,4-4H30a.984.984,0,0,1,.776.395l9.829,9.829A.981.981,0,0,1,41,12h0V43A4,4,0,0,1,37,47ZM31,4.381V11h6.619ZM39,13H30a1,1,0,0,1-1-1V3H11A2,2,0,0,0,9,5V43a2,2,0,0,0,2,2H37a2,2,0,0,0,2-2ZM33,39H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Zm0-8H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Zm0-8H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Z" transform="translate(-7 -1)" fill-rule="evenodd"></path>
+                                            </svg>&nbsp;{{title}}
+                                        </div>
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 24 24">
+                                                <path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z" fill="#0D0D0D"></path>
+                                            </svg>&nbsp;{{ model.createdByFullName }} <!--({{ model.employeeCode }})-->
+                                        </div>
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;" ng-if="model.created">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 24 24">
+                                                <path d="M9 2a1 1 0 0 1 1 1v1h4V3a1 1 0 1 1 2 0v1h3a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V3a1 1 0 0 1 1-1zM8 6H5v3h14V6h-3v1a1 1 0 1 1-2 0V6h-4v1a1 1 0 0 1-2 0V6zm11 5H5v8h14v-8z" fill="#0D0D0D"></path>
+                                            </svg>&nbsp;{{ model.created | date:'dd/MM/yyyy HH:mm'  }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 d-flex flex-wrap justify-content-end">
+                                    <button class="btn-none dropdown-toggle"
+                                            type="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             width="16"
+                                             height="16"
+                                             fill="currentColor"
+                                             class="bi bi-three-dots-vertical"
+                                             viewBox="0 0 16 16">
+                                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                        </svg>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-end dropdown-menu-text-link display-11 text-center">
+                                        <li>
+                                            <a class="dropdown-item" href="" ng-click="showTrackingHistory()" ng-if="isITHelpdesk">
+                                                <svg width="16" height="16" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                                    <g fill="currentColor" fill-rule="evenodd" transform="translate(2 1)">
+                                                        <path fill-rule="nonzero" d="M3 4C3 3.44772 3.44772 3 4 3 4.55228 3 5 3.44772 5 4 5 4.55228 4.55228 5 4 5 3.44772 5 3 4.55228 3 4zM7 3C6.44772 3 6 3.44772 6 4 6 4.55228 6.44771 5 7 5L8 5C8.5523 5 9 4.55228 9 4 9 3.44772 8.5523 3 8 3L7 3zM6 7C6 6.44772 6.44772 6 7 6L8 6C8.5523 6 9 6.44772 9 7 9 7.55228 8.5523 8 8 8L7 8C6.44771 8 6 7.55228 6 7zM3 7C3 6.44772 3.44772 6 4 6 4.55228 6 5 6.44772 5 7 5 7.55228 4.55228 8 4 8 3.44772 8 3 7.55228 3 7zM6 10C6 9.4477 6.44772 9 7 9L8 9C8.5523 9 9 9.4477 9 10 9 10.5523 8.5523 11 8 11L7 11C6.44771 11 6 10.5523 6 10zM3 10C3 9.4477 3.44772 9 4 9 4.55228 9 5 9.4477 5 10 5 10.5523 4.55228 11 4 11 3.44772 11 3 10.5523 3 10z"></path>
+                                                        <path d="M0,1 C0,0.44772 0.44772,0 1,0 L11,0 C11.5523,0 12,0.44772 12,1 L12,13 C12,13.5523 11.5523,14 11,14 L1,14 C0.44772,14 0,13.5523 0,13 L0,1 Z M2,12 L2,2 L10,2 L10,12 L2,12 Z"></path>
+                                                    </g>
+                                                </svg>&nbsp;{{'COMMON_TRACKING_HISTORY'|translate}}
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider" ng-show="model.id && model.status == 'Completed'" /></li>
+                                        <li>
+                                            <a class="dropdown-item" href="" ng-click="printForm()" ng-if="model.id && model.status == 'Completed'">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                                                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                                                    <rect x="6" y="14" width="12" height="8"></rect>
+                                                </svg>&nbsp;{{'COMMON_BUTTON_PRINT'|translate}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-left: 0 !important; padding-top: 0 !important;">
+                                <div class="col-6">
+                                    <span class="badge badge-style1 justify-content-start" ng-if="model.status"
+                                          ng-class="{
+                                                   'badge-orange': model.status != 'Completed' && model.status != 'Draft' && model.status != 'Cancelled' && model.status != 'Reject' && model.status != 'Out Of Period',
+                                                   'badge-green': model.status == 'Completed',
+                                                   'badge-red': model.status == 'Cancelled' || model.status == 'Reject' || model.status == 'Out Of Period',
+                                                   '': model.status == 'Draft'
+                                                   }">
+                                        {{statusTranslate}}
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mt-2 d-flex flex-column flex-lg-row justify-content-end">
+                                        <div class="progresses" ng-repeat="item in currentInstanceProcessingStage.workflowData.steps">
+                                            <div class="steps badge-green" ng-if="item.stepNumber == 1">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     width="16"
+                                                     height="16"
+                                                     viewBox="0 0 24 24"
+                                                     fill="none"
+                                                     stroke="#ffffff"
+                                                     stroke-width="2"
+                                                     stroke-linecap="round"
+                                                     stroke-linejoin="round">
+                                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                                </svg>
+                                            </div>
+                                            <span class="line" ng-if="item.stepNumber == 1"></span>
+                                            <div class="steps" ng-class="!item.histories ? '' : {'badge-green': item.histories.voteType == 1 && item.histories.isStepCompleted,
+                                                   'badge-yellow-60': item.histories.voteType == 3,
+                                                   'badge-outline-orange': item.histories.voteType == 0 && !item.histories.isStepCompleted,
+                                                   'badge-red': (item.histories.voteType == 2 || item.histories.voteType == 4)}" ng-if="item.stepNumber != 1">
+                                                <div class="tooltip-custom tooltip-style2 tooltip-below">
+                                                    {{item.stepNumber}}
+                                                    <span class="tooltip-text">
+                                                        <span class="badge btn-grey rounded-pill poppins-regular display-12 leading-14">Round {{processingStageRound}}</span>
+                                                        <p class="text-orange poppins-medium display-11" style="text-transform: uppercase;">
+                                                            {{item.stepName}}
+                                                        </p>
+                                                        <p class="display-12" ng-if="(item.histories.assignedToUserFullName || item.histories.assignedToDepartmentName)">
+                                                            <span class="text-grey">Assign To: </span>
+                                                            <span style="text-transform: uppercase;">
+                                                                {{item.histories.assignedToUserFullName ? item.histories.assignedToUserFullName: item.histories.assignedToDepartmentName}}
+                                                            </span>
+                                                        </p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="line" ng-if="item.stepNumber != 1 && currentInstanceProcessingStage.workflowData.steps[currentInstanceProcessingStage.workflowData.steps.length - 1].stepNumber != item.stepNumber"></span>
+                                        </div>
+                                        <a href="#" style="padding-left: 20px"
+                                           data-bs-toggle="modal"
+                                           data-bs-target="#exampleModalView5">
+                                            View more
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 width="10"
+                                                 height="10"
+                                                 viewBox="0 0 24 24"
+                                                 fill="none"
+                                                 stroke="#0D6EFD"
+                                                 stroke-width="2"
+                                                 stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path d="M9 18l6-6-6-6" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="portlet-body">
+                               <!-- <div class="row ng-scope" style="padding: 15px 0;margin-bottom:15px">
+                                    <div class="col-sm-12">
+                                        <workflow-comment></workflow-comment>
+                                    </div>
+                                </div>-->
+                                <div class="alert alert-danger-style1 mb-3" role="alert" ng-if="errors.length > 0">
+                                    <div class="col-sm-12">
+                                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                                            <h5 class="bold uppercase"> {{'COMMON_ENTER_FIELD' | translate}} <span class="text-danger">*</span>:</h5>
+                                            <p></p>
+                                            <ul>
+                                                <li ng-repeat="error in errors track by $index">
+                                                    <span class="bold ">{{error.controlName}}</span>{{error.message?error.message: ''}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <div class="accordion accordion-style1">
+                                        <div class="accordion-item">
+                                            <div class="accordion-collapse collapse show">
+                                                <div class="accordion-body">
+                                                    <div class="row">
+                                                        <div class="col-md-6" style="border-right: 1px solid #e0e0e0;">
+                                                            <div class="mb-3">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="me-2" style="width: 4px; height: 20px; background-color: #006efa;"></div>
+                                                                    <h2 class="accordion-header">
+                                                                        <label class="poppins-semibold display-9">
+                                                                            Position Details
+                                                                        </label>
+                                                                    </h2>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="form-label text-secondary">
+                                                                        Position: <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <select kendo-drop-down-list
+                                                                            name="positionName"
+                                                                            id="positionId"
+                                                                            k-options="positionsDataSource"
+                                                                            k-ng-model="model.positionId"
+                                                                            k-value-primitive="true"
+                                                                            style="width: 100%;">
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="form-label text-secondary">Type Of Need:</label>
+                                                                    <div class="d-flex gap-4">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="typeOfNeed" id="newPosition" ng-model="model.replacementFor" ng-value="{{typeOfNeed.NewPosition}}" ng-change="changeTypeOfNeed()">
+                                                                            <label class="form-check-label" for="newPosition">
+                                                                                New Position
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="typeOfNeed" id="replacementFor" checked="" ng-model="model.replacementFor" ng-value="{{typeOfNeed.ReplacementFor}}" ng-change="changeTypeOfNeed()">
+                                                                            <label class="form-check-label" for="replacementFor">
+                                                                                Replacement For a Valid Position
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <div class="row align-items-center">
+                                                                        <div class="col">
+                                                                            <label class="form-label text-secondary">Check Budget: <span class="text-danger">*</span></label>
+                                                                            <select kendo-drop-down-list ng-class="{'input-default': model.replacementFor==2}"
+                                                                                    name="hasBudget" id="hasBudget"
+                                                                                    k-on-change="onChangeBudget()"
+                                                                                    k-options="budgetOptions"
+                                                                                    ng-disabled="disableFollowTypeOfNeed"
+                                                                                    k-ng-model="model.hasBudget"
+                                                                                    style="width: 100%;">
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label class="form-label text-secondary">Quantity: <span class="text-danger">*</span></label>
+                                                                            <input kendo-numeric-text-box
+                                                                                   id="quantity"
+                                                                                   class="form-control"
+                                                                                   k-min="0"
+                                                                                   name="quantity"
+                                                                                   k-format="'#,0'"
+                                                                                   k-ng-model="model.quantity"
+                                                                                   style="width: 100%; height:100%" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3" ng-hide="!disableFollowTypeOfNeed">
+                                                                <div class="form-group">
+                                                                    <label class="form-label text-secondary">
+                                                                        Department: <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div id="tooltip">
+                                                                        <span id="tooltipText"> {{ model.replacementForCode}}</span>
+                                                                        <span>
+                                                                            <select kendo-drop-down-tree
+                                                                                    id="replacementId"
+                                                                                    name="replacementId"
+                                                                                    k-options="replacementForOptions"
+                                                                                    k-ng-model="model.replacementForId"
+                                                                                    k-on-change="onChangeReplacementFor(model.replacementForId)"
+                                                                                    style="width: 100%;">
+                                                                            </select>
+                                                                        </span>
+                                                                    </div>
+                                                                    <!--<select kendo-drop-down-tree id="replacementId" name="replacementId" k-options="replacementForOptions" k-ng-model="model.replacementForId" k-on-change="onChangeReplacementFor(model.replacementForId)" style="width: 100%">
+                                                                    </select>-->
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3" ng-if="!disableFollowTypeOfNeed">
+                                                                <div class="form-group">
+                                                                    <label class="form-label text-secondary">
+                                                                        Department: <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div id="tooltip">
+                                                                        <span id="tooltipText"> {{ model.deptDivisionCode}}</span>
+                                                                        <span>
+                                                                            <input kendo-drop-down-tree
+                                                                                   k-options="departmentOptions"
+                                                                                   name="departmentId"
+                                                                                   id="departmentId"
+                                                                                   k-ng-model="model.deptDivisionId"
+                                                                                   style="width: 100%;" />
+                                                                        </span>
+                                                                    </div>
+                                                                    <!--<div class="col-md-8">
+                                                                        <input kendo-drop-down-tree k-options="departmentOptions" name="departmentId" id="departmentId" k-ng-model="model.deptDivisionId" style="width: 100%;" />
+                                                                    </div>-->
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <div class="row align-items-center">
+                                                                        <div class="col">
+                                                                            <label class="form-label text-secondary">Job Grade: <span class="text-danger">*</span></label>
+                                                                            <select kendo-drop-down-list
+                                                                                    name="jobGrade"
+                                                                                    id="jobGradeId"
+                                                                                    k-options="jobGradesDataSource"
+                                                                                    ng-disabled="true"
+                                                                                    k-ng-model="model.jobGradeId"
+                                                                                    style="width: 100%;"
+                                                                                    k-on-open="openJobGrade()">
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label class="form-label text-secondary">Expired Day: <span class="text-danger">*</span></label>
+                                                                            <input kendo-numeric-text-box
+                                                                                   id="expiredDayPosition"
+                                                                                   k-min="0"
+                                                                                   class="form-control"
+                                                                                   name="expiredDayPosition"
+                                                                                   k-format="'#,0'"
+                                                                                   ng-model="model.expiredDayPosition"
+                                                                                   style="width: 100%; height:100%" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--update UI 432-->
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="form-label text-secondary">
+                                                                        Replacement For (User):
+                                                                    </label>
+                                                                    <select kendo-drop-down-list
+                                                                            name="replacementForUser"
+                                                                            id="replacementFor_UserId"
+                                                                            k-options="replacementForUsersOptions"
+                                                                            k-ng-model="model.replacementForUserId"
+                                                                            k-value-primitive="true"
+                                                                            style="width: 100%;"
+                                                                            ng-disabled="disabledForReplacement">
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <div class="row align-items-end mt-3">
+                                                                        <div class="col">
+                                                                            <label class="form-label text-secondary">Reason: <span class="text-danger">*</span></label>
+                                                                            <select kendo-drop-down-list
+                                                                                    name="reason"
+                                                                                    id="reason_id"
+                                                                                    k-options="reasonOptions"
+                                                                                    k-ng-model="model.reason"
+                                                                                    style="width: 100%;"
+                                                                                    ng-disabled="disabledForReplacement">
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <input type="text"
+                                                                                   id="otherReason"
+                                                                                   name="otherReason"
+                                                                                   class="form-control input-sm input-default"
+                                                                                   ng-model="model.otherReason"
+                                                                                   style="width: 100%;"
+                                                                                   ng-disabled="disableFollowReason">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--ticket 471-->
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="form-label text-secondary">
+                                                                        Resignation Application:
+                                                                    </label>
+                                                                    <div ng-if="model.resignationNumber">
+                                                                        <a target="_blank" class="k-textbox" style="color: #0073bb !important; border:0 !important; padding-left: 0px !important;" ui-sref="home.resignationApplication.item({referenceValue: model.resignationNumber, id: model.resignationId})" ui-sref-opts="{ reload: true }">{{model.resignationNumber}}</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--end 471-->
+                                                            <!--end 432-->
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="form-label text-secondary">
+                                                                        Cost Center:
+                                                                    </label>
+                                                                    <select kendo-drop-down-list
+                                                                            name="costCenterRecruitmentId"
+                                                                            id="costCenterRecruitmentId"
+                                                                            k-options="costCenterListOptions"
+                                                                            k-ng-model="model.costCenterRecruitmentId"
+                                                                            style="width: 100%;">
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="form-label text-secondary">
+                                                                        Business Unit (Personel Subarea): <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <select kendo-drop-down-list
+                                                                            name="locationCode"
+                                                                            id="locationCode"
+                                                                            k-options="locationsDataSource"
+                                                                            k-ng-model="model.locationCode"
+                                                                            style="width: 100%;">
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="form-label text-secondary">
+                                                                        HQ/Operation: <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <select kendo-drop-down-list
+                                                                            name="operation"
+                                                                            id="operation_id"
+                                                                            k-options="operationOptions"
+                                                                            k-ng-model="model.operation"
+                                                                            style="width: 100%;">
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="form-label text-secondary">
+                                                                        Working Address: <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <select kendo-drop-down-list
+                                                                            name="workingAddressRecruitmentId"
+                                                                            id="workingAddressRecruitment_id"
+                                                                            k-options="workingAddressListOptions"
+                                                                            k-ng-model="model.workingAddressRecruitmentId"
+                                                                            style="width: 100%;">
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <div class="row align-items-center">
+                                                                        <div class="col">
+                                                                            <label class="form-label text-secondary">Starting Date Require:</label>
+                                                                            <input style="width: 100%;"
+                                                                                   kendo-date-picker
+                                                                                   class="form-control"
+                                                                                   id="startingDateRequire"
+                                                                                   name="startingDateRequire"
+                                                                                   k-format="'dd/MM/yyyy'"
+                                                                                   k-date-input="true"
+                                                                                   k-ng-model="model.startingDateRequire" />
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label class="form-label text-secondary">Current Balance:</label>
+                                                                            <input type="text" id="currentBalance" name="currentBalance" ng-model="model.currentBalance" class="form-control input-sm" style="width: 100%;" readonly />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <div class="row align-items-center">
+                                                                        <div class="col">
+                                                                            <label class="form-label text-secondary">Working Time: <span class="text-danger">*</span></label>
+                                                                            <select kendo-drop-down-list
+                                                                                    name="workingTime"
+                                                                                    id="workingTimeId"
+                                                                                    k-options="workingTimesDataSource"
+                                                                                    k-ng-model="model.workingTimeId"
+                                                                                    k-value-primitive="true"
+                                                                                    style="width: 100%;">
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label class="form-label text-secondary">Contract Type: <span class="text-danger">*</span></label>
+                                                                            <select kendo-drop-down-list
+                                                                                    name="contractTypeCode"
+                                                                                    id="contractTypeCode"
+                                                                                    k-options="contractTypesOptions"
+                                                                                    k-ng-model="model.contractTypeCode"
+                                                                                    k-value-primitive="true"
+                                                                                    style="width: 100%;">
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3" ng-if="model.contractTypeCode === 'PT'">
+                                                                <div class="form-group">
+                                                                    <div class="row align-items-center">
+                                                                        <div class="col">
+                                                                            <label class="form-label text-secondary">
+                                                                                Working hour per week: <span class="text-danger">*</span>
+                                                                            </label>
+                                                                            <input kendo-numeric-text-box
+                                                                                   k-min="0"
+                                                                                   id="workingHoursPerWeerk"
+                                                                                   name="workingHoursPerWeerk"
+                                                                                   class="form-control"
+                                                                                   k-format="'#,0'"
+                                                                                   k-ng-model="model.workingHoursPerWeerk"
+                                                                                   style="width: 100%; height: 100%" />
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label class="form-label text-secondary">Wage per hour:</label>
+                                                                            <input kendo-numeric-text-box
+                                                                                   k-min="0" id="wagePerHour"
+                                                                                   name="wagePerHour"
+                                                                                   class="form-control"
+                                                                                   k-format="'#,0'"
+                                                                                   k-ng-model="model.wagePerHour"
+                                                                                   style="width: 100%; height: 100%" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3" ng-if="model.contractTypeCode === 'PT'">
+                                                                <div class="form-group">
+                                                                    <div class="row align-items-center">
+                                                                        <div class="col">
+                                                                            <label class="form-label text-secondary">
+                                                                                From Date: <span class="text-danger">*</span>
+                                                                            </label>
+                                                                            <input style="width: 100%; height: 100%"
+                                                                                   kendo-date-picker
+                                                                                   id="fromDate"
+                                                                                   name="fromDate"
+                                                                                   class="form-control"
+                                                                                   k-ng-model="model.fromDate"
+                                                                                   k-rebind="maxDate"
+                                                                                   k-on-change="fromDateChanged()"
+                                                                                   k-date-input="true"
+                                                                                   k-format="'dd/MM/yyyy'" />
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label class="form-label text-secondary">
+                                                                                To Date: <span class="text-danger">*</span>
+                                                                            </label>
+                                                                            <input style="width: 100%; height: 100%"
+                                                                                   kendo-date-picker
+                                                                                   id="toDate"
+                                                                                   name="toDate"
+                                                                                   class="form-control"
+                                                                                   k-ng-model="model.toDate"
+                                                                                   k-min="minDate"
+                                                                                   k-rebind="minDate"
+                                                                                   k-on-change="toDateChanged()"
+                                                                                   k-date-input="true"
+                                                                                   k-format="'dd/MM/yyyy'" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="form-label text-secondary">
+                                                                        Assign To:
+                                                                    </label>
+                                                                    <select kendo-drop-down-list
+                                                                            name="assignToId"
+                                                                            id="assignToId"
+                                                                            k-options="assignToDataSource"
+                                                                            k-ng-model="model.assignToId"
+                                                                            style="width: 100%;"
+                                                                            class="input-default"
+                                                                            disabled="disabled">
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="form-label text-secondary">
+                                                                        Department Name (For New Position): <span class="text-danger"></span>
+                                                                    </label>
+                                                                    <input type="text"
+                                                                           id="departmentName"
+                                                                           name="departmentName"
+                                                                           maxlength="50"
+                                                                           class="input-default form-control input-sm"
+                                                                           ng-model="model.departmentName"
+                                                                           style="width: 100%;"
+                                                                           disabled="disabled" /> <!--ng-disabled="disabledForReplacementDepartmentMass">-->
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="form-label text-secondary">
+                                                                        Category:
+                                                                    </label>
+                                                                    <select kendo-drop-down-list
+                                                                            name="category"
+                                                                            id="categoryId"
+                                                                            k-options="categoriesDataSource"
+                                                                            k-ng-model="model.categoryId"
+                                                                            k-value-primitive="true"
+                                                                            style="width: 100%;"
+                                                                            class="input-default"
+                                                                            disabled="disabled">
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="form-label text-secondary">
+                                                                        Working Location (From Mass):
+                                                                    </label>
+                                                                    <select kendo-drop-down-list
+                                                                            name="massLocation"
+                                                                            id="massLocation"
+                                                                            k-options="massLocationsDataSource"
+                                                                            k-ng-model="model.massLocationCode"
+                                                                            k-value-primitive="true"
+                                                                            style="width: 100%;"
+                                                                            class="input-default"
+                                                                            disabled="disabled">
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="form-group">
+                                                                    <!--<label class="form-label text-secondary">Attachment (Resignation form, JD):</label>-->
+                                                                    <label class="form-label text-secondary">
+                                                                        Attachment: <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <input name="files" id="attachmentDetail" type="file" kendo-upload k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }" k-select="onSelect" k-remove="removeAttach" />
+                                                                    <!--<label class="form-label text-secondary" ng-if="oldAttachments && oldAttachments.length">-->
+
+                                                                    <label class="form-label text-secondary" style="margin-top: 10px;">
+                                                                        <span class="text-danger">1. JD <span style="font-size:12px !important;">(required in all cases).</span></span><br />
+                                                                        <span class="text-danger" style="width: 100%;">2. Approved email <span style="font-size: 12px !important;">(for Non-budget headcount) (if any).</span></span><br />
+                                                                        <span class="text-danger">3. Approved new Org Chart <span style="font-size: 12px !important;">(for updating Org Chart) (if any).</span></span>
+                                                                    </label>
+                                                                    <div style="margin-top: 10px; padding-left: 30px;" ng-if="oldAttachments && oldAttachments.length">
+                                                                        <p><b>Uploaded Files</b></p>
+                                                                        <ol>
+                                                                            <li ng-repeat="doc in oldAttachments">
+                                                                                <a href="" ng-click="downloadAttachment(doc.id)">{{doc.fileDisplayName}}</a>
+                                                                                <a href="" ng-click="viewFileOnline(doc.id)">| {{'COMMON_BUTTON_VIEW'| translate}}</a>
+                                                                                <a href="" ng-click="removeOldAttachment(doc)">| {{'COMMON_BUTTON_DELETE'| translate}}</a>
+                                                                            </li>
+                                                                        </ol>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="mb-3">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="me-2" style="width: 4px; height: 20px; background-color: #006efa;"></div>
+                                                                    <h2 class="accordion-header">
+                                                                        <label class="poppins-semibold display-9">
+                                                                            Remark
+                                                                        </label>
+                                                                    </h2>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <textarea kendo-editor style="height: 1em;" k-ng-model="model.jobDescription"></textarea>
+                                                            </div>
+                                                            <!--<div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="caption" style="padding: 15px 0px 15px 0px;font-weight: bold;">
+                                                                        <span class="caption-subject hr-process uppercase f-collapse">
+                                                                            Job Requirement
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <textarea kendo-editor style="height: 1em" k-ng-model="model.jobRequirement"></textarea>
+                                                                </div>
+                                                            </div>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="group poppins-medium text-grey-300">
+                                    </div>
+
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-2" style="margin-bottom:12px">
+                                            <action-items model="model" save="save" form="g1"></action-items>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View File Online -->
+<div id="attachmentViewDialog" style="height:100%!important;display:none;" k-modal="true" k-visible="false">
+    <iframe id="attachment_owa" style="width:100%;height:97%;padding:0px!important;"></iframe>
+    <button class="btn btn-default btn-sm k-button pull-right close-owa-dialog" ng-click="owaClose()"><i class="k-icon k-i-close font-green-jungle"></i> Close</button>
+</div>
+
+<processing-stage workflow-instances="workflowInstances"></processing-stage>
+<tracking-history tracking-history="trackingHistory"></tracking-history>

@@ -1,0 +1,27 @@
+[
+  {
+    "SourceField": "RequestFrom",
+    "TargetField": "Edoc_user",
+    "Type": 0
+  },
+  {
+    "SourceField": "EmployeeCode",
+    "TargetField": "Pernr",
+    "Type": 0
+  },
+  {
+    "SourceField": "Date",
+    "TargetField": "Date", // "Endda"
+    "Type": 0
+  },
+  {
+    "SourceField": "NewShift",
+    "TargetField": "Tprog",
+    "Type": 0
+  },
+  {
+    "SourceField": "IsCheckedERD",
+    "TargetField": "E",
+    "Type": 0
+  }
+]

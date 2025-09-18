@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{815B6BF4-9420-4720-9F3B-8B8A2BB23E40}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>JobApproverNotification</RootNamespace>
+    <AssemblyName>JobApproverNotification</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\Job\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>E49D8F14F840EA1BBE194137C25024C5D578848A</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>JobApproverNotification_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\Aeon.HR.BusinessObjects\bin\Debug\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Aeon.HR.API\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="JobApproverNotificationService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JobApproverNotificationService.Designer.cs">
+      <DependentUpon>JobApproverNotificationService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProjectInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectInstaller.Designer.cs">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Args\EmailNotificationArgs.cs" />
+    <Compile Include="src\Args\NotificationUser.cs" />
+    <Compile Include="src\Args\Edoc1ArgV2.cs" />
+    <Compile Include="src\Args\Edoc1Arg.cs" />
+    <Compile Include="src\Args\EdocTask.cs" />
+    <Compile Include="src\ConfigAPI\SAPSettingsSection.cs" />
+    <Compile Include="src\ConfigAPI\TradeContractSettingsSection.cs" />
+    <Compile Include="src\DTOs\ResultDTO.cs" />
+    <Compile Include="src\Enums\EmailTemplateName.cs" />
+    <Compile Include="src\Helpers\JobDashboardHelper.cs" />
+    <Compile Include="src\ModelEntity\ITUsers.cs" />
+    <Compile Include="src\ModelEntity\ActingEntity.cs" />
+    <Compile Include="src\ModelEntity\UserDepartmentMappingEntity.cs" />
+    <Compile Include="src\ModelEntity\UserEntity.cs" />
+    <Compile Include="src\ModelEntity\DepartmentEntity.cs" />
+    <Compile Include="src\ModelEntity\WorkflowTaskEntity.cs" />
+    <Compile Include="src\SendNotifications.cs" />
+    <Compile Include="src\SQLExcute\SQLQuery.cs" />
+    <Compile Include="src\Utilities.cs" />
+    <Compile Include="src\ViewModel\Edoc1Result.cs" />
+    <Compile Include="src\ViewModel\MailWaitList.cs" />
+    <Compile Include="src\ViewModel\ResponseEmailTemplateModel.cs" />
+    <Compile Include="src\ViewModel\EmailTemplate.cs" />
+    <Compile Include="src\ViewModel\Edoc1TaskViewModelV2.cs" />
+    <Compile Include="src\ViewModel\Edoc1TaskViewModel.cs" />
+    <Compile Include="src\ViewModel\NotificationUserViewModel.cs" />
+    <Compile Include="src\ViewModel\EdocTaskViewModel.cs" />
+    <Compile Include="src\ViewModel\WorkflowTaskViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProjectInstaller.resx">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aeon.HR.Infrastructure\Aeon.HR.Infrastructure.csproj">
+      <Project>{1D52C6C0-82F2-49A0-A49F-9ED7E9B0D0B6}</Project>
+      <Name>Aeon.HR.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

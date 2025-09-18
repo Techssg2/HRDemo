@@ -1,0 +1,117 @@
+<style>
+    .workflow-history-step {
+        margin-bottom: 0px !important;
+    }
+</style>
+
+<div class="workflow-history-step step-status-completed" ng-if="step.rounds && step.rounds.length >0 && ((step.rounds[step.rounds.length-1].voteType==0 &&  step.rounds[step.rounds.length-1].isStepCompleted) ||step.rounds[step.rounds.length-1].voteType == 1)">
+    <div class="step-flag-container">
+        <div class="step-flag" data-toggle="tooltip" data-placement="right" title="Completed">
+            <span class="caption ng-binding">{{step.stepName |translate}}</span>
+        </div>
+    </div>
+    <div class="all-round-container">
+        <div class="step-caption-container">
+            <div class="step-caption-background">
+                <span class="caption ng-binding">{{step.stepName |translate}}</span>
+            </div>
+        </div>
+        <workflow-task ng-repeat="round in step.rounds" round="round"></workflow-task>
+    </div>
+</div>
+<div class="workflow-history-step step-status-rejected" ng-if="step.rounds && step.rounds.length >0 && step.rounds[step.rounds.length-1].voteType == 2">
+    <div class="step-flag-container">
+        <div class="step-flag" data-toggle="tooltip" data-placement="right" title="Rejected">
+            <span class="caption ng-binding">{{step.stepName |translate}}</span>
+        </div>
+    </div>
+    <div class="all-round-container">
+        <div class="step-caption-container">
+            <div class="step-caption-background">
+                <span class="caption ng-binding">{{step.stepName |translate}}</span>
+            </div>
+        </div>
+        <workflow-task ng-repeat="round in step.rounds" round="round"></workflow-task>
+    </div>
+</div>
+
+<div class="workflow-history-step step-status-requested-to-change" ng-if="step.rounds && step.rounds.length >0 && step.rounds[step.rounds.length-1].voteType == 3">
+    <div class="step-flag-container">
+        <div class="step-flag" data-toggle="tooltip" data-placement="right" title="Rejected">
+            <span class="caption ng-binding">{{step.stepName |translate}}</span>
+        </div>
+    </div>
+    <div class="all-round-container">
+        <div class="step-caption-container">
+            <div class="step-caption-background">
+                <span class="caption ng-binding">{{step.stepName |translate}}</span>
+            </div>
+        </div>
+        <workflow-task ng-repeat="round in step.rounds" round="round"></workflow-task>
+    </div>
+</div>
+
+<div class="workflow-history-step step-status-cancelled" ng-if="step.rounds && step.rounds.length >0 && step.rounds[step.rounds.length-1].voteType == 4">
+    <div class="step-flag-container">
+        <div class="step-flag" data-toggle="tooltip" data-placement="right" title="Cancelled">
+            <span class="caption ng-binding">{{step.stepName |translate}}</span>
+        </div>
+    </div>
+    <div class="all-round-container">
+        <div class="step-caption-container">
+            <div class="step-caption-background">
+                <span class="caption ng-binding">{{step.stepName |translate}}</span>
+            </div>
+        </div>
+        <workflow-task ng-repeat="round in step.rounds" round="round"></workflow-task>
+    </div>
+</div>
+<div class="workflow-history-step step-status-cancelled" ng-if="step.rounds && step.rounds.length >0 && step.rounds[step.rounds.length-1].voteType == 5">
+    <div class="step-flag-container">
+        <div class="step-flag" data-toggle="tooltip" data-placement="right" title="Out Of Period">
+            <span class="caption ng-binding">{{step.stepName |translate}}</span>
+        </div>
+    </div>
+    <div class="all-round-container">
+        <div class="step-caption-container">
+            <div class="step-caption-background">
+                <span class="caption ng-binding">{{step.stepName |translate}}</span>
+            </div>
+        </div>
+        <workflow-task ng-repeat="round in step.rounds" round="round"></workflow-task>
+    </div>
+</div>
+<div class="workflow-history-step step-status-in-progress" ng-if="step.rounds && step.rounds.length >0 && step.rounds[step.rounds.length-1].voteType==0 && !step.rounds[step.rounds.length-1].isStepCompleted">
+    <div class="step-flag-container">
+        <div class="step-flag" data-toggle="tooltip" data-placement="right" title="In Progress">
+            <span class="caption ng-binding">{{step.stepName |translate}}</span>
+        </div>
+    </div>
+    <div class="all-round-container">
+        <div class="step-caption-container">
+            <div class="step-caption-background">
+                <span class="caption ng-binding">{{step.stepName |translate}}</span>
+            </div>
+        </div>
+        <workflow-task ng-repeat="round in step.rounds" round="round"></workflow-task>
+
+    </div>
+</div>
+<div class="workflow-history-step step-status-not-started" ng-if="step.rounds && step.rounds.length> 0 && !step.rounds[step.rounds.length-1].id">
+    <div class="step-flag-container">
+        <div class="step-flag" data-toggle="tooltip" data-placement="right" title="Not Started">
+            <span class="caption ng-binding">{{step.stepName |translate}}</span>
+        </div>
+    </div>
+    <div class="all-round-container">
+        <div class="step-caption-container">
+            <div class="step-caption-background">
+                <span class="caption ng-binding">{{step.stepName |translate}}</span>
+            </div>
+        </div>
+        <div class="step-round-container ng-scope">
+            <div class="workflow-history-task">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<style>
+  .headline-invitation {
+    color: #b42e83 !important;
+    font-family: Nova-Regular !important;
+    font-size: 18px;
+  }
+</style>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet bordered light">
+      <div class="portlet-title">
+        <div class="caption caption-md">
+          <span class="caption-subject uppercase">{{title}} </span>
+        </div>
+        <div class="portlet-title">
+          <ng-include src="'training-request/header-actions.partial.html'" />
+        </div>
+      </div>
+      <div ng-include src="'common/error-summary.partial.html'"></div>
+
+      <ng-include
+        src="'training-invitation/new-invitation-info.partial.html'"
+      />
+      <ng-include src="'training-invitation/no-of-participants.partial.html'" />
+    </div>
+  </div>
+</div>

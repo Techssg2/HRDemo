@@ -1,0 +1,139 @@
+<style>
+    k-loading-mask {
+        z-index: 3;
+        /* must be larger than the z-index:2 of #container */
+    }
+
+    .k-dialog {
+        position: fixed;
+        top: calc(25%) !important;
+    }
+
+    #userGridReview .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+
+    #userGrid .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+
+    #userGrid .k-loading-image {
+        background-image: none !important;
+    }
+
+    #userGrid .k-loading-color {
+        opacity: 0;
+    }
+
+   
+</style>
+<div id="loading"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md tabbable-line">
+                    <span class="caption-subject uppercase">{{title}}</span>
+                </div>
+                <div class="actions">
+                    <kendo-button class="btn btn-default btn-sm" type="button" ng-click="sendData()">
+                        <i class="fa fa-send font-green-jungle right-5"></i> {{'COMMON_BUTTON_SEND_DATA'|translate}}
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" type="button" ng-click="save()">
+                        <i class="k-icon k-i-save font-green-jungle"></i> {{'COMMON_BUTTON_SAVE'|translate}}
+                    </kendo-button>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row ng-scope" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <workflow-comment></workflow-comment>
+                    </div>
+                </div>
+                <div class="row ng-scope" ng-if="getLengthObjectKeys(errorsTwo) > 0"
+                    style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12" ng-repeat="(key, value) in errorsTwo">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase" ng-if="key">{{key}}<span ng-switch-when="key"
+                                    class="font-red-thunderbird">*:</span></h5>
+                            <ul ng-if="value.length > 0">
+                                <li ng-repeat="error in value"><span ng-bind-html="renderHtml(error.message)"></span>
+                                </li>
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content-wrapper float-none">
+                    <form name="formItem">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="row align-middle">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label
+                                                class="col-md-4 control-label">{{'COMMON_DEPT_LINE'|translate}}:</label>
+                                            <div class="col-md-8 ">
+                                                <select kendo-drop-down-list name="dept_line_name" id="dept_line_id"
+                                                    k-options="deptLineOptions" k-ng-model="model.deptLine"
+                                                    style="width: 100%;">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label
+                                                class="col-md-4 control-label">{{'COMMON_DIVISION_GROUP'|translate}}:</label>
+                                            <div class="col-md-8 ">
+                                                <input kendo-drop-down-tree="divisionTree" class="w100"
+                                                    name="division_name" k-on-change="onChangeDivision(model.deptLine)"
+                                                    k-options="divisionOptions" k-ng-model="model.division"
+                                                    id="division_id" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-middle">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label
+                                                class="col-md-4 control-label">{{'SHIFT_PLAN_PERIOD'|translate}}:</label>
+                                            <div class="col-md-4 ">
+                                                <select id="period_source_id" kendo-drop-down-list
+                                                    k-options="targetPlans" style="width: 100%;"
+                                                    name="period_source_name" k-ng-model="model.period"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mrt10">
+                                    <div class="col-md-12">
+                                        <kendo-grid id="grid_user_id" k-options="gridUsers" k-rebind="gridUsers">
+                                        </kendo-grid>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="portlet-title">
+                <div class="actions">
+                    <kendo-button class="btn btn-default btn-sm" type="button" ng-click="sendData()">
+                        <i class="fa fa-send font-green-jungle right-5"></i> {{'COMMON_BUTTON_SEND_DATA'|translate}}
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" type="button" ng-click="save()">
+                        <i class="k-icon k-i-save font-green-jungle"></i> {{'COMMON_BUTTON_SAVE'|translate}}
+                    </kendo-button>
+                </div>
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>
+<!-- <processing-stage workflow-instances="workflowInstances"></processing-stage> -->

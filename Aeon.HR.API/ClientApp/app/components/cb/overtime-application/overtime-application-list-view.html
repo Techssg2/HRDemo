@@ -1,0 +1,210 @@
+<style>
+    .k-datepicker {
+        margin-top: 3px;
+        height: 37px
+    }
+
+    .k-grid-header-wrap.sync-collapse {
+        width: calc(100% - 532px) !important;
+    }
+
+    .k-grid-content.sync-collapse {
+        width: calc(100% - 532px) !important;
+    }
+</style>
+
+
+<div class="row">
+    <div class="p-3">
+        <!-- Title -->
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="group poppins-medium text-grey-300">
+                <p class="display-8 m-0">
+                    {{title}}
+                </p>
+                <p class="display-11">
+                    <span class="opacity-40">Number of request:</span> {{total}}
+                </p>
+            </div>
+            <div class="group">
+                <a ui-sref='home.overtimeApplication.item({referenceValue: null, action: {}, id: null, status: null})' ui-sref-opts="{ reload: true }" href="#!/home/overtimeApplication/item/?id=" role="button" class="btn btn-primary rounded-3 poppins-regular display-8 py-2 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"></path>
+                    </svg>
+                    &nbsp;Create Request
+                </a>
+            </div>
+        </div>
+        <div class="h-1r"></div>
+        <div class="table-rounded-toolbar">
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="d-flex gap-2 align-items-center">
+                            <select id="mySelect" class="form-select poppins-medium display-9 leading-16 py-2 select-style1 mw-25"
+                                    aria-label="Default select example" ng-model="selectedTab" ng-change="onTabChange()">
+                                <option value="0">All Requests</option>
+                                <option value="1">My Requests</option>
+                            </select>
+                            <button type="button" class="btn btn-outline-cyan rounded-3 poppins-regular display-9 py-2 px-3" ng-click="export()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class=" bi bi-check-square" viewBox="0 0 1920 1920">
+                                    <path d="m0 1016.081 409.186 409.073 79.85-79.736-272.867-272.979h1136.415V959.611H216.169l272.866-272.866-79.85-79.85L0 1016.082ZM1465.592 305.32l315.445 315.445h-315.445V305.32Zm402.184 242.372-329.224-329.11C1507.042 187.07 1463.334 169 1418.835 169h-743.83v677.647h112.94V281.941h564.706v451.765h451.765v903.53H787.946V1185.47H675.003v564.705h1242.353V667.522c0-44.498-18.07-88.207-49.581-119.83Z" fill-rule="evenodd"></path>
+                                </svg>
+                                &nbsp;Export
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-flex align-items-center justify-content-end gap-1">
+                            <!--new-->
+                            <button type="button"
+                                    class="btn-none"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"
+                                    ng-click="toggleFilterPanel(true)">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="16"
+                                     height="16"
+                                     fill="currentColor"
+                                     class="bi bi-funnel"
+                                     viewBox="0 0 16 16">
+                                    <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"></path>
+                                </svg>
+                            </button>
+                            <!--new-->
+                            <!--<div class="dropdown">
+                                <button class="btn-none dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"></path>
+                                        -.
+                                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"></path>
+                                    </svg>
+                                </button>
+                                <div class="dropdown-menu poppins-regular display-9 w-max py-2 px-3 border-0 shadow" style="">
+                                    <p class="ps-3">Show all columns</p>
+                                    <ul class="p-0">
+                                        <li>
+                                            <div class="form-check">
+                                                <input class="form-check-input dark-style" type="checkbox" id="darkCheckbox">
+                                                <label class="form-check-label" for="darkCheckbox">
+                                                    From
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-check">
+                                                <input class="form-check-input dark-style" type="checkbox" id="darkCheckbox">
+                                                <label class="form-check-label" for="darkCheckbox">
+                                                    To
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-check">
+                                                <input class="form-check-input dark-style" type="checkbox" id="darkCheckbox" checked="">
+                                                <label class="form-check-label" for="darkCheckbox">
+                                                    Month of use
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-check">
+                                                <input class="form-check-input dark-style" type="checkbox" id="darkCheckbox" checked="">
+                                                <label class="form-check-label" for="darkCheckbox">
+                                                    Request for
+                                                </label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-dark rounded-3 poppins-regular display-9 py-2 px-5">
+                                            Save config
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <kendo-grid options="model.overtimeApplicationGridOptions" id="gridRequests" style="border-top-left-radius: 0; border-top-right-radius: 0;"></kendo-grid>
+                </div>
+            </div>
+        </div>
+        <div class="portlet-body">
+          
+
+
+            <div class="custom-popup" ng-show="isModalVisible">
+                <div class="custom-dialog custom-dialog-centered">
+                    <div class="custom-content p-3 rounded-4">
+                        <div class="d-flex align-items-center">
+                            <h1 class="custom-title fs-5 modal-title-style1" id="exampleModalLabel">SEARCH</h1>
+                            <button type="button" class="btn-close ms-auto" ng-click="toggleFilterPanel(false)" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label">{{'COMMON_KEYWORD' | translate}}:</label>
+                                        <input type="text" maxlength="50" class="form-control" style="width: 100%;" ng-model="query.keyword">
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">{{'COMMON_DEPARTMENT' | translate}}:</label>
+                                        <input class="form-select" id="departmentId" kendo-drop-down-tree k-options="departmentOptions" ng-model="query.departmentCode" style="width: 100%; height: 38px;" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label">{{'COMMON_STATUS' | translate}}:</label>
+                                        <select kendo-multi-select k-options="statusOptions" k-ng-model="query.status"></select>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">{{'COMMON_CREATED_DATE' | translate}}:</label>
+                                        </br> <range-Date-Of-Date-Picker d-from="query.fromDate" d-to="query.toDate"></range-Date-Of-Date-Picker>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label">OT Date:</label>
+                                        </br> <custom-Date-Range-Picker d-from="query.otDateFrom" d-to="query.otDateTo"></custom-Date-Range-Picker>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">User SAPCode:</label>
+                                        <input type="text" name="userSAPCode" class="form-control" style="width: 100%;" ng-model="query.userSAPCode" />
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-end gap-2">
+                                    <button type="button" class="btn btn-white rounded-3 poppins-regular display-9" ng-click="clearSearch()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"></path>
+                                            <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"></path>
+                                        </svg>
+                                        &nbsp;{{'COMMON_BUTTON_RESET' | translate}}
+                                    </button>
+                                    <button type="button" class="btn btn-primary rounded-3 poppins-regular display-9" ng-click="applySearch()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                                        </svg>
+                                        &nbsp;{{'COMMON_BUTTON_SEARCH' | translate}}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--</div>-->
+
+        </div>
+        <!-- Content -->
+        <!--</div>-->
+    </div>
+</div>

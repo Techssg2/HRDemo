@@ -1,0 +1,105 @@
+<form id="grid" name="formItem" kendo-validator="formValidate.validator" ng-submit="save('Opened', formItem)" novalidate>
+    <div class="page-content-wrapper float-none">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="portlet bordered light">
+                    <!-- Title -->
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <span class="caption-subject uppercase">{{title}}</span>
+                        </div>
+                        <div class="actions">
+                            <kendo-button class="btn btn-default btn-sm" type="submit">
+                                <i style="font-size: 12px; padding-right: 3px;" class="fa fa-paper-plane font-green-jungle"></i>Submit
+                            </kendo-button>
+                            <kendo-button class="btn btn-default btn-sm" type="button" ng-click="save('Draft', formItem)">
+                                <i class="k-icon k-i-save font-green-jungle"></i> Save
+                            </kendo-button>
+                            <kendo-button class="btn btn-default btn-sm" type="button" ng-click="cancel('home.recruitment')">
+                                <i class="k-icon k-i-close font-green-jungle"></i> Close
+                            </kendo-button>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+                        <div class="row ng-scope" ng-if="errors.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                            <div class="col-sm-12">
+                                <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                                    <h5 class="bold uppercase">Please enter all required fields <span class="font-red-thunderbird">*</span>:</h5>
+                                    <p></p>
+                                    <ul>
+                                        <li ng-repeat="error in errors"><span class="bold ">{{error[0]}}</span>: {{error[1]}}</li>
+                                    </ul>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="display: flex; align-items: center;">
+                            <label class="col-md-1" for="position">Position: <span class="font-red-thunderbird">*</span> </label>
+                            <div class="col-md-5">
+                                <input type="text" id="position" name="Position" class="k-textbox" style="width: 100%;" required ng-model="form.positionName" autocomplete="off" validationMessage="Field is required" />
+                            </div>
+                            <div class="col-md-1" for="devpDivision"> Dept/ Division: <span class="font-red-thunderbird">*</span> </div>
+                            <div class="col-md-5">
+                                <input id="devpDivision" name="Dept/ Division" kendo-drop-down-tree k-options="departmentOptions" k-ng-model="form.deptDivisionId" style="width: 100%;" required validationMessage="Field is required">
+                            </div>
+                        </div>
+
+                        <div class="row mrt10" style="display: flex; align-items: center;">
+                            <div class="col-md-6">
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-md-2" for="job"> Job Grade: </div>
+                                    <div class="col-md-5">
+                                        <input class="form-control input-sm k-textbox" id="job" name="Job grade" type="text" style="width: 100%;" readonly ng-model="form.deptDivisionJobGradeCaption" />
+                                    </div>
+                                    <div class="col-md-2" for="job"> Expired Day: </div>
+                                    <div class="col-md-3">
+                                        <input kendo-numeric-text-box k-min="0" k-format="'#,0'" id="expiredDate" name="Expired Date" ng-model="form.expiredDay" style="width: 100%;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1" for="location"> Location: <span class="font-red-thunderbird">*</span> </div>
+                            <div class="col-md-5">
+                                <select id="location" name="Location" ng-model="form.locationCode" style="width: 100%;" kendo-drop-down-list k-options="locationOptions" required validationMessage="Field is required"></select>
+                            </div>
+                        </div>
+
+                        <div class="row mrt10" style="display: flex; align-items: center;">
+                            <div class="col-md-1" for="budge"> Check Budget: <span class="font-red-thunderbird">*</span> </div>
+                            <div class="col-md-5">
+                                <select id="budge" name="Check Budget" ng-model="form.hasBudget" style="width: 100%;" kendo-drop-down-list k-options="budgetOptions" required validationMessage="Field is required"></select>
+                            </div>
+                            <div class="col-md-1"> Quantity: <span class="font-red-thunderbird">*</span> </div>
+                            <div class="col-md-5">
+                                <input kendo-numeric-text-box id="quantity" name="Quantity" k-options="quantityOptions" ng-model="form.quantity" required validationMessage="Field is required" k-rebind="[quantityOptions]" />
+                            </div>
+                        </div>
+
+                        <div class="row mrt10" style="display: flex; align-items: center;">
+                            <label class="col-md-1" for="assign">Assign To: <span class="font-red-thunderbird">*</span></label>
+                            <div class="col-md-5">
+                                <select kendo-drop-down-list="widget.assign" id="assignTo" name="Assign To" ng-model="form.assignToId" style="width: 100%;" k-options="assignOptions" required validationMessage="Field is required"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content -->
+                    <div class="portlet-title">
+                        <div class="actions">
+                            <kendo-button class="btn btn-default btn-sm" type="submit">
+                                <i style="font-size: 12px; padding-right: 3px;" class="fa fa-paper-plane font-green-jungle"></i>Submit
+                            </kendo-button>
+                            <kendo-button class="btn btn-default btn-sm" type="button" ng-click="save('Draft')">
+                                <i class="k-icon k-i-save font-green-jungle"></i> Save
+                            </kendo-button>
+                            <kendo-button class="btn btn-default btn-sm" type="button" ng-click="cancel('home.recruitment')">
+                                <i class="k-icon k-i-close font-green-jungle"></i> Close
+                            </kendo-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

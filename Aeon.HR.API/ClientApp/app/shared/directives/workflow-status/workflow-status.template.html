@@ -1,0 +1,26 @@
+<!--<div title="{{status=='null'?'':status}}">
+    <span ng-switch on="status">
+        <i ng-switch-when="Draft" class='fa fx-status-icon right-2 fa-circle font-grey'></i>
+        <i ng-switch-when="Completed|Completed Changing" ng-switch-when-separator="|" class='fa fx-status-icon right-2 fa-check-circle font-green-jungle'></i>       
+        <i ng-switch-when="Cancelled|Rejected|Out Of Period|Cancelled Booking" ng-switch-when-separator="|" class='fa fx-status-icon right-2 fa-circle font-red'></i>
+        <i ng-switch-default class='fa fx-status-icon right-2 fa-circle font-yellow-lemon'></i>-->
+        <!-- them moi cho translate VN -->
+        <!--<i ng-switch-when="Nháp" class='fa fx-status-icon right-2 fa-circle font-grey'></i>
+        <i ng-switch-when="Hoàn tất|Hoàn tất thay đổi" ng-switch-when-separator="|" class='fa fx-status-icon right-2 fa-check-circle font-green-jungle'></i>        
+        <i ng-switch-when="Đã hủy|Bị từ chối|Đã hủy do quá chu kỳ lương" ng-switch-when-separator="|" class='fa fx-status-icon right-2 fa-circle font-red'></i>
+    </span>
+    {{status=='null'?'':status}}
+</div>-->
+<div title="{{status=='null'?'':status}}">
+    <span class="dot-container" ng-switch on="status">
+        <span ng-switch-when="Draft" class='dot bg-draft'></span>
+        <span ng-switch-when="Completed|Completed Changing" ng-switch-when-separator="|" class='dot bg-success'></span>
+        <span ng-switch-when="Cancelled|Rejected|Out Of Period|Cancelled Booking" ng-switch-when-separator="|" class='dot bg-danger'></span>
+        <span ng-switch-default class='dot bg-warning'></span>
+        <!-- them moi cho translate VN -->
+        <span ng-switch-when="Nháp" class='dot bg-draft'></span>
+        <span ng-switch-when="Hoàn tất|Hoàn tất thay đổi" ng-switch-when-separator="|" class='dot bg-success'></span>
+        <span ng-switch-when="Đã hủy|Bị từ chối|Đã hủy do quá chu kỳ lương" ng-switch-when-separator="|" class='dot bg-danger'></span>
+    </span>
+    {{status=='null'?'':status}}
+</div>

@@ -1,0 +1,207 @@
+<style>
+    k-loading-mask {
+        z-index: 3;
+        /* must be larger than the z-index:2 of #container */
+    }
+
+    .k-dialog {
+        position: fixed;
+        top: calc(25%) !important;
+    }
+
+    #userGridReview .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+
+    #userGrid .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+
+    #userGrid .k-loading-image {
+        background-image: none !important;
+    }
+
+    #userGrid .k-loading-color {
+        opacity: 0;
+    }
+
+    /* .render-color {
+        background-color: var(--color) !important;
+    } */
+
+    .k-grid-content {
+        min-height: 0px !important;
+        max-height: 500px !important;
+    }
+
+    .k-grid-content-locked {
+        overflow: hidden !important;
+        min-height: 50px !important;
+    }
+
+    tr.separate td {
+        border-bottom: 1px solid #dedbdb !important;
+    }
+
+    .table-cell {
+        border: 1px solid #dedbdb !important;
+    }
+
+    .k-grid-header-wrap.sync-collapse {
+        width: calc(100% - 480px) !important;
+    }
+
+    .k-grid-content.sync-collapse {
+        width: calc(100% - 480px) !important;
+    }
+</style>
+<div id="loading"></div>
+<div class="p-3">
+    <div class="row title-wrapper stickybar-1">
+        <div class="col-6">
+            <h2 class="widget-title">{{titleHeader}}</h2>
+        </div>
+        <div class="col-6">
+            <div class="d-flex gap-2 flex-wrap justify-content-end">
+                <button type="button" ng-click="cancel()" class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+                    <i class="fa fa-xmark" style="color: #18aa7e;"></i> &nbsp;{{'COMMON_BUTTON_CLOSE'|translate}}
+                </button>
+
+                <button type="button" href ="" class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1" ng-click="downloadShiftCode()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" style="color:#18aa7e;"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    &nbsp;{{'DOWNLOAD_SHIFT_CODE'|translate}}
+                </button>
+
+                
+                <button type="button"
+                        ng-click="export()"
+                        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+                    <svg fill="#38B6FF" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" stroke="#38B6FF">
+                        <path d="M16,9.5v4A2.5,2.5,0,0,1,13.5,16H2.5A2.5,2.5,0,0,1,0,13.5V2.5A2.5,2.5,0,0,1,2.5,0h3A.5.5,0,0,1,6,.5a.5.5,0,0,1-.5.5h-3A1.5,1.5,0,0,0,1,2.5v11A1.5,1.5,0,0,0,2.5,15h11A1.5,1.5,0,0,0,15,13.5v-4a.5.5,0,0,1,1,0ZM5,9.5a.5.5,0,0,0,1,0v-2A3.5,3.5,0,0,1,9.5,4h4.79L12.15,6.15a.48.48,0,0,0,0,.7.48.48,0,0,0,.7,0l3-3A.36.36,0,0,0,16,3.69a.5.5,0,0,0,0-.38.36.36,0,0,0-.11-.16l-3-3a.48.48,0,0,0-.7,0,.48.48,0,0,0,0,.7L14.29,3H9.5A4.51,4.51,0,0,0,5,7.5Z" />
+                    </svg>&nbsp;{{'COMMON_BUTTON_EXPORT'|translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="portlet-body mb-3">
+        <div class="mt-3">
+            <div class="accordion accordion-style1">
+                <div class="accordion-item">
+                    <div class="accordion-collapse collapse show">
+                        <div class="portlet bordered light">
+                            <!-- Title -->
+                            <div class="row p-3">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 24 24">
+                                                <path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z" fill="#0D0D0D"></path>
+                                            </svg>&nbsp;{{ createdByFullName }} <!--({{ model.employeeCode }})-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <!--<div class="row ng-scope" style="padding: 15px 0;margin-bottom:15px">
+                                    <div class="col-sm-12">
+                                        <workflow-comment></workflow-comment>
+                                    </div>
+                                </div>-->
+                                <div class="row ng-scope" ng-if="getLengthObjectKeys(errorsTwo) > 0"
+                                     style="padding: 15px 0;margin-bottom:15px">
+                                    <div class="col-sm-12" ng-repeat="(key, value) in errorsTwo">
+                                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                                            <h5 class="bold uppercase" ng-if="key">
+                                                {{key}}<span ng-switch-when="key"
+                                                             class="font-red-thunderbird">*:</span>
+                                            </h5>
+                                            <ul ng-if="value.length > 0">
+                                                <li ng-repeat="error in value">
+                                                    <span ng-bind-html="renderHtml(error.message)"></span>
+                                                </li>
+                                            </ul>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="accordion accordion-style1">
+                                        <div class="accordion-item">
+                                            <div class="accordion-collapse collapse show">
+                                                <div class="accordion-body">
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label text-secondary">{{'COMMON_DEPT_LINE'|translate}}:</label>
+                                                                <select kendo-drop-down-list name="dept_line_name" id="dept_line_id"
+                                                                        k-options="deptLineOptions" k-ng-model="model.deptId"
+                                                                        style="width: 100%;">
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label text-secondary">{{'COMMON_DIVISION_GROUP'|translate}}:</label>
+                                                                <input kendo-drop-down-tree="divisionTree" class="w100"
+                                                                       name="division_name" k-on-change="onChangeDivision(model.divisionId)"
+                                                                       k-options="divisionOptions" k-ng-model="model.divisionId"
+                                                                       id="division_id" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label text-secondary">{{'SHIFT_PLAN_PERIOD'|translate}}:</label>
+                                                                <select id="period_source_id" kendo-drop-down-list
+                                                                        k-options="targetPlans" style="width: 100%;"
+                                                                        name="period_source_name" k-ng-model="model.periodId"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-label text-secondary">{{'TARGET_PLAN_NOTE_ALERT'|translate}}:</label>
+                                                                </br><img kendo-tooltip k-content="colorContent" k-position="'right'"
+                                                                          k-width="'400px'" class="img-circle"
+                                                                          src="ClientApp/assets/images/icon/color-picker-icon.png" style="height:22.5px;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mrt10">
+                                                        <div class="col-md-12">
+                                                            <kendo-grid id="grid_user_id" k-options="gridUsers" k-rebind="gridUsers">
+                                                            </kendo-grid>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="group poppins-medium text-grey-300">
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2" style="margin-bottom:12px">
+                                        <button type="button" ng-click="cancel()" class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+                                            <i class="fa fa-xmark" style="color: #18aa7e;"></i> &nbsp;{{'COMMON_BUTTON_CLOSE'|translate}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <processing-stage workflow-instances="workflowInstances"></processing-stage> -->

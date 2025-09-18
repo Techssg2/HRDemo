@@ -1,0 +1,40 @@
+﻿<!--//Khoa truoc khi upgrade-->
+
+<!--<div
+  class="note note-danger note-bordered"
+  style="margin-bottom: 0px"
+  ng-if="lastStep && (lastStep.action == 'Rejected' || lastStep.action == 'Requested To Change' || lastStep.action == 'Cancelled')"
+>-->
+  <!-- <h5 class="bold uppercase"><span class="font-red-thunderbird">Reason</span>:</h5> -->
+  <!--<h5 class="bold uppercase">
+    <span class="font-red-thunderbird">{{'COMMON_REASON'|translate}}</span>:
+  </h5>
+  <p><span class="bold">{{ lastStep.comment }}</span></p>-->
+  <!-- <p>Processor: <span class="bold">{{ status.lastHistory.approverFullName }}</span></p> -->
+  <!--<p>
+    {{'COMMON_PROCESSOR'|translate}}:
+    <span class="bold">{{ lastStep.createdByFullName }}</span>
+  </p>
+</div>-->
+
+
+<div class="alert alert-danger-style1 ng-scope" role="alert" style="margin-bottom: 0px"  ng-if="lastStep && (lastStep.action == 'Rejected' || lastStep.action == 'Requested To Change' || lastStep.action == 'Cancelled')">
+    <!-- <h5 class="bold uppercase"><span class="font-red-thunderbird">Reason</span>:</h5> -->
+    <h6 class="heading"><span class="font-red-thunderbird ng-binding">{{'COMMON_REASON'|translate}}</span>:</h6>
+    <p><strong class="bold ng-binding">{{ lastStep.comment }}</strong></p>
+    <!-- <p>Processor: <span class="bold">{{ status.lastHistory.approverFullName }}</span></p> -->
+<p class="ng-binding">  {{'COMMON_PROCESSOR'|translate}}: <strong class="bold ng-binding">{{ lastStep.createdByFullName }}</strong></p>
+</div>
+
+<!-- <div
+  class="note note-danger note-bordered"
+  style="margin-bottom: 0px"
+  ng-if="lastStep && (lastStep.action == 'Completed' && lastStep.comment)"
+>
+  <h5 class="bold uppercase">
+    <span class="font-red-thunderbird">{{'COMMON_REASON'|translate}}</span>:
+  </h5>
+  <p>
+    <span class="bold" ng-if="lastStep.comment">{{ lastStep.comment }}</span>
+  </p>
+</div> -->

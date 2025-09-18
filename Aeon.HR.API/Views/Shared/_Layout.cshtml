@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <title>SSG</title>
+    <script type="text/javascript">
+        var sr = '@ViewBag.SR';
+        var uxr = '@ViewBag.UXR';
+        var edocV = '1.0';
+        var baseUrl = "/";
+        var baseUrlApi = "/api";
+        var edoc1Url = '@ViewBag.Edoc1Url';
+        var skuUrl = '@ViewBag.skuUrl';
+        var homeUpgradeUrlAPI = "https://edocv2.aeon.com.vn";
+        var subDomainEdoc1 = "/FinV2";
+        var subDomainSKU = "/SKUV2";
+        var subDomainLiquor = "/LiquorV2";
+        var subDomainHR = "/HRV2";
+    </script>
+    @* Define Chat bot *@
+    <script src="https://cutiena-ai-app-webadm-prod.azurewebsites.net/chat.js"></script>
+    <!-- Signal -->
+    @* End define chatbot *@
+    <link type="text/css" rel="stylesheet" href="ClientApp/assets/lib/kendo/styles/kendo.common.min.css" />
+    @*
+        <link type="text/css" rel="stylesheet" href="ClientApp/assets/lib/kendo/styles/fx.framework.core.css" />
+        <link type="text/css" rel="stylesheet" href="ClientApp/assets/css/aeon.edocument.css" />
+        <link type="text/css" rel="stylesheet" href="ClientApp/assets/css/shared.css" />
+        <link type="text/css" rel="stylesheet" href="ClientApp/assets/css/styles.css" />
+    *@
+
+    <link type="text/css" rel="stylesheet" href="ClientApp/assets/css/angular-ui-notification.css" />
+
+    @*<script src="ClientApp/newassets/load-scripts.js"></script>*@
+    @*<script src="ClientApp/newassets/js/bootstrap.min.js"></script>*@
+    <script src="ClientApp/newassets/js/popper.min.js"></script>
+    <script src="ClientApp/newassets/js/flatpickr.js"></script>
+    <script src="ClientApp/newassets/js/embla-carousel-autoplay.umd.js"></script>
+
+    <script src="~/ClientApp/newassets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @*        <script src="~/ClientApp/newassets/js/embla-carousel.js"></script>
+        <script src="~/ClientApp/newassets/js/dragdrop.js"></script>*@
+    <script src="~/ClientApp/newassets/js/chart.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    @*    <link rel="stylesheet" href="ClientApp/newassets/css/all.min.css">
+        <link rel="stylesheet" href="ClientApp/newassets/css/bootstrap.min.n.css">*@
+    <link rel="stylesheet" href="~/ClientApp/newassets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="ClientApp/newassets/css/custom.css">
+    <link rel="stylesheet" href="ClientApp/newassets/css/colors.css">
+    <link rel="stylesheet" href="~/ClientApp/newassets/css/fonts.css">
+    <link rel="stylesheet" href="~/ClientApp/newassets/css/grid.css">
+    <link rel="stylesheet" href="~/ClientApp/newassets/css/reset.css">
+    <link rel="stylesheet" href="~/ClientApp/newassets/css/style.css">
+    <link rel="stylesheet" href="~/ClientApp/newassets/css/responsive.css">
+    <link rel="stylesheet" href="~/ClientApp/newassets/css/darkmode.css">
+    <link rel="stylesheet" href="~/ClientApp/newassets/library/flatpickr/flatpickr.min.css">
+    <link rel="stylesheet" href="~/ClientApp/newassets/library/bootstrap-table/bootstrap-table-fixed-columns.min.css">
+    <link rel="stylesheet" href="~/ClientApp/newassets/library/bootstrap-table/bootstrap-table.min.js">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+
+    <script src="ClientApp/newassets/library/embla-carousel/embla-carousel.umd.js"></script>
+    <script src="ClientApp/newassets/library/embla-carousel/embla-carousel-autoplay.umd.js"></script>
+    <script src="ClientApp/newassets/library/flatpickr/flatpickr.min.js"></script>
+    <script src="ClientApp/newassets/library/chartjs/chart.js"></script>
+    <script src="ClientApp/newassets/library/fullcalendar/index.global.min.js"></script>
+    @*<script src="~/ClientApp/newassets/library/jquery-3.5.0.slim.min.js"></script>*@
+    <script src="~/ClientApp/newassets/library/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/ClientApp/newassets/library/bootstrap-table/bootstrap-table-fixed-columns.min.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="ClientApp/assets/lib/kendo/styles/kendo.common.min.css" />
+    <link type="text/css" rel="stylesheet" href="ClientApp/assets/lib/kendo/styles/kendo.office365.min.css" />
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="ClientApp/assets/lib/kendo/js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.2.1/jquery.signalR.min.js"></script>
+    <script src="https://hrapi50.aeon.com.vn/EdocIntegr/notificationHub/hubs"></script>
+    <script src="ClientApp/assets/lib/kendo/js/jszip.min.js"></script>
+    <script src="ClientApp/assets/lib/kendo/js/angular.min.js"></script>
+    <script src="ClientApp/assets/lib/kendo/js/kendo.all.min.js"></script>
+    <script src="ClientApp/assets/lib/kendo/js/angular-cookies.min.js"></script>
+    <script src="ClientApp/assets/lib/angular-translate/angular-translate.min.js"></script>
+    <script src="ClientApp/assets/lib/angular-translate/angular-translate-loader-static-files.min.js"></script>
+    <script src="ClientApp/assets/lib/ui-router/angular-ui-router.min.js"></script>
+    <script src="ClientApp/assets/lib/angular-resource/angular-resource.min.js"></script>
+    <script src="ClientApp/assets/lib/lodash/lodash.min.js"></script>
+    <script src="ClientApp/assets/lib/file/FileSaver.js"></script>
+    <script src="ClientApp/assets/lib/kendo/js/angular-local-storage.min.js"></script>
+    <script src="ClientApp/assets/lib/fns/date_fns.min.js"></script>
+    <!-- My js files -->
+    <script src="ClientApp/app/app.module.js"></script>
+    <script src="ClientApp/app/components/recruitment/recruitment-controller.js"></script>
+    <script src="ClientApp/app/components/cb/cb-controller.js"></script>
+    <script src="ClientApp/app/components/setting/setting-controller.js"></script>
+    <script src="ClientApp/app/components/dashboard/dashboard-controller.js"></script>
+    <script src="ClientApp/app/components/dashboard/orgchart/orgchart-controller.js"></script>
+    <script src="ClientApp/app/app-controller.js"></script>
+    <script src="ClientApp/app/components/recruitment/applicant/applicant-controller.js"></script>
+    <script src="ClientApp/app/components/recruitment/position/position-controller.js"></script>
+    <script src="ClientApp/app/components/recruitment/promote-and-transfer/promote-and-transfer-controller.js"></script>
+    <script src="ClientApp/app/components/recruitment/new-staff-onboard/new-staff-onboard-controller.js"></script>
+    <script src="ClientApp/app/components/recruitment/request-to-hire/request-to-hire-controller.js"></script>
+    <script src="ClientApp/app/components/cb/overtime-application/overtime-application-controller.js"></script>
+    <script src="ClientApp/app/components/cb/resignation-application/resignation-application-controller.js"></script>
+    <script src="ClientApp/app/components/cb/shift-exchange-application/shift-exchange-application-controller.js"></script>
+    <script src="ClientApp/app/components/cb/leave-management/leave-management-controller.js"></script>
+    <script src="ClientApp/app/components/setting/departments/department-controller.js"></script>
+    <script src="ClientApp/app/components/cb/missing-timelock/missing-timelock-controller.js"></script>
+    <script src="ClientApp/app/components/setting/job-grade/job-grade-controller.js"></script>
+    <script src="ClientApp/app/components/recruitment/handover/handover-controller.js"></script>
+    <script src="ClientApp/app/components/setting/recruitments/working-time/recruitment-working-time-controller.js"></script>
+    <script src="ClientApp/app/components/setting/recruitments/promoteTransferPrint/recruitment-promote-transfer-print-controller.js"></script>
+    <script src="ClientApp/app/components/setting/recruitments/category/category-controller.js"></script>
+    <script src="ClientApp/app/components/setting/recruitments/item-list/recruitment-item-list-controller.js"></script>
+    <script src="ClientApp/app/components/recruitment/action/action-controller.js"></script>
+    <script src="ClientApp/app/components/setting/cb/c-a-b-reason-controller.js"></script>
+    <script src="ClientApp/app/components/setting/reference-number/reference-number-controller.js"></script>
+    <script src="ClientApp/app/components/setting/recruitments/status/recruitment-applicant-status-controller.js"></script>
+    <script src="ClientApp/app/components/setting/recruitments/appreciation/recruitment-appreciation-list-controller.js"></script>
+    <script src="ClientApp/app/components/setting/tracking-logs/tracking-log-controller.js"></script>
+    <script src="~/ClientApp/app/components/setting/tracking-sync-orgchart/tracking-sync-orgchart-controller.js"></script>
+    <script src="ClientApp/app/components/setting/recruitments/position/recruitment-position-controller.js"></script>
+    <script src="ClientApp/app/components/errors-page/not-found.controller.js"></script>
+    <script src="ClientApp/app/redirect-page-controller.js"></script>
+    <script src="ClientApp/app/components/setting/days-configuration/days-configuration-controller.js"></script>
+    <script src="ClientApp/app/components/setting/recruitments/working-address/recruitment-working-address-controller.js"></script>
+    <script src="ClientApp/app/components/recruitment/applicant/applicant-directives/applicant-item-g1.directive.js"></script>
+    <script src="ClientApp/app/components/recruitment/applicant/applicant-directives/applicant-item-g2.directive.js"></script>
+    <script src="ClientApp/app/components/setting/recruitments/cost-center/recruitment-cost-center-controller.js"></script>
+    <script src="ClientApp/app/components/setting/users/user-controller.js"></script>
+    <script src="ClientApp/app/components/setting/budgets/budget-controller.js"></script>
+    <script src="ClientApp/app/components/setting/workflows/workflow-controller.js"></script>
+    <script src="ClientApp/app/components/setting/recruitments/category/category-controller.js"></script>
+    <script src="ClientApp/app/components/cb/shift-plan/pending-target-plan/pending-target-plan-controller.js"></script>
+    <script src="ClientApp/app/components/cb/shift-plan/target-plan-list/target-plan-list-controller.js"></script>
+    <script src="ClientApp/app/components/cb/shift-plan/shift-plan-item/shift-plan-item-controller.js"></script>
+    <script src="ClientApp/app/components/cb/shift-plan/target-plan-list/target-plan-item/target-plan-item-controller.js"></script>
+    <script src="ClientApp/app/components/setting/cb/holiday-schedule/cb-holiday-schedule-controller.js"></script>
+    <script src="ClientApp/app/components/setting/cb/shift-code/cb-shift-code-controller.js"></script>
+    <script src="ClientApp/app/components/setting/shift-plan-submit-person/shift-plan-submit-person-controller.js"></script>
+    <script src="ClientApp/app/components/setting/target-plan-special/target-plan-special-controller.js"></script>
+    <script src="ClientApp/app/components/cb/shift-plan/report-target-plan/report-target-plan-controller.js"></script>
+    <script src="ClientApp/app/components/errors-page/access-denied.controller.js"></script>
+    <script src="ClientApp/app/components/view-log-detail/workflow-view-log-detail-controller.js"></script>
+    <script src="ClientApp/app/components/view-log-detail/shift-exchange-view-log-detail-controller.js"></script>
+    <script src="ClientApp/app/components/view-log-detail/target-plan-view-log-detail-controller.js"></script>
+    <script src="ClientApp/app/components/setting/maintenant/maintenant-controller.js"></script>
+    <script src="ClientApp/app/components/setting/business-model/business-model-controller.js"></script>
+    <script src="ClientApp/app/components/setting/business-model-unit-mapping/business-model-unit-mapping-controller.js"></script>
+
+    <!-- Navigation -->
+    <script src="ClientApp/app/components/setting/navigation/navigation-controller.js"></script>
+    <script src="ClientApp/app/components/navigation-home/navigation-home-controller.js"></script>
+    <script src="ClientApp/app/shared/directives/sub-menu-nav-section/sub-menu-nav-section.directive.js"></script>
+
+    <!-- Shared -->
+    <script src="ClientApp/app/app.setting.js"></script>
+    <script src="ClientApp/app/shared/utilities.js"></script>
+    <script src="ClientApp/app/shared/btaHelper.js"></script>
+    <script src="ClientApp/app/shared/SPHandler_Helper.js"></script>
+    <script src="ClientApp/app/shared/moment.js"></script>
+    <script src="ClientApp/app/shared/history.js"></script>
+    <script src="ClientApp/app/shared/angular-ui-notification.js"></script>
+    <script src="ClientApp/app/shared/fileSaver.js"></script>
+
+    <!-- Directive -->
+    <script src="ClientApp/app/shared/directives/user-info/user-info.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/sub-menu-section/sub-menu-section.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/excute-jq.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/actions/item-action.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/notification/notification.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/workflow-status/workflow-status.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/item-icon/item-icon.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/workflow-comment/workflow-comment.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/processing-stages/processing-statges.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/tracking-history/tracking-history.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/processing-stages/workflow-history-task.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/processing-stages/workflow-history-step.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/learn-more/learn-more.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/bta/search-flight.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/bta/flight-ticket/flight-ticket.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/bta/view-change-cancel-ticket/view-change-cancel-ticket.directive.js"></script>
+
+    <!-- Service -->
+    <script src="ClientApp/app/components/setting/setting-service.js"></script>
+    <script src="ClientApp/app/components/cb/cb-service.js"></script>
+    <script src="ClientApp/app/components/recruitment/recruitment-service.js"></script>
+    <script src="ClientApp/app/components/cb/cb-service.js"></script>
+    <script src="ClientApp/app/shared/interceptor-service.js"></script>
+    <script src="ClientApp/app/components/master-data/master-data-service.js"></script>
+    <script src="ClientApp/app/components/employee/employee-service.js"></script>
+    <script src="ClientApp/app/shared/services/attachmentFile-service.js"></script>
+    <script src="ClientApp/app/services/data-service.js"></script>
+    <script src="ClientApp/app/services/workflow-service.js"></script>
+    <script src="ClientApp/app/services/permission-service.js"></script>
+    <script src="ClientApp/app/services/dashboard-service.js"></script>
+    <script src="ClientApp/app/services/booking-flight-service.js"></script>
+    <script src="ClientApp/app/components/integration-remote-data/ssgex-service.js"></script>
+    <script src="ClientApp/app/services/file-service.js"></script>
+    <script src="ClientApp/app/shared/services/common-service.js"></script>
+    <script src="ClientApp/app/services/mass-service.js"></script>
+    <script src="ClientApp/app/services/api-service.js"></script>
+    <script src="ClientApp/app/services/navigation-service.js"></script>
+    <script src="ClientApp/app/services/tracking-history-service.js"></script>
+    <script src="ClientApp/app/services/it-service.js"></script>
+
+    <!-- Filter -->
+    <script src="ClientApp/app/shared/filter-option.js"></script>
+
+    <script src="ClientApp/app/shared/modules/attachment-file-module.js"></script>
+    <!--BTA-Business Trip Application -->
+    <script src="ClientApp/app/components/bta/bta-controller.js"></script>
+    <script src="ClientApp/app/components/bta/bta-service.js"></script>
+    <script src="ClientApp/app/components/bta/business-trip-application/business-trip-item/business-trip-item-controller.js"></script>
+    <script src="ClientApp/app/components/bta/business-trip-application/business-trip-list/business-trip-list-controller.js"></script>
+    <script src="ClientApp/app/components/bta/business-trip-application/over-budget/over-budget-item-controller.js"></script>
+    <script src="ClientApp/app/components/bta/business-trip-application/over-budget/over-budget-list-controller.js"></script>
+    <script src="ClientApp/app/components/bta/business-trip-report/business-trip-report-controller.js"></script>
+    <script src="ClientApp/app/components/setting/bta/airline/airline-controller.js"></script>
+    <script src="ClientApp/app/components/setting/bta/flight-number/flight-number-controller.js"></script>
+    <script src="ClientApp/app/components/setting/bta/hotel/hotel-controller.js"></script>
+    <script src="ClientApp/app/components/setting/bta/location/location-controller.js"></script>
+    <script src="ClientApp/app/components/setting/bta/room-type/room-type-controller.js"></script>
+    <script src="ClientApp/app/components/setting/bta/bta-policy/bta-policy-controller.js"></script>
+    <script src="ClientApp/app/components/setting/bta/bta-policy-special-case/bta-policy-special-case-controller.js"></script>
+    <script src="ClientApp/app/components/setting/bta/partition/partition-controller.js"></script>
+    <script src="ClientApp/app/components/setting/bta/global-location/global-location-controller.js"></script>
+    <script src="ClientApp/app/components/setting/bta/reason/reason-controller.js"></script>
+    <script src="ClientApp/app/components/setting/bta/bta-error-message/bta-error-message-list-controller.js"></script>
+
+    <base href="/">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>

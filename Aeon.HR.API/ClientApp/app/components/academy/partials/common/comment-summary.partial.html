@@ -1,0 +1,26 @@
+<div class="col-md-12">
+  <div
+    class="row ng-scope"
+    ng-if="status != 'Draft' && comment"
+    style="padding: 15px 0; margin-bottom: 15px"
+  >
+    <div class="col-sm-12">
+      <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+        <h5 class="bold uppercase">{{'COMMON_COMMENT' | translate}}:</h5>
+        <p></p>
+        <textarea
+          ng-model="comment"
+          rows="3"
+          disabled
+          style="width: 100%"
+        ></textarea>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .ng-invalid {
+    border: 1px solid #f00;
+  }
+</style>

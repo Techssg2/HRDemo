@@ -1,0 +1,1740 @@
+﻿<style>
+    .k-webkit{
+        overflow:auto;
+    }
+    .k-dialog-title {
+        color: #006EFA !important;
+        font-size: 18px !important;
+        font-weight: 700;
+        margin: 10px 0;
+        margin: 0;
+        line-height: 1.42857143;
+        text-transform: uppercase !important;
+    }
+
+    .board-me::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    #bst-board-finance1 .board-link {
+        padding-left: 0px !important
+    }
+
+        #bst-board-finance1 .board-link span {
+            padding-left: 0px !important
+        }
+
+    #bst-board-finance1 .text-start {
+        padding-left: 0px !important
+    }
+
+
+    #bst-board-recruitment .board-link, #bst-board-recruitment .board-link span, #bst-board-recruitment .text-start {
+        padding-left: 0px !important
+    }
+
+
+    #bst-board-admin .board-link, #bst-board-admin .board-link span, #bst-board-admin .text-start {
+        padding-left: 0px !important
+    }
+
+
+    #bst-board-finance1 .board-link span {
+        padding-left: 0px !important
+    }
+
+
+    #bst-board-academy .board-link {
+        padding-left: 0px !important
+    }
+
+        #bst-board-academy .board-link span {
+            padding-left: 0px !important
+        }
+
+    #bst-board-academy .text-start {
+        padding-left: 0px !important
+    }
+    .overflow-auto {
+        overflow-y: auto !important
+    }
+
+    .board-collapse-items .text-limit{
+        width:80px !important;
+    }
+
+
+
+    .submenu {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: -1px;
+        width: max-content;
+        border: 1px solid var(--color-grey-50);
+        border-bottom: none;
+        background-color: var(--color-white);
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+        padding: 0;
+        /* Added transition for smooth visibility */
+    }
+
+        /* Refactored deeper submenus to ensure consistent positioning */
+        .submenu .submenu {
+            top: -1px;
+            left: 250px;
+        }
+
+        .submenu .submenu-item {
+            border-bottom: 1px solid var(--color-grey-50);
+            position: relative;
+            width: 250px;
+        }
+
+            .submenu .submenu-item .submenu-icon {
+                position: absolute;
+                top: 5px;
+                right: 10px;
+            }
+
+            .submenu .submenu-item .btn {
+                text-align: left;
+                width: 100%;
+            }
+
+            .submenu .submenu-item .submenu-text {
+                text-wrap: wrap;
+                text-align: left;
+                margin-left: 0.5rem;
+            }
+
+        /* Apply hover transition only when submenu becomes visible */
+        .submenu.active,
+        .submenu-item:hover > .submenu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+    .board-item > .btn-none:hover {
+        background-color: #f0f0f0 !important;
+        color: #000;
+        transform: scale(1.1);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border-radius: 8px;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .submenu-profile {
+        display: none;
+        position: absolute;
+        right: 100%; /* Di chuyển sang bên trái */
+        top: 0; /* Canh phía trên */
+        background-color: white;
+        list-style: none;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        min-width: 150px;
+        z-index: 1000;
+    }
+
+    .dropdown:hover .submenu-profile {
+        display: block;
+    }
+
+    .submenu-profile li {
+        margin: 5px 0;
+    }
+
+        .submenu-profile li a {
+            text-decoration: none;
+            color: black;
+        }
+
+            .submenu-profile li a:hover {
+                color: black;
+            }
+
+    .k-loading-mask-new {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        height: 100vh !important;
+        width: 100vw !important;
+        z-index: 9999 !important;
+    }
+</style>
+
+<!--<style>
+    .k-dialog {
+        position: absolute;
+        top: 65px !important;
+    }
+
+    .confirm-btn {
+        margin-top: 10px;
+        float: right;
+    }
+
+    @media (max-width: 1199px) {
+    }
+
+
+    @media (min-width: 1200px) {
+
+        #nav li {
+            list-style: none inside;
+            display: block;
+            position: relative;
+            float: left;
+        }
+
+        #nav ul {
+            position: absolute;
+            padding: 0;
+            left: 0;
+            display: none;
+            /* hides sublists */
+        }
+
+        /* hides sub-sublists */
+        #nav li:hover ul {
+            display: block;
+            padding: 0px 10px;
+            border-radius: 5px !important;
+            background-color: #b42e83;
+            width: auto;
+            margin-left: 210px;
+            margin-top: -35px
+        }
+
+        #nav_child li {
+            list-style: none inside;
+            display: contents;
+            position: relative;
+            /*float: left;*/
+        }
+
+        #nav_child ul {
+            position: absolute;
+            padding: 0;
+            left: 0;
+            display: none;
+            /* hides sublists */
+        }
+
+            #nav_child ul.custom-menu {
+                left: 4% !important;
+            }
+        /* hides sub-sublists */
+        #nav_child li:hover ul {
+            display: block;
+            padding: 0px 10px;
+            border-radius: 5px !important;
+            background-color: #b42e83;
+            width: auto;
+            margin-left: 190px;
+            margin-top: -35px
+        }
+
+        .last-child-menu-responsive {
+            visibility: hidden
+        }
+    }
+</style>-->
+<!--<div class="page-header navbar navbar-fixed-top bg-blue  bg-white">
+    <div class="page-header-inner ng-scope">
+        <div class="page-header-inner ng-scope">
+            <div class="page-logo">
+                <div class="menu-toggler sidebar-toggler" title="Toggle left menu"></div>
+            </div>
+            <a collapse-menu class="menu-toggler responsive-toggler" title="Toggle left menu" data-toggle="collapse"
+               data-target="#navbar-collapse" current-class="collapseA" added-class="in"></a>
+            <div class="page-top">
+                <div style="margin-right:10px;" class="top-menu">-->
+<!-- ngIf: vm.currentUser.Id -->
+<!--<user-info current-user="currentUser" avatar="avatar"></user-info>-->
+<!-- end ngIf: vm.currentUser.Id -->
+<!-- ngIf: vm.currentUser.Id -->
+<!-- end ngIf: vm.currentUser.Id -->
+<!--<ul class="nav navbar-nav pull-right">
+    <li class="dropdown list-item-t add-menu" style="padding-right: 0px; padding-left: 0px"
+        excutejq>
+        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+           class="dropdown-toggle">
+            <i class="fa fa-plus-circle add-menu"
+               style="font-size: 24px !important;margin-top: 6px"></i>
+        </a>
+        <ul class="dropdown-menu child-menu" id="nav"
+            style="width: 220px; padding: 0px 3px 0px 10px !important ;" ng-if="addSectionMenu.length">-->
+<!-- <li ng-repeat='item in addSectionMenu'>
+    <a ng-if="item.ref"
+       ui-sref='{{item.ref}}({referenceValue: null, action: {}, id: null, status: null})'
+       ui-sref-opts="{ reload: true }">{{item.name | translate}}</a>
+    <a ng-if="item.url" href="{{item.url}}" target="_blank">{{item.name | translate}}</a>
+</li> -->
+<!--<li ng-repeat="item in addSectionMenu">
+            <a>
+                {{item.title|translate}}<span style="position: absolute; right: -5px;">
+                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                </span>
+            </a>
+            <ul>
+                <li style="width:100%;" ng-repeat="child in item.values">
+                    <a ng-if="child.ref"
+                       ui-sref='{{child.ref}}({referenceValue: null, action: item, id: null, status: null})'
+                       ui-sref-opts="{ reload: true }">
+                        {{child.name| translate}}
+                    </a>
+                    <a ng-if="child.url" href="{{child.url}}">
+                        {{child.nameAdd| translate}}
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+</li>
+<li class="dropdown" title="User Guide" style="padding-right: 0px; padding-left: 0px">
+    <a ng-href="http://kb.aeon.com.vn/index.php/vi/edocument"
+       target="_blank" class="dropdown-toggle"
+       style="color: #0073bb !important;height:59px !important"
+       href="http://kb.aeon.com.vn/index.php/vi/edocument">
+        <i class="icon-question"></i>
+    </a>
+</li>
+<li class="dropdown" title="Change log" style="padding-right: 0px; padding-left: 0px">
+    <a href="/Shared%20Documents/change_log.txt" target="_blank" class="dropdown-toggle">
+        <img class="img-circle-icon" style="width: 23px"
+             src="ClientApp/assets/images/logIcon.png">
+    </a>
+</li>
+<li class="dropdown" title="Language"
+    style="padding-right: 0px; padding-left: 0px; padding-top:3px;" ng-click="switchLang()">
+    <a class="dropdown-toggle">
+        {{getLang() == "en_US"? 'VN':'ENG'}}
+    </a>
+</li>-->
+<!--<li class="dropdown" style="padding-right: 0px; padding-left: 0px">
+    <a  ng-click="openNotificationPanel();" data-toggle="dropdown" class="dropdown-toggle ng-binding">
+        <i class="icon-bell" style="font-size: 20px !important;top:4px"></i>
+        <span class="badge badge-danger ng-binding ng-scope" style="color:white !important;top:11px;" ng-if="totalTask > 0">{{totalTask}}</span>
+    </a>
+</li>-->
+<!--</ul>
+                <a style="display: none;" class="page-quick-sidebar-toggler" ng-click="closeNotificationPanel();">
+                    <i class="icon-login"></i>
+                </a>
+            </div>
+            <notification></notification>
+        </div>
+    </div>
+    <div class="app-logo ng-scope">
+        <a href="/">
+            <img alt="" class="img-responsive"
+                 src="ClientApp/assets/images/logo.png">
+        </a>
+    </div>
+<nav class="navbar navbar-default nav-sidebar-style2 ng-scope">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown brand-dropdown" excutejq>
+                    <a class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="true">
+                        <i class="fa fa-align-left"></i> {{title|translate}}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu child-menu" ng-if="menus.length">
+                        <li ng-repeat="menu in menus" ng-click="selectedItem(menu)">
+                            <a ui-sref="{{menu.url}}">{{menu.name|translate}}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-repeat="item in childMenus" class="dropdown" excutejq ng-if="childMenus.length">
+                    <a ui-sref="{{item.url}}" ng-click='selectedItem(item)' class="dropdown-toggle"
+                       data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="true">
+                        {{item.name | translate}}
+                        <span class="caret" ng-if="item.actions"></span>
+                    </a>
+                    <ul class="dropdown-menu child-menu" ng-if="item.actions" id="nav_child">
+                        <li ng-repeat='action in item.actions' ng-click='changeToChildView()' ng-if="width >= 1200">-->
+<!-- <a ui-sref='{{action.state}}({action: action})'>{{action.title}}</a> -->
+<!--<a ui-sref='{{action.state}}({action: action})'>
+                {{action.name | translate}}
+                <span style="position: absolute; right: -5px;" ng-if="action.children">
+                    <i class="fa fa-caret-right"></i>
+                </span>
+            </a>
+            <ul ng-if="action.children" style="width: 210px;"
+                ng-class="{'custom-menu': action.name === 'Shift Plan'}">
+                <li style="width:100%;" ng-repeat="child in action.children">
+                    <a ng-if="child.state" ui-sref='{{child.state}}'
+                       ui-sref-opts="{ reload: true }">
+                        {{child.name| translate}}
+                    </a>
+                    <a ng-if="child.url" href="{{child.url}}">
+                        {{child.name| translate}}
+                    </a>
+                </li>
+            </ul>
+
+            </li>
+            <li ng-repeat='action in item.actions' ng-if="width < 1200">
+                <a ui-sref="{{action.state}}" aria-expanded="true">
+                    {{action.name | translate}}
+                    <span class="caret" ng-if="action.children"></span>
+                </a>
+                <ul style="padding-left: 40px;" ng-if="action.children">
+                    <li ng-repeat='child in action.children' ng-click='changeToChildView()'>
+                        <a ui-sref='{{child.state}}'>
+                            {{child.name | translate}}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+            </div>
+        </nav>
+    </div>
+</div>-->
+<!--<div class="page-container">
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div ng-if='isParentMenu'>
+                <sub-menu-section ng-repeat="item in subMenuSection" title-section="item.title"
+                                  list-menu="item.sections">
+                </sub-menu-section>-->
+<!--            <button class="btn btn-default btn-sm" ng-click="getTasks()">Get Tasks</button> -->
+<!--            </div>
+            <div id="loading"></div>
+            <ui-view class="fade-in-up" ng-keydown="keyDown($event)"></ui-view>
+        </div>
+    </div>
+</div>-->
+<!--New layout -->
+<script src="ClientApp/newassets/js/script.js"></script>
+<div id="bst-sidebar-wrapper">
+    <sidebar id="bst-sidebar"
+             class="w-min toggle-sidebar collapse collapse-horizontal">
+        <!-- space before site logo -->
+        <div class="h-0d5r"></div>
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="#">
+                <img src="./ClientApp/newassets/images/logo.png" alt="logo.png" class="w-80" />
+            </a>
+            <button class="btn-none btn-collapse"
+                    data-bs-toggle="collapse"
+                    data-bs-target=".toggle-sidebar"
+                    onclick="handleToggleCollapse()">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="16"
+                     height="16"
+                     fill="currentColor"
+                     class="bi bi-square-half"
+                     viewBox="0 0 16 16">
+                    <path d="M8 15V1h6a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1zm6 1a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z" />
+                </svg>
+            </button>
+        </div>
+        <div class="h-1d25r"></div>
+        <div class="board-me">
+            <div class="board board-1">
+                <p class="board-title">Dashboards</p>
+                <div class="h-0d5r"></div>
+                <ul class="board-single">
+                    <!-- item -->
+                    <li class="board-item active">
+                        <a ng-click="changeHome()" class="btn board-link btn-none">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 fill="currentColor"
+                                 class="bi bi-house"
+                                 viewBox="0 0 16 16">
+                                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
+                            </svg>
+                            <span class="text-start ms-2" style="font-size: 14px;">Home</span>
+                        </a>
+                    </li>
+                    <!-- item -->
+                    <li class="board-item">
+                        <a href="#" class="btn board-link btn-none">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 fill="currentColor"
+                                 class="bi bi-list-task"
+                                 viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5zM3 3H2v1h1z" />
+                                <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1z" />
+                                <path fill-rule="evenodd"
+                                      d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5zM2 7h1v1H2zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm1 .5H2v1h1z" />
+                            </svg>
+                            <span class="text-start ms-2" style="font-size: 14px;">To-do List</span>
+                        </a>
+                    </li>
+                    <!-- item -->
+                    <!--<li class="board-item">
+                        <a href="#" class="btn board-link">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 fill="currentColor"
+                                 class="bi bi-file-text"
+                                 viewBox="0 0 16 16">
+                                <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1z" />
+                                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1" />
+                            </svg>
+                            <span class="text-start ms-2">Approve Docs</span>
+                        </a>
+                    </li>-->
+                </ul>
+            </div>
+            <div class="h-0d5r"></div>
+            <div class="board board-2">
+                <p class="board-title">Other</p>
+                <ul class="board-collapse">
+                    <li class="board-item" ng-repeat="itemLv1 in menus" ng-class="{'isSubParent': itemLv1.childMenus }"  ng-if="itemLv1.index !== 4 && itemLv1.index !== 5 && itemLv1.index !== 6 && itemLv1.index !== 7">
+
+                        <!-- Menu cấp 1 -->
+                        <button title="{{itemLv1.title|translate}}" class="btn board-link btn-none" data-bs-toggle="collapse" data-bs-target="#bst-board-sidebar-{{itemLv1.index}}">
+                            <img width="25" height="25" class="img-circle-icon" style="padding:0px" ng-src="{{itemLv1.icon}}">
+                            <span class="text-start ms-2 " style="padding-left:0px">
+                                <p class="text-limit"> {{itemLv1.title|translate}}</p>
+                            </span>
+                        </button>
+                        <ul id="bst-board-sidebar-{{itemLv1.index}}" class="board-collapse-items collapse" style="padding-left: 0rem">
+                            <li class="board-item"
+                                ng-repeat="itemLv2 in itemLv1.childMenus"
+                                title="{{itemLv2.name | translate}}"
+                                ng-class="{'trigger-submenu': itemLv2.subMenu }"
+                                data-list="{{ itemLv2.subMenu ? 'submenu-sidebar1-' + itemLv2.index : '' }}">
+
+                                <a ng-click="itemLv2.subMenu && $event.preventDefault()"
+                                   ui-sref="{{itemLv2.subMenu ? '' : itemLv2.urlV2}}({action: item})"
+                                   ui-sref-opts="{ reload: true }"
+                                   class="btn board-link btn-none">
+                                    <img width="16" height="16" class="img-circle-icon" style="padding:0px" ng-src="{{itemLv2.icon}}">
+                                    <span style="font-size: 15px; padding-left:0px" class="text-start ms-2">
+                                        <p  class="text-limit">{{itemLv2.name | translate}}</p>
+                                    </span>
+                                    <i ng-if="itemLv2.subMenu" style="font-size:11px" class="fa-solid fa-chevron-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="h-0d5r"></div>
+            <div class="board board-3">
+                <p class="board-title">Settings</p>
+                <ul class="board-collapse master-data">
+                    <li class="board-item"  ng-class="{'isSubParent': itemLv1.childMenus }"  ng-repeat="itemLv1 in menus" ng-if="itemLv1.index !== 1 && itemLv1.index !== 2 && itemLv1.index !== 3 && itemLv1.index !== 7 && itemLv1.index !==8">
+                        <!-- Menu cấp 1 -->
+                        <a title="{{itemLv1.title|translate}}" ui-sref="{{itemLv1.urlV2}}({action: item})" ui-sref-opts="{ reload: true }" class="btn board-link btn-none" data-bs-toggle="collapse" data-bs-target="#bst-board-sidebar2-{{itemLv1.index}}">
+                            <img width="25" height="25" class="img-circle-icon" style="padding:0px" ng-src="{{itemLv1.icon}}">
+
+                            <span class="text-start ms-2 " style="padding:0px">
+                                <p class="text-limit"> {{itemLv1.title|translate}}</p>
+                            </span>
+                        </a>
+                        <ul id="bst-board-sidebar2-{{itemLv1.index}}" class="board-collapse-items collapse" style="padding-left: 0rem">
+                            <li class="board-item"
+                                ng-repeat="itemLv2 in itemLv1.childMenus"
+                                title="{{itemLv2.name | translate}}"
+                                ng-class="{'trigger-submenu': itemLv2.subMenu }"
+                                data-list="{{ itemLv2.subMenu ? 'submenu-sidebar1-' + itemLv2.index : '' }}">
+
+                                <a ng-click="!itemLv2.subMenu || $event.preventDefault()"
+                                   ui-sref="{{itemLv2.subMenu ? '' : itemLv2.urlV2}}({action: item})"
+                                   ui-sref-opts="{ reload: true }"
+                                   class="btn board-link btn-none">
+                                    <img width="16" height="16" class="img-circle-icon" style="padding:0px" ng-src="{{itemLv2.icon}}">
+                                    <span style="font-size: 15px; padding-left:0px" class="text-start ms-2">
+                                        <p class="text-limit">{{itemLv2.name |translate}}</p>
+                                    </span>
+                                    <i ng-if="itemLv2.subMenu" style="font-size:11px" class="fa-solid fa-chevron-right"></i>
+                                </a>
+
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="board-item" ng-class="{'isSubParent': itemLv1.actions }" ng-repeat="itemLv1 in settingSidebar">
+                        
+                            <!-- Menu cấp 1 -->
+                        <button title="{{itemLv1.name|translate}}" class="btn board-link btn-none" data-bs-toggle="collapse" data-bs-target="#bst-board-sidebar2-{{itemLv1.index}}">
+                            <img width="25" height="25" class="img-circle-icon" style="padding:0px" ng-src="{{itemLv1.icon}}">
+
+                            <span class="text-start ms-2 " style="padding:0px">
+                                <p class="text-limit"> {{itemLv1.name|translate}}</p>
+                            </span>
+                        </button>
+                        <ul id="bst-board-sidebar2-{{itemLv1.index}}" class="board-collapse-items collapse" style="padding-left: 0rem">
+                            <li class="board-item"
+                                ng-repeat="itemLv2 in itemLv1.actions"
+                                title="{{itemLv2.name | translate}}"
+                                ng-class="{'trigger-submenu': itemLv2.children }"
+                                data-list="{{ itemLv2.children ? 'submenu-sidebar1-'+ itemLv2.index : '' }}">
+
+                                <a ng-click="!itemLv2.children || $event.preventDefault()"
+                                   ui-sref="{{itemLv2.children ? '' : itemLv2.urlV2}}({action: item})"
+                                   ui-sref-opts="{ reload: true }"
+                                   class="btn board-link btn-none">
+                                    <img width="16" height="16" class="img-circle-icon" style="padding:0px" ng-src="{{itemLv2.icon}}">
+                                    <span style="font-size: 15px; padding-left:0px" class="text-start ms-2">
+                                        <p class="text-limit">{{itemLv2.name |translate}}</p>
+                                    </span>
+                                    <i ng-if="itemLv2.children" style="font-size:11px" class="fa-solid fa-chevron-right"></i>
+                                </a>
+
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </sidebar>
+    <!-- ========== SIDEBAR SUBMENU ========== -->
+    <sidebar id="bst-sidebar-submenu" class="submenu-list">
+        <!-- Menu cấp 3 bên phải -->
+        <ul ng-repeat="itemLv1 in menus">
+            <ul id="submenu-sidebar1-{{itemLv2.index}}" class="board-collapse-items submenu"
+                ng-repeat="itemLv2 in itemLv1.childMenus"
+                ng-if="itemLv2.actions && itemLv2.actions.length"
+                style="width:300px;margin-left:13.5rem; border: 1px solid #e8e8e8; border-radius: 10px; padding: 5px; background-color: white; row-gap: 5px; display: flex; flex-direction: column;">
+                <li class="submenu-item" ng-repeat="itemLv3 in itemLv2.actions" style="border: 0px; padding-left:0px; border-radius:5px; width:100%">
+                    <a ui-sref="{{itemLv3.urlV2}}({action: item})" ui-sref-opts="{ reload: true }" class="btn board-link w100">
+                        <span style="font-size: 14px;" class="text-start ms-2">{{itemLv3.title |translate }}</span>
+                    </a>
+                </li>
+            </ul>
+        </ul>
+
+        <ul ng-repeat="itemLv1 in menus" ng-if="itemLv1.index==7">
+            <ul ng-repeat="itemLv2 in itemLv1.childMenus">
+                <ul id="submenu-sidebar1-{{itemLv3.index}}" class="board-collapse-items submenu"
+                    ng-repeat="itemLv3 in itemLv2.actions"
+                    ng-if="itemLv3.children && itemLv3.children.length"
+                    style="width:250px;margin-left:13.5rem; border: 1px solid #e8e8e8; border-radius: 10px; padding: 5px; background-color: white; row-gap: 5px; display: flex; flex-direction: column;">
+                    <li class="submenu-item" ng-repeat="itemLv4 in itemLv3.children" style="border: 0px; padding-left:0px; border-radius:5px; width:100%">
+                        <a ui-sref="{{itemLv4.urlV2}}({action: item})" ui-sref-opts="{ reload: true }" class="btn board-link w100">
+                            <span style="font-size: 14px;" ng-if="itemLv4.title" class="text-start ms-2">{{itemLv4.title | translate }}</span>
+                            <span style="font-size: 14px;" ng-if="!itemLv4.title && itemLv4.name" class="text-start ms-2">{{itemLv4.name | translate }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </ul>
+        </ul>
+
+        <ul ng-repeat="itemLv1 in menus">
+            <ul id="submenu-sidebar1-collap-{{itemLv2.index}}" class="board-collapse-items submenu"
+                ng-repeat="itemLv2 in itemLv1.childMenus"
+                ng-if="itemLv2.actions && itemLv2.actions.length"
+                style="width:300px;margin-left:4%; border: 1px solid #e8e8e8; border-radius: 10px; padding: 5px; background-color: white; row-gap: 5px; display: flex; flex-direction: column;">
+
+                <li class="submenu-item" ng-repeat="itemLv3 in itemLv2.actions" style="border: 0px; padding-left:0px; border-radius:5px; width:100%">
+                    <a ui-sref="{{itemLv3.urlV2}}({action: item})" ui-sref-opts="{ reload: true }" class="btn board-link w100">
+                        <span style="font-size: 14px;" class="text-start ms-2">{{itemLv3.title |translate }}</span>
+                    </a>
+                </li>
+            </ul>
+        </ul>
+
+        <ul ng-repeat="itemLv1 in menus" ng-if="itemLv1.index==7">
+            <ul ng-repeat="itemLv2 in itemLv1.childMenus">
+                <ul id="submenu-sidebar1-collap-{{itemLv3.index}}" class="board-collapse-items submenu"
+                    ng-repeat="itemLv3 in itemLv2.actions"
+                    ng-if="itemLv3.children && itemLv3.children.length"
+                    style="width:250px;margin-left:4%; border: 1px solid #e8e8e8; border-radius: 10px; padding: 5px; background-color: white; row-gap: 5px; display: flex; flex-direction: column;">
+
+                    <li class="submenu-item" ng-repeat="itemLv4 in itemLv3.children" style="border: 0px; padding-left:0px; border-radius:5px; width:100%">
+                        <a ui-sref="{{itemLv4.urlV2}}({action: item})" ui-sref-opts="{ reload: true }" class="btn board-link w100">
+                            <span style="font-size: 14px;" ng-if="itemLv4.title" class="text-start ms-2">{{itemLv4.title | translate }}</span>
+                            <span style="font-size: 14px;" ng-if="!itemLv4.title && itemLv4.name" class="text-start ms-2">{{itemLv4.name | translate }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </ul>
+        </ul>
+    </sidebar>
+
+    <!-- ========== SIDEBAR SHADOW ============ -->
+    <div id="bst-sidebar-shadow"
+         class="toggle-sidebar collapse collapse-horizontal d-none"></div>
+
+    <!-- ========== SIDEBAR COLLAPSE ========== -->
+    <sidebar id="bst-sidebar-collapse"
+             class="w-7 toggle-sidebar collapse collapse-horizontal">
+        <!-- space before site logo -->
+        <div class="h-0d5r"></div>
+        <div class="d-flex-center">
+            <a class="text-center" href="#">
+                <img src="./ClientApp/newassets/images/logo-collapse.png"
+                     alt="logo-collapse.png"
+                     class="w-100" />
+            </a>
+        </div>
+        <div class="h-1d25r"></div>
+        <div class="board-me">
+            <div class="board board-1">
+                <ul class="board-single">
+                    <!-- item -->
+                    <li class="board-item active">
+                        <a href=""
+                           class="btn board-link"
+                           data-bs-toggle="tooltip"
+                           data-bs-placement="right"
+                           title="Home">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 fill="currentColor"
+                                 class="bi bi-house"
+                                 viewBox="0 0 16 16">
+                                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
+                            </svg>
+                        </a>
+                    </li>
+                    <!-- item -->
+                    <li class="board-item">
+                        <a href="#"
+                           class="btn board-link"
+                           data-bs-toggle="tooltip"
+                           data-bs-placement="right"
+                           title="To-do List">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 fill="currentColor"
+                                 class="bi bi-list-task"
+                                 viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5zM3 3H2v1h1z" />
+                                <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1z" />
+                                <path fill-rule="evenodd"
+                                      d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5zM2 7h1v1H2zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm1 .5H2v1h1z" />
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="h-0d5r"></div>
+            <div class="board board-2">
+                <ul class="board-collapse">
+                    <li class="board-item" ng-repeat="itemLv1 in menus" ng-class="{'isSubParent': itemLv1.childMenus }" ng-if="itemLv1.index !== 4 && itemLv1.index !== 5 && itemLv1.index !== 6 && itemLv1.index !== 7">
+
+                        <!-- Menu cấp 1 -->
+                        <button title="{{itemLv1.title|translate}}" class="btn board-link btn-none" data-bs-toggle="collapse" data-bs-target="#bst-board-sidebar-{{itemLv1.index}}">
+                            <img width="25" height="25" class="img-circle-icon" style="padding:0px" ng-src="{{itemLv1.icon}}">
+
+
+                        </button>
+                        <ul id="bst-board-sidebar-{{itemLv1.index}}" class="board-collapse-items collapse" style="padding-left: 0rem">
+                            <li class="board-item"
+                                ng-repeat="itemLv2 in itemLv1.childMenus"
+                                title="{{itemLv2.name | translate}}"
+                                ng-class="{'trigger-submenu': itemLv2.subMenu }"
+                                data-list="{{ itemLv2.subMenu ? 'submenu-sidebar1-collap-' + itemLv2.index : '' }}">
+
+                                <a ui-sref="{{itemLv2.urlV2}}({action: item})" ui-sref-opts="{ reload: true }" class="btn board-link">
+                                    <img width="16" height="16" class="img-circle-icon" style="padding:0px" ng-src="{{itemLv2.icon}}">
+
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="board-item" ng-class="{'isSubParent': itemLv1.childMenus }" ng-repeat="itemLv1 in menus" ng-if="itemLv1.index !== 1 && itemLv1.index !== 2 && itemLv1.index !== 3 && itemLv1.index !== 7 && itemLv1.index !==8">
+
+                        <!-- Menu cấp 1 -->
+                        <button title="{{itemLv1.title|translate}}" ui-sref="{{itemLv1.urlV2}}({action: item})" ui-sref-opts="{ reload: true }" class="btn board-link btn-none" data-bs-toggle="collapse" data-bs-target="#bst-board-sidebar2-{{itemLv1.index}}">
+                            <img width="25" height="25" class="img-circle-icon" style="padding:0px" ng-src="{{itemLv1.icon}}">
+
+                           
+                        </button>
+                        <ul id="bst-board-sidebar2-{{itemLv1.index}}" class="board-collapse-items collapse" style="padding-left: 0rem">
+                            <li class="board-item"
+                                ng-repeat="itemLv2 in itemLv1.childMenus"
+                                title="{{itemLv2.name | translate}}"
+                                ng-class="{'trigger-submenu': itemLv2.subMenu }"
+                                data-list="{{ itemLv2.subMenu ? 'submenu-sidebar1-collap-' + itemLv2.index : '' }}">
+
+                                <a ui-sref="{{itemLv2.urlV2}}({action: item})" ui-sref-opts="{ reload: true }" class="btn board-link">
+                                    <img width="16" height="16" class="img-circle-icon" style="padding:0px" ng-src="{{itemLv2.icon}}">
+                                   
+                                    <i ng-if="itemLv2.subMenu" style="font-size:11px" class="fa-solid fa-chevron-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="board-item" ng-class="{'isSubParent': itemLv1.actions }" ng-repeat="itemLv1 in settingSidebar">
+
+                        <!-- Menu cấp 1 -->
+                        <button title="{{itemLv1.name|translate}}" class="btn board-link btn-none" data-bs-toggle="collapse" data-bs-target="#bst-board-sidebar2-{{itemLv1.index}}">
+                            <img width="25" height="25" class="img-circle-icon" style="padding:0px" ng-src="{{itemLv1.icon}}">
+                        </button>
+                        <ul id="bst-board-sidebar2-{{itemLv1.index}}" class="board-collapse-items collapse" style="padding-left: 0rem">
+                            <li class="board-item"
+                                ng-repeat="itemLv2 in itemLv1.actions"
+                                title="{{itemLv2.name | translate}}"
+                                ng-class="{'trigger-submenu': itemLv2.children }"
+                                data-list="{{ itemLv2.children ? 'submenu-sidebar1-collap-'+ itemLv2.index : '' }}">
+
+                                <a ui-sref="{{itemLv2.urlV2}}({action: item})" ui-sref-opts="{ reload: true }" class="btn board-link">
+                                    <img width="16" height="16" class="img-circle-icon" style="padding:0px" ng-src="{{itemLv2.icon}}">
+                                 
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="h-0d5r"></div>
+            <div class="board board-3">
+                <ul class="board-collapse">
+                   
+                </ul>
+               
+            </div>
+        
+        </div>
+    </sidebar>
+</div>
+
+<!-- ========== HEADER ========== -->
+<div id="bst-header-wrapper">
+    <header id="bst-header"
+            class="position-fixed w-100 top-0 end-0 py-2 px-3 bg-white">
+        <!-- header bar -->
+        <div class="d-flex align-items-center justify-content-between mx-3 inter-regular">
+            <!-- left: breadcrumb -->
+            <nav aria-label="breadcrumb"
+                 class="d-flex gap-3 align-items-center">
+                <button class="btn-none"
+                        data-bs-toggle="collapse"
+                        data-bs-target=".toggle-sidebar"
+                        onclick="handleToggleCollapse()">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="16"
+                         height="16"
+                         fill="currentColor"
+                         class="bi bi-square-half"
+                         viewBox="0 0 16 16">
+                        <path d="M8 15V1h6a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1zm6 1a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z" />
+                    </svg>
+                </button>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/home/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{nameBreadcrumb|translate}}</li>
+                </ol>
+            </nav>
+            <!-- right: options -->
+            <ul class="d-flex column-gap-1 m-0 p-0">
+                <li>
+                    <div id="bst-switch">
+                        <a class="btn-none btn-icon" type="button" href="/HRV1" target="_blank" title="Back to old eDoc">
+                            <svg fill="#66a8ff" width="28px" height="28px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m24 11.617c0 3.763-3.05 6.814-6.813 6.817h-10.371c-3.765 0-6.817-3.052-6.817-6.817s3.052-6.817 6.817-6.817h10.366c3.763 0 6.814 3.05 6.817 6.813zm-6.817-4.545c-2.507.001-4.54 2.034-4.54 4.542s2.033 4.542 4.542 4.542 4.542-2.033 4.542-4.542c0-1.252-.507-2.386-1.327-3.208-.822-.824-1.959-1.334-3.215-1.334-.001 0-.001 0-.002 0z" />
+                                <text x="6" y="13" text-anchor="middle" font-family="Poppins" font-weight="bold" font-size="4"
+                                      fill="#fff">
+                                    Old
+                                </text>
+                            </svg>
+                        </a>
+                    </div>
+                </li>
+
+                <li>
+                    <div id="bst-search">
+                        <button type="button"
+                                class="btn-none btn-icon"
+                                data-bs-toggle="modal"
+                                aria-expanded="false"
+                                data-bs-target="#smartSearchModal">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 fill="currentColor"
+                                 class="bi bi-search"
+                                 viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                        </button>
+                    </div>
+                </li>
+
+                <!-- customizer -->
+                <li>
+                    <div class="id" id="bst-customizer">
+                        <!-- Dropdown: Trigger -->
+                        <button class="btn-none btn-icon dropdown-toggle align-text-top"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            <i class="bi bi-grid-3x3-gap-fill"></i>
+                        </button>
+                        <!-- Dropdown -->
+                        <div class="dropdown-menu dropdown-menu-end dropdown-customizer shadow">
+                            <ul class="grid grid-cols-3">
+                                <li>
+                                    <a class="dropdown-item tooltip-custom tooltip-style3 tooltip-below-center"
+                                       href="http://profit.aeon.com.vn:7777/VNM" target="_blank">
+                                        <img src="./ClientApp/newassets/images/customizer/profit.png"
+                                             alt="profit.png" />
+                                        <h3 class="title">profit</h3>
+                                        <!-- <span class="tooltip-text">Retail management</span> -->
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="https://cxprd-avn24.launchpad.cfapps.ap11.hana.ondemand.com/site?siteId=6fed0bc4-9953-4474-a04a-b270c235d3db" target="_blank">
+                                        <img src="./ClientApp/newassets/images/customizer/sap-cx.png"
+                                             alt="sap-cx.png" />
+                                        <h3 class="title">sap-btp</h3>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="https://hcm44.sapsf.com" target="_blank">
+                                        <img src="./ClientApp/newassets/images/customizer/sap-sf.png"
+                                             alt="sap-sf.png" />
+                                        <h3 class="title">sap-sf</h3>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#" target="_blank">
+                                        <img src="./ClientApp/newassets/images/customizer/s4hana.png"
+                                             alt="s4hana.png" />
+                                        <h3 class="title">s4hana</h3>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="https://avnhelpdesk.sdpondemand.manageengine.com" target="_blank">
+                                        <img src="./ClientApp/newassets/images/customizer/helpdesk.png"
+                                             alt="helpdesk.png" />
+                                        <h3 class="title">helpdesk</h3>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="https://hr.aeon.com.vn" target="_blank">
+                                        <img src="./ClientApp/newassets/images/customizer/hr-portal.png"
+                                             alt="hr-portal.png" />
+                                        <h3 class="title">hr-portal</h3>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="http://canteen.aeon.com.vn/loginess" target="_blank">
+                                        <img src="./ClientApp/newassets/images/customizer/meal.png"
+                                             alt="meal.png" />
+                                        <h3 class="title">meal</h3>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="https://eoffice.aeon.com.vn/" target="_blank">
+                                        <img src="./ClientApp/newassets/images/customizer/doc-inout.png"
+                                             alt="doc-inout.png" />
+                                        <h3 class="title">doc-inout</h3>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" ng-click="saveConfigChatbot(false)">
+                                        <img src="./ClientApp/newassets/images/customizer/chatbot.png"
+                                             alt="chatbot.png" />
+                                        <h3 class="title">Bé Na</h3>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- help -->
+                <li>
+                    <div id="bst-help">
+                        <!-- Dropdown: Trigger -->
+                        <button type="button" class="btn-none btn-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false" data-bs-auto-close="outside">
+                            <i class="bi bi-question-circle"></i>
+                        </button>
+                        <!-- Dropdown -->
+                        <ul class="dropdown-menu dropdown-menu-style1 dropdown-menu-hover-style1 dropdown-menu-sm dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="/home/TrainingEdoc/TrainingEdoc">
+                                    <i class="bi bi-folder2-open"></i>&nbsp;&nbsp;&nbsp;System Document
+                                </a>
+                            </li>
+                            <li>
+                                <div class="dropend">
+                                    <a class="dropdown-item" data-bs-toggle="dropdown" role="button" aria-expanded="false"
+                                       aria-controls="collapseNewReleased">
+                                        <i class="bi bi-person"></i>&nbsp;&nbsp;&nbsp;Change log
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-style1 dropdown-menu-hover-style1 dropdown-menu-sm dropdown-menu-end"
+                                        style="width: 30px">
+                                        <li>
+                                            <a class="dropdown-item" href="/home/ChangeLog/NewChangeLog?selectedModule=Edoc%20HR">
+                                                HR &nbsp;&nbsp;&nbsp;
+                                                <i class="fa-regular fa-sparkles fa-lg" style="color: #FFD43B;"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="/home/ChangeLog/NewChangeLog?selectedModule=Academy">
+                                                Academy&nbsp;&nbsp;&nbsp;
+                                                <i class="fa-regular fa-sparkles fa-lg" style="color: #FFD43B;"></i>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- notifications -->
+                <li>
+                    <div id="bst-notifications">
+                        <!-- Dropdown: Trigger -->
+                        <button type="button"
+                                ng-click="showNotification()"
+                                class="btn-none btn-icon dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                data-bs-auto-close="outside">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 fill="currentColor"
+                                 class="bi bi-bell"
+                                 viewBox="0 0 16 16">
+                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
+                            </svg>
+                            <span class="position-absolute translate-middle badge rounded-pill bg-danger" style="padding: 2px 4px">
+                                {{notificationBe}}
+                            </span>
+                        </button>
+                        <!-- Dropdown -->
+                        <div class="dropdown-menu dropdown-menu-style1 dropdown-menu-sm dropdown-menu-end">
+                            <!-- header -->
+                            <div class="header">
+                                <p class="poppins-semibold display-9 leading-16">
+                                    Notifications
+                                </p>
+
+                                <div class="dropdown">
+                                    <button class="btn-none dropdown-toggle show"
+                                            type="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="true">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-end dropdown-submenu-style1">
+                                        <li>
+                                            <a style="cursor: pointer;" class="dropdown-item" ng-click="readAllNotification()">Mark all as read</a>
+                                        </li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li>
+                                            <a style="cursor: pointer;" class="dropdown-item text-danger" ng-click="deleteAllNotification()">{{'Delete_All_Notification' | translate}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- body -->
+                            <ul class="list-group-none list-group-style2" ng-repeat="itemNoti in notificatioList">
+                                <li>
+                                    <a ng-click="readNotification(itemNoti)"
+                                       class="dropdown-item unread" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block;"
+                                        <span class="dot-container">
+                                            <span ng-if="!itemNoti.IsRead" class="dot bg-primary"></span>
+                                        </span>
+								   <span></span> {{'ITEM' | translate}}
+                                   <span class="highlight" style="cursor: pointer;" target="_blank" ng-click="goToDetailItem(itemNoti)">{{itemNoti.ReferencesNumber}}</span>
+                                   {{itemNoti.ContentKey | translate}}
+								  <span class="checktime d-block mt-1">{{itemNoti.TimeAgo}}</span>
+								    </a>
+                                </li>
+                            </ul>
+                            <!-- footer -->
+                            <div class="text-center">
+                                <a style="cursor: pointer;" ng-click="gotoNotificationList()">View all</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <button type="button"
+                            class="btn-none btn-icon dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            data-bs-auto-close="outside"
+                            ng-click="switchLang()"
+                            title="Language">
+                        {{getLang() == "en_US"? 'VN':'ENG'}}
+                    </button>
+                </li>
+
+                <!-- user profile -->
+                <li>
+                    <div id="bst-profile">
+                        <!-- Dropdown: Trigger -->
+                        <button type="button"
+                                class="btn-none btn-icon dropdown-toggle"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                data-bs-auto-close="outside">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="20"
+                                 height="20"
+                                 fill="currentColor"
+                                 class="bi bi-person"
+                                 viewBox="0 0 16 16">
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                            </svg>
+                        </button>
+                        <!-- Dropdown -->
+                        <ul class="dropdown-menu dropdown-menu-style1 dropdown-menu-hover-style1 dropdown-menu-sm dropdown-menu-end">
+
+                            <li class="dropdown">
+                                <a class="dropdown-item" style="padding-left: 5px;">
+                                    <img alt="{{currentUser.Title}}" src="{{avatar}}" width="30" height="30" style="border-radius: 50%">
+                                    &nbsp; {{currentUser ? currentUser.fullName : 'Admin'}}
+                                </a>
+                                <ul class="submenu-profile">
+                                    <li>
+                                        <a class="dropdown-item" ui-sref="home.user-setting.user-profile({referenceValue:currentUser.id})"
+                                           ui-sref-opts="{reload: true}">View Profile</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="/home/Home/OrganizationChart">View Organization</a></li>
+                                </ul>
+                            </li>
+                            <li ng-show="currentUser.type == 1">
+                                <a ng-click="changePassword()" class="dropdown-item">
+                                    <i class="fa falock"></i>&nbsp;&nbsp;&nbsp;{{'USER_PROFILE_CHANGE_PASS' | translate}}
+                                </a>
+                            </li>
+
+                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                                <a ng-click="signOut()" class="dropdown-item" href="#">
+                                    <i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;&nbsp;Log Out
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- dark mode -->
+                <li>
+                    <div id="bst-darkmode">
+                        <button type="button"
+                                class="btn-none btn-icon"
+                                id="darkModeToggle"
+                                ng-click="changeDarkMode()">
+                            <i class="bi bi-moon-stars"></i>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="h-6r"></div>
+    <!-- Modal -->
+    <div class="modal fade"
+         id="searchModal"
+         tabindex="-1"
+         aria-labelledby="searchModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-2xl">
+            <div class="modal-content p-3 rounded-3">
+                <div class="input-group input-group-style1">
+                    <span class="input-group-text">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text"
+                           class="input-default form-control display-7"
+                           placeholder="Search or jump to..."
+                           aria-label="Username"
+                           aria-describedby="basic-addon1"
+                           data-bs-toggle="collapse"
+                           data-bs-target="#collapseSearchInput" />
+                    <span class="input-group-text">
+                        <i class="bi bi-x-circle"></i>
+                    </span>
+                </div>
+                <div class="collapse mt-3" id="collapseSearchInput">
+                    <ul class="list-group list-group-style1">
+                        <li class="list-group-item title">Recent searches</li>
+                        <li class="list-group-item content">
+                            <div>
+                                <a href="search-result.html" class="text-black"><i class="bi bi-clock"></i>&nbsp;Payment request</a>
+                            </div>
+                            <span class="daytime">yesterday</span>
+                        </li>
+                        <li class="list-group-item content">
+                            <div><i class="bi bi-clock"></i>&nbsp;Setting chart</div>
+                            <span class="daytime">yesterday</span>
+                        </li>
+                        <li class="list-group-item content">
+                            <div>
+                                <i class="bi bi-clock"></i>&nbsp;Purchasing request
+                            </div>
+                            <span class="daytime">Apr 04, 2024</span>
+                        </li>
+                        <li class="list-group-item content">
+                            <div><i class="bi bi-clock"></i>&nbsp;Credit note</div>
+                            <span class="daytime">Apr 04, 2024</span>
+                        </li>
+
+                        <li class="list-group-item title">Quick actions</li>
+                        <li class="list-group-item content">
+                            <div>
+                                <i class="bi bi-box-seam"></i>&nbsp;Create Purchasing
+                                Request
+                            </div>
+                            <div class="btn-wrapper">
+                                <button type="button" class="btn-none btn-icon-style1">
+                                    C
+                                </button>
+                                <button type="button" class="btn-none btn-icon-style1">
+                                    1
+                                </button>
+                            </div>
+                        </li>
+                        <li class="list-group-item content">
+                            <div>
+                                <i class="bi bi-box-seam"></i>&nbsp;Create Payment Request
+                            </div>
+                            <div class="btn-wrapper">
+                                <button type="button" class="btn-none btn-icon-style1">
+                                    C
+                                </button>
+                                <button type="button" class="btn-none btn-icon-style1">
+                                    2
+                                </button>
+                            </div>
+                        </li>
+                        <li class="list-group-item content">
+                            <div>
+                                <i class="bi bi-box-seam"></i>&nbsp;Create Credit Note
+                            </div>
+                            <div class="btn-wrapper">
+                                <button type="button" class="btn-none btn-icon-style1">
+                                    C
+                                </button>
+                                <button type="button" class="btn-none btn-icon-style1">
+                                    3
+                                </button>
+                            </div>
+                        </li>
+                        <li class="list-group-item content">
+                            <div>
+                                <i class="bi bi-box-seam"></i>&nbsp;Create Advance Request
+                            </div>
+                            <div class="btn-wrapper">
+                                <button type="button" class="btn-none btn-icon-style1">
+                                    C
+                                </button>
+                                <button type="button" class="btn-none btn-icon-style1">
+                                    4
+                                </button>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item title">Documents</li>
+                        <li class="list-group-item content justify-content-start">
+                            <i class="bi bi-file-earmark"></i>&nbsp;
+                            <a href="#">How to create a payment request</a>
+                        </li>
+                        <li class="list-group-item content justify-content-start">
+                            <i class="bi bi-file-earmark"></i>&nbsp;
+                            <a href="#">How to create a credit note</a>
+                        </li>
+                        <li class="list-group-item content justify-content-start">
+                            <i class="bi bi-file-earmark"></i>&nbsp;
+                            <a href="#">Tutorial about setting Chart type</a>
+                        </li>
+                        <li class="list-group-item content justify-content-start">
+                            <i class="bi bi-file-earmark"></i>&nbsp;
+                            <a href="#">How to use filter in the data table</a>
+                        </li>
+
+                        <li class="list-group-item text-grey-300">
+                            Not finding what you‘re looking for? Try one of these
+                            queries instead:
+                        </li>
+                        <li class="list-group-item d-flex column-gap-2">
+                            <button type="button" class="btn-none btn-tag-style1">
+                                <span class="highlight">Pay</span>ment Request
+                            </button>
+                            <button type="button" class="btn-none btn-tag-style1">
+                                create <span class="highlight">pay</span>ment
+                            </button>
+                            <button type="button" class="btn-none btn-tag-style1">
+                                get <span class="highlight">pay</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MAIN ========== -->
+<main id="bst-finance-detail" class="bst-main bg-neutral-blue-300">
+    <ui-view class="fade-in-up" ng-keydown="keyDown($event)"></ui-view>
+</main>
+<!-- Chat bot -->
+<div id="chatbot-container" ng-style="{'display': chatbotConfig ? 'none' : 'block'}">
+    <button class="btn-none" ng-click="saveConfigChatbot(true)">
+        <i class="fa-solid fa-xmark" id="close-icon"></i>
+    </button>
+    <div id="app"></div>
+</div>
+
+<div id="dialogDelete" kendo-dialog="dialogDelete" k-visible="false">
+    <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+        <p>{{content}}
+        <p>
+    </div>
+    <!-- <a kendo-button class="btn btn-default confirm-btn k-button"></a> -->
+    <div class="d-flex gap-2 flex-wrap justify-content-end">
+        <button class="btn btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1" type="button" ng-click="confirm($event)">
+            <i class="fa fa-check right-5 font-green-jungle text-success"></i> {{actionName}}
+        </button>
+    </div>
+</div>
+<div id="dialogYN" kendo-dialog="dialogYN" k-visible="false">
+    <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+        <p>{{contentYN}}
+        <p>
+    </div>
+    <!-- <a kendo-button class="btn btn-sm confirm-btn k-button" ng-click="confirmYN(0)"><i
+            class="fa fa-minus-circle font-red right-5 text-success"></i>No</a> -->
+
+    <kendo-button class="btn btn-default btn-sm confirm-btn" type="button" ng-click="confirmYN(0)">
+        <i class="fa fa-minus-circle right-5 font-red-jungle text-success"></i> No
+    </kendo-button>
+    <!-- <a kendo-button class="btn btn-sm confirm-btn k-button" style="margin-right: .4em;" ng-click="confirmYN(1)"><i
+            class="fa fa-check right-5 text-success"></i>Yes</a> -->
+    <kendo-button class="btn btn-default btn-sm confirm-btn" type="button" ng-click="confirmYN(1)">
+        <i class="fa fa-check right-5 font-green-jungle text-success"></i> Yes
+    </kendo-button>
+</div>
+<div id="dialogYNDialog" kendo-dialog="dialogYNDialog" k-visible="false">
+    <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+        <p>{{contentYN}}
+        <p>
+    </div>
+    <!--<kendo-button class="btn btn-default btn-sm confirm-btn" type="button" ng-click="confirmYN(1)">
+        <i class="fa fa-check right-5 font-green-jungle text-success"></i> {{'COMMON_BUTTON_CONFIRM'|translate}}
+    </kendo-button>-->
+    <div class="d-flex gap-2 flex-wrap justify-content-end">
+        <button class="btn btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1" type="button" ng-click="confirmYN(1)">
+            <i class="fa fa-check right-5 font-green-jungle text-success"></i> {{'COMMON_BUTTON_CONFIRM'|translate}}
+        </button>
+    </div>
+</div>
+<div id="dialogTimeOutId" kendo-dialog="dialogTimeOut" k-visible="false">
+    <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+        <p>
+            {{'TIME_OUT_MESSAGE_BEFORE'| translate}}<span style='font-size: 24; font-style: initial; font-weight: bold; color: #0073bb;'>{{timeOut}} </span>
+            {{'TIME_OUT_MESSAGE_END'| translate}}
+        </p>
+    </div>
+    <!-- <a kendo-button class="btn btn-sm confirm-btn k-button" ng-click="confirmYN(0)"><i
+            class="fa fa-minus-circle font-red right-5 text-success"></i>No</a> -->
+
+    <kendo-button class="btn btn-default btn-sm confirm-btn" type="button" ng-click="confirmTimeOut(0)">
+        <i class="fa fa-minus-circle right-5 font-red-jungle text-success"></i> {{'COMMON_NO'|translate}}
+    </kendo-button>
+    <!-- <a kendo-button class="btn btn-sm confirm-btn k-button" style="margin-right: .4em;" ng-click="confirmYN(1)"><i
+            class="fa fa-check right-5 text-success"></i>Yes</a> -->
+    <kendo-button class="btn btn-default btn-sm confirm-btn" type="button" ng-click="confirmTimeOut(1)">
+        <i class="fa fa-check right-5 font-green-jungle text-success"></i> {{'COMMON_BUTTON_CONTINUE'|translate}}
+    </kendo-button>
+</div>
+<div id="dialogReason" kendo-dialog="dialogReason" class="pd0" k-visible="false">
+    <div class="modal-body">
+        <div class="row reset-mp">
+            <div class="col-md-12">
+                <div class="form-horizontal">
+                    <div class="form-group reset-mp">
+                        <div class="col-md-2">
+                            <label class="control-label">
+                                Comment: <span class="font-red-thunderbird">*</span>
+                            </label>
+                        </div>
+                        <div class="col-md-10">
+                            <textarea class="w100 form-control" ng-model="reasonObject.comment"
+                                      rows="4"
+                                      style="overflow: hidden; overflow-wrap: break-word; resize: horizontal;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row reset-mp">
+            <div class="col-md-12">
+                <button class="btn btn-default btn-sm" ng-disabled="!reasonObject.comment.length"
+                        ng-click="modalInfo.btnAction()">
+                    <i class="{{modalInfo.iconClass}}"></i>
+                    {{modalInfo.btnName}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!---->
+<div id="viewHistoryDialog" kendo-dialog="viewHistoryDialog" class="pd0" k-visible="false">
+    <div class="modal-body" style="overflow-x: auto;">
+        <div class="reset-mp">
+            <div ng-if="histories && histories.length > 0">
+                <table class="table table-hover" style="width:100%">
+                    <thead>
+                        <tr style="width:100%">
+                            <!--<th>{{'COMMON_TYPE' | translate}}</th>-->
+                            <th>{{'COMMON_CREATED_DATE' | translate}}</th>
+                            <th>{{'COMMON_CREATED_BY' | translate}}</th>
+                            <th style="width:40%;">{{'COMMON_COMMENT' | translate}}</th>
+                            <th>{{'Attachment' | translate}}</th>
+                            <th style="width:20%;">Payload</th>
+                            <!--<th>{{'COMMON_ACTION' | translate}}</th>-->
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="his in histories">
+                        <tr>
+                            <!--<td>{{his.type | translate}}</td>-->
+                            <td>{{his.created}}</td>
+                            <td><a style="text-decoration:none;" k-content="'{{his.createdBy}}'" kendo-tooltip>{{his.createdByFullName}}</a> </td>
+                            <td>{{his.comment}}</td>
+                            <td>
+                                <ol ng-if="his.documents && his.documents.length > 0">
+                                    <li ng-repeat="doc in his.documents">
+                                        <a ng-click="downloadAttachment(doc.id)">{{doc.fileDisplayName}}</a>
+                                        <a ng-click="downloadAttachment(doc.id)">{{'COMMON_BUTTON_DOWLOAD'| translate}}</a>
+                                        <a ng-click="viewFileOnline(doc.id)">| {{'COMMON_BUTTON_VIEW'| translate}}</a>
+                                        <!--<a ng-click="removeOldAttachment(doc)">| {{'COMMON_BUTTON_DELETE'| translate}}</a>-->
+                                    </li>
+                                </ol>
+                            </td>
+                            <td><a style="text-decoration:none;" k-content="'{{his.payload}}'" kendo-tooltip>{{his.payload}}</a></td>
+                            <td>
+                                <!--<a style="text-decoration: none;" ng-click="viewHistoryDetail(history.type, history.dataStr)"> {{'COMMON_VIEW_DETAIL' | translate}}</a>-->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dialog loading -->
+<div id="dialog_Loading" kendo-dialog="dialogLoading" k-visible="false">
+    <div style=" margin-top:10px;">
+        <div class="alert alert-warning" style="clear: both; margin-top: 10px; margin-bottom: 10px; font-size: 14px;">
+            <p>{{messageLoading}}</p>
+        </div>
+        <div class="row">
+            <div class="ring">
+                Loading
+                <span id="loading1"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dialogWarningHRPortal" kendo-dialog="dialogWarningHRPortal" k-visible="false">
+    <div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px">
+        {{content}} <a href= "" ng-click='openWindowPortal()'>https:/hr.aeon.com.vn</a>
+    </div>
+    <div class="d-flex gap-2 flex-wrap justify-content-end">
+        <button class="btn btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1" type="button" ng-click="confirm($event)">
+            <i class="fa fa-check right-5 font-green-jungle text-success"></i> {{actionName}}
+        </button>
+    </div>
+
+</div>
+
+<div id="dialogWarning" kendo-dialog="dialogWarning" k-visible="false">
+    <div ng-if="isTrushAsHTML" class="note note-danger note-bordered" style="margin-bottom: 0px" ng-bind-html="content">
+    </div>
+    <div ng-if="!isTrushAsHTML" class="note note-danger note-bordered" style="margin-bottom: 0px" ng-bind-html="content">
+    </div>
+
+    <div class="d-flex gap-2 flex-wrap justify-content-end">
+        <button class="btn btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1" type="button" ng-click="confirm($event)">
+            <i class="fa fa-check right-5 font-green-jungle text-success"></i> {{actionName}}
+        </button>
+    </div>
+</div>
+
+<div id="changePwdDialog" kendo-dialog="changePwdDialog" options="changePwdDialogOpts">
+    <div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px" ng-if="pwdModel.errors.length != 0">
+        <p class="font-red-thunderbird" ng-repeat="error in pwdModel.errors"> {{error}}</p>
+    </div>
+    <br />
+    <div class="col-md-12">
+        <label class="control-label" for="Current Password">
+            {{'CHANGE_PASSWORD_CURRENT'|translate}}: <span class="text-danger">*</span>
+        </label>
+        <input type="password" data-container-for="CurrentPassword" autocomplete="off" class="k-textbox w100 mb-3" ng-model="pwdModel.oldPassword">
+        <label class="control-label" for="New Password">
+            {{'CHANGE_PASSWORD_NEW_PASSWORD'|translate}}: <span class="text-danger">*</span>
+        </label>
+        <input type="password" data-container-for="NewPassword" autocomplete="off" class="k-textbox w100 mb-3" ng-model="pwdModel.newPassword">
+        <label class="control-label" for="New Password">
+            {{'CHANGE_PASSWORD_VERIFY_PASSWORD'|translate}}: <span class="text-danger">*</span>
+        </label>
+        <input type="password" data-container-for="VerifyPassword" autocomplete="off" class="k-textbox w100 mb-3" ng-model="pwdModel.verifyPassword">
+    </div>
+</div>
+
+<div class="modal fade" id="smartSearchModal" tabindex="-1" aria-labelledby="smartSearchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-2xl">
+        <div class="modal-content p-3 rounded-3">
+            <div class="input-group input-group-style1">
+                <span class="input-group-text">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="text"
+                       class="input-default form-control display-7"
+                       placeholder="Search or jump to..."
+                       aria-label="Username"
+                       aria-describedby="basic-addon1"
+                       ng-keyup="getSuggestions(searchQuery)"
+                       ng-keydown="$event.keyCode === 13 && search(searchQuery)"
+                       ng-model="searchQuery"
+                       id="text-search" />
+                <span class="input-group-text">
+                    <i class="bi bi-x-circle" data-bs-dismiss="modal" aria-label="Close"></i>
+                </span>
+            </div>
+            <div class="mt-3" id="collapseSearchInput">
+                <ul class="list-group list-group-style1">
+                    <li class="list-group-item d-flex column-gap-2" ng-repeat="suggestion in suggestions">
+                        <button type="button" class="btn-none btn-tag-style1" ng-click="selectSuggestion(suggestion.Text)">
+                            <span> {{suggestion.Text}}</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 150px;
+        height: 150px;
+        background: transparent;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 150px;
+        font-family: sans-serif;
+        font-size: 20px;
+        color: #006efa;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-top: 10px;
+    }
+
+        .ring:before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid transparent;
+            border-top: 3px solid #006efa;
+            border-right: 3px solid #006efa;
+            border-radius: 50%;
+            animation: animateC 2s linear infinite;
+        }
+
+    .loading1 {
+        display: block;
+        position: absolute;
+        top: calc(50% - 2px);
+        left: 50%;
+        width: 50%;
+        height: 4px;
+        background: transparent;
+        transform-origin: left;
+        animation: animate 2s linear infinite;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+        .loading1:before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #006efa;
+            top: -6px;
+            right: -8px;
+        }
+
+    @keyframes animateC {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes animate {
+        0% {
+            transform: rotate(45deg);
+        }
+
+        100% {
+            transform: rotate(405deg);
+        }
+    }
+
+    .dialog_Loading {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+</style>
+<script type="text/javascript">
+    $(document).on("click", function (event) {
+        if (!$(event.target).closest(".dropdown").length) {
+            $(".child-menu").slideUp("fast");
+        }
+    });
+
+    $('.k-button').addClass('fas fa-icon');
+
+    // ========== Overflow on mouse sidebar ==========
+    const sidebar = document.querySelector("#bst-sidebar .board-me");
+    const sidebarCollapse = document.querySelector("#bst-sidebar-collapse .board-me");
+
+    if (sidebar) {
+        sidebar.addEventListener("mouseover", function () {
+            setTimeout(() => {
+                if (!sidebar.classList.contains("overflow-auto")) {
+                    sidebar.classList.add("overflow-auto");
+                }
+            }, 300);
+        });
+
+        //sidebar.addEventListener("mouseout", function () {
+        //    setTimeout(() => {
+        //        if (sidebar.classList.contains("overflow-auto") && !sidebar.classList.contains("keep-overflow")) {
+        //            sidebar.classList.remove("overflow-auto");
+        //        }
+        //    }, 300);
+        //});
+    }
+
+    if (sidebarCollapse) {
+        sidebarCollapse.addEventListener("mouseover", function () {
+            setTimeout(() => {
+                if (!sidebarCollapse.classList.contains("overflow-auto")) {
+                    sidebarCollapse.classList.add("overflow-auto");
+                }
+            }, 300);
+        });
+
+        sidebarCollapse.addEventListener("mouseout", function () {
+            setTimeout(() => {
+                if (sidebarCollapse.classList.contains("overflow-auto")) {
+                    sidebarCollapse.classList.remove("overflow-auto");
+           
+                }
+            }, 300);
+        });
+    }
+
+    // Trigger submenu
+    const pullSubmenuToTarget = (target, submenu) => {
+        const itemTop = target.getBoundingClientRect().top + window.scrollY;
+        submenu.style.top = itemTop + 'px';
+    }
+    setTimeout(() => {
+    document.querySelectorAll('.trigger-submenu').forEach((item) => {
+      
+        item.addEventListener('mouseenter', function () {
+            const targetId = this.getAttribute('data-list');
+            const submenu = document.getElementById(targetId);
+       
+            if (!submenu) return;
+
+            // Pull corresponding submenu to a certain target
+            pullSubmenuToTarget(this, submenu);
+
+            // Display and position the corresponding horizontal list
+            submenu.classList.add("active");
+     
+            // Add a flag to keep track of hovering status
+            submenu.setAttribute('data-visible', 'true');
+
+            // Keep the list visible when hovering over the horizontal list
+            submenu.addEventListener('mouseenter', function () {
+                submenu.setAttribute('data-visible', 'true');
+                sidebar.classList.add("keep-overflow");
+  
+              
+            });
+
+            submenu.addEventListener('mouseleave', function () {
+                submenu.setAttribute('data-visible', 'false');
+                sidebar.classList.remove("keep-overflow");
+                //sidebar.classList.remove("overflow-auto");
+           
+                setTimeout(() => {
+                    if (submenu.getAttribute('data-visible') === 'false') {
+                        submenu.classList.remove("active");
+                    }
+                }, 100);
+            });
+        });
+
+        item.addEventListener('mouseleave', function () {
+            const targetId = this.getAttribute('data-list');
+            const submenu = document.getElementById(targetId);
+            if (!submenu) return;
+
+            // Set visibility to false and wait a moment before hiding
+            submenu.setAttribute('data-visible', 'false');
+            setTimeout(() => {
+                if (submenu.getAttribute('data-visible') === 'false') {
+                    submenu.classList.remove("active");
+               
+                }
+            }, 150);
+        });
+    });
+    }, 1);
+</script>

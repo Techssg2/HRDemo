@@ -1,0 +1,329 @@
+<!-- TO-DO LIST -->
+<!--<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet bordered light">-->
+<!-- Title -->
+<!--<div class="portlet-title">
+    <div class="caption caption-md">
+        <span class="caption-subject uppercase">
+            {{'COMMON_TO_DO_LIST'|translate}}
+        </span>
+    </div>
+    <div class="actions" ng-if="!isParentMenu">
+        <div class="row">
+            <div class="col-sm-12">
+                <kendo-button class="btn btn-default btn-sm" ng-click="toggleFilterPanel(true)"
+                              ng-show="!advancedSearchMode">
+                    <i class="k-icon k-i-filter font-green-jungle"></i> {{'COMMON_BUTTON_SEARCH'|translate}}
+                </kendo-button>
+                <kendo-button class="btn btn-default btn-sm" ng-click="toggleFilterPanel(false)"
+                              ng-show="advancedSearchMode">
+                    <i class="k-icon k-i-close font-green-jungle"></i> {{'COMMON_BUTTON_CLOSE'|translate}}
+                </kendo-button>
+                <div add-class class="btn-group" current-class="btn-group" added-class="open">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="true" style="padding: 0px !important">
+                        <img src="ClientApp/assets/images/icon/more.png" style="position: relative;top: -2px"
+                             class="ng-isolate-scope">
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a ng-click="exportToDoList()" class="ng-binding">
+                                <i class="fa fa-table font-blue right-5"></i>
+                                {{'COMMON_BUTTON_EXPORT'|translate}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="portlet-body">
+    <div ng-show='advancedSearchMode' ng-if="!isParentMenu">
+        <div class="row">
+            <div class="form-horizontal">
+                <div class="form-body">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">{{'COMMON_KEYWORD'|translate}}:</label>
+                            <div class="col-md-8">
+                                <input type="text" maxlength="50" class="k-textbox" style="width: 100%;"
+                                       ng-model="query.keyword">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">{{'COMMON_CREATED_DATE'|translate}}:</label>
+                            <div class="col-md-8">
+                                <range-date-for-filter-kendo-model d-from="query.fromDate"
+                                                                   d-to="query.toDate"></range-date-for-filter-kendo-model>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-horizontal">
+                <div class="form-body">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Module:</label>
+                            <div class="col-md-8">
+                                <select id="moduleId" kendo-multi-select k-options="moduleOptions" k-ng-model="query.module"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Status:</label>
+                            <div class="col-md-8">
+                                <select id="dataStatusId" kendo-multi-select k-options="statusOptions" k-ng-model="query.status"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-horizontal">
+                <div class="form-body">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">{{'COMMON_DUE_DATE'|translate}}:</label>
+                            <div class="col-md-8">
+                                <range-date-for-filter-kendo-model d-from="query.fromDueDate"
+                                                                   d-to="query.toDueDate"></range-date-for-filter-kendo-model>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+<!-- <div class="row">
+    <div class="form-horizontal">
+        <div class="form-body">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">{{'LEAVE_MANAGEMENT_FROM_DATE'|translate}}:</label>
+                    <div class="col-md-8">
+                        <input class="w100" kendo-date-picker k-ng-model="query.fromDate" k-format="'dd/MM/yyyy'" k-date-input="true" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="col-md-4 control-label">{{'LEAVE_MANAGEMENT_TO_DATE'|translate}}:</label>
+                <div class="col-md-8">
+                    <input class="w100" kendo-date-picker k-ng-model="query.toDate" k-format="'dd/MM/yyyy'" k-date-input="true" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!--<div class="row mrb10">
+            <div class="col-md-2"> </div>
+            <div class="col-md-4 btn-group">
+                <kendo-button class="btn btn-default btn-sm" ng-click="search(true)">
+                    <i class="k-icon k-i-search font-green-jungle"></i>
+                    {{'COMMON_BUTTON_SEARCH' | translate}}
+                </kendo-button>
+                <kendo-button class="btn btn-default btn-sm" ng-click="clearSearch()">
+                    <i style="font-size: 12px; padding-right: 3px;"
+                       class="fa fa-refresh"></i>{{'COMMON_BUTTON_RESET' | translate}}
+                </kendo-button>
+            </div>
+        </div>
+    </div>
+    <ul class="fieldlist">
+        <li ng-show="showCheckAll">
+            <input type="checkbox" class="k-checkbox" id="is-check-all" ng-model="isCheckedAll">
+            <label class="k-checkbox-label" for="is-check-all">All</label>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <kendo-grid k-scope-field="toDoListGrid" options="toDoListGridOptions" id="toDoListGridId">
+            </kendo-grid>
+        </div>
+    </div>
+</div>-->
+<!-- Content -->
+<!--</div>
+<div class="portlet bordered light" ng-if="isParentMenu">
+    <div class="portlet-title">
+        <div class="caption caption-md">
+            <span class="caption-subject uppercase">
+                {{'COMMON_MY_ITEMS'|translate}}
+            </span>
+        </div>
+        <div class="actions">
+            <div class="row">
+                <div class="col-sm-12">
+                </div>
+            </div>
+        </div>
+    </div>
+    <kendo-grid k-scope-field="myItemsGrid" options="myItemsGridOptions"></kendo-grid>-->
+<!-- Content -->
+<!--</div>
+    </div>
+</div>-->
+<style>
+    .k-datepicker {
+        height: 39px
+    }
+
+    .k-loading-mask {
+        z-index: 10004 !important;
+        /* must be larger than the z-index:2 of #container */
+    }
+</style>
+
+<div class="row">
+    <div class="p-3">
+        <!-- Title -->
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="group poppins-medium text-grey-300">
+                <p class="display-8 m-0">
+                    {{'COMMON_TO_DO_LIST'|translate}}
+                </p>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-end gap-1">
+                <!--new-->
+                <button type="button"
+                        class="btn-none"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="16"
+                         height="16"
+                         fill="currentColor"
+                         class="bi bi-funnel"
+                         viewBox="0 0 16 16">
+                        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="h-1r"></div>
+
+        <div class="modal fade"
+             id="exampleModal"
+             tabindex="-1"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-2xl modal-dialog-centered">
+                <div class="modal-content p-3 rounded-4">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 modal-title-style1"
+                            id="exampleModalLabel">
+                            SEARCH
+                        </h1>
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="exampleInputText1"
+                                           class="form-label">{{'COMMON_KEYWORD'|translate}}:</label>
+                                    <input type="text" maxlength="50" class="form-control" style="width: 100%;"
+                                           ng-model="query.keyword">
+                                </div>
+                                <div class="col">
+                                    <label for="exampleInputText1"
+                                           class="form-label">{{'COMMON_CREATED_DATE'|translate}}:</label> <br>
+                                    <range-date-for-filter-kendo-model d-from="query.fromDate"
+                                                                       d-to="query.toDate" style="width:100%;"></range-date-for-filter-kendo-model>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="exampleSelect1" class="form-label">Module:</label>
+                                    <select id="moduleId" class="form-select" kendo-multi-select k-options="moduleOptions" k-ng-model="query.module"></select>
+                                </div>
+                                <div class="col">
+                                    <label for="exampleSelect1" class="form-label">{{'COMMON_DUE_DATE'|translate}}:</label> <br>
+                                    <range-date-for-filter-kendo-model d-from="query.fromDueDate"
+                                                                       d-to="query.toDueDate" style="width:100%;"></range-date-for-filter-kendo-model>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 d-flex align-items-center justify-content-lg-between">
+                                <div class="form-group">
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" ng-click="clearSearch()"
+                                            class="btn btn-white rounded-3 poppins-regular display-9">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             width="16"
+                                             height="16"
+                                             fill="currentColor"
+                                             class="bi bi-arrow-repeat"
+                                             viewBox="0 0 16 16">
+                                            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"></path>
+                                            <path fill-rule="evenodd"
+                                                  d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"></path>
+                                        </svg>
+                                        &nbsp;{{'COMMON_BUTTON_RESET'|translate}}
+                                    </button>
+                                    &nbsp;
+                                    <button type="button" ng-click="search(true)"
+                                            class="btn btn-primary rounded-3 poppins-regular display-9">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             width="16"
+                                             height="16"
+                                             fill="currentColor"
+                                             class="bi bi-search"
+                                             viewBox="0 0 16 16">
+                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                                        </svg>
+                                        &nbsp;{{'COMMON_BUTTON_SEARCH'|translate}}
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-rounded-toolbar">
+            <div class="row">
+                <div class="col-md-12">
+                    <kendo-grid k-scope-field="toDoListGrid" options="toDoListGridOptions" id="toDoListGridId">
+                    </kendo-grid>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-3">
+        <!-- Title -->
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="group poppins-medium text-grey-300">
+                <p class="display-8 m-0" style="text-transform: uppercase;">
+                    {{'COMMON_MY_ITEMS'|translate}}
+                </p>
+            </div>
+        </div>
+        <div class="h-1r"></div>
+        <div class="table-rounded-toolbar">
+            <div class="row">
+                <div class="col-md-12">
+                    <kendo-grid k-scope-field="myItemsGrid" options="myItemsGridOptions"></kendo-grid>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- breakline -->
+<div class="h-1r"></div>

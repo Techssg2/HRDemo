@@ -1,0 +1,148 @@
+<!--<style>
+    .k-dialog-title {
+        color: #b42e83 !important;
+        font-family: Nova-Regular !important;
+        font-size: 18px !important;
+        font-weight: 700;
+        margin: 10px 0;
+        margin: 0;
+        line-height: 1.42857143;
+        text-transform: uppercase !important;
+    }
+
+    .workflow-history {
+        white-space: nowrap;
+        overflow-x: auto !important;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        color: black;
+        font-family: Roboto;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        padding: 5px;
+    }
+
+    .modal-body {
+        max-height: calc(100vh - 15vw) !important;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+
+    .k-dialog {
+        top: calc(10%) !important;
+    }
+
+    .visible {
+        height: 3em;
+        width: 10em;
+        background: yellow;
+    }
+</style>-->
+<!--<div id="processingStates" kendo-dialog="processingStates" class="pd0" k-visible="false">-->
+    <!-- <h4 class="modal-title uppercase font-red-haze bold"></h4> -->
+    <!--<div class="modal-body" style="overflow-x: auto;">
+        <div class="reset-mp">
+            <div style="display: inline-flex;"
+                 ng-if="workflowStatus && workflowStatus.workflowInstances && workflowStatus.workflowInstances.length > 0">
+                <div class="workflow-history" ng-repeat="flow in reverseArray(workflowStatus.workflowInstances)">
+                    <div class="workflow-history-header">
+                        <div class="flag-header-container">
+                            <div class="flag-header"></div>
+                        </div>
+                        <div class="round-header-container">
+                            <div class="round-header">
+                                <span k-content="'{{flow.workflowName}}'" kendo-tooltip style="position:absolute;" class="caption">
+                                    {{'COMMON_ROUND'|translate}} {{$index+1}}
+                                </span>
+                                <a ng-if="flow.isCompleted == false && isITHelpDesk" ng-click="syncWorkflow(flow, $index+1)" data-toggle="tooltip" data-placement="right" title="{{'SYNC_WORKFLOW' | translate}}" style="cursor: pointer; position: relative; right: -160px; "><i style="font-size: 27px;" class="k-icon fa fa-refresh font-green-jungle"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <workflow-step ng-repeat="step in flow.workflowData.steps" model="model" step="step" flow="flow" directivevalue="directivevalue">
+                    </workflow-step>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+<div class="modal fade right"
+     id="exampleModalView5"
+     tabindex="-1"
+     aria-labelledby="exampleModalViewLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-2md">
+        <div class="modal-content rounded-3 rounded-start-0 p-3">
+            <div class="modal-header border-0">
+                <h1 class="modal-title fs-5 modal-title-style1"
+                    id="exampleModalLabel">
+                    PROCESSING STAGES
+                </h1>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <!-- TAB: TRIGGER -->
+                    <div class="nav nav-tabs border-0 d-inline-flex"
+                         id="myTab"
+                         ng-if="workflowStatus && workflowStatus.workflowInstances && workflowStatus.workflowInstances.length > 0"
+                         ng-repeat="flow in reverseArray(workflowStatus.workflowInstances)"
+                         role="tablist">
+                        <button type="button"
+                                class="nav-item btn btn-tab rounded-start-0 "
+                                data-bs-toggle="tab"
+                                k-content="'{{flow.workflowName}}'" kendo-tooltip
+                                ng-class="($index + 1) == selectedTab ? 'active' : ''"
+                                ng-click="changeRound($index+1)"
+                                ng-attr-data-bs-target="#nav-tab-pane-round{{$index+1}}">
+                            {{'COMMON_ROUND'|translate}} {{$index+1}}
+                        </button>
+                        <button type="button"
+                                class="btn btn-white rounded-3 poppins-regular display-9"
+                                ng-if="flow.isCompleted == false && isITHelpDesk" ng-click="syncWorkflow(flow, $index+1)"
+                                data-toggle="tooltip" data-placement="right" title="{{'SYNC_WORKFLOW' | translate}}" style="cursor: pointer; position: relative; border:none;">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 fill="currentColor"
+                                 class="bi bi-arrow-repeat"
+                                 viewBox="0 0 16 16">
+                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
+                                <path fill-rule="evenodd"
+                                      d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z" />
+                            </svg>
+                            &nbsp;
+                        </button>
+                    </div>
+                    <div ng-if="workflowStatus && workflowStatus.workflowInstances && workflowStatus.workflowInstances.length > 0"
+                         ng-repeat="flow in reverseArray(workflowStatus.workflowInstances)">
+                        <div class="tab-content" id="processingStagesTabContent"
+                             ng-show="($index+1) == selectedTab">
+                            <div class=""
+                                 id="nav-tab-pane-round{{$index+1}}"
+                                 role="tabpanel"
+                                 aria-labelledby="nav-tab{{$index+1}}"
+                                 tabindex="0">                         
+                                <workflow-step ng-repeat="step in flow.workflowData.steps" model="model" step="step" flow="flow" directivevalue="directivevalue"></workflow-step>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- syncWorkflowITHelpDesk -->
+<div id="syncWorkflowDialog" kendo-dialog="syncWorkflowDialog" options="syncWorkflowDialogOpts"  k-visible="false" ng-show="isITHelpDesk">
+    <div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px" ng-if="!modelSync.isValid && modelSync.errorMessage">
+        <span class="font-red-thunderbird">{{modelSync.errorMessage}}</span>
+    </div>
+    <label class="control-label">{{'COMMON_COMMENT'|translate}}</label>
+    <textarea class="form-control comment-text input-default it-helpdesk" placeholder="" style="width: 100%;" rows="6"
+              ng-model="modelSync.comment"></textarea>
+    <label class="control-label">{{'Attachment'|translate}}</label>
+    <input id="attachmentFieldId" class="k-disabled it-helpdesk" name="files" type="file" kendo-upload k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }" k-select="onSelect" k-remove="removeAttach" />
+</div>

@@ -1,0 +1,1163 @@
+<style>
+    .k-window-title {
+        color: #006EFA !important;
+        font-size: 18px !important;
+        font-weight: 700;
+        margin: 10px 0;
+        margin: 0;
+        line-height: 1.42857143;
+        text-transform: uppercase !important;
+    }
+
+    .k-grid-content-locked {
+        float: right;
+        text-align: center;
+    }
+
+    .k-grid-header-locked {
+        float: right;
+        text-align: center;
+    }
+
+        .k-grid-header-locked table thead tr .k-header {
+            text-align: center;
+        }
+
+    /* .k-grid-content{
+        overflow-y: hidden;
+    } */
+
+    .k-grid-content-locked {
+        overflow: hidden;
+        min-height: 50px !important;
+    }
+
+    .k-grid-header-wrap.sync-collapse {
+        width: calc(100% - 210px) !important;
+    }
+
+    /*.k-grid-content {
+        min-height: 0px !important;
+        max-height: 500px !important;
+    }*/
+    .k-grid-content {
+        min-height: 0 !important;
+        max-height: calc(100vh - 300px) !important; /* trừ phần header, search, v.v. */
+        overflow-y: auto !important;
+    }
+
+        .k-grid-content.sync-collapse {
+            width: calc(100% - 210px) !important;
+        }
+
+    #create:hover {
+        background-color: #3175af !important;
+        color: white !important;
+        border-bottom: 1px solid #3175af !important;
+    }
+
+    span.k-dropdown-wrap.k-state-default {
+        background-color: #fff !important;
+    }
+    .row-delete {
+        background-color: #ffcccc !important; /* nền đỏ nhạt */
+        color: red; /* chữ đỏ */
+    }
+    
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+
+            <div class="d-flex align-items-center justify-content-between portlet-title">
+                <div class="group poppins-medium text-grey-300 caption caption-md px-3">
+                    <p style=" text-transform: uppercase !important;" class="display-8 m-0">{{title}}</p>
+                    <p class="display-11">
+                        <span class="opacity-40">Number of record:</span> {{total}}
+                    </p>
+                </div>
+            </div>
+            <div class="portlet-body p-2 bg-neutral-blue-300">
+                <div ng-show="false"><input id="files" name="files" kendo-upload type="file" ng-show="false" class="ng-hide" /></div>
+                <div class="page-content-wrapper float-none table-rounded-toolbar ">
+                    <div class="toolbar">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="d-flex gap-2 align-items-center justify-content-between">
+                                    <div class=" d-flex gap-3" style="width: 500px; margin-top:10px">
+                                        <input type="text" class="form-control" id='fieldFilter' ng-model="searchText" style="width: 350px;"
+                                               ng-keypress="ifEnter($event)" placeholder="Search for..." autocomplete="off">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary rounded-3 poppins-regular display-9  py-2 px-3" type="button" ng-click="search()" style="border: 1px solid #dadada; margin-bottom: 10px;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                                </svg>
+                                                &nbsp;Search
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex gap-2">
+                                        <a class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1" ng-click="resetDepartmentModel();openCreateWindow()" id="create">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
+                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"></path>
+                                            </svg> &nbsp; Create
+                                        </a>
+
+                                        <button type="button" ng-click="export()" class="btn btn-outline-cyan rounded-3 poppins-regular display-9 py-2 px-3">
+                                            <svg fill="currentColor" class="bi bi-check-square" width="16" height="16" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="m0 1016.081 409.186 409.073 79.85-79.736-272.867-272.979h1136.415V959.611H216.169l272.866-272.866-79.85-79.85L0 1016.082ZM1465.592 305.32l315.445 315.445h-315.445V305.32Zm402.184 242.372-329.224-329.11C1507.042 187.07 1463.334 169 1418.835 169h-743.83v677.647h112.94V281.941h564.706v451.765h451.765v903.53H787.946V1185.47H675.003v564.705h1242.353V667.522c0-44.498-18.07-88.207-49.581-119.83Z" fill-rule="evenodd"></path>
+                                            </svg>
+                                            &nbsp;Export
+                                        </button>
+                                        <!--<button type="button" class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1" ng-click="showTrackingHistory()" ng-if="isITHelpdesk">
+                                            <svg width="16" height="16" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                                <g fill="currentColor" fill-rule="evenodd" transform="translate(2 1)">
+                                                    <path fill-rule="nonzero" d="M3 4C3 3.44772 3.44772 3 4 3 4.55228 3 5 3.44772 5 4 5 4.55228 4.55228 5 4 5 3.44772 5 3 4.55228 3 4zM7 3C6.44772 3 6 3.44772 6 4 6 4.55228 6.44771 5 7 5L8 5C8.5523 5 9 4.55228 9 4 9 3.44772 8.5523 3 8 3L7 3zM6 7C6 6.44772 6.44772 6 7 6L8 6C8.5523 6 9 6.44772 9 7 9 7.55228 8.5523 8 8 8L7 8C6.44771 8 6 7.55228 6 7zM3 7C3 6.44772 3.44772 6 4 6 4.55228 6 5 6.44772 5 7 5 7.55228 4.55228 8 4 8 3.44772 8 3 7.55228 3 7zM6 10C6 9.4477 6.44772 9 7 9L8 9C8.5523 9 9 9.4477 9 10 9 10.5523 8.5523 11 8 11L7 11C6.44771 11 6 10.5523 6 10zM3 10C3 9.4477 3.44772 9 4 9 4.55228 9 5 9.4477 5 10 5 10.5523 4.55228 11 4 11 3.44772 11 3 10.5523 3 10z"></path>
+                                                    <path d="M0,1 C0,0.44772 0.44772,0 1,0 L11,0 C11.5523,0 12,0.44772 12,1 L12,13 C12,13.5523 11.5523,14 11,14 L1,14 C0.44772,14 0,13.5523 0,13 L0,1 Z M2,12 L2,2 L10,2 L10,12 L2,12 Z"></path>
+                                                </g>
+                                            </svg>&nbsp;{{'COMMON_TRACKING_HISTORY'|translate}}
+                                        </button>-->
+
+                                        <button type="button"
+                                                class="btn-none"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 width="16"
+                                                 height="16"
+                                                 fill="currentColor"
+                                                 class="bi bi-funnel"
+                                                 viewBox="0 0 16 16">
+                                                <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"></path>
+                                            </svg>
+                                        </button>
+
+                                        <button class="btn-none dropdown-toggle"
+                                                type="button"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 width="16"
+                                                 height="16"
+                                                 fill="currentColor"
+                                                 class="bi bi-three-dots-vertical"
+                                                 viewBox="0 0 16 16">
+                                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                            </svg>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-end dropdown-menu-text-link display-11 text-center">
+                                            <li>
+                                                <a class="dropdown-item" href="" ng-click="showTrackingHistory()" ng-if="isITHelpdesk">
+                                                    <svg width="16" height="16" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                                        <g fill="currentColor" fill-rule="evenodd" transform="translate(2 1)">
+                                                            <path fill-rule="nonzero" d="M3 4C3 3.44772 3.44772 3 4 3 4.55228 3 5 3.44772 5 4 5 4.55228 4.55228 5 4 5 3.44772 5 3 4.55228 3 4zM7 3C6.44772 3 6 3.44772 6 4 6 4.55228 6.44771 5 7 5L8 5C8.5523 5 9 4.55228 9 4 9 3.44772 8.5523 3 8 3L7 3zM6 7C6 6.44772 6.44772 6 7 6L8 6C8.5523 6 9 6.44772 9 7 9 7.55228 8.5523 8 8 8L7 8C6.44771 8 6 7.55228 6 7zM3 7C3 6.44772 3.44772 6 4 6 4.55228 6 5 6.44772 5 7 5 7.55228 4.55228 8 4 8 3.44772 8 3 7.55228 3 7zM6 10C6 9.4477 6.44772 9 7 9L8 9C8.5523 9 9 9.4477 9 10 9 10.5523 8.5523 11 8 11L7 11C6.44771 11 6 10.5523 6 10zM3 10C3 9.4477 3.44772 9 4 9 4.55228 9 5 9.4477 5 10 5 10.5523 4.55228 11 4 11 3.44772 11 3 10.5523 3 10z"></path>
+                                                            <path d="M0,1 C0,0.44772 0.44772,0 1,0 L11,0 C11.5523,0 12,0.44772 12,1 L12,13 C12,13.5523 11.5523,14 11,14 L1,14 C0.44772,14 0,13.5523 0,13 L0,1 Z M2,12 L2,2 L10,2 L10,12 L2,12 Z"></path>
+                                                        </g>
+                                                    </svg>&nbsp;{{'COMMON_TRACKING_HISTORY'|translate}}
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade"
+                                             id="exampleModal"
+                                             tabindex="-1"
+                                             aria-labelledby="exampleModalLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog modal-2xl modal-dialog-centered">
+                                                <div class="modal-content p-3 rounded-4">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5 modal-title-style1"
+                                                            id="exampleModalLabel">
+                                                            SEARCH
+                                                        </h1>
+                                                        <button type="button"
+                                                                class="btn-close"
+                                                                data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form>
+                                                            <div class="row mb-3">
+                                                                <div class="col">
+                                                                    <label for="exampleInputText1"
+                                                                           class="form-label">User:</label>
+                                                                    <input type="text" maxlength="50" class="k-textbox" style="width: 100%;" id="userKeywordId"
+                                                                           ng-model="advancedQuery.userKeyword">
+                                                                </div>
+                                                                <div class="col">
+                                                                    <label for="exampleInputText1"
+                                                                           class="form-label">Code:</label>
+                                                                    <input type="text" maxlength="50" class="k-textbox" style="width: 100%;" id="departmentCode"
+                                                                           ng-model="advancedQuery.departmentCode">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col">
+                                                                    <label for="exampleSelect1" class="form-label">Name:</label>
+                                                                    <input type="text" maxlength="50" class="k-textbox" style="width: 100%;" id="departmentName"
+                                                                           ng-model="advancedQuery.departmentName">
+                                                                </div>
+                                                                <div class="col">
+                                                                    <label for="exampleSelect1" class="form-label">Position:</label>
+                                                                    <input type="text" maxlength="50" class="k-textbox" style="width: 100%;" id="positionName"
+                                                                           ng-model="advancedQuery.positionName">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="mb-3 d-flex align-items-center justify-content-lg-between">
+                                                                <div class="form-group">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <button type="button" ng-click="advancedReset()"
+                                                                            class="btn btn-white rounded-3 poppins-regular display-9">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                             width="16"
+                                                                             height="16"
+                                                                             fill="currentColor"
+                                                                             class="bi bi-arrow-repeat"
+                                                                             viewBox="0 0 16 16">
+                                                                            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"></path>
+                                                                            <path fill-rule="evenodd"
+                                                                                  d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"></path>
+                                                                        </svg>
+                                                                        &nbsp;{{'COMMON_BUTTON_RESET'|translate}}
+                                                                    </button>
+                                                                    &nbsp;
+                                                                    <button type="button" data-bs-dismiss="modal" ng-click="advancedSearch(true)"
+                                                                            class="btn btn-primary rounded-3 poppins-regular display-9">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                             width="16"
+                                                                             height="16"
+                                                                             fill="currentColor"
+                                                                             class="bi bi-search"
+                                                                             viewBox="0 0 16 16">
+                                                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                                                                        </svg>
+                                                                        &nbsp;{{'COMMON_BUTTON_SEARCH'|translate}}
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="">
+                            <div class="col-md-4" id="body"
+                                 style="border-radius: 16px; border: 2px solid #e5e5e5; overflow: auto;height: 100%; margin-left: 10px; ">
+                                <!-- <div id="treeview"></div> -->
+                                <div class="display-10 leading-18">
+                                    <input style="margin-bottom: 10px; margin-top: 10px; width:100%;" class="w100" id="departmentId"
+                                           kendo-drop-down-tree="widget.department" k-options="departmentOptions"
+                                           ng-model="departmentTreeId" />
+                                    <div kendo-tree-view="tree" k-options="treeViewDepartment" id="treeview"
+                                         k-data-source="dataDepartment" k-on-change="onchangeItemTreeView(dataItem)">
+                                        <span k-template>
+                                            <span k-position="'top'" k-content="'SAPCode: {{dataItem.sapCode}} - Code: {{dataItem.code}}'" kendo-tooltip  ng-style="dataItem.isPrepareDelete ? {'color':'red'} : {}" ng-if="dataItem.jobGradeCaption">
+                                                {{dataItem.name}}
+                                            </span>
+                                            <span k-position="'top'" k-content="'SAPCode: {{dataItem.sapCode}} - Code: {{dataItem.code}}'" kendo-tooltip ng-style="dataItem.isPrepareDelete ? {'color':'red'} : {}" ng-if="!dataItem.jobGradeCaption">{{dataItem.name}}</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8" style="width:65%;height: calc(100vh - 200px); overflow: auto; ">
+                                <div class="display-10 leading-18">
+                                    <kendo-grid id="departmentGrid" options="departmentGridOptions"
+                                        k-on-data-bound="onUserDepartmentGridDataBound(kendoEvent)"
+                                    >
+                                    </kendo-grid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Windows edit -->
+                    <div kendo-window="departmentEditWin" id="departmentEditWin" k-title="'Edit Department'" k-draggable="false"
+                         k-visible="false" k-actions="dialogActions" width="1500" modal="true" resizable="false"
+                         k-on-close="onClose()" k-on-open="onOpen()">
+                        <div class="row k-popup-edit-form k-window-content k-content" style="padding-bottom:0px">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Code:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div data-container-for="Code">
+                                        <input type="text" autocomplete="off" class="form-control form-control-sm"  style="width: 100%;height:50%" name="Code" title="Code"
+                                               ng-model="departmentModel.code"  ng-disabled="departmentModel.isEdoc1">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label">
+                                        Is Edoc
+                                    </label>
+                                    <div data-container-for="Code" style="padding-left: 22px;">
+                                        <input class="form-check-input" 
+                                               type="checkbox"
+                                               id="isEdoc"
+                                               ng-model="departmentModel.isEdoc" name="isEdoc" title="isEdoc" />
+                                        <label for="isEdoc" class="form-check-label" >Is Edoc</label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Name:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div data-container-for="Code">
+                                        <input type="text" autocomplete="off" class="form-control"  style="width: 100%;height:50%" name="Name" title="Name"
+                                               ng-model="departmentModel.name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Department Parent:
+
+                                    </label>
+                                    <input style="width: 100%;height:50%" kendo-drop-down-tree="departmentTreeEdit"
+                                           k-options="groupOptions.departmentListOptions" ng-model="departmentModel.parentId"
+                                           k-on-change="changeDepartment('edit')" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Position:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input    class="form-select"
+                                style="width: 100%;height:50%"  kendo-drop-down-list k-options="groupOptions.positionListOptions" k-data-source="dataPositions"
+                                           ng-model="departmentModel.positionCode" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        SAP Department Parent:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div data-container-for="Code">
+                                        <input type="text" autocomplete="off" class="form-control" style="width: 100%;height:50%" name="SAPDepartmentParentName" title="SAPDepartmentParentName"
+                                               ng-model="departmentModel.SAPDepartmentParentName" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Type:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input class="form-select"
+                                style="width: 100%;height:50%" kendo-drop-down-list k-data-source="model.typeList" data-role="dropdownlist"
+                                           k-auto-bind="true" k-on-change="updateJobGradeList('edit')" k-data-text-field="'title'"
+                                           k-data-value-field="'id'" ng-model="departmentModel.type" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Job Grade:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input class="form-select"
+                                style="width: 100%;height:50%" kendo-drop-down-list="jobGradeDropdownEdit" k-auto-bind="true"
+                                           k-options="groupOptions.jobGradeListOptions" k-on-change="updateTreeList('edit',true)"
+                                           ng-model="departmentModel.jobGradeId" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        SAP Level:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div data-container-for="Code">
+                                        <input type="text" autocomplete="off" class="form-control" style="width: 100%;height:50%" name="SAPLevel" title="SAPLevel"
+                                               ng-model="departmentModel.SAPLevel" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Region:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input class="form-select"
+                                    style="width: 100%;height:50%" kendo-drop-down-list
+                                           k-options="groupOptions.regionListOptions"
+                                           ng-model="departmentModel.regionId" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        SAP Code:
+
+                                    </label>
+                                    <input type="text" autocomplete="off" class="form-control"  style="width: 100%;height:50%" name="sapCode" title="sapCode"
+                                           ng-model="departmentModel.sapCode">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label class="form-check-label form-label me-2" for="darkCheckbox">
+                                                Color:
+                                            </label>
+                                            <br />
+                                            <input class="spectrumColor w30" style="margin-top:3px" type="color" name="Color"
+                                                   ng-model="departmentModel.color" value="departmentModel.color" title="Color">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input class="form-check-input"
+                                                   type="checkbox"
+                                                   ng-disabled="!departmentModel.isMD && !departmentModel.isMMD && !departmentModel.isSM"
+                                                   id="applyChildSMMDMMD"
+                                                   ng-model="departmentModel.applyChildSMMDMMD" name="applyChildSMMDMMD" title="applyChildSMMDMMD" />
+                                            <label for="applyChildSMMDMMD" class="form-check-label" style="margin-left: 10px; ">Apply child for SM, MD, MMD</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 d-flex">
+                                    <label class="form-check-label form-label"
+                                           for="isStore">
+                                    </label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isHrA"
+                                           ng-model="departmentModel.isHr" name="isHrA" title="isHr"
+                                           style="margin-left: 20px;" />
+                                    <label for="isHrA" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is HR</label>
+                                </div>
+                                <div class="col-md-6" style="padding-left:55px">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isMD"
+                                           ng-model="departmentModel.isMD" name="isMD" title="isMD" />
+                                    <label for="isMD" class="form-check-label" style="margin-left: 10px; ">Is MD</label>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6 d-flex">
+                                    <label class="form-check-label form-label"
+                                           for="isPrB">
+                                    </label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isStoreA"
+                                           ng-model="departmentModel.isStore" name="isStoreA" title="isStore"
+                                           style="margin-left: 20px;" />
+                                    <label for="isStoreA" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is Store</label>
+                                </div>
+                                <div class="col-md-6" style="padding-left:55px">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isSM"
+                                           ng-model="departmentModel.isSM" name="isSM" title="isSM" />
+                                    <label for="isMD" class="form-check-label" style="margin-left: 10px; ">Is SM</label>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6 d-flex">
+                                    <label class="form-check-label form-label"
+                                           for="isAdminB">
+                                    </label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isPrB"
+                                           ng-model="departmentModel.isCB" name="isPrB" title="isCB"
+                                           style="margin-left: 20px;" />
+                                    <label for="isPrB" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is C&B</label>
+                                </div>
+                                <div class="col-md-6" style="padding-left:55px">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isFacility"
+                                           ng-model="departmentModel.isFacility" name="isFacility" title="isFacility" />
+                                    <label for="isFacility" class="form-check-label" style="margin-left: 10px; ">Is Facility</label>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6 d-flex">
+                                    <label class="form-check-label form-label"
+                                           for="isAdminB">
+                                    </label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isAdminB"
+                                           ng-model="departmentModel.isAdmin" name="isAdminB" title="isAdminB"
+                                           style="margin-left: 20px;" />
+                                    <label for="isAdminB" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is Admin</label>
+                                </div>
+                                <div class="col-md-6" style="padding-left:55px">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isAcademy"
+                                           ng-model="departmentModel.isAcademy" name="isAcademy" title="isAcademy" />
+                                    <label for="isAcademy" class="form-check-label" style="margin-left: 10px; ">Is Academy</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 d-flex">
+                                    <label class="form-check-label form-label"
+                                           for="isPrA">
+                                    </label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isPrA"
+                                           ng-model="departmentModel.isPerfomance" name="isPrA" title="isPrA"
+                                           style="margin-left: 20px;" />
+                                    <label for="isPrA" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is Perfomance</label>
+                                </div>
+                                <div class="col-md-6" style="padding-left:55px">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isMMD"
+                                           ng-model="departmentModel.isMMD" name="isMMD" title="isMMD" />
+                                    <label for="isMMD" class="form-check-label" style="margin-left: 10px; ">Is MMD</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Business Model:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input class="form-select"
+                                style="width: 100%;height:50%" kendo-drop-down-list
+                                           k-options="groupOptions.businessModelListOptions"
+                                           ng-model="departmentModel.businessModelId" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Cost Center:
+
+                                    </label>
+                                    <input class="form-select"
+                                style="width: 100%;height:50%" kendo-drop-down-list
+                                           k-options="groupOptions.costCenterListOptions"
+                                           ng-model="departmentModel.costCenterRecruitmentId" />
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        HR Department:
+
+                                    </label>
+                                    <input class="form-select"
+                                style="width: 100%;height:50%" kendo-drop-down-tree="hrDepartmentTree" id="hrDepartmentTree"
+                                           k-options="groupOptions.hrTreeEditOptions"
+                                           k-ng-model="departmentModel.hrDepartmentId" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Note:
+
+                                    </label>
+                                    <textarea rows="1" autocomplete="off" class="form-control w100" name="Note" title="Note"
+                                              ng-model="departmentModel.note"> </textarea>
+                                </div>
+                            </div>
+                            <br />
+
+                            <!--==========-->
+                            <!--<div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Code:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" autocomplete="off" class="k-textbox w100" name="Code" title="Code"
+                                           ng-model="departmentModel.code">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Name:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" autocomplete="off" class="k-textbox w100" name="Name" title="Name"
+                                           ng-model="departmentModel.name">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Position:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input class="w100" kendo-drop-down-list k-options="groupOptions.positionListOptions"
+                                           ng-model="departmentModel.positionCode" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Type:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input class="w100" kendo-drop-down-list k-data-source="model.typeList" data-role="dropdownlist"
+                                           k-auto-bind="false" k-on-change="updateJobGradeList('edit')" k-data-text-field="'title'"
+                                           k-data-value-field="'id'" ng-model="departmentModel.type" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Job Grade:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input class="w100" kendo-drop-down-list="jobGradeDropdownEdit"
+                                           k-options="groupOptions.jobGradeListOptions" k-on-change="updateTreeList('edit')"
+                                           ng-model="departmentModel.jobGradeId" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Department Parent:
+
+                                    </label>
+                                    <input class="w100" kendo-drop-down-tree="departmentTreeEdit"
+                                           k-options="groupOptions.departmentListOptions" ng-model="departmentModel.parentId"
+                                           k-on-change="changeDepartment('edit')" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Region:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input class="w100" kendo-drop-down-list
+                                           k-options="groupOptions.regionListOptions"
+                                           ng-model="departmentModel.regionId" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        SAP Code:
+
+                                    </label>
+                                    <input type="text" autocomplete="off" class="k-textbox w100" name="sapCode" title="sapCode"
+                                           ng-model="departmentModel.sapCode">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Color:
+
+                                    </label>
+                                    <input class="spectrumColor w100" type="color" name="Color" ng-model="departmentModel.color"
+                                           value="departmentModel.color" title="Color">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="isStore">
+                                    </label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isHrA"
+                                           ng-model="departmentModel.isHr" name="isHrA" title="isHr"
+                                           style="margin-left: 20px;" />
+                                    <label for="isHrA" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is HR</label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isMD"
+                                           ng-model="departmentModel.isMD" name="isMD" title="isMD" />
+                                    <label for="isMD" class="form-check-label" style="margin-left: 10px; ">Is MD</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="isPrB">
+                                    </label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isStoreA"
+                                           ng-model="departmentModel.isStore" name="isStoreA" title="isStore"
+                                           style="margin-left: 20px;" />
+                                    <label for="isStoreA" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is Store</label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isSM"
+                                           ng-model="departmentModel.isSM" name="isSM" title="isSM" />
+                                    <label for="isMD" class="form-check-label" style="margin-left: 10px; ">Is SM</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="isAdminB">
+                                    </label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isPrB"
+                                           ng-model="departmentModel.isCB" name="isPrB" title="isCB"
+                                           style="margin-left: 20px;" />
+                                    <label for="isPrB" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is C&B</label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isFacility"
+                                           ng-model="departmentModel.isFacility" name="isFacility" title="isFacility" />
+                                    <label for="isFacility" class="form-check-label" style="margin-left: 10px; ">Is Facility</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="isAdminB">
+                                    </label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isAdminB"
+                                           ng-model="departmentModel.isAdmin" name="isAdminB" title="isAdminB"
+                                           style="margin-left: 20px;" />
+                                    <label for="isAdminB" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is Admin</label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isAcademy"
+                                           ng-model="departmentModel.isAcademy" name="isAcademy" title="isAcademy" />
+                                    <label for="isAcademy" class="form-check-label" style="margin-left: 10px; ">Is Academy</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="isPrA">
+                                    </label>
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="isPrA"
+                                           ng-model="departmentModel.isPerfomance" name="isPrA" title="isPrA"
+                                           style="margin-left: 20px;" />
+                                    <label for="isPrA" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is Perfomance</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Business Model:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input class="w100" kendo-drop-down-list
+                                           k-options="groupOptions.businessModelListOptions"
+                                           ng-model="departmentModel.businessModelId" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        HR Department:
+
+                                    </label>
+                                    <input class="w100" kendo-drop-down-tree="hrDepartmentTree" id="hrDepartmentTree"
+                                           k-options="groupOptions.hrTreeEditOptions"
+                                           k-ng-model="departmentModel.hrDepartmentId" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Cost Center:
+
+                                    </label>
+                                    <input class="w100" kendo-drop-down-list
+                                           k-options="groupOptions.costCenterListOptions"
+                                           ng-model="departmentModel.costCenterRecruitmentId" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label form-label"
+                                           for="darkCheckbox">
+                                        Note:
+
+                                    </label>
+                                    <textarea rows="2" autocomplete="off" class="k-textbox w100" name="Note" title="Note"
+                                              ng-model="departmentModel.note"> </textarea>
+                                </div>
+                            </div>-->
+                            <div class="k-edit-buttons k-state-default col-md-12"
+                                 style="border-top: 1px solid #c9c9c9; padding-top: 1em; text-align: right;">
+                                <button type="button" ng-click="confirmSaveDepartment();"
+                                        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+                                    <svg fill="#000000" width="18" height="18" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+                                        <g fill-rule="evenodd">
+                                            <path d="M65.456 48.385c10.02 0 96.169-.355 96.169-.355 2.209-.009 5.593.749 7.563 1.693 0 0-1.283-1.379.517.485 1.613 1.67 35.572 36.71 36.236 37.416.665.707.241.332.241.332.924 2.007 1.539 5.48 1.539 7.691v95.612c0 7.083-8.478 16.618-16.575 16.618-8.098 0-118.535-.331-126.622-.331-8.087 0-16-6.27-16.356-16.1-.356-9.832.356-118.263.356-126.8 0-8.536 6.912-16.261 16.932-16.261zm-1.838 17.853l.15 121c.003 2.198 1.8 4.003 4.012 4.015l120.562.638a3.971 3.971 0 0 0 4-3.981l-.143-90.364c-.001-1.098-.649-2.616-1.445-3.388L161.52 65.841c-.801-.776-1.443-.503-1.443.601v35.142c0 3.339-4.635 9.14-8.833 9.14H90.846c-4.6 0-9.56-4.714-9.56-9.14s-.014-35.14-.014-35.14c0-1.104-.892-2.01-1.992-2.023l-13.674-.155a1.968 1.968 0 0 0-1.988 1.972zm32.542.44v27.805c0 1.1.896 2.001 2 2.001h44.701c1.113 0 2-.896 2-2.001V66.679a2.004 2.004 0 0 0-2-2.002h-44.7c-1.114 0-2 .896-2 2.002z" />
+                                            <path d="M127.802 119.893c16.176.255 31.833 14.428 31.833 31.728s-14.615 31.782-31.016 31.524c-16.401-.259-32.728-14.764-32.728-31.544s15.735-31.963 31.91-31.708zm-16.158 31.31c0 9.676 7.685 16.882 16.218 16.843 8.534-.039 15.769-7.128 15.812-16.69.043-9.563-7.708-16.351-15.985-16.351-8.276 0-16.045 6.52-16.045 16.197z" />
+                                        </g>
+                                    </svg> &nbsp;Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Window thêm mới -->
+                    <div kendo-window="departmentCreateWin" id="departmentCreateWin" k-title="'CREATE A DEPARTMENT'"
+                         k-draggable="false" k-visible="false" k-actions="dialogActions" width="1500" modal="true"
+                         resizable="false" k-on-close="dialogVisible = false;">
+                        <div class="row k-popup-edit-form k-window-content k-content" style="padding-bottom:0px">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-check-label form-label"
+                                               for="darkCheckbox">
+                                            Code:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div data-container-for="Code">
+                                            <input type="text" autocomplete="off" class="form-control" style="width: 100%;height:50%" name="Code" title="Code"
+                                                   ng-model="departmentModel.code">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-check-label form-label">
+                                            Is Edoc
+                                        </label>
+                                        <div data-container-for="Code" style="padding-left: 22px;">
+                                            <input class="form-check-input"
+                                                   type="checkbox"
+                                                   id="isEdoc"
+                                                   ng-model="departmentModel.isEdoc" name="isEdoc" title="isEdoc" />
+                                            <label for="isMD" class="form-check-label" >Is Edoc</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-check-label form-label"
+                                               for="darkCheckbox">
+                                            Name:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div data-container-for="Code">
+                                            <input type="text" autocomplete="off" class="form-control" style="width: 100%;height:50%" name="Name" title="Name"
+                                                   ng-model="departmentModel.name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-check-label form-label"
+                                               for="darkCheckbox">
+                                            Department Parent:
+                                        </label>
+                                        <input class="form-control w100" kendo-drop-down-tree="departmentTreeAdd" k-options="departmentListOptionsAdd"
+                                               k-ng-model="departmentModel.parentIdCreate" k-on-change="changeDepartmentAdd()" ng-show="isAeon" />
+                                        <input type="text" autocomplete="off" class="k-textbox w100" name="sapCode" title="sapCode" ng-show="!isAeon"
+                                               ng-model="selectedItem.name" readonly />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-check-label form-label"
+                                               for="darkCheckbox">
+                                            Position:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input class="form-control w100"
+                                               style="width: 100%;height:50%" kendo-drop-down-list k-options="groupOptions.positionListOptions" k-data-source="dataPositions"
+                                               ng-model="departmentModel.positionCode" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-check-label form-label"
+                                               for="darkCheckbox">
+                                            SAP Department Parent:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div data-container-for="Code">
+                                            <input type="text" autocomplete="off" class="form-control" style="width: 100%;height:50%" name="SAPDepartmentParentName" title="SAPDepartmentParentName"
+                                                   ng-model="departmentModel.SAPDepartmentParentName" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-check-label form-label"
+                                               for="darkCheckbox">
+                                            SAP Level:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div data-container-for="Code">
+                                            <input type="text" autocomplete="off" class="form-control" style="width: 100%;height:50%" name="SAPLevel" title="SAPLevel"
+                                                   ng-model="departmentModel.SAPLevel" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-check-label form-label"
+                                               for="darkCheckbox">
+                                            Region:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input class="form-control w100" kendo-drop-down-list
+                                               k-options="groupOptions.regionListOptions" ng-model="departmentModel.regionId" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-check-label form-label"
+                                               for="darkCheckbox">
+                                            Job Grade:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input class="form-control w100" kendo-dropdownlist="jobGradeDropdownAdd" k-options="groupOptions.jobGradeListOptions"
+                                               k-on-change="updateTypeFormAdd(departmentModel.jobGradeId)" ng-model="departmentModel.jobGradeId" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-check-label form-label"
+                                               for="darkCheckbox">
+                                            Type:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input id="editType" class="form-control w100" kendo-drop-down-list k-data-source="model.typeList" data-role="dropdownlist"
+                                               k-auto-bind="true" k-data-text-field="'title'" readonly k-data-value-field="'id'"
+                                               ng-model="departmentModel.type" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-check-label form-label"
+                                               for="darkCheckbox">
+                                            SAP Code:
+                                        </label>
+                                        <input type="text" autocomplete="off" class="form-control w100" name="sapCode" title="sapCode"
+                                               ng-model="departmentModel.sapCode">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label class="form-check-label form-label"
+                                                       for="darkCheckbox">
+                                                    Color:
+                                                </label><br />
+                                                <input class="spectrumColor w30" style="margin-top:3px" type="color" name="Color" ng-model="departmentModel.color"
+                                                       value="departmentModel.color" title="Color">
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input class="form-check-input"
+                                                       type="checkbox"
+                                                       ng-disabled="!departmentModel.isMD && !departmentModel.isMMD && !departmentModel.isSM"
+                                                       id="applyChildSMMDMMD"
+                                                       ng-model="departmentModel.applyChildSMMDMMD" name="applyChildSMMDMMD" title="applyChildSMMDMMD" />
+                                                <label for="applyChildSMMDMMD" class="form-check-label" style="margin-left: 10px; ">Apply child for SM, MD, MMD</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 d-flex">
+                                        <label class="form-check-label form-label"
+                                               for="isStore">
+                                        </label>
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               id="isHrB"
+                                               ng-model="departmentModel.isHr" name="isHrB" title="isHr"
+                                               style="margin-left: 20px;" />
+                                        <label for="isHrB" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is HR</label>
+                                    </div>
+                                    <div class="col-md-6" style="padding-left:55px">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               id="isMD"
+                                               ng-model="departmentModel.isMD" name="isMD" title="isMD" />
+                                        <label for="isMD" class="form-check-label" style="margin-left: 10px; ">Is MD</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 d-flex">
+                                        <label class="form-check-label form-label"
+                                               for="isPrB">
+                                        </label>
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               id="isStoreB"
+                                               ng-model="departmentModel.isStore" name="isStoreB" title="isStore"
+                                               style="margin-left: 20px;" />
+                                        <label for="isStoreB" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is Store</label>
+                                    </div>
+                                    <div class="col-md-6" style="padding-left:55px">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               id="isSM"
+                                               ng-model="departmentModel.isSM" name="isSM" title="isSM" />
+                                        <label for="isMD" class="form-check-label" style="margin-left: 10px; ">Is SM</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 d-flex">
+                                        <label class="form-check-label form-label"
+                                               for="isAdminB">
+                                        </label>
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               id="isPrB"
+                                               ng-model="departmentModel.isCB" name="isPrB" title="isCB"
+                                               style="margin-left: 20px;" />
+                                        <label for="isPrB" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is C&B</label>
+                                    </div>
+                                    <div class="col-md-6" style="padding-left:55px">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               id="isFacility"
+                                               ng-model="departmentModel.isFacility" name="isFacility" title="isFacility" />
+                                        <label for="isFacility" class="form-check-label" style="margin-left: 10px; ">Is Facility</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 d-flex">
+                                        <label class="form-check-label form-label"
+                                               for="isAdminB">
+                                        </label>
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               id="isAdminB"
+                                               ng-model="departmentModel.isAdmin" name="isAdminB" title="isAdminB"
+                                               style="margin-left: 20px;" />
+                                        <label for="isAdminB" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is Admin</label>
+                                    </div>
+                                    <div class="col-md-6" style="padding-left:55px">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               id="isAcademy"
+                                               ng-model="departmentModel.isAcademy" name="isAcademy" title="isAcademy" />
+                                        <label for="isAcademy" class="form-check-label" style="margin-left: 10px; ">Is Academy</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 d-flex">
+                                        <label class="form-check-label form-label"
+                                               for="isPrA">
+                                        </label>
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               id="isPrA"
+                                               ng-model="departmentModel.isPerfomance" name="isPrA" title="isPrA"
+                                               style="margin-left: 20px;" />
+                                        <label for="isPrA" class="form-check-label" style="width: 120px; margin-right: 100px; margin-left: 50px; ">Is Perfomance</label>
+                                    </div>
+                                    <div class="col-md-6" style="padding-left:55px">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               id="isMMD"
+                                               ng-model="departmentModel.isMMD" name="isMMD" title="isMMD" />
+                                        <label for="isMMD" class="form-check-label" style="margin-left: 10px; ">Is MMD</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-check-label form-label"
+                                               for="darkCheckbox">
+                                            Business Model:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input class="form-control w100" kendo-drop-down-list
+                                               k-options="groupOptions.businessModelListOptions"
+                                               ng-model="departmentModel.businessModelId" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-check-label form-label"
+                                               for="darkCheckbox">
+                                            HR Department:
+
+                                        </label>
+                                        <input class="form-control w100" kendo-drop-down-tree="hrDepartmentTreeAdd" id="hrDepartmentTreeAdd"
+                                               k-options="groupOptions.hrTreeAddOptions"
+                                               ng-model="departmentModel.hrDepartmentIdCreate" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-check-label form-label"
+                                                   for="darkCheckbox">
+                                                Cost Center:
+
+                                            </label>
+                                            <input class="form-control w100" kendo-drop-down-list
+                                                   k-options="groupOptions.costCenterListOptions"
+                                                   ng-model="departmentModel.costCenterRecruitmentId" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-check-label form-label"
+                                               for="darkCheckbox">
+                                            Note:
+
+                                        </label>
+                                        <textarea rows="1" autocomplete="off" class="form-control w100" name="Note" title="Note"
+                                                  ng-model="departmentModel.note"> </textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="k-edit-buttons k-state-default col-md-12"
+                                 style="border-top: 1px solid #c9c9c9; padding-top: 1em; text-align: right;">
+                                <button type="button" ng-click="addDepartment();"
+                                        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+                                    <svg fill="#000000" width="18" height="18" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+                                        <g fill-rule="evenodd">
+                                            <path d="M65.456 48.385c10.02 0 96.169-.355 96.169-.355 2.209-.009 5.593.749 7.563 1.693 0 0-1.283-1.379.517.485 1.613 1.67 35.572 36.71 36.236 37.416.665.707.241.332.241.332.924 2.007 1.539 5.48 1.539 7.691v95.612c0 7.083-8.478 16.618-16.575 16.618-8.098 0-118.535-.331-126.622-.331-8.087 0-16-6.27-16.356-16.1-.356-9.832.356-118.263.356-126.8 0-8.536 6.912-16.261 16.932-16.261zm-1.838 17.853l.15 121c.003 2.198 1.8 4.003 4.012 4.015l120.562.638a3.971 3.971 0 0 0 4-3.981l-.143-90.364c-.001-1.098-.649-2.616-1.445-3.388L161.52 65.841c-.801-.776-1.443-.503-1.443.601v35.142c0 3.339-4.635 9.14-8.833 9.14H90.846c-4.6 0-9.56-4.714-9.56-9.14s-.014-35.14-.014-35.14c0-1.104-.892-2.01-1.992-2.023l-13.674-.155a1.968 1.968 0 0 0-1.988 1.972zm32.542.44v27.805c0 1.1.896 2.001 2 2.001h44.701c1.113 0 2-.896 2-2.001V66.679a2.004 2.004 0 0 0-2-2.002h-44.7c-1.114 0-2 .896-2 2.002z" />
+                                            <path d="M127.802 119.893c16.176.255 31.833 14.428 31.833 31.728s-14.615 31.782-31.016 31.524c-16.401-.259-32.728-14.764-32.728-31.544s15.735-31.963 31.91-31.708zm-16.158 31.31c0 9.676 7.685 16.882 16.218 16.843 8.534-.039 15.769-7.128 15.812-16.69.043-9.563-7.708-16.351-15.985-16.351-8.276 0-16.045 6.52-16.045 16.197z" />
+                                        </g>
+                                    </svg> &nbsp;Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Windows user in department -->
+                    <div id="userWin" kendo-window="userWin" k-title="'Users in Department'" k-on-open="dialogVisible = true"
+                         k-visible="false" k-actions="dialogActions" width="1000" modal="true" resizable="false"
+                         k-on-close="dialogVisible = false;onCloseUserWindow()">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div kendo-grid id="userInDepartmentGrid"
+                                     options="userInDepartmentGridOptions"
+                                     k-on-data-bound="onUserDepartmentGridDataBound(kendoEvent)"
+                                >
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2">
+                                <a class="btn btn-sm btn-primary" ng-disabled="hasEditingUser()"
+                                   style="color: white; padding-top: 7px !important; background-color: #006EFA; float: right"
+                                   ng-click="addUserInDepartment()">
+                                    Add
+                                    More
+                                </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<tracking-history ng-if="showTrackingHistoryDirective" tracking-history="trackingHistory"></tracking-history>

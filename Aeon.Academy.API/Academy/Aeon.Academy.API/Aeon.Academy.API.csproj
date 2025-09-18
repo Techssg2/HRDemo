@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1757DF47-E8F2-4397-8990-7F1330A10194}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Aeon.Academy.API</RootNamespace>
+    <AssemblyName>Aeon.Academy.API</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Client.Policy">
+      <HintPath>..\..\..\packages\Microsoft.SharePoint2016.CSOM.16.0.4690.1000\lib\net45\Microsoft.Office.Client.Policy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Client.TranslationServices">
+      <HintPath>..\..\..\packages\Microsoft.SharePoint2016.CSOM.16.0.4690.1000\lib\net45\Microsoft.Office.Client.TranslationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Online.SharePoint.Client.Tenant, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SharePoint2016.CSOM.16.0.4690.1000\lib\net45\Microsoft.Online.SharePoint.Client.Tenant.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client">
+      <HintPath>..\..\..\packages\Microsoft.SharePoint2016.CSOM.16.0.4690.1000\lib\net45\Microsoft.SharePoint.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.DocumentManagement">
+      <HintPath>..\..\..\packages\Microsoft.SharePoint2016.CSOM.16.0.4690.1000\lib\net45\Microsoft.SharePoint.Client.DocumentManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Publishing">
+      <HintPath>..\..\..\packages\Microsoft.SharePoint2016.CSOM.16.0.4690.1000\lib\net45\Microsoft.SharePoint.Client.Publishing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Runtime">
+      <HintPath>..\..\..\packages\Microsoft.SharePoint2016.CSOM.16.0.4690.1000\lib\net45\Microsoft.SharePoint.Client.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Search">
+      <HintPath>..\..\..\packages\Microsoft.SharePoint2016.CSOM.16.0.4690.1000\lib\net45\Microsoft.SharePoint.Client.Search.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Search.Applications">
+      <HintPath>..\..\..\packages\Microsoft.SharePoint2016.CSOM.16.0.4690.1000\lib\net45\Microsoft.SharePoint.Client.Search.Applications.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Taxonomy">
+      <HintPath>..\..\..\packages\Microsoft.SharePoint2016.CSOM.16.0.4690.1000\lib\net45\Microsoft.SharePoint.Client.Taxonomy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.UserProfiles">
+      <HintPath>..\..\..\packages\Microsoft.SharePoint2016.CSOM.16.0.4690.1000\lib\net45\Microsoft.SharePoint.Client.UserProfiles.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.WorkflowServices">
+      <HintPath>..\..\..\packages\Microsoft.SharePoint2016.CSOM.16.0.4690.1000\lib\net45\Microsoft.SharePoint.Client.WorkflowServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\NLog.4.7.11\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Unity.Abstractions">
+      <HintPath>..\..\..\packages\Unity.Abstractions.5.11.1\lib\net46\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container">
+      <HintPath>..\..\..\packages\Unity.Container.5.11.1\lib\net46\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.WebApi">
+      <HintPath>..\..\..\packages\Unity.WebAPI.5.4.0\lib\net45\Unity.WebApi.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AttachmentController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Controllers\F2IntegrationController.cs" />
+    <Compile Include="Controllers\ReasonController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\TrainingReportController.cs" />
+    <Compile Include="Controllers\TrainingInvitationController.cs" />
+    <Compile Include="Controllers\TrainingRequestController.cs" />
+    <Compile Include="Core\BaseApiController.cs" />
+    <Compile Include="DTOs\BudgetPlanDto.cs" />
+    <Compile Include="DTOs\CostCenterDto.cs" />
+    <Compile Include="DTOs\CurrencyDto.cs" />
+    <Compile Include="DTOs\DepartmentInChargeDto.cs" />
+    <Compile Include="DTOs\EmployeeInfoDto.cs" />
+    <Compile Include="DTOs\ReasonDto.cs" />
+    <Compile Include="DTOs\TrainingRequestViewItemDto.cs" />
+    <Compile Include="DTOs\TrainingSurveyQuestionDto.cs" />
+    <Compile Include="DTOs\TrainingReportAttachmentDto.cs" />
+    <Compile Include="DTOs\TrainingActionPlanDto.cs" />
+    <Compile Include="DTOs\TrainingInvitationParticipantDto.cs" />
+    <Compile Include="DTOs\TrainingDurationDto.cs" />
+    <Compile Include="DTOs\TrainingInvitationDto.cs" />
+    <Compile Include="DTOs\TrainingReportHistoryDto.cs" />
+    <Compile Include="DTOs\TrainingReportDto.cs" />
+    <Compile Include="DTOs\TrainingRequestManagementDto.cs" />
+    <Compile Include="DTOs\TrainingRequestHistoryDto.cs" />
+    <Compile Include="DTOs\WorkingCommitmentDto.cs" />
+    <Compile Include="DTOs\TrainingSponsorshipContractDto.cs" />
+    <Compile Include="DTOs\CategoryDto.cs" />
+    <Compile Include="DTOs\CourseDto.cs" />
+    <Compile Include="DTOs\LoginResultDto.cs" />
+    <Compile Include="DTOs\LoginDto.cs" />
+    <Compile Include="DTOs\MyItemDto.cs" />
+    <Compile Include="DTOs\ParticipantBudgetDto.cs" />
+    <Compile Include="DTOs\ParticipantDto.cs" />
+    <Compile Include="DTOs\RequesterDto.cs" />
+    <Compile Include="DTOs\TrainingDetailsDto.cs" />
+    <Compile Include="DTOs\TrainingDurationItemDto.cs" />
+    <Compile Include="DTOs\TrainingRequestDto.cs" />
+    <Compile Include="DTOs\WorkflowActionDto.cs" />
+    <Compile Include="DTOs\WorkflowTaskDto.cs" />
+    <Compile Include="Filters\AuthFilterByUserTypeAttribute.cs" />
+    <Compile Include="Filters\AuthFilterByRoleAttribute.cs" />
+    <Compile Include="Filters\AuthFilterAttribute.cs" />
+    <Compile Include="Filters\CustomExceptionFilter.cs" />
+    <Compile Include="Filters\ValidateModelAttribute.cs" />
+    <Compile Include="Jobs\RemindResponseInvitationJob.cs" />
+    <Compile Include="Mappers\ReasonMapper.cs" />
+    <Compile Include="Mappers\TrainingInvitationParticipantMapper.cs" />
+    <Compile Include="Mappers\TrainingReportHistoryMapper.cs" />
+    <Compile Include="Mappers\TrainingRequestHistoryMapper.cs" />
+    <Compile Include="Mappers\CategoryMapper.cs" />
+    <Compile Include="Mappers\CourseMapper.cs" />
+    <Compile Include="Mappers\TrainingInvitationMapper.cs" />
+    <Compile Include="Mappers\TrainingReportMapper.cs" />
+    <Compile Include="Mappers\TrainingRequestMapper.cs" />
+    <Compile Include="Module\ModuleDashboard.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\HttpUtil.cs" />
+    <Compile Include="Utils\SharepointFile.cs" />
+    <Compile Include="Utils\WindowsClientContext.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="dll\Newtonsoft.Json.dll" />
+    <Content Include="dll\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="NLog.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Aeon.HR.Infrastructure\Aeon.HR.Infrastructure.csproj">
+      <Project>{1d52c6c0-82f2-49a0-a49f-9ed7e9b0d0b6}</Project>
+      <Name>Aeon.HR.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Aeon.HR.ViewModels\Aeon.HR.ViewModels.csproj">
+      <Project>{4107a398-5774-43d6-b193-67d98f0875bd}</Project>
+      <Name>Aeon.HR.ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Integrations\Aeon.Academy.IntegrationServices\Aeon.Academy.IntegrationServices.csproj">
+      <Project>{fb7ca623-d9c0-45fc-b413-d29aeeadc91f}</Project>
+      <Name>Aeon.Academy.IntegrationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aeon.Academy.Common\Aeon.Academy.Common.csproj">
+      <Project>{bf7d2917-78e6-4ed9-91e3-fad091fc0a2c}</Project>
+      <Name>Aeon.Academy.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aeon.Academy.Data\Aeon.Academy.Data.csproj">
+      <Project>{997b4929-32e9-4754-ad6d-1e754293192b}</Project>
+      <Name>Aeon.Academy.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aeon.Academy.Services\Aeon.Academy.Services.csproj">
+      <Project>{51cc84fc-f410-470f-928f-2a1dfefb2a6d}</Project>
+      <Name>Aeon.Academy.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64793</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:64793/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

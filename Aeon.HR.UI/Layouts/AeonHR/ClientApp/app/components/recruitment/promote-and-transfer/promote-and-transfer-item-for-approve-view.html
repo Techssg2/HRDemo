@@ -1,0 +1,223 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">{{titleDetail}}
+                    </span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                                ng-click="showPopup('modalInfo', actionNeedShowPopup[0], '#dialogReason', actions.approve)">
+                                <i class="fa fa-check font-green-jungle right-5"></i> Approve</kendo-button>
+                            <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                            ng-click="showPopup('modalInfo', actionNeedShowPopup[1], '#dialogReason', actions.requestedToChange)">
+                                <i class="fa fa-minus-circle font-red right-5"></i> Requested To Change
+                            </kendo-button>
+                            <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                            ng-click="showPopup('modalInfo', actionNeedShowPopup[2], '#dialogReason', actions.reject)">
+                                <i class="fa fa-minus-circle font-red right-5"></i> Reject</kendo-button>
+                            <kendo-button class="btn btn-default btn-sm" ng-click="cancel(state)">
+                                <i class="k-icon k-i-close font-green-jungle"></i> Close
+                            </kendo-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-6 line-divided">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Type:<span
+                                                    class="font-red-thunderbird ng-scope"> *</span></label>
+                                            <div class="col-md-8">
+                                                <label
+                                                    class="form-control-static">{{actions.getValueById(itemForm.typeId, typesDataSource, 'name')}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Effective date:<span
+                                                    class="font-red-thunderbird ng-scope"> *</span></label>
+                                            <div class="col-md-8">
+                                                <label
+                                                    class="form-control-static">{{itemForm.effectiveDate | date:'dd/MM/yyyy'}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Request from && new salary-->
+                                <div class="row">
+                                    <div class="col-md-6 line-divided">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Request From:<span
+                                                    class="font-red-thunderbird ng-scope"> *</span></label>
+                                            <div class="col-md-8">
+                                                <label
+                                                    class="form-control-static">{{actions.getValueById(itemForm.requestFrom, requestFromDataSource, 'name')}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">New Salary/ Benefits:<span
+                                                    class="font-red-thunderbird ng-scope"> *</span></label>
+                                            <div class="col-md-8">
+                                                <label
+                                                    class="form-control-static">{{itemForm.newSalaryOrBenefits}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 line-divided">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">SAP Code:<span
+                                                    class="font-red-thunderbird ng-scope"> *</span></label>
+                                            <div class="col-md-8">
+                                                <label
+                                                    class="form-control-static">{{actions.getValueById(itemForm.sapCodeId, sapCodesDataSource, 'name')}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Attachments:</label>
+                                            <div class="col-md-8">
+                                                <a href="">View</a>
+                                                <a href="">Download</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 line-divided">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Staff Full Name:</label>
+                                            <div class="col-md-8">
+                                                <label class="form-control-static">{{itemForm.staffFullName}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">New Position:<span
+                                                    class="font-red-thunderbird ng-scope"> *</span></label>
+                                            <div class="col-md-8">
+                                                <label
+                                                    class="form-control-static">{{actions.getValueById(itemForm.newTitle, newTitleDataSource, 'name')}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 line-divided">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Current Position:</label>
+                                            <div class="col-md-8">
+                                                <label class="form-control-static">{{itemForm.currentTitle}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">New Job Grade:<span
+                                                    class="font-red-thunderbird ng-scope"> *</span></label>
+                                            <div class="col-md-8">
+
+                                                <label
+                                                    class="form-control-static">{{actions.getValueById(itemForm.newJobGrade, newJobGradeDataSource, 'name')}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 line-divided">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Current Job Grade:</label>
+                                            <div class="col-md-8">
+                                                <label class="form-control-static">{{itemForm.currentJobGrade}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">New Dept/Line:<span
+                                                    class="font-red-thunderbird ng-scope"> *</span></label>
+                                            <div class="col-md-8">
+                                                <label
+                                                    class="form-control-static">Product Content</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 line-divided">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Current Dept/Line:</label>
+                                            <div class="col-md-8">
+                                                <label class="form-control-static">{{itemForm.currentDeptLine}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">New Work Location:<span
+                                                    class="font-red-thunderbird ng-scope"> *</span></label>
+                                            <div class="col-md-8">
+                                                <label
+                                                    class="form-control-static">{{actions.getValueById(itemForm.newWorkLocation, newWorkLocationDataSource, 'name')}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 line-divided">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Current Work Location:</label>
+                                            <div class="col-md-8">
+                                                <label
+                                                    class="form-control-static">{{itemForm.currentWorkLocation}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Report To:<span
+                                                    class="font-red-thunderbird ng-scope"> *</span></label>
+                                            <div class="col-md-8">
+                                                <label
+                                                    class="form-control-static">{{actions.getValueById(itemForm.reportTo, reportToDataSource, 'name')}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 line-divided line-height-100">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Reason of promotion/ Transfer:</label>
+                                            <div class="col-md-8">
+                                                <label
+                                                    class="form-control-static">{{itemForm.reasonOfPromotionOrTransfer}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>

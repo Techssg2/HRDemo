@@ -1,0 +1,117 @@
+<div class="row">
+    <div class="col-md-12 ">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">{{title}}</span>
+                </div>
+                <div class="actions">
+                    <kendo-button class="btn btn-default btn-sm" ng-click="toggleFilterPanel(true)" ng-show="!advancedSearchMode">
+                        <i class="k-icon k-i-filter font-green-jungle"></i> {{'COMMON_BUTTON_SEARCH'|translate}}
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="toggleFilterPanel(false)" ng-show="advancedSearchMode">
+                        <i class="k-icon k-i-close font-green-jungle"></i> {{'COMMON_BUTTON_CLOSE'|translate}}
+                    </kendo-button>
+                    <div add-class class="btn-group" current-class="btn-group" added-class="open">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="padding: 0px !important">
+                            <img src="ClientApp/assets/images/icon/more.png"
+                                 style="position: relative;top: -2px" class="ng-isolate-scope">
+                        </button>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a ng-click="export()" class="ng-binding">
+                                    <i class="fa fa-table font-blue right-5"></i> {{'COMMON_BUTTON_EXPORT'|translate}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <!--Search-->
+                <div ng-if='advancedSearchMode'>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-horizontal">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">{{'COMMON_KEYWORD'|translate}}:</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="keyword" class="k-textbox" style="width: 100%;" ng-model="query.keyword" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">{{'COMMON_DEPARTMENT'|translate}}:</label>
+                                                <div class="col-md-8">
+                                                    <input id="departmentId" kendo-drop-down-tree k-options="departmentOptions" ng-model="query.departmentCode" style="width: 100%;" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">{{'COMMON_STATUS'|translate}}:</label>
+                                                <div class="col-md-8">
+                                                    <select kendo-multi-select k-options="statusOptions" k-ng-model="query.status"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">{{'COMMON_CREATED_DATE'|translate}}:</label>
+                                                <div class="col-md-8 display-flex">
+                                                    <!-- <range-date-for-filter-kendo-model d-from="query.fromDate" d-to="query.toDate"></range-date-for-filter-kendo-model> -->
+                                                    <range-Date-Of-Date-Picker d-from="query.fromDate" d-to="query.toDate"></range-Date-Of-Date-Picker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">OT Date:</label>
+                                                <div class="col-md-8 display-flex">
+                                                    <custom-Date-Range-Picker d-from="query.otDateFrom" d-to="query.otDateTo"></custom-Date-Range-Picker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-8 btn-group">
+                                                    <kendo-button class="btn btn-default btn-sm" ng-click="applySearch()">
+                                                        <i class="k-icon k-i-search font-green-jungle"></i> {{'COMMON_BUTTON_SEARCH'|translate}}
+                                                    </kendo-button>
+                                                    <kendo-button class="btn btn-default btn-sm" ng-click="clearSearch()">
+                                                        <i style="font-size: 12px; padding-right: 3px;" class="fa fa-refresh"></i> {{'COMMON_BUTTON_RESET'|translate}}
+                                                    </kendo-button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Grid-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <kendo-grid options="model.overtimeApplicationGridOptions" id="gridRequests">
+                        </kendo-grid>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div title="{{status=='null'?'':status}}">
+    <span ng-switch on="status">
+        <i ng-switch-when="Draft" class='fa fx-status-icon right-2 fa-circle font-grey'></i>
+        <i ng-switch-when="Completed|Completed Changing" ng-switch-when-separator="|" class='fa fx-status-icon right-2 fa-check-circle font-green-jungle'></i>       
+        <i ng-switch-when="Cancelled|Rejected|Out Of Period|Cancelled Booking" ng-switch-when-separator="|" class='fa fx-status-icon right-2 fa-circle font-red'></i>
+        <i ng-switch-default class='fa fx-status-icon right-2 fa-circle font-yellow-lemon'></i>
+        <!-- them moi cho translate VN -->
+        <i ng-switch-when="Nháp" class='fa fx-status-icon right-2 fa-circle font-grey'></i>
+        <i ng-switch-when="Hoàn tất|Hoàn tất thay đổi" ng-switch-when-separator="|" class='fa fx-status-icon right-2 fa-check-circle font-green-jungle'></i>        
+        <i ng-switch-when="Đã hủy|Bị từ chối|Đã hủy do quá chu kỳ lương" ng-switch-when-separator="|" class='fa fx-status-icon right-2 fa-circle font-red'></i>
+    </span>
+    {{status=='null'?'':status}}
+</div>

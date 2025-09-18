@@ -1,0 +1,2640 @@
+﻿{
+  "RequestToHire": [
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Type",
+      "DisplayName": "Type",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DeptDivisionCode",
+      "DisplayName": "DeptDivision Code",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "DeptDivisionName",
+      "DisplayName": "Department",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReplacementForCode",
+      "DisplayName": "ReplacementFor Code",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "PositionName",
+      "DisplayName": "Position",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "JobGradeTitle",
+      "DisplayName": "Job Grade",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "HasBudget",
+      "DisplayName": "Budget",
+      "Visible": true,
+      "Type": "7"
+    },
+    {
+      "Name": "LocationCode",
+      "DisplayName": "Location Code",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "LocationName",
+      "DisplayName": "Location Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ContractTypeName",
+      "DisplayName": "Contract Type",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "WorkingTimeName",
+      "DisplayName": "Working Time",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "WorkingHoursPerWeerk",
+      "DisplayName": "Working Hours Per Week",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "WagePerHour",
+      "DisplayName": "Wage Per Hour",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "EstimateSalaryStart",
+      "DisplayName": "Estimate Salary Start",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "EstimateSalaryEnd",
+      "DisplayName": "Estimate Salary End",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "StartingDateRequire",
+      "DisplayName": "Starting Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "CreatedByFullName",
+      "DisplayName": "Requestor",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Quantity",
+      "DisplayName": "Quantity",
+      "Visible": true,
+      "Type": "1"
+    },
+    {
+      "Name": "CurrentBalance",
+      "DisplayName": "Current Balance",
+      "Visible": true,
+      "Type": "1"
+    },
+    {
+      "Name": "FromDate",
+      "DisplayName": "From Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "ToDate",
+      "DisplayName": "To Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "ReplacementForUserName",
+      "DisplayName": "Replacement for Emp Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SignedDate",
+      "DisplayName": "Assignment Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "AssigneeUserName",
+      "DisplayName": "Assignee",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "RegionName",
+      "DisplayName": "Region",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Created",
+      "DisplayName": "Created",
+      "Visible": true,
+      "Type": "4"
+    }
+  ],
+  "WorkingTimeRecruitment": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Name",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "BTAPolicySpecialCases": [
+    {
+      "Name": "SapCode",
+      "DisplayName": "Employee Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "Employee Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "UserDepartmentName",
+      "DisplayName": "Department Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "PositionName",
+      "DisplayName": "Position Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "UserJobGradeCaption",
+      "DisplayName": "Job Grade",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "BudgetFrom",
+      "DisplayName": "From",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "BudgetTo",
+      "DisplayName": "To",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "MaintainPromoteAndTranferPrint": [
+    {
+      "Name": "RemovingValue",
+      "DisplayName": "Removing Value",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "ItemListRecruitment": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Unit",
+      "DisplayName": "Unit",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "FlightsBooking": [
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SapCode",
+      "DisplayName": "Sap Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Mobile",
+      "DisplayName": "Mobile",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Email",
+      "DisplayName": "Email",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartmentName",
+      "DisplayName": "Department Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ParentDepartmentName",
+      "DisplayName": "Parent Department Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Departure",
+      "DisplayName": "Departure",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Arrival",
+      "DisplayName": "Arrival",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FromDate",
+      "DisplayName": "From Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "ToDate",
+      "DisplayName": "To Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "FlightNumber",
+      "DisplayName": "Flight Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReasonforBusinessTrip",
+      "DisplayName": "Reason for Business Trip",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReasonforBusinessTripDetail",
+      "DisplayName": "Detail Reason",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Airfare",
+      "DisplayName": "Airfare",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ServiceCharge",
+      "DisplayName": "Service charge",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SubTotal",
+      "DisplayName": "SubTotal",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "OverBudget",
+      "DisplayName": "Over Budget",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IsCancel",
+      "DisplayName": "IsCancel",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CancellationFee",
+      "DisplayName": "Cancellation Fee",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CancellationReason",
+      "DisplayName": "Cancellation Reason",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CreatedDate",
+      "DisplayName": "Created Date",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "BTAApprovedDate",
+      "DisplayName": "BTA approved date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "BookingDuration",
+      "DisplayName": "Booking duration",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "ApplicantStatusListRecruitment": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Arrangement",
+      "DisplayName": "Arrangement",
+      "Visible": true,
+      "Type": "1"
+    }
+  ],
+  "CostCenterRecruitment": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Description",
+      "DisplayName": "Description",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "AppreciationListRecruitment": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Name",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "PositionListRecruitment": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "JobGradeTitle",
+      "DisplayName": "Job Grade",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "Headcount": [
+    {
+      "Name": "DepartmentName",
+      "DisplayName": "Department",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "JobGradeTitle",
+      "DisplayName": "Job Grade",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Quantity",
+      "DisplayName": "Quantity",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "Department": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "PositionName",
+      "DisplayName": "Position",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ParentName",
+      "DisplayName": "Department Parent",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "TypeName",
+      "DisplayName": "Type",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "JobGradeCaption",
+      "DisplayName": "Job Grade",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SAPCode",
+      "DisplayName": "SAP Code",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "JobGrade": [
+    {
+      "Name": "Grade",
+      "DisplayName": "Grade",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Caption",
+      "DisplayName": "Caption",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Title",
+      "DisplayName": "Title",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ExpiredDayPosition",
+      "DisplayName": "Expired Day For Positions",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "_ExportDepartmentType",
+      "DisplayName": "Department Type",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "MaxWFH",
+      "DisplayName": "Max WFH",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "_ExportStorePosition",
+      "DisplayName": "Store Position",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "_ExportHQPosition",
+      "DisplayName": "HQ Position",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "CAndB": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Name",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "TrackingLog": [
+    {
+      "Name": "Url",
+      "DisplayName": "Url",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Payload",
+      "DisplayName": "Payload",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Response",
+      "DisplayName": "Response",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "UserName",
+      "DisplayName": "User Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Created",
+      "DisplayName": "Created Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "Modified",
+      "DisplayName": "Modified Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "HttpStatusCode",
+      "DisplayName": "HttpStatusCode",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ActionDescription",
+      "DisplayName": "Action Type",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "User": [
+    {
+      "Name": "LoginName",
+      "DisplayName": "Login Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SAPCode",
+      "DisplayName": "Employee Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "Employee Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Email",
+      "DisplayName": "Email",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "LoginType",
+      "DisplayName": "Login Type",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ModulePermission",
+      "DisplayName": "Module Permission",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "MissingTimeClock": [
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SapCode",
+      "DisplayName": "SAP Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartmentCode",
+      "DisplayName": "Department Code",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartmentName",
+      "DisplayName": "Dept/Line",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DivisionName",
+      "DisplayName": "Division/Group",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Date",
+      "DisplayName": "Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "TypeActualTime",
+      "DisplayName": "Type",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ShiftCode",
+      "DisplayName": "ShiftCode",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "ActualTime",
+      "DisplayName": "Actual Time",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Reason",
+      "DisplayName": "Reason",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Other",
+      "DisplayName": "Reason Content",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "CreateDate",
+      "DisplayName": "Create Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "Documents",
+      "DisplayName": "Attachment",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "BusinessTripApplication": [
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SubmittedSAPCode",
+      "DisplayName": "Submitted SAP Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SubmittedFullName",
+      "DisplayName": "Submitted Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SAPCode",
+      "DisplayName": "SAP Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartmentName",
+      "DisplayName": "Dept/Line",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DivisionName",
+      "DisplayName": "Division/Group",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Email",
+      "DisplayName": "Email",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Mobile",
+      "DisplayName": "Mobile",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IDCard",
+      "DisplayName": "ID Card",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Passport",
+      "DisplayName": "Passport",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IsForeigner",
+      "DisplayName": "Is Foreigner",
+      "Visible": true,
+      "Type": "6"
+    },
+    {
+      "Name": "Gender",
+      "DisplayName": "Gender",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Departure",
+      "DisplayName": "Departure",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Arrival",
+      "DisplayName": "Arrival",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "HotelName",
+      "DisplayName": "Hotel",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FromDate",
+      "DisplayName": "From Date",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ToDate",
+      "DisplayName": "To Date",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CheckInHotelDate",
+      "DisplayName": "Check in Hotel Date",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CheckOutHotelDate",
+      "DisplayName": "Check out Hotel Date",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartFlight",
+      "DisplayName": " Depart Flight",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReturnFlight",
+      "DisplayName": " Return Flight",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CreateDate",
+      "DisplayName": "Created Date",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ModifiedDate",
+      "DisplayName": "Modified Date",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IsCancelled",
+      "DisplayName": "Is Cancelled",
+      "Visible": true,
+      "Type": "6"
+    }
+  ],
+  "OvertimeApplication": [
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SubmitSAPCode",
+      "DisplayName": "Submit SAP Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SubmitFullName",
+      "DisplayName": "Submit Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartmentCode",
+      "DisplayName": "Department Code",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartmentName",
+      "DisplayName": "Department Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "WorkLocationCode",
+      "DisplayName": "WorkLocation Code",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "WorkLocationName",
+      "DisplayName": "WorkLocation Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Date",
+      "DisplayName": "Date of OT",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "ReasonName",
+      "DisplayName": "Reason of OT",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "SAPCodeUserOT",
+      "DisplayName": "SAP Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullNameUserOT",
+      "DisplayName": "Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReasonName",
+      "DisplayName": "Reason",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ContentOfOtherReason",
+      "DisplayName": "Other Reason",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ProposalHoursFrom",
+      "DisplayName": "Proposal Hours From",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ProposalHoursTo",
+      "DisplayName": "Proposal Hours To",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "OtProposalHours",
+      "DisplayName": "OtProposalHours",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ActualHoursFrom",
+      "DisplayName": "Actual Hours From",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ActualHoursTo",
+      "DisplayName": "Actual Hours To",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ActualOtHours",
+      "DisplayName": "Actual OT Hours",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DateOffInLieu",
+      "DisplayName": "Date Off In Lieu",
+      "Visible": true,
+      "Type": "6"
+    },
+    {
+      "Name": "IsNoOT",
+      "DisplayName": "Is Not OT",
+      "Visible": true,
+      "Type": "6"
+    },
+    {
+      "Name": "CreateDate",
+      "DisplayName": "Create Date",
+      "Visible": true,
+      "Type": "4"
+    }
+  ],
+  "OvertimeFillActualDetails": [
+    {
+      "Name": "SAPCode",
+      "DisplayName": "SAP CODE",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "FULL NAME",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Date",
+      "DisplayName": "DATE OF OT (DD/MM/YYYY)",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "ProposalHoursFrom",
+      "DisplayName": "FROM (HH:mm)",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ProposalHoursTo",
+      "DisplayName": "TO (HH:mm)",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ActualHoursFrom",
+      "DisplayName": "ACTUAL FROM (HH:mm)",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ActualHoursTo",
+      "DisplayName": "ACTUAL TO (HH:mm)",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DateOffInLieu",
+      "DisplayName": "DATE OF IN LIEU (1 or 0)",
+      "Visible": true,
+      "Type": "8"
+    },
+    {
+      "Name": "IsNoOT",
+      "DisplayName": "NOT OT (1 or 0)",
+      "Visible": true,
+      "Type": "8"
+    }
+  ],
+  "ShiftExchangeApplication": [
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartmentCode",
+      "DisplayName": "Department Code",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartmentName",
+      "DisplayName": "Department Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "Submitted Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SAPCode",
+      "DisplayName": "Submitted SAP Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "UserFullName",
+      "DisplayName": "Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "UserSAPCode",
+      "DisplayName": "SAP Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ShiftExchangeDate",
+      "DisplayName": "Shift Exchange Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "CurrentShiftCode",
+      "DisplayName": "Current Shift Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CurrentShiftName",
+      "DisplayName": "Current Shift Name",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "NewShiftCode",
+      "DisplayName": "New Shift Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "NewShiftName",
+      "DisplayName": "New Shift Name",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "ReasonCode",
+      "DisplayName": "Reason Code",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "ReasonName",
+      "DisplayName": "Reason Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "OtherReason",
+      "DisplayName": "Other Reason",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CreateDate",
+      "DisplayName": "Create Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "QuotaErd",
+      "DisplayName": "Quota Erd",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IsERD",
+      "DisplayName": "IsERD",
+      "Visible": true,
+      "Type": "6"
+    },
+    {
+      "Name": "CompletedDate",
+      "DisplayName": "Completed Date",
+      "Visible": true,
+      "Type": "9"
+    }
+  ],
+  "ResignationApplication": [
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CreatedByFullName",
+      "DisplayName": "Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "UserSAPCode",
+      "DisplayName": "SAP Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DeptCode",
+      "DisplayName": "DeptLine Code",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "DeptName",
+      "DisplayName": "DeptLine Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DivisionCode",
+      "DisplayName": "Division Code",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "DivisionName",
+      "DisplayName": "Division Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "WorkLocationCode",
+      "DisplayName": "WorkLocation Code",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "WorkLocationName",
+      "DisplayName": "WorkLocation Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "StartingDate",
+      "DisplayName": "Joining Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "OfficialResignationDate",
+      "DisplayName": "Offical Resignation Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "SHUIBookCode",
+      "DisplayName": "SHUIBook Code",
+      "Visible": false,
+      "Type": "7"
+    },
+    {
+      "Name": "SHUIBookName",
+      "DisplayName": "SHUIBook Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReasonForActionCode",
+      "DisplayName": "Reason For Action Code",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "ContractTypeCode",
+      "DisplayName": "Contract Type Code",
+      "Visible": false,
+      "Type": "7"
+    },
+    {
+      "Name": "ContractTypeName",
+      "DisplayName": "Contract Type Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SuggestionForLastWorkingDay",
+      "DisplayName": "Suggestion For Last Working Day",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "IsAgree",
+      "DisplayName": "Agree",
+      "Visible": true,
+      "Type": "6"
+    },
+    {
+      "Name": "Created",
+      "DisplayName": "Create Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "SubmitDate",
+      "DisplayName": "Submit Date",
+      "Visible": true,
+      "Type": "4"
+    }
+  ],
+  "LeaveApplication": [
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SAPCode",
+      "DisplayName": "SAP Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartmentCode",
+      "DisplayName": "Department Code",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartmentName",
+      "DisplayName": "Department Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "LeaveDate",
+      "DisplayName": "Leave Date",
+      "Visible": false,
+      "Type": "4"
+    },
+    {
+      "Name": "LeaveCode",
+      "DisplayName": "Leave Kind Code",
+      "Visible": false,
+      "Type": "0"
+    },
+    {
+      "Name": "LeaveName",
+      "DisplayName": "Leave Kind Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FromDate",
+      "DisplayName": "From Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "ToDate",
+      "DisplayName": "To Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "Quantity",
+      "DisplayName": "Quantity",
+      "Visible": true,
+      "Type": "1"
+    },
+    {
+      "Name": "Reason",
+      "DisplayName": "Reason",
+      "Visible": true,
+      "Type": "1"
+    },
+    {
+      "Name": "CreateDate",
+      "DisplayName": "Create Date",
+      "Visible": true,
+      "Type": "4"
+    }
+  ],
+  "Handover": [
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ApplicantReferenceNumber",
+      "DisplayName": "Applicant Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ApplicantFullName",
+      "DisplayName": "Applicant Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Department",
+      "DisplayName": "Department",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReceivedDate",
+      "DisplayName": "Received Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Item",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SerialNumber",
+      "DisplayName": "Series/Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Unit",
+      "DisplayName": "Unit",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Quantity",
+      "DisplayName": "Quantity",
+      "Visible": true,
+      "Type": "1"
+    },
+    {
+      "Name": "Notes",
+      "DisplayName": "Notes",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IsCancel",
+      "DisplayName": "Cancel",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CreatedDate",
+      "DisplayName": "Create Date",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "PromteAndTransfer": [
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Type",
+      "DisplayName": "Type",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "RequestFrom",
+      "DisplayName": "Request From ",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "FullName",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SapCode",
+      "DisplayName": "SAP Code",
+      "Visible": true,
+      "Type": "1"
+    },
+    {
+      "Name": "CurrentPosittion",
+      "DisplayName": "Current Position",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CurrentJobGrade",
+      "DisplayName": "Current Job Grade",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CurrentDepartment",
+      "DisplayName": "Current Department",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CurrentWorkLocation",
+      "DisplayName": "Current Work Location",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "EffectiveDate",
+      "DisplayName": "Effective Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "NewSalaryBenefits",
+      "DisplayName": "New Salary/ Benefits",
+      "Visible": true,
+      "Type": "3"
+    },
+    {
+      "Name": "NewPosition",
+      "DisplayName": "New Position",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "NewDeptLine",
+      "DisplayName": "New Dept/ Line",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "NewJobGrade",
+      "DisplayName": "New Job Grade",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "NewWorkLocation",
+      "DisplayName": "New Work Location",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReportTo",
+      "DisplayName": "Report To",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReasonOfPromotionTransfer",
+      "DisplayName": "Reason Of Promotion/ Transfer",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CreatedByFullName",
+      "DisplayName": "Requestor",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CreatedDate",
+      "DisplayName": "Create Date",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "Acting": [
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SapCode",
+      "DisplayName": "SAP Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DeptLine",
+      "DisplayName": "Dept/ Line",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Division",
+      "DisplayName": "Division",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "WorkLocation",
+      "DisplayName": "Work Location",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "PositionInActingPeriod",
+      "DisplayName": "Position In Acting Period",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CreatedDate",
+      "DisplayName": "Create Date",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CreatedByFullName",
+      "DisplayName": "Requestor",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "Position": [
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "RequestToHireNumber",
+      "DisplayName": "Request to hire",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Position",
+      "DisplayName": "Position",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Department",
+      "DisplayName": "Department",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Location",
+      "DisplayName": "Location",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ExpiredDate",
+      "DisplayName": "Expired Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "Applicants",
+      "DisplayName": "Applicants",
+      "Visible": true,
+      "Type": "1"
+    },
+    {
+      "Name": "Hired",
+      "DisplayName": "Hired",
+      "Visible": true,
+      "Type": "1"
+    },
+    {
+      "Name": "Required",
+      "DisplayName": "Required",
+      "Visible": true,
+      "Type": "1"
+    },
+    {
+      "Name": "Assignee",
+      "DisplayName": "Assignee",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "Applicant": [
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Position",
+      "DisplayName": "Position",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IDCard9Number",
+      "DisplayName": "ID Card 9 Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IDCard12Number",
+      "DisplayName": "ID Card 12 Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Department",
+      "DisplayName": "Department",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DateOfBirth",
+      "DisplayName": "Date Of Birth",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "Created",
+      "DisplayName": "Create Date",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "NewStaffOnBoard": [
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Position",
+      "DisplayName": "Position",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IDCard9Number",
+      "DisplayName": "ID Card 9 Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IDCard12Number",
+      "DisplayName": "ID Card 12 Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Department",
+      "DisplayName": "Department",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DateOfBirth",
+      "DisplayName": "Date Of Birth",
+      "Visible": true,
+      "Type": "4"
+    }
+  ],
+  "PositionDetail": [
+    {
+      "Name": "FullName",
+      "DisplayName": "Applicant Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Email",
+      "DisplayName": "Email",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Mobile",
+      "DisplayName": "Phone",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ApplicantStatusName",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "AppreciationName",
+      "DisplayName": "Appreciation",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "InChargePerson",
+      "DisplayName": "In Charge Person",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SAPReviewStatus",
+      "DisplayName": "SAP Review Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Created",
+      "DisplayName": "Created",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "StartDate",
+      "DisplayName": "Start Date",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "HolidaySchedule": [
+    {
+      "Name": "FromDate",
+      "DisplayName": "FromDate",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "ToDate",
+      "DisplayName": "ToDate",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "Title",
+      "DisplayName": "Title",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "HotelSetting": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Address",
+      "DisplayName": "Address",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Telephone",
+      "DisplayName": "Telephone",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "BusinessTripLocationName",
+      "DisplayName": "Business Trip Location",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IsForeigner",
+      "DisplayName": "Is Foreigner",
+      "Visible": true,
+      "Type": "6"
+    }
+  ],
+  "BusinessTripLocation": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Name",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "AirlineSetting": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Name",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "FlightNumberSetting": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "AirlineName",
+      "DisplayName": "Airline",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IsPeakTime",
+      "DisplayName": "Is Peak Time",
+      "Visible": true,
+      "Type": "6"
+    }
+  ],
+  "RoomTypeSetting": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Quota",
+      "DisplayName": "Quota",
+      "Visible": true,
+      "Type": "1"
+    }
+  ],
+  "BusinessTripApplicationReport": [
+    {
+      "Name": "Hotel",
+      "DisplayName": "Hotel",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FlightNumber",
+      "DisplayName": "Flight Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "RoomType",
+      "DisplayName": "Room Type",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "BusinessTripType",
+      "DisplayName": "Business Trip Type",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SAPCode",
+      "DisplayName": "SAPCode",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IDCard",
+      "DisplayName": "ID Card",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Passport",
+      "DisplayName": "Passport",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Mobile",
+      "DisplayName": "Mobile",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Email",
+      "DisplayName": "Email",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartmentName",
+      "DisplayName": "Department Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Departure",
+      "DisplayName": "Departure",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Arrival",
+      "DisplayName": "Arrival",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "HotelName",
+      "DisplayName": "Hotel",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FromDate",
+      "DisplayName": "From Date",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ToDate",
+      "DisplayName": "To Date",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CheckInHotelDate",
+      "DisplayName": "Check In Hotel",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "CheckOutHotelDate",
+      "DisplayName": "Check Out Hotel",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "TotalDays",
+      "DisplayName": "Total Days",
+      "Visible": true,
+      "Type": "1"
+    },
+    {
+      "Name": "FlightNumberName",
+      "DisplayName": "Flight Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IsCancel",
+      "DisplayName": "Is Cancel",
+      "Visible": true,
+      "Type": "6"
+    },
+    {
+      "Name": "Reason",
+      "DisplayName": "Reason",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DetailReason",
+      "DisplayName": "Detail Reason",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "HasBudget",
+      "DisplayName": "Check Budget",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartFlight",
+      "DisplayName": "Depart Flight",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReturnFlight",
+      "DisplayName": "Return Flight",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "OnTime",
+      "DisplayName": "On Time",
+      "Visible": true,
+      "Type": "7"
+    },
+    {
+      "Name": "DeptLine",
+      "DisplayName": "Dept/ Line",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "BTAApprovedDay",
+      "DisplayName": "BTA approved day in advance",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "ShiftPlanSubmitPerson": [
+    {
+      "Name": "Department",
+      "DisplayName": "Department",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Users",
+      "DisplayName": "Users",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "TargetPlan": [
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SubmitterSAPCode",
+      "DisplayName": "Created By SAP Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SubmitterFullName",
+      "DisplayName": "Created By Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SAPCode",
+      "DisplayName": "SAP Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Department",
+      "DisplayName": "Department",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DeptLine",
+      "DisplayName": "Dept/Line",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DivisionGroup",
+      "DisplayName": "Division/Group",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Period",
+      "DisplayName": "Period",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Created",
+      "DisplayName": "Created Date",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Modified",
+      "DisplayName": "Modified Date",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "ReportTargetPlan": [
+    {
+      "Name": "SAPCode",
+      "DisplayName": "SAP Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartmentName",
+      "DisplayName": "Department",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "PeriodName",
+      "DisplayName": "Period",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Created",
+      "DisplayName": "Created",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "OverBudget": [
+    {
+      "Name": "ReferenceNumber",
+      "DisplayName": "Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "BTA_ReferenceNumber",
+      "DisplayName": "BTA Reference Number",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DeptName",
+      "DisplayName": "Department Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "SAPCode",
+      "DisplayName": "SAP Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FullName",
+      "DisplayName": "Full Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DeptDivisionName",
+      "DisplayName": "Division/Group Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "DepartureName",
+      "DisplayName": "Departure Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ArrivalName",
+      "DisplayName": "Arrival Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "FromDate",
+      "DisplayName": "From Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "ToDate",
+      "DisplayName": "To Date",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "OldBudget",
+      "DisplayName": "Old Budget",
+      "Visible": true,
+      "Type": "3"
+    },
+    {
+      "Name": "NewBudget",
+      "DisplayName": "New Budget",
+      "Visible": true,
+      "Type": "3"
+    },
+    {
+      "Name": "DeviantBudget",
+      "DisplayName": "Deviant Budget",
+      "Visible": true,
+      "Type": "3"
+    },
+    {
+      "Name": "Status",
+      "DisplayName": "Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "BTAStatus",
+      "DisplayName": "BTA Status",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Created",
+      "DisplayName": "Created",
+      "Visible": true,
+      "Type": "4"
+    }
+  ],
+  "BusinessModel": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Name",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Created",
+      "DisplayName": "Created",
+      "Visible": true,
+      "Type": "4"
+    },
+    {
+      "Name": "Modified",
+      "DisplayName": "Modified",
+      "Visible": true,
+      "Type": "4"
+    }
+  ],
+  "WorkingAddressRecruitment": [
+    {
+      "Name": "Code",
+      "DisplayName": "Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Address",
+      "DisplayName": "Address",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "BusinessModelUnitMapping": [
+    {
+      "Name": "BusinessModelCode",
+      "DisplayName": "Business Model Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "BusinessUnitCode",
+      "DisplayName": "Business Unit Code",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "ShiftCode": [
+    {
+      "Name": "Code",
+      "DisplayName": "Shift Code",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Type",
+      "DisplayName": "Type of Shift",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "Line",
+      "DisplayName": "Line",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "TypeOfHaftDay",
+      "DisplayName": "Type Of Haft Day",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IsHoliday",
+      "DisplayName": "Holiday",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "IsActive",
+      "DisplayName": "Is Active",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "TargetPlanSpecial": [
+    {
+      "Name": "Department",
+      "DisplayName": "Department",
+      "Visible": true,
+      "Type": "0"
+    }
+  ],
+  "BTAErrorMessage": [
+    {
+      "Name": "APIType",
+      "DisplayName": "APIType",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "ErrorCode",
+      "DisplayName": "ErrorCode",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "MessageVI",
+      "DisplayName": "Message VI",
+      "Visible": true,
+      "Type": "0"
+    },
+    {
+      "Name": "MessageEN",
+      "DisplayName": "Message EN",
+      "Visible": true,
+      "Type": "0"
+    }
+  ]
+}

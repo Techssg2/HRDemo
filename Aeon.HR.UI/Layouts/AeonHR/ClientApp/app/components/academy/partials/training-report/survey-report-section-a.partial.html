@@ -1,0 +1,30 @@
+<style>
+  .table {
+    border-left: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+    border-bottom: solid 1px #ddd;
+  }
+  .borderless td,
+  .borderless th {
+    border: none;
+  }
+  .k-grid tr:nth-child(26) td {
+    border-top: solid 1px #ccc;
+  }
+</style>
+<div class="row mrt10">
+  <div class="col-md-12">
+    <kendo-grid
+      options="surveyQuestionOptions"
+      id="surveyQuestion"
+      class="participant-grid"
+    >
+    </kendo-grid>
+  </div>
+
+  <div
+    ng-include
+    src="'training-report/survey-report-section-c.partial.html'"
+    class="col-md-12"
+  ></div>
+</div>

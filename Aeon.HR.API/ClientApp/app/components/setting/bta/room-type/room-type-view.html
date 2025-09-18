@@ -1,0 +1,124 @@
+<style>
+
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+
+            <div class="d-flex align-items-center justify-content-between portlet-title">
+                <div class="group poppins-medium text-grey-300 caption caption-md px-3">
+                    <p style=" text-transform: uppercase !important;" class="display-8 m-0">{{title}}</p>
+                    <p class="display-11">
+                        <span class="opacity-40">Number of record:</span> {{total}}
+                    </p>
+                </div>
+            </div>
+            <div class="portlet-body p-2 bg-neutral-blue-300">
+                <div ng-show="false"><input id="files" name="files" kendo-upload type="file" ng-show="false" class="ng-hide" /></div>
+                <div class="page-content-wrapper float-none table-rounded-toolbar ">
+                    <div class="toolbar">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="d-flex gap-2 align-items-center justify-content-between">
+                                    <div class=" d-flex gap-3" style="width: 500px; margin-top:10px">
+                                        <input type="text" class="form-control" style="width: 300px; height: 40px" id='FieldFilter' placeholder="Search for..." ng-keypress="actions.ifEnter($event)" ng-model="keyword" style="">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary rounded-3 poppins-regular display-9  py-2 px-3" type="button" ng-click="search()" style="border: 1px solid #dadada; margin-bottom: 10px;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                                </svg>
+                                                &nbsp;Search
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex gap-2">
+                                        <button type="button" ng-click="export()" class="btn btn-outline-cyan rounded-3 poppins-regular display-9 py-2 px-3">
+                                            <svg fill="currentColor" class="bi bi-check-square" width="16" height="16" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="m0 1016.081 409.186 409.073 79.85-79.736-272.867-272.979h1136.415V959.611H216.169l272.866-272.866-79.85-79.85L0 1016.082ZM1465.592 305.32l315.445 315.445h-315.445V305.32Zm402.184 242.372-329.224-329.11C1507.042 187.07 1463.334 169 1418.835 169h-743.83v677.647h112.94V281.941h564.706v451.765h451.765v903.53H787.946V1185.47H675.003v564.705h1242.353V667.522c0-44.498-18.07-88.207-49.581-119.83Z" fill-rule="evenodd"></path>
+                                            </svg>
+                                            &nbsp;Export
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="display-10 leading-18">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <kendo-grid id="grid" options="roomTypeOptions" style=" overflow: hidden; border-top-left-radius: 0px !important; border-top-right-radius: 0px !important;">
+                                    </kendo-grid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="row">
+    <div class="col-md-12 ">
+        <div class="portlet bordered light">-->
+<!-- Title -->
+<!--<div class="portlet-title">
+    <div class="caption caption-md">
+        <span class="caption-subject uppercase">{{title}}</span>
+    </div>
+    <div class="actions">
+        <div class="row">
+            <div class="col-md-7">
+
+            </div>
+            <div class="col-md-5 align-right-btn-group">
+                <div class="input-group" style="width: 400px">
+                    <input type="text" class="form-control" id='FieldFilter' placeholder="Search for..." style="width: 100%; " ng-keypress="actions.ifEnter($event)" ng-model="keyword">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="button" ng-click="search()" style="border: 1px solid #dadada;
+                        margin-bottom: 10px;">
+                            <span class="k-icon k-i-search"></span>
+                        </button>
+                    </span>
+                </div>
+                <div add-class class="btn-group" current-class="btn-group" added-class="open" style="margin-top:3px">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="padding: 0px !important">
+                        <img src="ClientApp/assets/images/icon/more.png"
+                             style="position: relative;top: -2px"
+                             class="ng-isolate-scope">
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a ng-click="export()" class="ng-binding">
+                                <i class="fa fa-table font-blue right-5"></i>
+                                Export excel
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="portlet-body">-->
+<!--Grid-->
+<!--<div class="row">
+        <div class="col-md-12">
+            <kendo-grid id="grid" options="roomTypeOptions">
+            </kendo-grid>
+        </div>
+    </div>
+
+</div>-->
+<!-- Content -->
+<!--</div>
+    </div>
+</div>-->

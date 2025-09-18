@@ -1,0 +1,151 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md tabbable-line">
+                    <span class="caption-subject uppercase">{{title}}</span>
+                </div>
+                <div class="actions">
+                    <!-- <kendo-button type="button" class="btn btn-default btn-sm right-5" ng-click="showPopup('modalInfo', actionNeedShowPopup[0], '#dialogReason', actions.approve)">
+                        <i class="fa fa-check font-green-jungle right-5"></i> Approve</kendo-button>
+                    <kendo-button type="button" class="btn btn-default btn-sm right-5" ng-click="showPopup('modalInfo', actionNeedShowPopup[1], '#dialogReason', actions.requestedToChange)">
+                        <i class="fa fa-minus-circle font-red right-5"></i> Requested To Change
+                    </kendo-button>
+                    <kendo-button type="button" class="btn btn-default btn-sm right-5" ng-click="showPopup('modalInfo', actionNeedShowPopup[2], '#dialogReason', actions.reject)">
+                        <i class="fa fa-minus-circle font-red right-5"></i> Reject</kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="cancel()">
+                        <i class="k-icon k-i-close color-gray"></i> Close
+                    </kendo-button> -->
+                    <action-items model="model" save="saveOvertimeRequirsion" form="form"></action-items>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="page-content-wrapper float-none">
+                    <form name="g1Form">
+                        <div class="page-content">
+                            <div class="form-horizontal">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label" style="font-weight: bold;">{{'COMMON_SAP_CODE'|translate}}</label>
+                                                        <div class="col-md-8 ">
+                                                            <input type="text" class="form-control input-sm" ng-model="model.userSAPCode" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label" style="font-weight: bold;">
+                                                            {{'COMMON_FULL_NAME'|translate}}
+                                                        </label>
+                                                        <div class="col-md-8 ">
+                                                            <input type="text" class="form-control input-sm" ng-model="model.createdByFullName" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label" style="font-weight: bold;">
+                                                            {{'COMMON_DEPT_LINE'|translate}}
+                                                        </label>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control input-sm" ng-model="model.deptName" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label" style="font-weight: bold;">
+                                                            {{'COMMON_DIVISION_GROUP'|translate}}
+                                                        </label>
+                                                        <div class="col-md-8 ">
+                                                            <input type="text" class="form-control input-sm" ng-model="model.divisionName" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label" style="font-weight: bold;">{{'COMMON_WORK_LOCATION'|translate}}</label>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control input-sm" ng-model="model.workLocationName" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mt-2">
+                                            <div kendo-grid="overtimeReadListGrid" id="overtimeReadListGrid" options="overtimeReadListGridOptions">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12">
+                                    <p><b>{{'COMMON_NOTE'|translate}}: </b><span>*</span></p>
+                                    <p>
+                                        - <b>Chỉ cần phê duyệt khi số giờ tăng ca thực tế khác kế hoạch tăng ca.</b> <br />
+                                        <i>Only requires in case actual OT is different from planned OT.</i>
+                                    </p>
+                                    <p>
+                                        - <b>
+                                            Phiếu đề nghị tăng ca phải được ký duyệt trước khi tăng ca và có sự phê
+                                            duyệt
+                                            của Giám Đốc cấp cao.
+                                        </b> <br />
+                                        <i>
+                                            Ovetime request form must be signed and approved before overtime with the
+                                            approval of Senior General Manager or approriate authorization.
+                                    </p>
+                                    </i>
+                                    <p>
+                                        - <b>
+                                            Không OT quá 4h/ngày, quá 40h/tháng, 200h/năm; Ngày lễ, ngày nghỉ ca không
+                                            OT
+                                            quá 12h/ngày.
+                                        </b><br />
+                                        <i>
+                                            OT hours can’t exceed 4h/day, 40h/month, 200h/year; On holidays or Day-off OT
+                                            hours can’t exceed 12h/day.
+                                        </i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="portlet-title">
+                <div class="actions">
+                    <!-- <kendo-button type="button" class="btn btn-default btn-sm right-5" ng-click="showPopup('modalInfo', actionNeedShowPopup[0], '#dialogReason', actions.approve)">
+                        <i class="fa fa-check font-green-jungle right-5"></i> Approve</kendo-button>
+                    <kendo-button type="button" class="btn btn-default btn-sm right-5" ng-click="showPopup('modalInfo', actionNeedShowPopup[1], '#dialogReason', actions.requestedToChange)">
+                        <i class="fa fa-minus-circle font-red right-5"></i> Requested To Change
+                    </kendo-button>
+                    <kendo-button type="button" class="btn btn-default btn-sm right-5" ng-click="showPopup('modalInfo', actionNeedShowPopup[2], '#dialogReason', actions.reject)">
+                        <i class="fa fa-minus-circle font-red right-5"></i> Reject</kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="cancel()">
+                        <i class="k-icon k-i-close color-gray"></i> Close
+                    </kendo-button> -->
+                    <action-items model="model" save="saveOvertimeRequirsion" form="g1Form"></action-items>
+                </div>
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>

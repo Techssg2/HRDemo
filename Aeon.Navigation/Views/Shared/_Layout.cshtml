@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <title>SSG</title>
+    <script type="text/javascript">
+        var sr = '@ViewBag.SR';
+        var uxr = '@ViewBag.UXR';
+        var edocV = '1.0';
+        var baseUrl = "/";
+        var baseUrlApi = "/api";
+        var edoc1Url = '@ViewBag.Edoc1Url';
+        var skuUrl = '@ViewBag.skuUrl';
+    </script>
+    <link type="text/css" rel="stylesheet" href="ClientApp/assets/lib/kendo/styles/kendo.common.min.css" />
+    <link type="text/css" rel="stylesheet" href="ClientApp/assets/lib/kendo/styles/kendo.office365.min.css" />
+    <link type="text/css" rel="stylesheet" href="ClientApp/assets/lib/kendo/styles/fx.framework.core.css" />
+    <link type="text/css" rel="stylesheet" href="ClientApp/assets/css/aeon.edocument.css" />
+    <link type="text/css" rel="stylesheet" href="ClientApp/assets/css/shared.css" />
+    <link type="text/css" rel="stylesheet" href="ClientApp/assets/css/angular-ui-notification.css" />
+    <link type="text/css" rel="stylesheet" href="ClientApp/assets/css/styles.css" />
+    <script src="ClientApp/assets/lib/kendo/js/jquery.min.js"></script>
+    <script src="ClientApp/assets/lib/kendo/js/jszip.min.js"></script>
+    <script src="ClientApp/assets/lib/kendo/js/angular.min.js"></script>
+    <script src="ClientApp/assets/lib/kendo/js/kendo.all.min.js"></script>
+    <script src="ClientApp/assets/lib/kendo/js/angular-cookies.min.js"></script>
+    <script src="ClientApp/assets/lib/angular-translate/angular-translate.min.js"></script>
+    <script src="ClientApp/assets/lib/angular-translate/angular-translate-loader-static-files.min.js"></script>
+    <script src="ClientApp/assets/lib/ui-router/angular-ui-router.min.js"></script>
+    <script src="ClientApp/assets/lib/angular-resource/angular-resource.min.js"></script>
+    <script src="ClientApp/assets/lib/lodash/lodash.min.js"></script>
+    <script src="ClientApp/assets/lib/file/FileSaver.js"></script>
+    <script src="ClientApp/assets/lib/kendo/js/angular-local-storage.min.js"></script>
+    <script src="ClientApp/assets/lib/fns/date_fns.min.js"></script>
+    <!-- My js files -->
+    <script src="ClientApp/app/app-controller.js"></script>
+    <script src="ClientApp/app/app.module.js"></script>
+
+    <script src="ClientApp/app/components/dashboard/dashboard-controller.js"></script>
+
+    <script src="ClientApp/app/components/setting/setting-controller.js"></script>
+    <script src="ClientApp/app/components/setting/navigation/navigation-controller.js"></script>
+    <script src="ClientApp/app/components/setting/setting-service.js"></script>
+    <script src="ClientApp/app/shared/directives/item-icon/item-icon.directive.js"></script>
+    <script src="ClientApp/app/components/errors-page/access-denied.controller.js"></script>
+
+    <script src="ClientApp/app/shared/directives/user-info/user-info.directive.js"></script>
+
+    <script src="ClientApp/app/components/errors-page/not-found.controller.js"></script>
+    <script src="ClientApp/app/redirect-page-controller.js"></script>
+
+    <!-- Navigation -->
+    <script src="ClientApp/app/components/navigation-home/navigation-home-controller.js"></script>
+    <script src="ClientApp/app/shared/directives/sub-menu-nav-section/sub-menu-nav-section.directive.js"></script>
+
+    <!-- Shared -->
+    <script src="ClientApp/app/app.setting.js"></script>
+    <script src="ClientApp/app/shared/utilities.js"></script>
+    <script src="ClientApp/app/shared/btaHelper.js"></script>
+    <script src="ClientApp/app/shared/SPHandler_Helper.js"></script>
+    <script src="ClientApp/app/shared/moment.js"></script>
+    <script src="ClientApp/app/shared/history.js"></script>
+    <script src="ClientApp/app/shared/angular-ui-notification.js"></script>
+    <script src="ClientApp/app/shared/fileSaver.js"></script>
+
+    <!-- Directive -->
+    <script src="ClientApp/app/shared/directives/sub-menu-section/sub-menu-section.directive.js"></script>
+    <script src="ClientApp/app/shared/directives/excute-jq.directive.js"></script>
+
+    <!-- Service -->
+    <script src="ClientApp/app/shared/interceptor-service.js"></script>
+    <script src="ClientApp/app/shared/services/attachmentFile-service.js"></script>
+    <script src="ClientApp/app/shared/services/common-service.js"></script>
+
+    <script src="ClientApp/app/components/integration-remote-data/ssgex-service.js"></script>
+
+    <script src="ClientApp/app/services/data-service.js"></script>
+    <script src="ClientApp/app/services/dashboard-service.js"></script>
+    <script src="ClientApp/app/services/file-service.js"></script>
+    <script src="ClientApp/app/services/navigation-service.js"></script>
+    <script src="ClientApp/app/services/workflow-service.js"></script>
+
+    <!-- Filter -->
+    <script src="ClientApp/app/shared/filter-option.js"></script>
+    <script src="ClientApp/app/shared/modules/attachment-file-module.js"></script>
+    <base href="/">
+
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>

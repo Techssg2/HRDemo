@@ -1,0 +1,62 @@
+<style>
+    #shiftPlanGrid .k-loading-image {
+        display: none;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div id="loading_submit_person"></div>
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">{{title}}</span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-md-7">
+
+                        </div>
+                        <div class="col-md-5 align-right-btn-group">
+                            <div class="input-group" style="width: 400px">
+                                <input type="text" class="form-control" ng-model="searchText"
+                                    placeholder="Search for..." ng-keypress="ifEnter($event)" style="width: 100%; ">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default btn-sm" ng-click="search()" type="button" style="border: 1px solid #dadada;
+                                    margin-bottom: 10px;"><span class="k-icon k-i-search"></span></button>
+                                </span>
+                            </div>
+                            <div add-class class="btn-group" current-class="btn-group" added-class="open"
+                                style="margin-top:3px">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-expanded="true" style="padding: 0px !important"><img
+                                        src="ClientApp/assets/images/icon/more.png" style="position: relative;top: -2px"
+                                        class="ng-isolate-scope"></button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a ng-click="export()" class="ng-binding"><i
+                                                class="fa fa-table font-blue right-5"></i>
+                                            Export excel</a></li>
+                                    <!-- <li><a  ng-click="import()" class="ng-binding"><i class="fa fa-table font-blue right-5"></i>
+                                            Import excel</a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="page-content-wrapper float-none">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <kendo-grid id="shiftPlanGrid" options="shiftPlanGridOptions">
+                            </kendo-grid>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>

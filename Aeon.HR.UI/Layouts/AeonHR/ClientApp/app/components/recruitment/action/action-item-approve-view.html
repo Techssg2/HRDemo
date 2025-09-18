@@ -1,0 +1,217 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">{{titleEdit}}
+                    </span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <span>
+                                <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                                    ng-click="showPopup('modalInfo', actionNeedShowPopup[0], '#dialogReason', actions.approve)">
+                                    <i class="fa fa-check font-green-jungle right-5"></i> Approve</kendo-button>
+                                <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                                    ng-click="showPopup('modalInfo', actionNeedShowPopup[1], '#dialogReason', actions.requestedToChange)">
+                                    <i class="fa fa-minus-circle font-red right-5"></i> Requested To Change
+                                </kendo-button>
+                                <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                                    ng-click="showPopup('modalInfo', actionNeedShowPopup[2], '#dialogReason', actions.reject)">
+                                    <i class="fa fa-minus-circle font-red right-5"></i> Reject</kendo-button>
+                                <kendo-button class="btn btn-default btn-sm" ng-click="cancel(stateParams)">
+                                    <i class="k-icon k-i-close font-green-jungle"></i> Close
+                                </kendo-button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row ng-scope" ng-if="errors.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase">Please enter all required fields <span
+                                    class="font-red-thunderbird">*</span>:</h5>
+                            <p></p>
+                            <ul>
+                                <li ng-repeat="error in errors"><span class="bold ">{{error.controlName}}</span>:
+                                    {{error.message ? error.message : 'Field is required'}}</li>
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+                <form name="g1Form">
+                    <div class="page-content-wrapper float-none">
+
+                        <div class="page-content">
+                            <div class="form-horizontal">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">SAP Code: </label>
+                                                <div class="col-md-8">
+                                                    <label
+                                                    class="form-control-static">{{detail.sapCode}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Full Name: </label>
+                                                <div class="col-md-8">
+                                                    <label
+                                                    class="form-control-static">{{detail.fullName}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Dept/ Line: </label>
+                                                <div class="col-md-8">
+                                                    <label
+                                                    class="form-control-static">{{detail.deptLine}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Work Location: </label>
+                                                <div class="col-md-8">
+                                                    <label
+                                                    class="form-control-static">{{detail.workLocationName}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Current Title: </label>
+                                                <div class="col-md-8">
+                                                    <label
+                                                    class="form-control-static">{{detail.currentTitle}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Position in Acting Period:</label>
+                                                <div class="col-md-8">
+                                                    <label
+                                                    class="form-control-static">{{detail.position}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">1<sup>st</sup> Appraiser: </label>
+                                                <div class="col-md-8">
+                                                    <label
+                                                    class="form-control-static">{{detail.appraiser1st}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">2<sup>nd</sup> Appraiser:</label>
+                                                <div class="col-md-8">
+                                                    <label
+                                                    class="form-control-static">{{detail.appraiser2nd}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--PERIOD-->
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Acting Period: </label>
+                                                <div class="col-md-8">
+                                                    <label
+                                                    class="form-control-static">{{actingPeriodFrom}} - {{actingPeriodTo}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--APPRAISING-->
+                                    <div class="row" style="padding-top: 15px;">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <div class="portlet box bg-grey bg-font-grey fx-portlet">
+                                                    <div class="portlet-title">
+                                                        <div class="caption"><span
+                                                                class="caption-subject hr-process uppercase f-collapse">APPRAISING</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body">
+                                                        <!-- <div class="row">
+                                                        <div class="col-md-12">
+                                                            <kendo-grid id="appraisingGrid" options="appraisingGridOptions"></kendo-grid>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 10px;">
+                                                        <div class="col-md-12">
+                                                            <kendo-button style="background-color: #b42e83; color:#fff;" class="btn btn-default btn-sm pull-right" ng-click="addRow('appraising')">
+                                                                Add more
+                                                            </kendo-button>
+                                                        </div>
+                                                    </div> -->
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <kendo-grid k-scope-field="inst.appraising" id="mainAppraisingGridOptionsApprove"
+                                                                    k-options="mainAppraisingGridOptionsApprove">
+                                                                    <div k-detail-template>
+                                                                        <!-- <div kendo-grid id="appraisingGrid" options="appraisingGridOptions"></div> -->
+                                                                        <!-- <div class="orders"></div> -->
+                                                                        <kendo-grid id="appraisingDetailGridOptionsApprove"
+                                                                            k-options="appraisingDetailGridOptionsApprove(dataItem)">
+                                                                    </div>
+                                                                </kendo-grid>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="portlet-title">
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <span>
+                                <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                                    ng-click="showPopup('modalInfo', actionNeedShowPopup[0], '#dialogReason', actions.approve)">
+                                    <i class="fa fa-check font-green-jungle right-5"></i> Approve</kendo-button>
+                                <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                                    ng-click="showPopup('modalInfo', actionNeedShowPopup[1], '#dialogReason', actions.requestedToChange)">
+                                    <i class="fa fa-minus-circle font-red right-5"></i> Requested To Change
+                                </kendo-button>
+                                <kendo-button type="button" class="btn btn-default btn-sm right-5"
+                                    ng-click="showPopup('modalInfo', actionNeedShowPopup[2], '#dialogReason', actions.reject)">
+                                    <i class="fa fa-minus-circle font-red right-5"></i> Reject</kendo-button>
+                                <kendo-button class="btn btn-default btn-sm" ng-click="cancel(stateParams)">
+                                    <i class="k-icon k-i-close font-green-jungle"></i> Close
+                                </kendo-button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>

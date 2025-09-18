@@ -1,0 +1,843 @@
+<style>
+    .k-dialog-title {
+        color: #006EFA !important;
+        font-family: Nova-Regular !important;
+        font-size: 18px !important;
+        font-weight: 700;
+        margin: 10px 0;
+        margin: 0;
+        line-height: 1.42857143;
+        text-transform: uppercase !important;
+    }
+
+    .workflow-history {
+        white-space: nowrap;
+        overflow-x: auto !important;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        color: black;
+        font-family: Roboto;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        padding: 5px;
+    }
+
+    .k-dialog {
+        top: calc(10%) !important;
+    }
+
+    .visible {
+        height: 3em;
+        width: 10em;
+        background: yellow;
+    }
+
+    .table a {
+        text-decoration: none;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .table th, .table td {
+        border: none;
+    }
+</style>
+<div id="trackingHistoryDialog" kendo-dialog="trackingHistoryDialog" class="pd0" k-visible="false">
+    <div class="modal-body" style="overflow-x: auto; overflow-y: auto; max-height: 400px;">
+        <div class="row" ng-if="trackingHistory[0].itemType == 'Department' && trackingHistory[0].type == 'Delete' && trackingHistory.length">
+            <div class="form-horizontal">
+                <div class="form-body d-flex">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">{{'COMMON_DEPARTMENT_CODE' | translate}}:</label>
+                            <div class="col">
+                                <!-- <input type="text" maxlength="50" class="form-control input-sm" ng-model="searchLeaveManagement.keyword"> -->
+                                <input type="text" maxlength="50" class="k-textbox" style="width: 100%;" ng-model="query.departmentCode">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-5 control-label">{{'COMMON_DEPARTMENT_NAME' | translate}}:</label>
+                            <div class="col">
+                                <!-- <input type="text" maxlength="50" class="form-control input-sm" ng-model="searchLeaveManagement.keyword"> -->
+                                <input type="text" maxlength="50" class="k-textbox" style="width: 100%;" ng-model="query.departmentName">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="trackingHistory[0].itemType == 'Department' && trackingHistory[0].type == 'Delete' && trackingHistory.length">
+            <div class="form-horizontal">
+                <div class="form-body">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                          
+                            <div class="col-md-8">
+                               
+
+                                <button type="button" ng-click="filterDeparment(query)" class="btn btn-primary rounded-3 poppins-regular display-9 ng-binding">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                                    </svg>
+                                    &nbsp; {{'COMMON_BUTTON_SEARCH' | translate}}
+                                </button>
+
+                                <button type="button" ng-click="clearSearch()" class="btn btn-white rounded-3 poppins-regular display-9 ng-binding">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"></path>
+                                        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"></path>
+                                    </svg>
+                                    &nbsp; {{'COMMON_BUTTON_RESET' | translate}}
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="reset-mp" ng-if="trackingHistory.length">
+            <div>
+                <table class=" table table-borderless table-rounded display-10 leading-18" style="width:100%">
+                    <thead>
+                        <tr style="width:100%; border:none">
+                            <th style=" border: none">{{'COMMON_TYPE' | translate}}</th>
+                            <th ng-if="trackingHistory[0].itemType == 'Department'&&trackingHistory[0].type=='Delete'">{{'COMMON_DEPARTMENT_CODE' | translate}}</th>
+                            <th ng-if="trackingHistory[0].itemType == 'Department'&&trackingHistory[0].type=='Delete'">{{'COMMON_DEPARTMENT_NAME' | translate}}</th>
+                            <!--<th>{{'COMMON_ROUND' | translate}}</th>-->
+                            <!--<th ng-if="hideRound(trackingHistory[0].type)">{{'COMMON_ROUND' | translate}}</th>-->
+                            <th ng-if="trackingHistory[0].itemType !== 'User' && trackingHistory[0].itemType !== 'Department' && trackingHistory[0].itemType !== 'Workflow' && trackingHistory[0].itemType !== 'RequestToHire' && trackingHistory[0].itemType !== 'ShiftExchangeApplication' && trackingHistory[0].itemType !== 'TargetPlan' && trackingHistory[0].itemType !==  'UserDepartmentMapping' && trackingHistory[0].itemType !==  'Shift Code' && trackingHistory[0].itemType !==  'TargetPlanSpecial'">{{'COMMON_ROUND' | translate}}</th>
+                            <th>{{'COMMON_MODIFIED_DATE' | translate}}</th>
+                            <th>{{'COMMON_MODIFIED_BY' | translate}}</th>
+                            <th ng-if="trackingHistory[0].itemType !== 'User' && trackingHistory[0].itemType !== 'Department' && trackingHistory[0].itemType !== 'Workflow' && trackingHistory[0].itemType !== 'UserDepartmentMapping' && trackingHistory[0].itemType !==  'Shift Code' && trackingHistory[0].itemType !== 'TargetPlanSpecial'">{{'COMMON_COMMENT' | translate}}</th>
+                            <th ng-if="trackingHistory[0].itemType !== 'User' && trackingHistory[0].itemType !== 'Department' && trackingHistory[0].itemType !== 'Workflow' && trackingHistory[0].itemType !== 'UserDepartmentMapping' && trackingHistory[0].itemType !==  'Shift Code' && trackingHistory[0].itemType !== 'TargetPlanSpecial'">{{'Attachment' | translate}}</th>
+                            <!-- other module-->
+                            <!-- Window tracking log -->
+                            <th ng-if="trackingHistory[0].type == 'UpdatePayload'">Payload</th>
+                            <!-- Window User -->
+                            <th ng-if="trackingHistory[0].itemType == 'User'">Login Name</th>
+                            <th ng-if="trackingHistory[0].itemType == 'User'">Employee Code</th>
+                            <th ng-if="trackingHistory[0].itemType == 'User'">Employee Name</th>
+                            <th ng-if="trackingHistory[0].itemType == 'User'">Not Target Plan</th>
+                            <th ng-if="trackingHistory[0].itemType == 'User'">Email</th>
+                            <th ng-if="trackingHistory[0].itemType == 'User'">Login Type</th>
+                            <!-- Window ShiftCode -->
+                            <th ng-if="trackingHistory[0].itemType == 'Shift Code'">Shift Code</th>
+                            <th ng-if="trackingHistory[0].itemType == 'Shift Code'">Type of Shift</th>
+                            <th ng-if="trackingHistory[0].itemType == 'Shift Code'">Line</th>
+                            <th ng-if="trackingHistory[0].itemType == 'Shift Code'">Type of HaftDay</th>
+                            <th ng-if="trackingHistory[0].itemType == 'Shift Code'">Holiday</th>
+                            <th ng-if="trackingHistory[0].itemType == 'Shift Code'">Active</th>
+                            <!--<th>PositionCode</th>-->
+                            <th ng-if="trackingHistory[0].itemType == 'User'">Permission</th>
+                            <th ng-if="trackingHistory[0].itemType == 'User'">Status</th>
+                            <!-- Window Department -->
+                            <!--<th ng-if="(trackingHistory[0].itemType == 'Workflow' || trackingHistory[0].itemType == 'Department' || trackingHistory[0].itemType == 'UserDepartmentMapping' || (trackingHistory[0].type == 'UpdateInformation' && (trackingHistory[0].itemType == 'ShiftExchangeApplication' || trackingHistory[0].itemType == 'TargetPlan')))">{{'COMMON_ACTION' | translate}}</th>-->
+                            <th ng-if="trackingHistory[0].itemType !== 'User' && trackingHistory[0].itemType !== 'Shift Code'">{{'COMMON_ACTION' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="history in trackingHistory">
+                        <tr ng-if="history.type !== 'SendData'">
+                            <td ng-if="!history.isJsonDefault">{{history.type | translate}}</td>
+                            <td ng-if="!history.isJsonDefault&& history.itemType == 'Department'&&history.type=='Delete'">{{history.dataItem.Code}}</td>
+                            <td ng-if="!history.isJsonDefault&& history.itemType == 'Department'&&history.type=='Delete'">{{history.dataItem.Name}}</td>
+                            <td ng-if="history.itemType !== 'User' && history.itemType !== 'Department' && history.itemType !== 'Workflow' && history.itemType !== 'RequestToHire' && history.itemType !== 'ShiftExchangeApplication' && history.itemType !== 'TargetPlan' && history.itemType !== 'UserDepartmentMapping' && trackingHistory[0].itemType !==  'Shift Code' && history.itemType !== 'TargetPlanSpecial'">{{history.roundNum}}</td>
+                            <td ng-if="!history.isJsonDefault">{{formatDate(history.created)}}</td>
+                            <td ng-if="!history.isJsonDefault"><a style="text-decoration:none;" data-toggle="tooltip" data-placement="right" title="{{history.createdBy}}">{{history.createdByFullName}}</a> </td>
+                            <!--<td ng-if="hideComment(history.type)"><a k-content="'{{history.comment}}'" kendo-tooltip>View</a> </td>-->
+                            <td ng-if="history.itemType !== 'User' && history.itemType !== 'Department' && history.itemType !== 'Workflow' && history.itemType !== 'UserDepartmentMapping' && trackingHistory[0].itemType !==  'Shift Code' && history.itemType !== 'TargetPlanSpecial'">{{history.comment}}</td>
+                            <td ng-if="hideAttachment(history.type)">
+                                <ol ng-if="history.trackingHistoryAttachments && history.trackingHistoryAttachments.length > 0">
+                                    <li ng-repeat="doc in history.trackingHistoryAttachments">
+                                        <a ng-click="downloadAttachment(doc.id)">{{doc.fileDisplayName}}</a>
+                                        <a class="btn-border-upgrade btn-download-upgrade" ng-click="downloadAttachment(doc.id)"></a>
+                                        <a class="btn-border-upgrade btn-view-detail-upgrade" ng-click="viewFileOnline(doc.id)"></a>
+                                        <!--<a ng-click="removeOldAttachment(doc)">| {{'COMMON_BUTTON_DELETE'| translate}}</a>-->
+                                    </li>
+                                </ol>
+                            </td>
+                            <td ng-if="history.itemType !== 'Workflow' && (history.type == 'UpdateInformation' || history.type == 'UpdateApproval' || history.type == 'SyncBusinessUnit') && history.itemType !== 'ShiftExchangeApplication' && history.itemType !== 'TargetPlan'">
+                                <a class="btn-border-upgrade btn-view-detail-upgrade" style="text-decoration: none;" ng-click="viewHistoryDetail(history.type, history.itemType, history.dataStr)"></a>
+                            </td>
+                            <!-- other module -->
+                            <td ng-if="history.type == 'UpdateStatus'">Update {{convertTypeUpdateStatus(history.dataStr)}}</td>
+                            <!-- Window tracking log -->
+                            <td ng-if="history.type == 'UpdatePayload'"><a k-content="'{{history.payload}}'" kendo-tooltip>View Payload</a></td>
+                            <!-- Window User -->
+                            <td ng-if="history.itemType == 'User'">{{history.dataItem.LoginName}}</td>
+                            <td ng-if="history.itemType == 'User'">{{history.dataItem.SAPCode}}</td>
+                            <td ng-if="history.itemType == 'User'">{{history.dataItem.FullName}}</td>
+                            <td ng-if="history.dataItem.IsNotTargetPlan == true && trackingHistory[0].itemType == 'User'"><input type="checkbox" checked disabled></td>
+                            <td ng-if="history.dataItem.IsNotTargetPlan == false && trackingHistory[0].itemType == 'User'"><input type="checkbox" disabled></td>
+                            <td ng-if="history.itemType == 'User'">{{history.dataItem.Email}}</td>
+                            <td ng-if="history.itemType == 'User'">{{history.dataItem.Type == 0 ? 'AD' : 'MS'}}</td>
+                            <td ng-if="history.itemType == 'User'">{{convertPermission(history.dataItem.Role)}}</td>
+                            <td ng-if="history.itemType == 'User'">{{history.dataItem.IsActivated == 0 ? 'Inactive' : 'Active'}}</td>
+                            <!-- ShiftCode -->
+                            <td ng-if="history.itemType == 'Shift Code'">{{history.dataItem.Code}}</td>
+                            <td ng-if="history.itemType == 'Shift Code'">{{history.dataItem.Type}}</td>
+                            <td ng-if="history.itemType == 'Shift Code'">{{history.dataItem.Line}}</td>
+                            <td ng-if="history.itemType == 'Shift Code'">{{history.dataItem.TypeOfHaftDay}}</td>
+                            <td ng-if="history.itemType == 'Shift Code' && history.dataItem.IsHoliday == true"><input type="checkbox" checked disabled></td>
+                            <td ng-if="history.itemType == 'Shift Code' && history.dataItem.IsHoliday == false"><input type="checkbox" disabled></td>
+                            <td ng-if="history.itemType == 'Shift Code' && history.dataItem.IsActive == true"><input type="checkbox" checked disabled></td>
+                            <td ng-if="history.itemType == 'Shift Code' && history.dataItem.IsActive == false"><input type="checkbox" disabled></td>
+                            <!-- Window Department -->
+                            <td ng-if="history.itemType == 'Workflow' || (history.type == 'UpdateInformation' && (history.itemType == 'ShiftExchangeApplication' || history.itemType == 'TargetPlan'))">
+                                <a class="btn-border-upgrade btn-view-detail-upgrade" style="text-decoration: none;" ng-click="openTabViewDetail(history.id, history.itemType)"></a>
+                            </td>
+                            <td ng-if="(history.itemType == 'Department' || history.itemType == 'UserDepartmentMapping' || history.itemType == 'TargetPlanSpecial') && !history.isJsonDefault" ng-click="openCreateWindow(history.type, history.itemType, history.dataStr)"><a class="btn-border-upgrade btn-view-detail-upgrade" ></a></td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <button style="float:right;" class="btn btn-primary rounded-3 poppins-semibold display-8" ng-click="closePopup()">
+                    <i class="k-icon k-i-close font-green-jungle"></i>
+                    {{'COMMON_BUTTON_CLOSE' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="trackingHistoryDetailDialog" kendo-dialog="trackingHistoryDetailDialog" class="pd0" k-visible="false">
+    <div class="modal-body" style="overflow-x: auto;">
+        <div class="reset-mp">
+            <div ng-if="trackinHistoryDetail">
+                <div ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">
+                    <div class="row">
+                        <div>
+                            <b>{{'COMMON_TICKETTYPE' | translate}}:</b>
+                            <span>{{trackinHistoryDetail.dataRoundTrip == '1' ? 'One Way' : 'Round Trip'}}</span>
+                        </div>
+                        <div>
+                            <b>{{'COMMON_REQUESTOR_NOTE' | translate}}:</b>
+                            <span>{{trackinHistoryDetail.requestorNote}}</span>
+                        </div>
+                        <div>
+                            <b>{{'COMMON_REQUESTOR_NOTE_DETAIL' | translate}}:</b>
+                            <span>{{trackinHistoryDetail.requestorNoteDetail}}</span>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover" style="width:100%">
+                    <thead>
+                        <!-- UpdateApproval -->
+                        <tr style="width:100%" ng-if="trackinHistoryDetail.dataType == 'UpdateApproval'">
+                            <th>{{'COMMON_TYPE' | translate}}</th>
+                            <th>{{'StepNumber' | translate}}</th>
+                            <th>{{'AssignFromName' | translate}}</th>
+                            <th ng-show="trackinHistoryDetail.Type == 'Department'">{{'AssignFromGroup' | translate}}</th>
+                            <th>{{'AssignToName' | translate}}</th>
+                            <th ng-show="trackinHistoryDetail.Type == 'Department'">{{'AssignToGroup' | translate}}</th>
+                            <!--<th style="width:25%;">{{'Attachment' | translate}}</th>-->
+                        </tr>
+                        <!--ChangeStepWorkflow-->
+                        <tr style="width:100%" ng-if="trackinHistoryDetail.dataType == 'ChangeStepWorkflow'">
+                            <th>{{'COMMON_CURRENT_STEP' | translate}}</th>
+                            <th>{{'COMMON_NEW_STEP' | translate}}</th>
+                        </tr>
+                        <tr style="width:100%" ng-if="isWindowUserDepartmentDetail(trackinHistoryDetail.dataType)">
+                            <th>Employee Name</th>
+                            <th>Employee Code</th>
+                            <th>Group</th>
+                            <th>Is Edoc</th>
+                            <th>Is HeadCount</th>
+                            <th>Note</th>
+
+                        </tr>
+                        <!--Update Information-->
+                        <!-- Phieu Request to hire-->
+                        <tr style="width:100%" ng-if="trackinHistoryDetail.dataType == 'UpdateInformation'">
+                            <th ng-if="trackinHistoryDetail.itemType == 'RequestToHire'">Check Budget</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'RequestToHire'">Working Address</th>
+
+                            <th ng-if="trackinHistoryDetail.itemType == 'ResignationApplication'">{{'RESIGNATION_APPLICATION_JOINING_DATE'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'ResignationApplication'">{{'RESIGNATION_APPLICATION_OFFICAL_RESINATION_DATE'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'ResignationApplication'">{{'SUGGESTION_FOR_LAST_WORKING_DAY'|translate}}</th>
+
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_IS_BOOKING_CONTACT'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'COMMON_SAP_CODE'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'COMMON_FULL_NAME'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'COMMON_DEPARTMENT'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_PARTITION'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_DEPARTURE'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_ARRIVAL'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_TRIP_FROM_DATE'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_TRIP_TO_DATE'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_IS_FOREIGNER'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'COMMON_GENDER'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_STAY_HOTEL'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_HOTEL'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_CHECK_IN_HOTEL_DATE'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_CHECK_OUT_HOTEL_DATE'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_GIVEN_NAME'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_SURNAME'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_EMAIL'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'COMMON_MOBILE'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_ID_CARD'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_DATE_OF_BIRTH'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_PASSPORT'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_COUNTRY'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_PASSPORT_DATE_OF_ISSUE'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">{{'BTA_PASSPORT_EXPIRY_DATE_ISSUE'|translate}}</th>
+                            <th ng-if="trackinHistoryDetail.itemType == 'BusinessTripApplication'">Check Budget</th>
+                        </tr>
+
+                        <tr ng-if="trackinHistoryDetail.dataType == 'SyncBusinessUnit'">
+                            <th>Current Business Unit Name</th>
+                        </tr>
+
+                        <tr ng-if="trackinHistoryDetail.dataType == 'SyncBusinessUnit'">
+                            <th>Current Business Unit Name</th>
+                        </tr>
+                    <tbody>
+                        <tr ng-if="trackinHistoryDetail.dataType == 'UpdateApproval'">
+                            <td>{{trackinHistoryDetail.Type}}</td>
+                            <td style="text-align:center;">{{trackinHistoryDetail.StepNumber}}</td>
+                            <td><a data-toggle="tooltip" title="{{trackinHistoryDetail.AssignFromCode}}">{{trackinHistoryDetail.AssignFromName}}</a></td>
+                            <td class="center" ng-show="trackinHistoryDetail.Type == 'Department'">{{trackinHistoryDetail.AssignFromGroup}}</td>
+                            <td><a data-toggle="tooltip" title="{{trackinHistoryDetail.AssignToCode}}">{{trackinHistoryDetail.AssignToName}}</a></td>
+                            <td class="center" ng-show="trackinHistoryDetail.Type == 'Department'">{{trackinHistoryDetail.AssignToGroup}}</td>
+                        </tr>
+                        <!-- Change Step Workflow -->
+                        <tr ng-if="trackinHistoryDetail.dataType == 'ChangeStepWorkflow'">
+                            <td>{{trackinHistoryDetail.CurrentStepNumber}}</td>
+                            <td>{{trackinHistoryDetail.NewStepNumber}}</td>
+                        </tr>
+                        <!-- UserDepartmentMappinG Window -->
+                        <tr ng-if="isWindowUserDepartmentDetail(trackinHistoryDetail.dataType)">
+                            <td>{{trackinHistoryDetail.FullName}}</td>
+                            <td>{{trackinHistoryDetail.UserSAPCode}}</td>
+                            <td>
+                                <select kendo-combo-box='roleUserCbb' name='role' data-k-ng-model="trackinHistoryDetail.Role" k-data-text-field="'title'" disabled
+                                        k-data-value-field="'id'" k-data-source="groupDataSource" k-auto-bind="'true'" k-disable="'true'" k-value-primitive="'true'"> </select>
+                            </td>
+                            <td ng-if="trackinHistoryDetail.IsEdoc == true"><input type="checkbox" checked disabled></td>
+                            <td ng-if="trackinHistoryDetail.IsEdoc == false"><input type="checkbox" disabled></td>
+                            <td ng-if="trackinHistoryDetail.IsHeadCount == true"><input type="checkbox" checked disabled></td>
+                            <td ng-if="trackinHistoryDetail.IsHeadCount == false"><input type="checkbox" disabled></td>
+                            <td>{{trackinHistoryDetail.Note}}</td>
+                        </tr>
+                        <!-- UpdateApproval -->
+                        <tr ng-if="trackinHistoryDetail.dataType == 'UpdateInformation' && trackinHistoryDetail.itemType != 'BusinessTripApplication'">
+                            <td ng-if="trackinHistoryDetail.itemType == 'RequestToHire'">{{trackinHistoryDetail.HasBudget==1 ? 'Budget' : 'Non-Budget'}}</td>
+                            <td ng-if="trackinHistoryDetail.itemType == 'RequestToHire'">{{trackinHistoryDetail.WorkingAddressRecruitmentName}}</td>
+                            <td ng-if="trackinHistoryDetail.itemType == 'ResignationApplication'">{{trackinHistoryDetail.StartingDate|date:'dd/MM/yyyy'}}</td>
+                            <td ng-if="trackinHistoryDetail.itemType == 'ResignationApplication'">{{trackinHistoryDetail.OfficialResignationDate|date:'dd/MM/yyyy'}}</td>
+                            <td ng-if="trackinHistoryDetail.itemType == 'ResignationApplication'">{{trackinHistoryDetail.SuggestionForLastWorkingDay|date:'dd/MM/yyyy'}}</td>
+                        </tr>
+
+                        <tr ng-repeat="btaDetailItem in trackinHistoryDetail.businessTripDetails" ng-if="trackinHistoryDetail.dataType == 'UpdateInformation' && trackinHistoryDetail.itemType == 'BusinessTripApplication'">
+                            <td><input type="checkbox" ng-checked="btaDetailItem.isBookingContact" disabled></td>
+                            <td width="20px">{{btaDetailItem.sapCode}}</td>
+                            <td>{{btaDetailItem.fullName}}</td>
+                            <td>{{btaDetailItem.departmentName}}</td>
+                            <td>{{btaDetailItem.partitionCode}}</td>
+                            <td>{{btaDetailItem.departureCode}} - {{btaDetailItem.departureName}}</td>
+                            <td>{{btaDetailItem.arrivalCode}} - {{btaDetailItem.arrivalName}}</td>
+                            <td>{{btaDetailItem.fromDate | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{btaDetailItem.toDate | date: 'dd/MM/yyyy'}}</td>
+                            <td><input type="checkbox" ng-checked="btaDetailItem.isForeigner" disabled></td>
+                            <td>{{btaDetailItem.gender}}</td>
+                            <td><input type="checkbox" ng-checked="btaDetailItem.stayHotel" disabled></td>
+                            <td>{{btaDetailItem.hotelCode}} - {{btaDetailItem.hotelName}}</td>
+                            <td>{{btaDetailItem.checkInHotelDate | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{btaDetailItem.checkOutHotelDate | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{btaDetailItem.firstName}}</td>
+                            <td>{{btaDetailItem.lastName}}</td>
+                            <td>{{btaDetailItem.email}}</td>
+                            <td>{{btaDetailItem.mobile}}</td>
+                            <td>{{btaDetailItem.idCard}}</td>
+                            <td>{{btaDetailItem.dateOfBirth | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{btaDetailItem.passport}}</td>
+                            <td>{{btaDetailItem.countryCode}} - {{btaDetailItem.countryName}}</td>
+                            <td>{{btaDetailItem.passportDateOfIssue | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{btaDetailItem.passportExpiryDate | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{btaDetailItem.hasBudget ? 'Budget' : 'Non-Budget'}}</td>
+                        </tr>
+
+                        <!-- SyncBusinessUnit -->
+                        <tr ng-if="trackinHistoryDetail.dataType == 'SyncBusinessUnit'">
+                            <td>{{trackinHistoryDetail.WorkLocationName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div kendo-window="departmentEditWin" id="departmentEditWin" k-title="'Edit Department'" k-draggable="false"
+     k-visible="false" k-actions="dialogActions" width="1000" modal="true" resizable="false"
+     k-on-close="onClose()" k-on-open="onOpen()">
+    <div class="row k-popup-edit-form k-window-content k-content" style="padding-bottom:0px">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Code">
+                    Code: 
+                </label><br />
+                <div data-container-for="Code">
+                    <input type="text" autocomplete="off" class="k-textbox w100" name="Code" title="Code" disabled
+                           ng-model="departmentModel.Code">
+                </div>
+            </div>
+            <div class="col-md-6" >
+                <label for="Edoc">
+                    Is Edoc:
+                </label><br />
+                        <div data-container-for="Edoc"  style="margin-left:20px">
+                       
+                            <input type="checkbox" class="form-check-input" disabled
+                                   ng-model="departmentModel.IsEdoc">
+                            <label for="IsEdoc" class="form-check-label" style="width: 120px; margin-right: 100px;">Is Edoc</label>
+                        </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Name">
+                    Name:
+                </label>
+                <div data-container-for="Name">
+                    <input type="text" class="k-textbox w100" name="Name" title="Name" disabled
+                           ng-model="departmentModel.Name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="DepartmentParent">Department Parent:</label>
+
+                <div data-container-for="DepartmentParent" class="">
+                    <input type="text" class="k-textbox w100" name="Name" title="{{departmentModel.ParentCode}}" disabled
+                           ng-model="departmentModel.ParentName">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Caption">
+                    Position: 
+                </label>
+                <div data-container-for="Caption">
+                    <input type="text" class="k-textbox w-100" name="Name" title="{{departmentModel.PositionCode}}" disabled
+                           ng-model="departmentModel.PositionName">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="SAP">
+                    SAP Department Parent: 
+                </label>
+                <div data-container-for="SAP">
+                    <input type="text" class="k-textbox w-100" name="SAP" title="{{departmentModel.SAPDepartmentParentName}}" disabled
+                           ng-model="departmentModel.SAPDepartmentParentName">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Type">
+                    Type: 
+                </label>
+                <div data-container-for="Type">
+                    <input type="text" class="k-textbox w100" name="Name" disabled
+                           ng-model="departmentModel.typeName">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="JobGrade">
+                    Job Grade:
+                </label>
+                <div data-container-for="JobGrade">
+                    <input type="text" class="k-textbox w100" name="Name" disabled
+                           ng-model="departmentModel.JobGradeCaption">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="SAPLevel">SAP Level:</label>
+
+                <div data-container-for="SAPLevel" class="">
+                    <input type="text" class="k-textbox w100" name="SAPLevel" title="{{departmentModel.SAPLevel}}" disabled
+                           ng-model="departmentModel.SAPLevel">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="Region">
+                    Region: <span class="font-red-thunderbird">*</span>
+                </label>
+                <div data-container-for="Region">
+                    <input type="text" autocomplete="off" class="k-textbox w100" name="Name" disabled
+                           ng-model="departmentModel.RegionName">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="sapCode">SAP Code:</label>
+
+                <div data-container-for="sapCode">
+                    <input type="text" autocomplete="off" class="k-textbox w100" name="sapCode" disabled
+                           ng-model="departmentModel.SAPCode">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="Color">Color:</label> <br />
+
+                <div data-container-for="Color"
+                     style="width: 60px;float: left;display:inline-flex">
+                    <input class="spectrumColor" type="color" name="Color" ng-model="departmentModel.Color" disabled
+                           value="departmentModel.color" title="Color">
+                </div>
+
+                <div class="col-md-6">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2" style="margin-left:10px" >
+            <div class="col-md-6">
+                <input type="checkbox" class="form-check-input" disabled
+                       ng-model="departmentModel.ApplyChildSMMDMMD">
+                <label for="ApplyChildSMMDMMD" class="form-check-label" style="width: 220px; margin-right: 100px;">Apply Child SM-MD-MMD</label>
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+        </div>
+
+        <div style="margin-left:10px"  class="row mt-2" data-container-for="isStore">
+            <div class="col-md-6" >
+                <input type="checkbox" id="isHrA" class="form-check-input" name="isHrA" title="isHr" disabled
+                       ng-model="departmentModel.IsHr">
+                <label for="isHrA" class="form-check-label" style="width: 120px; margin-right: 100px;">Is HR</label>
+            </div>
+            <div class="col-md-6">
+                <input type="checkbox" id="isMD" class="form-check-input" name="isMD" title="isMD" disabled
+                       ng-model="departmentModel.IsMD">
+                <label for="isMD" class="form-check-label">Is MD</label>
+            </div>
+        </div>
+
+
+        <div style="margin-left:10px"  class="row mt-2" data-container-for="isStoreA">
+            <div class="col-md-6">
+                <input type="checkbox" id="isStoreA" class="form-check-input" name="isStoreA" title="isStore" disabled
+                       ng-model="departmentModel.IsStore">
+                <label for="isStoreA" class="form-check-label" style="width: 120px; margin-right: 100px;">Is Store</label>
+            </div>
+            <div class="col-md-6">
+                <input type="checkbox" id="isSM" class="form-check-input" name="isSM" title="isSM" disabled
+                       ng-model="departmentModel.IsSM">
+                <label for="isSM" class="form-check-label">Is SM</label>
+            </div>
+        </div>
+
+
+        <div style="margin-left:10px"  class="row mt-2" data-container-for="isPrB">
+            <div class="col-md-6">
+                <input type="checkbox" id="isPrB" class="form-check-input" name="isPrB" title="isCB" disabled
+                       ng-model="departmentModel.IsCB">
+                <label for="isPrB" class="form-check-label" style="width: 120px; margin-right: 100px;">Is C&B</label>
+            </div>
+            <div class="col-md-6">
+                <input type="checkbox" id="isFacility" class="form-check-input" name="isFacility" title="isFacility" disabled
+                       ng-model="departmentModel.IsFacility">
+                <label for="isFacility" class="form-check-label">Is Facility</label>
+            </div>
+        </div>
+
+
+        <div style="margin-left:10px"  class="row mt-2" data-container-for="isMD">
+            <div class="col-md-6">
+                <input type="checkbox" id="isAdminB" class="form-check-input" name="isAdminB" title="isAdminB" disabled
+                       ng-model="departmentModel.IsAdmin">
+                <label for="isAdminB" class="form-check-label" style="width: 120px; margin-right: 100px;">Is Admin</label>
+            </div>
+            <div class="col-md-6">
+                <input type="checkbox" id="isAcademy" class="form-check-input" name="isAcademy" title="isAcademy" disabled
+                       ng-model="departmentModel.IsAcademy">
+                <label for="isAcademy" class="form-check-label">Is Academy</label>
+            </div>
+        </div>
+
+
+        <div style="margin-left:10px"  class="row mt-2" data-container-for="isPrA">
+            <div class="col-md-6">
+                <input type="checkbox" id="isPrA" class="form-check-input" name="isPrA" title="isPrA" disabled
+                       ng-model="departmentModel.IsPerfomance">
+                <label for="isPrA" class="form-check-label" style="width: 130px; margin-right: 100px;">Is Perfomance</label>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="DepartmentParent">Business Model:</label>
+
+                <div data-container-for="DepartmentParent" class="">
+                    <input type="text" autocomplete="off" class="k-textbox w100" name="Name" title="{{departmentModel.HrDepartmentCode}}" disabled
+                           ng-model="departmentModel.BusinessModelName">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="CostCenter">
+                    Cost Center:
+                </label>
+                <div data-container-for="CostCenter">
+                    <input type="text" autocomplete="off" class="k-textbox w100" name="Name" title="{{departmentModel.CostCenterRecruitmentDescripion}}" disabled
+                           ng-model="departmentModel.CostCenterRecruitmentCode">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="DepartmentParent">HR Department:</label>
+
+                <div data-container-for="DepartmentParent" class="">
+                    <input type="text" autocomplete="off" class="k-textbox w100" name="Name" title="{{departmentModel.HrDepartmentCode}}" disabled
+                           ng-model="departmentModel.HrDepartmentName">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="Note">
+                    Note:
+                </label>
+                <div data-container-for="Note">
+                    <textarea rows="2" autocomplete="off" class="k-textbox w100" name="Note" title="Note" disabled
+                              ng-model="departmentModel.Note"> </textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
+
+
+        <!--<div class="col-md-12">
+        <div class="k-edit-label">
+            <label for="Code">
+                Code: <span class="font-red-thunderbird">*</span>
+            </label>
+        </div>
+        <div data-container-for="Code" class="k-edit-field">
+            <input type="text" autocomplete="off" class="k-textbox" name="Code" title="Code" disabled
+                   ng-model="departmentModel.Code">
+        </div>
+        <div class="k-edit-label">
+            <label for="Name">
+                Name: <span class="font-red-thunderbird">*</span>
+            </label>
+        </div>
+        <div data-container-for="Name" class="k-edit-field">
+            <input type="text" class="k-textbox" name="Name" title="Name" disabled
+                   ng-model="departmentModel.Name">
+        </div>
+        <div class="k-edit-label">
+            <label for="Caption">
+                Position: <span class="font-red-thunderbird">*</span>
+            </label>
+        </div>
+        <div data-container-for="Caption" class="k-edit-field">
+            <input type="text" class="k-textbox" name="Name" title="{{departmentModel.PositionCode}}" disabled
+                   ng-model="departmentModel.PositionName">
+        </div>
+        <div class="k-edit-label">
+            <label for="Type">
+                Type: <span class="font-red-thunderbird">*</span>
+            </label>
+        </div>
+        <div data-container-for="Type" class="k-edit-field">
+            <input type="text" class="k-textbox" name="Name" disabled
+                   ng-model="departmentModel.typeName">
+        </div>
+        <div class="k-edit-label">
+            <label for="JobGrade">
+                Job Grade: <span class="font-red-thunderbird">*</span>
+            </label>
+        </div>
+        <div data-container-for="JobGrade" class="k-edit-field">
+            <input type="text" class="k-textbox" name="Name" disabled
+                   ng-model="departmentModel.JobGradeCaption">
+        </div>
+        <div class="k-edit-label">
+            <label for="DepartmentParent">Department Parent:</label>
+        </div>
+        <div data-container-for="DepartmentParent" class="k-edit-field">
+            <input type="text" class="k-textbox" name="Name" title="{{departmentModel.ParentCode}}" disabled
+                   ng-model="departmentModel.ParentName">
+        </div>
+        <div class="k-edit-label">
+            <label for="Region">
+                Region: <span class="font-red-thunderbird">*</span>
+            </label>
+        </div>
+        <div data-container-for="Region" class="k-edit-field">
+            <input type="text" autocomplete="off" class="k-textbox" name="Name" disabled
+                   ng-model="departmentModel.RegionName">
+        </div>
+        <div class="k-edit-label"><label for="sapCode">SAP Code:</label></div>
+        <div data-container-for="sapCode" class="k-edit-field">
+            <input type="text" autocomplete="off" class="k-textbox" name="sapCode" disabled
+                   ng-model="departmentModel.SAPCode">
+        </div>
+        <div class="k-edit-label"><label for="Color">Color:</label></div>
+        <div data-container-for="Color" class="k-edit-field"
+             style="width: 60px;float: left;margin-left: 2.8em;display:inline-flex">
+            <input class="spectrumColor" type="color" name="Color" ng-model="departmentModel.Color" disabled
+                   value="departmentModel.color" title="Color">
+        </div>
+        <div class="k-edit-label"><label for="isStore"></label></div>
+        <div data-container-for="isStore" class="k-edit-field">
+            <input type="checkbox" id="isHrA" class="k-checkbox" name="isHrA" title="isHr" disabled
+                   ng-model="departmentModel.IsHr">
+            <label for="isHrA" class="k-checkbox-label" style="width: 120px; margin-right: 100px;">Is HR</label>
+            <input type="checkbox" id="isMD" class="k-checkbox" name="isMD" title="isMD" disabled
+                   ng-model="departmentModel.IsMD">
+            <label for="isMD" class="k-checkbox-label">Is MD</label>
+        </div>
+        <div class="k-edit-label"><label for="isPrB"></label></div>
+        <div data-container-for="isStoreA" class="k-edit-field">
+            <input type="checkbox" id="isStoreA" class="k-checkbox" name="isStoreA" title="isStore" disabled
+                   ng-model="departmentModel.IsStore">
+            <label for="isStoreA" class="k-checkbox-label" style="width: 120px; margin-right: 100px;">Is Store</label>
+            <input type="checkbox" id="isSM" class="k-checkbox" name="isSM" title="isSM" disabled
+                   ng-model="departmentModel.IsSM">
+            <label for="isSM" class="k-checkbox-label">Is SM</label>
+        </div>
+        <div class="k-edit-label"><label for="isAdminB"></label></div>
+        <div data-container-for="isPrB" class="k-edit-field">
+            <input type="checkbox" id="isPrB" class="k-checkbox" name="isPrB" title="isCB" disabled
+                   ng-model="departmentModel.IsCB">
+            <label for="isPrB" class="k-checkbox-label" style="width: 120px; margin-right: 100px;">Is C&B</label>
+            <input type="checkbox" id="isFacility" class="k-checkbox" name="isFacility" title="isFacility" disabled
+                   ng-model="departmentModel.IsFacility">
+            <label for="isFacility" class="k-checkbox-label">Is Facility</label>
+        </div>
+        <div class="k-edit-label"><label for="isAdminB"></label></div>
+        <div data-container-for="isMD" class="k-edit-field">
+            <input type="checkbox" id="isAdminB" class="k-checkbox" name="isAdminB" title="isAdminB" disabled
+                   ng-model="departmentModel.IsAdmin">
+            <label for="isAdminB" class="k-checkbox-label" style="width: 120px; margin-right: 100px;">Is Admin</label>
+            <input type="checkbox" id="isAcademy" class="k-checkbox" name="isAcademy" title="isAcademy" disabled
+                   ng-model="departmentModel.IsAcademy">
+            <label for="isAcademy" class="k-checkbox-label">Is Academy</label>
+        </div>
+        <div class="k-edit-label"><label for="isPrA"></label></div>
+        <div data-container-for="isPrA" class="k-edit-field">
+            <input type="checkbox" id="isPrA" class="k-checkbox" name="isPrA" title="isPrA" disabled
+                   ng-model="departmentModel.IsPerfomance">
+            <label for="isPrA" class="k-checkbox-label" style="width: 120px; margin-right: 100px;">Is Perfomance</label>
+        </div>
+        <div class="k-edit-label">
+            <label for="DepartmentParent">HR Department:</label>
+        </div>
+        <div data-container-for="DepartmentParent" class="k-edit-field">
+            <input type="text" autocomplete="off" class="k-textbox" name="Name" title="{{departmentModel.HrDepartmentCode}}" disabled
+                   ng-model="departmentModel.HrDepartmentName">
+        </div>
+        <div class="k-edit-label">
+            <label for="CostCenter">
+                Cost Center:
+            </label>
+        </div>
+        <div data-container-for="CostCenter" class="k-edit-field">
+            <input type="text" autocomplete="off" class="k-textbox" name="Name" title="{{departmentModel.CostCenterRecruitmentDescripion}}" disabled
+                   ng-model="departmentModel.CostCenterRecruitmentCode">
+        </div>
+        <div class="k-edit-label">
+            <label for="Note">
+                Note:
+            </label>
+        </div>
+        <div data-container-for="Note" class="k-edit-field">
+            <textarea rows="2" autocomplete="off" class="k-textbox" name="Note" title="Note" disabled
+                      ng-model="departmentModel.Note"> </textarea>
+        </div>
+    </div>-->
+    </div>
+</div>
+
+<div kendo-window="targetPlanSpecialEditWin" id="targetPlanSpecialEditWin" k-title="'Edit Target Plan Special'" k-draggable="false"
+     k-visible="false" k-actions="dialogActions" width="600" modal="true" resizable="false"
+     k-on-close="onClose()" k-on-open="onOpen()">
+    <div class="row k-popup-edit-form k-window-content k-content" style="padding-bottom:0px; ">
+        <div class="col-md-12">
+            <div class="k-edit-label">
+                <label for="Code">
+                    Name: <span class="font-red-thunderbird">*</span>
+                </label>
+            </div>
+            <div data-container-for="Code" class="k-edit-field">
+                <input type="text" autocomplete="off" class="form-control" style="height:80%; width:80%" name="Code" title="Code" disabled
+                       ng-model="targetPlanSpecialModel.DepartmentName">
+            </div>
+            <div class="k-edit-label">
+                <label for="Code">
+                    Code: <span class="font-red-thunderbird">*</span>
+                </label>
+            </div>
+            <div data-container-for="Code" class="k-edit-field">
+                <input type="text" autocomplete="off" class="form-control" style="height:80%; width:80%" name="Code" title="Code" disabled
+                       ng-model="targetPlanSpecialModel.DepartmentCode">
+            </div>
+            <div class="k-edit-label">
+                <label for="Line">
+                    IncludeChildren: <span class="font-red-thunderbird">*</span>
+                </label>
+            </div>
+            <div data-container-for="Line" class="k-edit-field">
+                <!--<input type="text" class="k-textbox" name="Name" title="Name" disabled
+                       ng-model="targetPlanSpecialModel.IsIncludeChildren">-->
+                {{ targetPlanSpecialModel.IsIncludeChildren ? 'Yes' : 'No' }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Log HR -->
+<div id="LogHRAdminDialog" kendo-dialog="LogHRAdminDialog" class="pd0" k-visible="false">
+    <div class="modal-body" style="overflow-x: auto;">
+        <div class="reset-mp" ng-if="trackingHistory.length">
+            <div>
+                <table class="table table-hover" style="width:100%">
+                    <thead>
+                        <tr style="width:100%">
+                            <th ng-if="trackingHistory[0].type == 'SendData' && trackingHistory[0].itemType == 'ResignationApplication'">{{'COMMON_ROUND' | translate}}</th>
+                            <th ng-if="trackingHistory[0].type == 'SendData' && trackingHistory[0].itemType == 'ResignationApplication'">{{'RESIGNATION_SPECIAL_CASE' | translate}}</th>
+                            <th ng-if="trackingHistory[0].type == 'SendData' && trackingHistory[0].itemType == 'ResignationApplication'">{{'COMMON_CONTRACT' | translate}}</th>
+                            <th ng-if="trackingHistory[0].type == 'SendData' && trackingHistory[0].itemType == 'ResignationApplication'">{{'RESIGNATION_APPLICATION_OFFICAL_RESINATION_DATE' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="history in trackingHistory">
+                        <tr ng-if="history.type == 'SendData'">
+                            <td>{{getValueInDataStr('RoundNum', history)}}</td>
+                            <td>{{getValueInDataStr('IsExpiredLaborContractDate', history)}}</td>
+                            <td>{{getValueInDataStr('ContractTypeCode', history) | translate}}</td>
+                            <td>{{getValueInDataStr('OfficialResignationDate', history) | date:'dd/MM/yyyy'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

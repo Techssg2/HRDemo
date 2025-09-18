@@ -1,0 +1,532 @@
+<div ng-if="trainingDetails.typeOfTraining=='External'">
+    <div class="row mb-3" style="padding-top: 5px;">
+        <div class="col-md-12">
+            <div style="overflow:hidden;">
+                <div class="p-2 mb-2" style="border-left: 5px solid #006efa;">
+                    <span class="display-8 m-0 fw-bold">{{'TRAINING_REQUEST_SPONSORSHIP_CONTRACT_TITLE' | translate}}</span>
+                </div>
+
+                <div class="p-3">
+                    <div class="row ">
+                        <div class="col-md-4">
+                            <div class="form-group" style="margin-left:-15px" >
+                                <input type="checkbox"
+                                       name="Apply Sponsorship"
+                                       id="applySponsorship"
+                                       ng-model="trainingSponsorshipContract.applySponsorship"
+                                       class="form-check-input"
+                                       style="margin-left: 15px"
+                                       ng-disabled="!isEditable"
+                                       ng-change="onReimbursementChange(kendoEvent)" />
+                                <label class="form-check-label control-label"
+                                       for="applySponsorship"
+                                       style="padding-top: 0 !important; margin-left:40px !important">
+                                    {{'TRAINING_REQUEST_APPLY_SPONSORSHIP' | translate}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-if="trainingSponsorshipContract.applySponsorship">
+                        <div class="row ">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=" control-label">
+                                        {{'TRAINING_REQUEST_ACTUAL_REIMBURSEMENT_AMOUNT' |translate}}:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="row align-items-end mt-3">
+                                        <div class="col-md-11">
+                                            <input kendo-numeric-text-box
+                                                   k-format="'#,'"
+                                                   decimals="0"
+                                                   restrict-decimals="true"
+                                                   data-role="numerictextbox"
+                                                   name="Actual Tuition Reimbursement Amount"
+                                                   class="w100"
+                                                   ng-model="trainingSponsorshipContract.actualTuitionReimbursementAmount"
+                                                   style="text-align: left"
+                                                   min="0"
+                                                   k-on-change="onReimbursementChange(kendoEvent)"
+                                                   ng-disabled="!isEditable" />
+
+                                        </div>
+                                        <label class="col-md-1 control-label">{{trainingDetails.currency}}</label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=" control-label">
+                                        {{'TRAINING_REQUEST_SPONSORSHIP_PERCENTAGE' | translate}}:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="row align-items-end mt-3">
+                                        <div class="col-md-12">
+                                            <select name="Tuition Reimbursement Percentage"
+                                                    kendo-drop-down-list
+                                                    k-data-source="percentReimbursement"
+                                                    data-k-ng-model="trainingSponsorshipContract.sponsorshipPercentage"
+                                                    k-data-text-field="'text'"
+                                                    k-data-value-field="'value'"
+                                                    class="w100"
+                                                    k-value-primitive="'false'"
+                                                    k-template="'<span><label>#: data.text# </label></span>'"
+                                                    k-on-change="onReimbursementChange(kendoEvent)"
+                                                    ng-disabled="!isEditable"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="row ">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=" control-label">
+                                        {{'TRAINING_REQUEST_TOTAL_AFTER_APPLY' | translate}}:
+                                    </label>
+                                    <div class="row align-items-end mt-3">
+                                        <div class="col-md-11">
+                                            <!--<input kendo-numeric-text-box
+                                            k-format="'#,0'"
+                                            decimals="0"
+                                            restrict-decimals="true"
+                                            data-role="numerictextbox"
+                                            name="Total Training Fee after apply Tuition Reimbursement"
+                                            class="w100"
+                                            ng-model="trainingSponsorshipContract.totalAfterApply"
+                                            style="text-align: center"
+                                            k-on-change="onReimbursementChange(kendoEvent)"
+                                            disabled />-->
+                                            <input kendo-numeric-text-box
+                                                   k-format="'#,0'"
+                                                   data-role="numerictextbox"
+                                                   aria-valuemin="1"
+                                                   aria-valuemax="3"
+                                                   class="w100"
+                                                   ng-model="trainingSponsorshipContract.totalAfterApply"
+                                                   maxlength="13"
+                                                   min="0"
+                                                   readonly
+                                                   k-on-change="onReimbursementChange(kendoEvent)" />
+
+                                        </div>
+                                        <label class="col-md-1 control-label">{{trainingDetails.currency}}</label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3" style="padding-top: 5px;">
+        <div class="col-md-12">
+            <div style="overflow:hidden;">
+                <div class="p-2 mb-2" style="border-left: 5px solid #006efa;">
+                    <span class="display-8 m-0 fw-bold">{{'TRAINING_REQUEST_WORKING_COMMITMENT_TITLE' | translate}}</span>
+                </div>
+
+                <div class="p-3">
+
+                    <div class="row ">
+                        <div class="col-md-4">
+                            <div class="form-group" style="margin-left:-15px">
+                                <input type="checkbox"
+                                       name="WorkingCommitment"
+                                       id="workingCommitment"
+                                       ng-model="workingCommitment.workingCommitment"
+                                       class="form-check-input"
+                                       style="margin-left: 15px"
+                                       ng-disabled="!isEditable"
+                                       ng-change="getAllocationCost(workingCommitment.workingCommitment)" />
+                                <label class="form-check-label control-label"
+                                       for="workingCommitment"
+                                       style="padding-top: 0 !important; margin-left: 40px !important">
+                                    {{'TRAINING_REQUEST_WORKING_COMMITMENT' | translate}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="workingCommitment.workingCommitment">
+
+                        <div class="row ">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=" control-label">
+                                        {{'TRAINING_REQUEST_FROM_DATE'|translate}}:<span class="text-danger"
+                                                                                         ng-if="workingCommitment.workingCommitment">*</span>
+                                    </label>
+                                    <div class="row align-items-end mt-3">
+                                        <div class="col-md-12">
+                                            <input kendo-date-picker
+                                                   name="FromDate"
+                                                   k-ng-model="workingCommitment.from"
+                                                   style="width: 100%"
+                                                   k-date-input="true"
+                                                   k-format="'dd/MM/yyyy'"
+                                                   ng-disabled="!isEditable" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=" control-label">
+                                        {{'TRAINING_REQUEST_TO_DATE' | translate}}:<span class="text-danger"
+                                                                                         ng-if="workingCommitment.workingCommitment">*</span>
+                                    </label>
+                                    <div class="row align-items-end mt-3">
+                                        <div class="col-md-12">
+                                            <input style="width: 100%"
+                                                   kendo-date-picker
+                                                   name="ToDate"
+                                                   k-ng-model="workingCommitment.to"
+                                                   k-date-input="true"
+                                                   k-format="'dd/MM/yyyy'"
+                                                   ng-disabled="!isEditable" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row ">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=" control-label">
+                                        {{'TRAINING_REQUEST_SPONSORSHIP_CONTRACT_NUMBER'|translate}}:<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="row align-items-end mt-3">
+                                        <div class="col-md-12">
+                                            <input type="text"
+                                                   name="Sponsorship ContractNumber"
+                                                   class=" form-control input-sm"
+                                                   ng-model="workingCommitment.sponsorshipContractNumber"
+                                                   style="width: 100%; text-align: center"
+                                                   maxlength="30"
+                                                   ng-disabled="!isEditable" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class=" control-label">
+                                        {{'TRAINING_REQUEST_COMPENSATE_AMOUNT'|translate}}:<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="row align-items-end mt-3">
+                                        <div class="col-md-10">
+                                            <input kendo-numeric-text-box
+                                                   k-format="'#,'"
+                                                   decimals="0"
+                                                   restrict-decimals="true"
+                                                   data-role="numerictextbox"
+                                                   name="Compensate Amount"
+                                                   class="w100"
+                                                   ng-model="workingCommitment.compensateAmount"
+                                                   style="text-align: center"
+                                                   min="0"
+                                                   disabled />
+                                        </div>
+                                        <label class="text-label col-md-2">{{trainingDetails.currency}}</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--<div ng-if="trainingDetails.typeOfTraining=='External'">
+  <div class="portlet box bg-grey bg-font-grey fx-portlet">
+    <div class="portlet-title">
+      <div class="caption">
+        <span class="caption-subject hr-process uppercase f-collapse"
+          >{{'TRAINING_REQUEST_SPONSORSHIP_CONTRACT_TITLE' | translate}}</span
+        >
+      </div>
+    </div>
+  </div>
+  <div class="page-content-wrapper float-none">
+    <div class="page-content">
+      <div class="form-horizontal">
+        <div class="form-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <input
+                  type="checkbox"
+                  name="Apply Sponsorship"
+                  id="applySponsorship"
+                  ng-model="trainingSponsorshipContract.applySponsorship"
+                  class="k-checkbox"
+                  style="margin-left: 15px"
+                  ng-disabled="!isEditable"
+                  ng-change="onReimbursementChange(kendoEvent)"
+                />
+                <label
+                  class="k-checkbox-label control-label"
+                  for="applySponsorship"
+                  style="padding-top: 0 !important"
+                >
+                  {{'TRAINING_REQUEST_APPLY_SPONSORSHIP' | translate}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <div ng-if="trainingSponsorshipContract.applySponsorship">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-md-4 control-label"
+                    >{{'TRAINING_REQUEST_ACTUAL_REIMBURSEMENT_AMOUNT' |
+                    translate}}:
+                    <span class="font-red-thunderbird">*</span></label
+                  >
+                  <div class="col-md-6">
+                    <input
+                      kendo-numeric-text-box
+                      k-format="'#,'"
+                      decimals="0"
+                      restrict-decimals="true"
+                      data-role="numerictextbox"
+                      name="Actual Tuition Reimbursement Amount"
+                      class="w100"
+                      ng-model="trainingSponsorshipContract.actualTuitionReimbursementAmount"
+                      style="text-align: left"
+                      min="0"
+                      k-on-change="onReimbursementChange(kendoEvent)"
+                      ng-disabled="!isEditable"
+                    />
+                  </div>
+                  <label class="col-md-1 control-label">{{trainingDetails.currency}}</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-md-4 control-label"
+                    >{{'TRAINING_REQUEST_SPONSORSHIP_PERCENTAGE' | translate}}:
+                    <span class="font-red-thunderbird">*</span></label
+                  >
+                  <div class="col-md-6">
+                    <select
+                      name="Tuition Reimbursement Percentage"
+                      kendo-drop-down-list
+                      k-data-source="percentReimbursement"
+                      data-k-ng-model="trainingSponsorshipContract.sponsorshipPercentage"
+                      k-data-text-field="'text'"
+                      k-data-value-field="'value'"
+                      class="w100"
+                      k-value-primitive="'false'"
+                      k-template="'<span><label>#: data.text# </label></span>'"
+                      k-on-change="onReimbursementChange(kendoEvent)"
+                      ng-disabled="!isEditable"
+                    ></select>
+                  </div>
+                  <label class="col-md-1 control-label">%</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-md-4 control-label"
+                    >{{'TRAINING_REQUEST_TOTAL_AFTER_APPLY' | translate}}:
+                  </label>
+                  <div class="col-md-6">-->
+<!--<input kendo-numeric-text-box
+       k-format="'#,0'"
+       decimals="0"
+       restrict-decimals="true"
+       data-role="numerictextbox"
+       name="Total Training Fee after apply Tuition Reimbursement"
+       class="w100"
+       ng-model="trainingSponsorshipContract.totalAfterApply"
+       style="text-align: center"
+       k-on-change="onReimbursementChange(kendoEvent)"
+       disabled />-->
+<!--<input kendo-numeric-text-box
+                             k-format="'#,0'"
+                             data-role="numerictextbox"
+                             aria-valuemin="1"
+                             aria-valuemax="3"
+                             class="w100"
+                             ng-model="trainingSponsorshipContract.totalAfterApply"
+                             maxlength="13"
+                             min="0"
+                             readonly
+                             k-on-change="onReimbursementChange(kendoEvent)" />
+                  </div>
+                  <label class="col-md-1 control-label">{{trainingDetails.currency}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="portlet box bg-grey bg-font-grey fx-portlet">
+    <div class="portlet-title">
+      <div class="caption">
+        <span class="caption-subject hr-process uppercase f-collapse"
+          >{{'TRAINING_REQUEST_WORKING_COMMITMENT_TITLE' | translate}}</span
+        >
+      </div>
+    </div>
+  </div>
+  <div class="page-content-wrapper float-none">
+    <div class="page-content">
+      <div class="form-horizontal">
+        <div class="form-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <input
+                  type="checkbox"
+                  name="WorkingCommitment"
+                  id="workingCommitment"
+                  ng-model="workingCommitment.workingCommitment"
+                  class="k-checkbox"
+                  style="margin-left: 15px"
+                  ng-disabled="!isEditable"
+                  ng-change="getAllocationCost(workingCommitment.workingCommitment)"
+                />
+                <label
+                  class="k-checkbox-label control-label"
+                  for="workingCommitment"
+                  style="padding-top: 0 !important"
+                >
+                  {{'TRAINING_REQUEST_WORKING_COMMITMENT' | translate}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <div ng-if="workingCommitment.workingCommitment">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-md-4 control-label"
+                    >{{'TRAINING_REQUEST_FROM_DATE'|translate}}:<span
+                      class="font-red-thunderbird"
+                      ng-if="workingCommitment.workingCommitment"
+                      >*</span
+                    ></label
+                  >
+                  <div class="col-md-6">
+                    <input
+                      kendo-date-picker
+                      name="FromDate"
+                      k-ng-model="workingCommitment.from"
+                      style="width: 100%"
+                      k-date-input="true"
+                      k-format="'dd/MM/yyyy'"
+                      ng-disabled="!isEditable"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-md-4 control-label">
+                    {{'TRAINING_REQUEST_TO_DATE' | translate}}:<span
+                      class="font-red-thunderbird"
+                      ng-if="workingCommitment.workingCommitment"
+                      >*</span
+                    ></label
+                  >
+                  <div class="col-md-6">
+                    <input
+                      style="width: 100%"
+                      kendo-date-picker
+                      name="ToDate"
+                      k-ng-model="workingCommitment.to"
+                      k-date-input="true"
+                      k-format="'dd/MM/yyyy'"
+                      ng-disabled="!isEditable"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-md-4 control-label"
+                    >{{'TRAINING_REQUEST_SPONSORSHIP_CONTRACT_NUMBER'|translate}}:<span
+                      class="font-red-thunderbird"
+                      >*</span
+                    ></label
+                  >
+                  <div class="col-md-6">
+                    <input
+                      type="text"
+                      name="Sponsorship ContractNumber"
+                      class="k-textbox form-control input-sm"
+                      ng-model="workingCommitment.sponsorshipContractNumber"
+                      style="width: 100%; text-align: center"
+                      maxlength="30"
+                      ng-disabled="!isEditable"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-md-4 control-label"
+                    >{{'TRAINING_REQUEST_COMPENSATE_AMOUNT'|translate}}:<span
+                      class="font-red-thunderbird"
+                      >*</span
+                    ></label
+                  >
+                  <div class="col-md-6">
+                    <input
+                      kendo-numeric-text-box
+                      k-format="'#,'"
+                      decimals="0"
+                      restrict-decimals="true"
+                      data-role="numerictextbox"
+                      name="Compensate Amount"
+                      class="w100"
+                      ng-model="workingCommitment.compensateAmount"
+                      style="text-align: center"
+                      min="0"
+                      disabled
+                    />
+                  </div>
+                  <label class="text-label col-md-2">{{trainingDetails.currency}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->

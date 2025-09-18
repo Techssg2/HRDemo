@@ -1,0 +1,270 @@
+<style>
+    .k-participant {
+        margin: auto 100px;
+        margin-top: 20px;
+    }
+
+        .k-participant .control-label {
+            padding-left: 0;
+        }
+
+    .k-action {
+        display: flex;
+        float: left;
+        padding: 20px 0px 10px 15px;
+    }
+
+    .k-upload-custom {
+        display: none;
+    }
+
+    .participant-grid .k-grid-content {
+        max-height: 200px;
+    }
+
+    .k-grid-toolbar {
+        text-align: right;
+    }
+
+    .k-dialog .k-dialog-buttongroup.k-dialog-button-layout-normal .k-button {
+        border-radius: 5px;
+        background-color: white;
+        border-color: black;
+        color: black
+    }
+</style>
+<div class="row mb-3" style="padding-top: 5px;">
+    <div class="col-md-12">
+        <div style="overflow:hidden;">
+            <div class="p-2 mb-2" style="border-left: 5px solid #006efa;">
+                <span class="display-8 m-0 fw-bold">{{'TRAINING_REQUEST_NO_PARTICIPANTS'|translate}}</span>
+            </div>
+
+            <div class="p-3">
+                <div class="row" style="padding-left:13px">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="col form-label text-secondary">G1</label>
+                            <div class="row align-items-end mt-3">
+                                <div class="col-md-12">
+                                    <input type="text" name="G1" class="k-textbox form-control input-sm" ng-model="participantBudget.g1"
+                                           style="width: 100%" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="col form-label text-secondary">G2</label>
+                            <div class="row align-items-end mt-3">
+                                <div class="col-md-12">
+                                    <input type="text" name="G2" class="k-textbox form-control input-sm" ng-model="participantBudget.g2"
+                                           style="width: 100%" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="col form-label text-secondary">G3</label>
+                            <div class="row align-items-end mt-3">
+                                <div class="col-md-12">
+                                    <input type="text" name="G3" class="k-textbox form-control input-sm" ng-model="participantBudget.g3"
+                                           style="width: 100%" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="col form-label text-secondary">G4</label>
+                            <div class="row align-items-end mt-3">
+                                <div class="col-md-12">
+                                    <input type="text" name="G4" class="k-textbox form-control input-sm" ng-model="participantBudget.g4"
+                                           style="width: 100%" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="col form-label text-secondary">G5+</label>
+                            <div class="row align-items-end mt-3">
+                                <div class="col-md-12">
+                                    <input type="text" name="G5plus" class="k-textbox form-control input-sm" ng-model="participantBudget.g5plus"
+                                           style="width: 100%" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row k-action mb-1" style="float: right;">
+                    <span class=" col-md-12 input-group-btn">
+                        <button type="button"  ng-disabled="showColumn || models.numberOfParticipant== participantBudget.participants.length"  class="btn btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1 ng-binding" ng-click="addDeparmentUser()" >
+                            {{'TRAINING_REQUEST_ADD'|translate}}
+                        </button>
+                    </span>
+                </div>
+
+
+                <div class="row mrt10" style="float: right;">
+                    <div class="col-md-12">
+                        <kendo-grid options="participantsGridOptions" id="participantGrid" class="participant-grid">
+                        </kendo-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--<div class="page-content-wrapper float-none">
+    <div class="caption caption-md">
+        <span class="caption-subject uppercase headline-invitation">
+            {{'TRAINING_REQUEST_NO_PARTICIPANTS'|translate}}
+        </span>
+    </div>
+    <div class="k-participant">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">G1</label>
+                    <div class="col-md-6">
+                        <input type="text" name="G1" class="k-textbox form-control input-sm" ng-model="participantBudget.g1"
+                               style="width: 100%" readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">G2</label>
+                    <div class="col-md-6">
+                        <input type="text" name="G2" class="k-textbox form-control input-sm" ng-model="participantBudget.g2"
+                               style="width: 100%" readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">G3</label>
+                    <div class="col-md-6">
+                        <input type="text" name="G3" class="k-textbox form-control input-sm" ng-model="participantBudget.g3"
+                               style="width: 100%" readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">G4</label>
+                    <div class="col-md-6">
+                        <input type="text" name="G4" class="k-textbox form-control input-sm" ng-model="participantBudget.g4"
+                               style="width: 100%" readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">G5+</label>
+                    <div class="col-md-6">
+                        <input type="text" name="G5plus" class="k-textbox form-control input-sm" ng-model="participantBudget.g5plus"
+                               style="width: 100%" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <div class="row k-action" style="float: right;">
+                <span class="input-group-btn">
+                    <kendo-button class="btn btn-sm default blue-stripe" ng-click="addDeparmentUser()"
+                                  ng-disabled="showColumn || models.numberOfParticipant== participantBudget.participants.length">
+                        <i class="k-icon k-i-plus font-blue-jungle"></i>{{'TRAINING_REQUEST_ADD'|translate}}
+                    </kendo-button>
+                </span>
+            </div>
+        </div>
+
+        <div class="row mrt10">
+            <div class="col-md-12">
+                <kendo-grid options="participantsGridOptions" id="participantGrid" class="participant-grid">
+                </kendo-grid>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<!-- popup add user -->
+<!--Add-->
+<div id="dialog_Detail" kendo-dialog="dialogDetailCode" k-on-open="dialogVisible = true" style="height: 100% !important"
+     k-on-close="dialogVisible = false" k-width="890" k-modal="true" k-visible="false" options="dialogDetailOption">
+    <div class="row">
+        <label class="col-md-3 control-label"></label>
+        <div class="col-md-8">
+            <div class="d-flex" style="width: 400px">
+                <input type="text" class="form-control" id="FieldFilter" placeholder="Search for..." style="width: 100%"
+                       ng-keypress="ifEnter($event, 'addUser')" ng-model="gridUser.keyword" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm ml-1" type="button" ng-click="searchGridUser(null,'#userGrid')"
+                            style="border: 1px solid #dadada; margin-bottom: 10px; height: 37px">
+                        <span class="k-icon k-i-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row mrb10">
+        <div class="col-md-12"></div>
+    </div>
+    <div>
+        <div kendo-grid id="userGrid" style="width: 850px" options="userListGridOptions"></div>
+    </div>
+    <div class="row mrb10">
+        <div class="col-md-12"></div>
+    </div>
+</div>
+
+
+<!--Add from department-->
+<div id="dialog_Detail_Department" kendo-dialog="dialogDetailCodeDepartment" k-title="'Add User'"
+     k-on-open="dialogVisible = true" k-on-close="dialogVisible = false" k-width="1000" k-modal="false"
+     style="height: 100% !important" k-visible="false" options="dialogDeptOption">
+    <div class="row">
+   
+                        <div class="col-md-4">
+                            <div kendo-tree-view="tree" k-data-source="departments" k-on-change="selectedDeparment(dataItem)"
+                                 style="height: 500px; overflow-y: auto">
+                                <span k-template> {{dataItem.name}} </span>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                           
+                                <kendo-grid id="userByDeptGrid" options="userListByDeptGridOptions">
+                                </kendo-grid>
+                      
+                        </div>
+                 
+    </div>
+
+</div>
+
+<!--Confirm dialog-->
+<div id="dialog_Confirm" kendo-dialog="diaglogConfirm" k-on-open="dialogVisible = true" style="height: 100% !important"
+     k-on-close="dialogVisible = false" k-width="890" k-modal="true" k-visible="false" options="dialogConfirmOption"
+     k-title="'Warning'">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet-body">
+                <div class="page-content-wrapper float-none">
+                    {{'TRAINING_REQUEST_DELETE_WARNING' | translate}}
+                    <strong>{{deletedParticipant.name}}</strong>?
+                </div>
+            </div>
+        </div>
+        <div class="row mrb10">
+            <div class="col-md-12"></div>
+        </div>
+    </div>
+</div>

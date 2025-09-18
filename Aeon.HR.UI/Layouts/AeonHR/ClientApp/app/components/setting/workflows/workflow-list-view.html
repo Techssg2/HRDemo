@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">WORKFLOW
+                    </span>
+                </div>
+                <div class="actions">
+                    <div class="col-md-5 align-right-btn-group">
+                        <div class="input-group" style="width: 400px">
+                            <!-- <span class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span> -->
+                            <input type="text" class="form-control" ng-model="searchText" id='FieldFilter'  ng-keypress="ifEnter($event)" placeholder="Search for..." style="width: 100%; ">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-sm" ng-click="search()" type="button" style="border: 1px solid #dadada;
+                                margin-bottom: 10px;"><span class="k-icon k-i-search"></span></button>
+                            </span>
+                        </div>
+                        <div add-class class="btn-group" current-class="btn-group" added-class="open" style="margin-top:3px">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="padding: 0px !important"><img
+                                    src="ClientApp/assets/images/icon/more.png"
+                                    style="position: relative;top: -2px"
+                                    class="ng-isolate-scope"></button>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a  ng-click="vm.actions.export()" class="ng-binding"><i class="fa fa-table font-blue right-5"></i>
+                                    Export excel</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="page-content-wrapper float-none">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <kendo-grid id="grid" options="workFlowGridOptions"></kendo-grid>
+                        </div>
+                        <div class="col-md-12 mt-2">
+                            <a ng-click="onCreateWorkFlowTemplate()" class="btn btn-sm btn-primary float-right">
+                                <i class="fa fa-plus right-5"></i>Create
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>
+
+<div id="confirmFlowType">
+    <select kendo-drop-down-list
+            style="width: 100%;"
+            k-ng-model="itemType"
+            k-options="flowTypeOptions">
+    </select>
+    <kendo-button ng-disabled="!itemType" class="btn btn-default btn-sm confirm-btn" type="button" ng-click="onConfirmFlowType()">
+        <i class="fa fa-check right-5 font-green-jungle text-success"></i> OK
+    </kendo-button>
+</div>

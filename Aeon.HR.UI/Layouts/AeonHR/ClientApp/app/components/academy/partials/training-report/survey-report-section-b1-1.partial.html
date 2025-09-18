@@ -1,0 +1,39 @@
+<ul style="list-style: none">
+  <li
+    style="padding: 5px; margin: 5px"
+    ng-repeat=" question in dataItem.childQuestion"
+  >
+    <input
+      ng-if="question.display"
+      type="checkbox"
+      id="{{question.surveyQuestion}}"
+      class="k-checkbox"
+      checked="{{question.value}}"
+      ng-model="question.value"
+      ng-click="changeEventForsubQuestionB1($event)"
+      ng-disabled="!isEditable"
+    />
+    <label
+      ng-if="question.display"
+      class="k-checkbox-label"
+      for="{{question.surveyQuestion}}"
+      >{{question.questionText}}</label
+    >
+    <span ng-if="question.surveyQuestion=='B118' && question.value  ">
+      <!-- <input
+        type="richText"
+        ng-model="question.childQuestion[0].value"
+        ng-change="changeEventForsubQuestionB1($event)"
+      /> -->
+      <textarea
+        kendo-text-area
+        ng-model="surveyDataModel.otherReasons"
+        style="width: 100%"
+        rows="5"
+        k-on-change="changeEventForsubQuestionB1($event)"
+        class="kendoTextArea"
+        ng-disabled="!isEditable"
+      ></textarea>
+    </span>
+  </li>
+</ul>

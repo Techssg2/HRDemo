@@ -1,0 +1,1634 @@
+
+<style type="text/css">
+    #attachmentViewDialog {
+        min-height: 40vh !important;
+        height: 98vh !important;
+    }
+
+    .close-owa-dialog {
+        margin: 5px;
+    }
+
+    #tooltipText {
+        position: absolute;
+        left: 50%;
+        top: -40px;
+        transform: translateX(-50%);
+        background-color: #fff;
+        color: #000;
+        white-space: nowrap;
+        padding: 5px 10px;
+        border-radius: 10px;
+        border: 1px solid #000;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+        #tooltipText::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            transform: translateX(-50%);
+            border: 10px solid;
+            border-color: #808080 #0000 #0000 #0000;
+        }
+
+    #tooltip:hover #tooltipText {
+        top: -140%;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .k-dropdown-wrap {
+        border-radius: 0.375rem;
+    }
+
+        .k-dropdown-wrap.k-state-default {
+            border-color: #e4e7ea;
+        }
+
+    #goalGrid .k-grid-header th {
+        background-color: #E8E8E8;
+        color: #000;
+        font-weight: 500 !important;
+        text-transform: uppercase !important;
+    }
+
+    #goalGrid .k-grid-header {
+        background-color: #E8E8E8;
+        color: #000;
+    }
+
+    #mainAppraisingGridOptions .k-grid-header th {
+        background-color: #E8E8E8;
+        color: #000;
+        font-weight: 500 !important;
+        text-transform: uppercase !important;
+    }
+
+    #mainAppraisingGridOptions .k-grid-header {
+        background-color: #E8E8E8;
+        color: #000;
+    }
+
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+
+            <div class="d-flex align-items-center justify-content-between portlet-title">
+                <div class="group poppins-medium text-grey-300 caption caption-md px-3">
+                    <p style=" text-transform: uppercase !important;" class="display-8 m-0">{{title}}</p>
+                    <p class="display-11">
+                        <span class="opacity-40">Number of record:</span> {{total}}
+                    </p>
+                </div>
+            </div>
+            <div class="portlet-body p-2 bg-neutral-blue-300">
+                <div ng-show="false"><input id="files" name="files" kendo-upload type="file" ng-show="false" class="ng-hide" /></div>
+                <div class="page-content-wrapper float-none table-rounded-toolbar ">
+                    <div class="toolbar">
+                        <div class="row">
+                            <div class="p-3">
+                                <div class="portlet bordered light">
+                                    <!-- Title -->
+                                    <div class="portlet-body">
+
+                                        <div class="mt-3">
+                                            <div class="accordion accordion-style1">
+                                                <div class="accordion-item">
+                                                    <div class="accordion-collapse collapse show">
+                                                        <div class="accordion-body">
+                                                            <div ng-if="errors.length > 0" class="row ng-scope" style="padding: 15px 0;margin-bottom:15px">
+                                                                <div class="col-sm-12">
+                                                                    <div class="alert alert-required-fields py-3" role="alert">
+                                                                        <h5 class="alert-header">Please Enter All Required Fields *:</h5>
+                                                                        <div class="alter-content">
+                                                                            <ul>
+                                                                                <li ng-repeat="error in errors">
+                                                                                    <span class="mb-2">{{error.controlName}}</span>: Field
+                                                                                    is required
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Row1-->
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="workflowName" class="form-label text-secondary">
+                                                                            Workflow Name:
+                                                                        </label>
+                                                                        <div class="row align-items-end mt-3">
+                                                                            <div class="col-md-12">
+                                                                                <input type="text" id="workflowName" name="workflowName"
+                                                                                       class="k-textbox" style="width: 100%;height:38px !important"
+                                                                                       ng-model="model.workflowName" autocomplete="off" disabled />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="workflowName" class="form-label text-secondary">
+                                                                            Priority:
+
+                                                                        </label>
+                                                                        <div class="row align-items-end mt-3">
+                                                                            <div class="col-md-12">
+                                                                                <input kendo-numeric-text-box class="form-control" id="order" k-min="0" name="order"
+                                                                                       k-format="'#,0'" ng-model="model.order" style="width: 100%;height:50%"  disabled/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!--Row2-->
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="overwriteRequestedDepartmentGobal" class="form-label text-secondary">
+                                                                            Overwrite Requested Department:
+
+                                                                        </label>
+                                                                        <div class="row align-items-end mt-3">
+                                                                            <div class="col-md-12" style="margin-left:20px">
+                                                                                <input type="checkbox" name="overwriteRequestedDepartmentGobal"
+                                                                                       id="overwriteRequestedDepartmentGobal" class="form-check-input"
+                                                                                       ng-model="model.workflowData.overwriteRequestedDepartment" disabled
+                                                                                       ng-change="model.workflowData.requestedDepartmentField = ''">
+                                                                                <label class="form-check-label"
+                                                                                       for="overwriteRequestedDepartmentGobal"></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="requestedDepartmentFieldGobal" class="form-label text-secondary">
+                                                                            Requested Department Field:
+                                                                        </label>
+                                                                        <div class="row align-items-end mt-3">
+                                                                            <div class="col-md-12">
+                                                                                <select kendo-drop-down-list name="requestedDepartmentFieldGobal"
+                                                                                        id="requestedDepartmentFieldGobal"
+                                                                                        class="form-select"
+                                                                                        k-ng-disabled="!model.workflowData.overwriteRequestedDepartment"
+                                                                                        k-options="requestedDepartmentFieldGobalDataSource"
+                                                                                        k-ng-model="model.workflowData.requestedDepartmentField"
+                                                                                        style="width: 100%" disabled></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!--Row3-->
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label for="ignoreValidation" class="form-label text-secondary">
+                                                                            Ignore Validation:
+                                                                        </label>
+                                                                        <div class="row align-items-end mt-3">
+                                                                            <div class="col-md-12" style="margin-left:20px">
+                                                                                <input type="checkbox" name="ignoreValidation" id="ignoreValidation"
+                                                                                       class="form-check-input" disabled
+                                                                                       ng-model="model.workflowData.ignoreValidation">
+                                                                                <label class="form-check-label" for="ignoreValidation"></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!--Row4-->
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="allowMultipleFlow" class="form-label text-secondary">
+                                                                            Allow Multiple Flow:
+
+                                                                        </label>
+                                                                        <div class="row align-items-end mt-3">
+                                                                            <div class="col-md-12" style="margin-left:20px">
+                                                                                <input type="checkbox" name="allowMultipleFlow" id="allowMultipleFlow" class="form-check-input" disabled ng-model="model.allowMultipleFlow" ng-change="model.startWorkflowButton = ''">
+                                                                                <label class="form-check-label" for="allowMultipleFlow"></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="order" class="form-label text-secondary">
+                                                                            Start Workflow Button:
+
+                                                                        </label>
+                                                                        <div class="row align-items-end mt-3">
+                                                                            <div class="col-md-12">
+                                                                                <input type="text" id="startWorkflowButton" name="startWorkflowButton" class="k-textbox" style="width: 100%;height:38px !important" ng-model="model.startWorkflowButton" k-value-primitive="true" autocomplete="off" disabled/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!--Row5-->
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="onCancelled" class="form-label text-secondary">
+                                                                            On Cancelled:
+                                                                        </label>
+                                                                        <div class="row align-items-end mt-3">
+                                                                            <div class="col-md-12">
+                                                                                <input type="text" id="onCancelled" name="onCancelled" class="k-textbox" style="width: 100%;height:38px !important" ng-model="model.workflowData.onCancelled" k-value-primitive="true" autocomplete="off" disabled />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="order" class="form-label text-secondary">
+                                                                            Default Completed Status:
+                                                                        </label>
+                                                                        <div class="row align-items-end mt-3">
+                                                                            <div class="col-md-12">
+                                                                                <input type="text" id="defaultCompletedStatus" name="defaultCompletedStatus" class="k-textbox" style="width: 100%; height: 38px !important" ng-model="model.defaultCompletedStatus" k-value-primitive="true" autocomplete="off" disabled/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <!--Row6-->
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="onRequestToChange" class="form-label text-secondary">
+                                                                            On Request To Change:
+                                                                        </label>
+                                                                        <div class="row align-items-end mt-3">
+                                                                            <div class="col-md-12">
+                                                                                <input type="text" id="onRequestToChange" name="onRequestToChange" class="k-textbox" style="width: 100%; height: 38px !important" ng-model="model.workflowData.onRequestToChange" k-value-primitive="true" autocomplete="off"  disabled/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <!--Row7-->
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <h7 style="color: dodgerblue; font-weight: bold">WORKFLOW CONDITION</h7>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!--Row8-->
+                                                            <div class="row mb-3">
+                                                                <div class="col">
+                                                                    <kendo-grid k-scope-field="widget.startWorkflowConditions"
+                                                                                options="startWorkflowConditionsGridOptions"></kendo-grid>
+                                                                </div>
+                                                            </div>
+
+                                                            <!--Row9-->
+                                                            
+
+
+                                                            <!--Row10-->
+                                                            <div class="row mb-3">
+                                                                <!--left-->
+                                                                <div class="col-md-2">
+                                                                    <!--Workflow-->
+                                                                    <div class="col-md-12">
+                                                                        <div ng-repeat="step in model.workflowData.steps"
+                                                                             class="workflow-history-step "
+                                                                             ng-class="{'step-status-not-started': currentStep != step, 'step-status-completed': currentStep == step}">
+                                                                            <div class="step-flag-container" style="padding-bottom: 30px;">
+                                                                                <div class="step-flag"
+                                                                                     style="cursor: pointer; position: relative"
+                                                                                     ng-click="selectStep(step)">
+                                                                                    <div class="caption ng-binding">{{step.stepName}}</div>
+                                                                                    <!--<span ng-if="model.workflowData.steps.length > 1"
+                                                                                      ng-click="deleteWorkflow(step, $index)"
+                                                                                      class="k-icon k-i-close-outline"
+                                                                                      style="font-size: 24px; background-color: white; position: absolute; top: 0; right: 0; border-radius: 50% !important"></span>-->
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!--right-->
+                                                                <div class="col-md-10">
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="stepName" class="form-label text-secondary">
+                                                                                Step Name:
+                                                                            </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <input type="text" id="stepName" name="stepName"
+                                                                                       class="k-textbox" style="width: 90%; height: 38px !important"
+                                                                                       ng-model="currentStep.stepName" k-value-primitive="true" disabled
+                                                                                       autocomplete="off" />
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <label for="stepNumber" class="form-label text-secondary">
+                                                                                Step Number:
+                                                                            </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <input kendo-numeric-text-box id="stepNumber" k-min="0"
+                                                                                       name="stepNumber" k-format="'#,0'" disabled
+                                                                                       ng-model="currentStep.stepNumber"
+                                                                                       style="width: 90%;" />
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <!--rowRight1-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="onSuccess" class="form-label text-secondary">
+                                                                                Success
+                                                                                Status:
+                                                                            </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <input type="text" id="onSuccess" name="onSuccess"
+                                                                                       class="k-textbox" style="width: 90%; height: 38px !important"
+                                                                                       ng-model="currentStep.onSuccess" disabled
+                                                                                       k-value-primitive="true" autocomplete="off" />
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <label for="onFailure" class="form-label text-secondary">
+                                                                                Failure
+                                                                                Status:
+                                                                            </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <input type="text" id="onFailure" name="onFailure"
+                                                                                       class="k-textbox" style="width: 90%; height: 38px !important"
+                                                                                       ng-model="currentStep.onFailure" disabled
+                                                                                       k-value-primitive="true" autocomplete="off" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                    <!--rowRight3-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="successVote" class="form-label text-secondary">
+                                                                                Vote
+                                                                                Success:
+                                                                            </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <input type="text" id="successVote" name="successVote"
+                                                                                       class="k-textbox" style="width: 90%; height: 38px !important"
+                                                                                       ng-model="currentStep.successVote" disabled
+                                                                                       k-value-primitive="true" autocomplete="off" />
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <label for="failureVote" class="form-label text-secondary">
+                                                                                Vote
+                                                                                Failure:
+                                                                            </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <input type="text" id="failureVote" name="failureVote"
+                                                                                       class="k-textbox" style="width: 90%; height: 38px !important"
+                                                                                       ng-model="currentStep.failureVote" disabled
+                                                                                       k-value-primitive="true" autocomplete="off" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!--rowRight4-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="participantType"
+                                                                                   class="form-label text-secondary">Participant Type:</label>
+
+                                                                            <div class="row align-items-end ">
+                                                                                <select kendo-drop-down-list name="participantType"
+                                                                                        id="participantType" k-options="participantTypesOptions"
+                                                                                        k-ng-model="currentStep.participantType" disabled
+                                                                                        style="width: 90%;height: 36px"></select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6" ng-if="currentStep.participantType === 6">
+                                                                            <label ng-show="currentStep.participantType === 6"
+                                                                                   class="form-label text-secondary">Data Field:</label>
+                                                                            <div class="row align-items-end ">
+                                                                                <select ng-show="currentStep.participantType === 6"
+                                                                                        k-ng-disabled="currentStep.participantType !== 6"
+                                                                                        kendo-drop-down-list id="dataField" name="dataField"
+                                                                                        k-options="participantTypeValueOptions" disabled
+                                                                                        k-ng-model="currentStep.dataField"
+                                                                                        style="width: 90%;height: 36px"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!--rowRight5-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="departmentType" class="form-label text-secondary">
+                                                                                Group:
+                                                                            </label>
+
+                                                                            <div class="row align-items-end ">
+                                                                                <select k-ng-disabled="currentStep.participantType === 6"
+                                                                                        kendo-drop-down-list name="departmentType"
+                                                                                        id="departmentType" k-options="departmentTypesOptions"
+                                                                                        k-ng-model="currentStep.departmentType" disabled
+                                                                                        style="width: 90%;height: 36px"></select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6" ng-if="currentStep.participantType === 6">
+                                                                            <label class="form-label text-secondary">Next Group:</label>
+                                                                            <div class="row align-items-end ">
+                                                                                <select k-ng-disabled="currentStep.participantType === 6"
+                                                                                        kendo-drop-down-list id="dataField" name="dataField"
+                                                                                        k-options="departmentTypesOptions" disabled
+                                                                                        k-ng-model="currentStep.nextDepartmentType"
+                                                                                        style="width: 90%;height: 36px"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <!--rowRight6-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="allowRequestToChange"
+                                                                                   class="form-label text-secondary">Request To Change:</label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col-md-4 " style="margin-left:20px">
+                                                                                    <input type="checkbox" name="allowRequestToChange"
+                                                                                           id="allowRequestToChange" class="form-check-input"
+                                                                                           ng-model="currentStep.allowRequestToChange" disabled
+                                                                                           ng-change="currentStep.returnToStepNumber = 0">
+                                                                                    <label class="form-check-label"
+                                                                                           for="allowRequestToChange"></label>
+                                                                                </div>
+                                                                                <div class="col">
+                                                                                    <input kendo-numeric-text-box id="returnToStepNumber"
+                                                                                           k-min="0" name="returnToStepNumber" k-format="'#,0'"
+                                                                                           ng-model="currentStep.returnToStepNumber" disabled
+                                                                                           ng-disabled="!currentStep.allowRequestToChange"
+                                                                                           style="width: 87%;height: 36px" />
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6" ng-if="currentStep.participantType === 6">
+                                                                            <label for="dueDateNumber" class="form-label text-secondary">
+                                                                                Due
+                                                                                days:
+                                                                            </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <input kendo-numeric-text-box id="dueDateNumber" k-min="0"
+                                                                                       name="dueDateNumber" k-format="'#,0'" disabled
+                                                                                       ng-model="currentStep.dueDateNumber"
+                                                                                       style="width: 90%;height: 36px" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <!--rowRight7-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="isCustomRequestToChange"
+                                                                                   class="form-label text-secondary">Is Custom Request To Change:</label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col-md-4 " style="margin-left:20px">
+                                                                                    <input type="checkbox" name="isCustomRequestToChange" disabled
+                                                                                           id="isCustomRequestToChange" class="form-check-input"
+                                                                                           ng-model="currentStep.isCustomRequestToChange">
+                                                                                    <label class="form-check-label"
+                                                                                           for="isCustomRequestToChange"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!--rowRight8-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="requestorPerm" class="form-label text-secondary">
+                                                                                Permission
+                                                                                for Requestor:
+                                                                            </label>
+
+                                                                            <div class="row align-items-end ">
+                                                                                <select kendo-drop-down-list name="requestorPerm" disabled
+                                                                                        id="requestorPerm" k-options="requestorPermsDataSource"
+                                                                                        k-ng-model="currentStep.requestorPerm"
+                                                                                        style="width: 90%;height: 36px"></select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6" ng-if="currentStep.participantType === 6">
+                                                                            <label for="approverPerm" class="form-label text-secondary">
+                                                                                Permission
+                                                                                for Approver:
+                                                                            </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <select kendo-drop-down-list name="approverPerm" disabled
+                                                                                        id="approverPerm" k-options="approverPermsDataSource"
+                                                                                        k-ng-model="currentStep.approverPerm"
+                                                                                        style="width: 90%;height: 36px"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!--rowRight9-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="level" class="form-label text-secondary">Level: </label>
+
+                                                                            <div class="row align-items-end ">
+                                                                                <input id="participantType"
+                                                                                       k-ng-disabled="currentStep.participantType !== 5" disabled
+                                                                                       kendo-numeric-text-box id="level" k-min="0" name="level"
+                                                                                       k-format="'#,0'" ng-model="currentStep.level"
+                                                                                       style="width: 90%;height: 36px" />
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6" ng-if="currentStep.participantType === 6">
+                                                                            <label for="maxLevel" class="form-label text-secondary">
+                                                                                Max Level:
+                                                                            </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <input k-ng-disabled="currentStep.participantType !== 5"
+                                                                                       kendo-numeric-text-box id="maxLevel" k-min="0"
+                                                                                       name="maxLevel" k-format="'#,0'" disabled
+                                                                                       ng-model="currentStep.maxLevel" style="width: 90%;height: 36px" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!--rowRight10-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="overwriteRequestedDepartment"
+                                                                                   class="form-label text-secondary">
+                                                                                Overwrite Requested Department:
+                                                                            </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col-md-4 " style="margin-left:20px">
+                                                                                    <input type="checkbox" name="overwriteRequestedDepartment" disabled
+                                                                                           id="overwriteRequestedDepartment" class="form-check-input"
+                                                                                           ng-model="currentStep.overwriteRequestedDepartment"
+                                                                                           ng-change="currentStep.requestedDepartmentField = ''">
+                                                                                    <label class="form-check-label"
+                                                                                           for="overwriteRequestedDepartment"></label>
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <label for="requestedDepartmentField" class="form-label text-secondary">
+                                                                                Requested Department Field:
+                                                                            </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <select kendo-drop-down-list name="requestedDepartmentField"
+                                                                                        id="requestedDepartmentField" disabled
+                                                                                        k-ng-disabled="!currentStep.overwriteRequestedDepartment"
+                                                                                        k-options="requestedDepartmentFieldDataSource"
+                                                                                        k-ng-model="currentStep.requestedDepartmentField"
+                                                                                        style="width: 90%;height: 36px"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <!--rowRight11-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="requestedDepartmentField"
+                                                                                   class="form-label text-secondary">
+                                                                                Is Status Follow StepName:
+                                                                            </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col-md-4 " style="margin-left:20px">
+                                                                                    <input type="checkbox" name="isStatusFollowStepName" disabled
+                                                                                           id="isStatusFollowStepName" class="form-check-input"
+                                                                                           ng-model="currentStep.isStatusFollowStepName">
+                                                                                    <label class="form-check-label"
+                                                                                           for="isStatusFollowStepName"></label>
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <label for="traversingFromRoot"
+                                                                                   class="form-label text-secondary">Traversing From Root: </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col-md-4 " style="margin-left:20px">
+                                                                                    <input type="checkbox" name="traversingFromRoot" disabled
+                                                                                           id="traversingFromRoot" class="form-check-input"
+                                                                                           ng-model="currentStep.traversingFromRoot">
+                                                                                    <label class="form-check-label"
+                                                                                           for="traversingFromRoot"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!--rowRight12-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="isHRHQ" class="form-label text-secondary">Is HQ: </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col-md-4 " style="margin-left:20px">
+                                                                                    <input type="checkbox" name="isHRHQ" id="isHRHQ" disabled
+                                                                                           class="form-check-input" ng-model="currentStep.isHRHQ">
+                                                                                    <label class="form-check-label" for="isHRHQ"></label>
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <label for="ignoreIfNoParticipant"
+                                                                                   class="form-label text-secondary">Ignore If No Participant: </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col-md-4 " style="margin-left:20px">
+                                                                                    <input type="checkbox" name="ignoreIfNoParticipant" disabled
+                                                                                           id="ignoreIfNoParticipant" class="form-check-input"
+                                                                                           ng-model="currentStep.ignoreIfNoParticipant">
+                                                                                    <label class="form-check-label"
+                                                                                           for="ignoreIfNoParticipant"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <!--rowRight13-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <label for="preventAutoPopulate"
+                                                                                   class="form-label text-secondary">Prevent Auto Populate: </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col-md-4 " style="margin-left:20px">
+                                                                                    <input type="checkbox" name="preventAutoPopulate" disabled
+                                                                                           id="preventAutoPopulate" class="form-check-input"
+                                                                                           ng-model="currentStep.preventAutoPopulate">
+                                                                                    <label class="form-check-label"
+                                                                                           for="preventAutoPopulate"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                    <!--rowRight14-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="jobGrade" class="form-label text-secondary">
+                                                                                Job
+                                                                                Grade:
+                                                                            </label>
+
+                                                                            <div class="row align-items-end ">
+                                                                                <select k-ng-disabled="currentStep.participantType !== 3 && currentStep.participantType !== 8 && currentStep.participantType !== 9 && currentStep.participantType !== 10 && currentStep.participantType !== 11 && currentStep.participantType !== 12"
+                                                                                        kendo-drop-down-list name="jobGrade" id="jobGrade"
+                                                                                        k-options="jobGradeOption" disabled
+                                                                                        ng-model="currentStep.jobGrade"
+                                                                                        style="width: 90%;height: 36px"></select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6" ng-if="currentStep.participantType === 6">
+                                                                            <label for="maxJobGrade" class="form-label text-secondary">
+                                                                                Max Job
+                                                                                Grade:
+                                                                            </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <select k-ng-disabled="currentStep.participantType !== 3 && currentStep.participantType !== 8 && currentStep.participantType !== 9 && currentStep.participantType !== 10 && currentStep.participantType !== 11 && currentStep.participantType !== 12"
+                                                                                        kendo-drop-down-list name="maxJobGrade" id="maxJobGrade"
+                                                                                        k-options="maxJobGradeOption" disabled
+                                                                                        ng-model="currentStep.maxJobGrade"
+                                                                                        style="width: 90%;height: 36px"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!--rowRight15-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="reverseJobGrade" class="form-label text-secondary">
+                                                                                Reverse
+                                                                                JobGrade:
+                                                                            </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col-md-4 " style="margin-left:20px">
+                                                                                    <input type="checkbox" name="reverseJobGrade" disabled
+                                                                                           id="reverseJobGrade" class="form-check-input"
+                                                                                           ng-model="currentStep.reverseJobGrade">
+                                                                                    <label class="form-check-label"
+                                                                                           for="reverseJobGrade"></label>
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <label for="includeCurrentNode"
+                                                                                   class="form-label text-secondary">Include Current Node:</label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col-md-4 " style="margin-left:20px">
+                                                                                    <input type="checkbox" name="includeCurrentNode" disabled
+                                                                                           id="includeCurrentNode" class="form-check-input"
+                                                                                           ng-model="currentStep.includeCurrentNode">
+                                                                                    <label class="form-check-label"
+                                                                                           for="includeCurrentNode"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!--rowRight16-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="isCustomEvent" class="form-label text-secondary"> Custom Event: </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col-md-4 " style="margin-left:20px">
+                                                                                    <input type="checkbox" name="isCustomEvent" id="isCustomEvent" class="form-check-input" ng-model="currentStep.isCustomEvent" disabled>
+                                                                                    <label class="form-check-label" for="isCustomEvent"></label>
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <label for="isCustomEvent" class="form-label text-secondary"> Custom Event Key: </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col ">
+                                                                                    <input type="text" name="customEventKey" id="customEventKey" ng-disabled="!currentStep.isCustomEvent" disabled
+                                                                                           class="k-textbox" style="width: 100%; height: 38px !important" k-value-primitive="true" autocomplete="off"
+                                                                                           ng-model="currentStep.customEventKey" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <!--rowRight17-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="isTurnedOffSendNotification" class="form-label text-secondary"> Turn Off Notification: </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col-md-4 " style="margin-left:20px">
+                                                                                    <input type="checkbox" name="isTurnedOffSendNotification" disabled
+                                                                                           id="isTurnedOffSendNotification" class="form-check-input"
+                                                                                           ng-model="currentStep.isTurnedOffSendNotification">
+                                                                                    <label class="form-check-label"
+                                                                                           for="isTurnedOffSendNotification"></label>
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!--rowRight18-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="isAttachmentFile" class="form-label text-secondary"> Attachment File: </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col-md-4 " style="margin-left:20px">
+                                                                                    <input type="checkbox" name="isAttachmentFile" id="isAttachmentFile" class="form-check-input" ng-model="currentStep.isAttachmentFile" disabled>
+                                                                                    <label class="form-check-label" for="isAttachmentFile"></label>
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <!--rowRight18-->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <label for="isStepWithConditions" class="form-label text-secondary"> Step with conditions: </label>
+                                                                            <div class="row align-items-end ">
+                                                                                <div class="col-md-4 " style="margin-left:20px">
+                                                                                    <input type="checkbox" name="isStepWithConditions" id="isStepWithConditions" class="form-check-input" ng-model="currentStep.isStepWithConditions" disabled>
+                                                                                    <label class="form-check-label" for="isStepWithConditions"></label>
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!--rowRight19-->
+                                                                    <div class="row mt-5" ng-show="currentStep.isStepWithConditions == true">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <h7 style="color: dodgerblue; font-weight: bold">CONDITIONS OF THIS STEP</h7>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mb-3" ng-show="currentStep.isStepWithConditions == true">
+                                                                        <div class="col">
+                                                                            <kendo-grid k-scope-field="widget.stepConditions" options="stepConditionsGridOptions"></kendo-grid>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row mb-3" ng-show="currentStep.isStepWithConditions == true">
+                                                                        <div class="col">
+                                                                            <button disabled type="button" class="btn btn-primary rounded-3 poppins-regular display-8 py-2 px-4 ng-binding" ng-click="addRow(widget.stepConditions)">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                                                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
+                                                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"></path>
+                                                                                </svg>
+                                                                                &nbsp;Add More
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                    <!--rowRight20-->
+                                                                    <div class="row mt-5">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <h7 style="color:dodgerblue; font-weight:bold">RRESTRICTED EDIT PROPERTY</h7>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mb-3">
+                                                                        <div class="col">
+                                                                            <kendo-grid k-scope-field="widget.restrictedProperties"
+                                                                                     options="restrictedPropertiesGridOptions"></kendo-grid>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!--<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <div class="portlet-title">
+                <div class="caption caption-md tabbable-line">
+                    <span class="caption-subject uppercase">{{title}}</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="col-md-12 mrb10">
+                </div>
+                <div class="row ng-scope" ng-if="errors.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase">
+                                Please enter all required fields <span class="font-red-thunderbird">*</span>:
+                            </h5>
+                            <p></p>
+                            <ul>
+                                <li ng-repeat="error in errors">
+                                    <span class="bold ">{{error.controlName}}</span>: Field
+                                    is required
+                                </li>
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <form name="formEditWorkFlow">
+                    <div class="page-content-wrapper float-none">
+                        <div class="page-content" style="padding-top: 0px !important;">
+                            <div class="form-horizontal">
+                                <div class="form-body">-->
+                                    <!--General content-->
+                                    <!--<div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <label for="workflowName" class="title-control">
+                                                        Workflow Name:
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" id="workflowName" name="workflowName"
+                                                           class="k-textbox" style="width: 100%;"
+                                                           ng-model="model.workflowName" autocomplete="off" disabled />
+                                                </div>
+                                                <div class="col-md-2 control-label">
+                                                    <label for="order" class="title-control"> Priority: </label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" id="workflowName" name="workflowName"
+                                                           class="k-textbox" style="width: 100%;"
+                                                           ng-model="model.order" autocomplete="off" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <label for="overwriteRequestedDepartmentGobal"
+                                                           class="title-control"> Overwrite Requested Department: </label>
+                                                </div>
+                                                <div class="col-md-4 control-label">
+                                                    <input type="checkbox" name="overwriteRequestedDepartmentGobal"
+                                                           id="overwriteRequestedDepartmentGobal" class="k-checkbox"
+                                                           ng-model="model.workflowData.overwriteRequestedDepartment"
+                                                           ng-change="model.workflowData.requestedDepartmentField = ''" disabled>
+                                                    <label class="k-checkbox-label"
+                                                           for="overwriteRequestedDepartmentGobal"></label>
+                                                </div>
+                                                <div class="col-md-2 control-label">
+                                                    <label for="requestedDepartmentFieldGobal" class="title-control">
+                                                        Requested Department Field:
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <select kendo-drop-down-list name="requestedDepartmentFieldGobal"
+                                                            id="requestedDepartmentFieldGobal"
+                                                            k-ng-disabled="true"
+                                                            k-options="requestedDepartmentFieldGobalDataSource"
+                                                            k-ng-model="model.workflowData.requestedDepartmentField"
+                                                            style="width: 100%" disabled></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <label for="ignoreValidation" class="title-control">
+                                                        Ignore
+                                                        Validation:
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-4 control-label">
+                                                    <input type="checkbox" name="ignoreValidation" id="ignoreValidation"
+                                                           class="k-checkbox"
+                                                           ng-model="model.workflowData.ignoreValidation" disabled>
+                                                    <label class="k-checkbox-label" for="ignoreValidation"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <label for="allowMultipleFlow" class="title-control">Allow Multiple Flow: </label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="checkbox" name="allowMultipleFlow" id="allowMultipleFlow" class="k-checkbox" ng-model="model.allowMultipleFlow" disabled ng-change="model.startWorkflowButton = ''">
+                                                    <label class="k-checkbox-label" for="allowMultipleFlow"></label>
+                                                </div>
+                                                <div class="col-md-2 control-label">
+                                                    <label for="order" class="title-control"> Start Workflow Button: </label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" id="startWorkflowButton" name="startWorkflowButton" class="k-textbox" style="width: 100%;" ng-model="model.startWorkflowButton" k-value-primitive="true" autocomplete="off" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <label for="onCancelled" class="title-control">On Cancelled: </label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" id="onCancelled" name="onCancelled" class="k-textbox" style="width: 100%;" ng-model="model.workflowData.onCancelled" k-value-primitive="true" autocomplete="off" disabled />
+                                                </div>
+                                                <div class="col-md-2 control-label">
+                                                    <label for="order" class="title-control"> Default Completed Status: </label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" id="defaultCompletedStatus" name="defaultCompletedStatus" class="k-textbox" style="width: 100%;" ng-model="model.defaultCompletedStatus" k-value-primitive="true" autocomplete="off" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="col-md-2 control-label">
+                                                    <label for="onRequestToChange" class="title-control">On Request To Change: </label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" id="onRequestToChange" name="onRequestToChange" class="k-textbox" style="width: 100%;" ng-model="model.workflowData.onRequestToChange" k-value-primitive="true" autocomplete="off" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="caption" style="padding: 15px 0px 15px 0px;font-weight: bold;">
+                                                <span class="caption-subject hr-process uppercase f-collapse">
+                                                    Workflow Condition
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <kendo-grid k-scope-field="widget.startWorkflowConditions"
+                                                        options="startWorkflowConditionsGridOptions"></kendo-grid>
+                                        </div>
+                                    </div>
+                                    <div class="row mrt10">-->
+                                        <!--Left-->
+                                        <!--<div class="col-md-2">
+                                            <div class="col-md-12">
+                                                <div ng-repeat="step in model.workflowData.steps"
+                                                     class="workflow-history-step "
+                                                     ng-class="{'step-status-not-started': currentStep != step, 'step-status-completed': currentStep == step}">
+                                                    <div class="step-flag-container" style="padding-bottom: 30px;">
+                                                        <div class="step-flag"
+                                                             style="cursor: pointer; position: relative"
+                                                             ng-click="selectStep(step)">
+                                                            <div class="caption ng-binding">{{step.stepName}}</div>-->
+                                                            <!--<span ng-if="model.workflowData.steps.length > 1"
+                                                                  ng-click="deleteWorkflow(step, $index)"
+                                                                  class="k-icon k-i-close-outline"
+                                                                  style="font-size: 24px; background-color: white; position: absolute; top: 0; right: 0; border-radius: 50% !important"></span>-->
+                                                        <!--</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>-->
+
+                                        <!--Right-->
+                                        <!--<div class="col-md-10 mrt20">
+                                            <div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="stepName" class="title-control">
+                                                                Step Name:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" id="stepName" name="stepName"
+                                                                   class="k-textbox" style="width: 100%;"
+                                                                   ng-model="currentStep.stepName" k-value-primitive="true" disabled
+                                                                   autocomplete="off" />
+                                                        </div>
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="stepNumber" class="title-control">
+                                                                Step
+                                                                Number:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input kendo-numeric-text-box id="stepNumber" k-min="0"
+                                                                   name="stepNumber" k-format="'#,0'"
+                                                                   ng-model="currentStep.stepNumber" disabled
+                                                                   style="width: 100%;" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="onSuccess" class="title-control">
+                                                                Success
+                                                                Status:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" id="onSuccess" name="onSuccess"
+                                                                   class="k-textbox" style="width: 100%;"
+                                                                   ng-model="currentStep.onSuccess" disabled
+                                                                   k-value-primitive="true" autocomplete="off" />
+                                                        </div>
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="onFailure" class="title-control">
+                                                                Failure
+                                                                Status:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" id="onFailure" name="onFailure"
+                                                                   class="k-textbox" style="width: 100%;"
+                                                                   ng-model="currentStep.onFailure" disabled
+                                                                   k-value-primitive="true" autocomplete="off" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="successVote" class="title-control">
+                                                                Vote
+                                                                Success:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" id="successVote" name="successVote"
+                                                                   class="k-textbox" style="width: 100%;"
+                                                                   ng-model="currentStep.successVote" disabled
+                                                                   k-value-primitive="true" autocomplete="off" />
+                                                        </div>
+                                                        <div class="col-md-2  control-label">
+                                                            <label for="failureVote" class="title-control">
+                                                                Vote
+                                                                Failure:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" id="failureVote" name="failureVote"
+                                                                   class="k-textbox" style="width: 100%;"
+                                                                   ng-model="currentStep.failureVote" disabled
+                                                                   k-value-primitive="true" autocomplete="off" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="participantType"
+                                                                   class="title-control">Participant Type:</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select kendo-drop-down-list name="participantType"
+                                                                    id="participantType" k-options="participantTypesOptions"
+                                                                    k-ng-model="currentStep.participantType" disabled
+                                                                    style="width: 100%"></select>
+                                                        </div>
+                                                        <div class="col-md-2 control-label"
+                                                             ng-if="currentStep.participantType === 6">
+                                                            <label ng-show="currentStep.participantType === 6"
+                                                                   class="title-control">Data Field:</label>
+                                                        </div>
+                                                        <div class="col-md-4" ng-if="currentStep.participantType === 6">
+                                                            <select ng-show="currentStep.participantType === 6"
+                                                                    k-ng-disabled="currentStep.participantType !== 6"
+                                                                    kendo-drop-down-list id="dataField" name="dataField"
+                                                                    k-options="participantTypeValueOptions"
+                                                                    k-ng-model="currentStep.dataField" disabled
+                                                                    style="width: 100%"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">-->
+                                                        <!-- <div class="col-md-2 control-label"></div>
+                                                        <div class="col-md-4"></div> -->
+                                                        <!--<div class="col-md-2 control-label">
+                                                            <label for="departmentType" class="title-control">
+                                                                Group:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select k-ng-disabled="true"
+                                                                    kendo-drop-down-list name="departmentType"
+                                                                    id="departmentType" k-options="departmentTypesOptions"
+                                                                    k-ng-model="currentStep.departmentType"
+                                                                    style="width: 100%"></select>
+                                                        </div>
+                                                        <div class="col-md-2 control-label">
+                                                            <label class="title-control">Next Group:</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select k-ng-disabled="true"
+                                                                    kendo-drop-down-list id="dataField" name="dataField"
+                                                                    k-options="departmentTypesOptions"
+                                                                    k-ng-model="currentStep.nextDepartmentType"
+                                                                    style="width: 100%"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="allowRequestToChange"
+                                                                   class="title-control">Request To Change:</label>
+                                                        </div>
+                                                        <div class="col-md-1 control-label">
+                                                            <input type="checkbox" name="allowRequestToChange"
+                                                                   id="allowRequestToChange" class="k-checkbox"
+                                                                   ng-model="currentStep.allowRequestToChange" disabled
+                                                                   ng-change="currentStep.returnToStepNumber = 0">
+                                                            <label class="k-checkbox-label"
+                                                                   for="allowRequestToChange"></label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input kendo-numeric-text-box id="returnToStepNumber"
+                                                                   k-min="0" name="returnToStepNumber" k-format="'#,0'"
+                                                                   ng-model="currentStep.returnToStepNumber" disabled
+                                                                   ng-disabled="true"
+                                                                   style="width: 100%;" />
+                                                        </div>
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="dueDateNumber" class="title-control">
+                                                                Due
+                                                                days:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input kendo-numeric-text-box id="dueDateNumber" k-min="0"
+                                                                   name="dueDateNumber" k-format="'#,0'"
+                                                                   ng-model="currentStep.dueDateNumber" disabled
+                                                                   style="width: 100%;" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="isCustomRequestToChange"
+                                                                   class="title-control">Is Custom Request To Change:</label>
+                                                        </div>
+                                                        <div class="col-md-1 control-label">
+                                                            <input type="checkbox" name="isCustomRequestToChange"
+                                                                   id="isCustomRequestToChange" class="k-checkbox" disabled
+                                                                   ng-model="currentStep.isCustomRequestToChange">
+                                                            <label class="k-checkbox-label"
+                                                                   for="isCustomRequestToChange"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="requestorPerm" class="title-control">
+                                                                Permission
+                                                                for Requestor:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select kendo-drop-down-list name="requestorPerm"
+                                                                    id="requestorPerm" k-options="requestorPermsDataSource"
+                                                                    k-ng-model="currentStep.requestorPerm" disabled
+                                                                    style="width: 100%"></select>
+                                                        </div>
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="approverPerm" class="title-control">
+                                                                Permission
+                                                                for Approver:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select kendo-drop-down-list name="approverPerm"
+                                                                    id="approverPerm" k-options="approverPermsDataSource"
+                                                                    k-ng-model="currentStep.approverPerm" disabled
+                                                                    style="width: 100%"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="level" class="title-control">Level: </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input id="participantType"
+                                                                   k-ng-disabled="currentStep.participantType !== 5"
+                                                                   kendo-numeric-text-box id="level" k-min="0" name="level"
+                                                                   k-format="'#,0'" ng-model="currentStep.level" disabled
+                                                                   style="width: 100%;" />
+                                                        </div>
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="maxLevel" class="title-control">
+                                                                Max Level:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input k-ng-disabled="currentStep.participantType !== 5"
+                                                                   kendo-numeric-text-box id="maxLevel" k-min="0"
+                                                                   name="maxLevel" k-format="'#,0'" disabled
+                                                                   ng-model="currentStep.maxLevel" style="width: 100%;" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="overwriteRequestedDepartment"
+                                                                   class="title-control">
+                                                                Overwrite Requested Department:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4 control-label">
+                                                            <input type="checkbox" name="overwriteRequestedDepartment"
+                                                                   id="overwriteRequestedDepartment" class="k-checkbox" disabled
+                                                                   ng-model="currentStep.overwriteRequestedDepartment"
+                                                                   ng-change="currentStep.requestedDepartmentField = ''">
+                                                            <label class="k-checkbox-label"
+                                                                   for="overwriteRequestedDepartment"></label>
+                                                        </div>
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="requestedDepartmentField" class="title-control">
+                                                                Requested Department Field:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select kendo-drop-down-list name="requestedDepartmentField"
+                                                                    id="requestedDepartmentField"
+                                                                    k-ng-disabled="!currentStep.overwriteRequestedDepartment" disabled
+                                                                    k-options="requestedDepartmentFieldDataSource"
+                                                                    k-ng-model="currentStep.requestedDepartmentField"
+                                                                    style="width: 100%"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="requestedDepartmentField"
+                                                                   class="title-control">
+                                                                Is Status Follow StepName:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4 control-label">
+                                                            <input type="checkbox" name="isStatusFollowStepName"
+                                                                   id="isStatusFollowStepName" class="k-checkbox" disabled
+                                                                   ng-model="currentStep.isStatusFollowStepName">
+                                                            <label class="k-checkbox-label"
+                                                                   for="isStatusFollowStepName"></label>
+                                                        </div>
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="traversingFromRoot"
+                                                                   class="title-control">Traversing From Root: </label>
+                                                        </div>
+                                                        <div class="col-md-4 control-label">
+                                                            <input type="checkbox" name="traversingFromRoot"
+                                                                   id="traversingFromRoot" class="k-checkbox" disabled
+                                                                   ng-model="currentStep.traversingFromRoot">
+                                                            <label class="k-checkbox-label"
+                                                                   for="traversingFromRoot"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="isHRHQ" class="title-control">Is HQ: </label>
+                                                        </div>
+                                                        <div class="col-md-4 control-label">
+                                                            <input type="checkbox" name="isHRHQ" id="isHRHQ" disabled
+                                                                   class="k-checkbox" ng-model="currentStep.isHRHQ">
+                                                            <label class="k-checkbox-label" for="isHRHQ"></label>
+                                                        </div>
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="ignoreIfNoParticipant"
+                                                                   class="title-control">Ignore If No Participant: </label>
+                                                        </div>
+                                                        <div class="col-md-4 control-label">
+                                                            <input type="checkbox" name="ignoreIfNoParticipant" disabled
+                                                                   id="ignoreIfNoParticipant" class="k-checkbox"
+                                                                   ng-model="currentStep.ignoreIfNoParticipant">
+                                                            <label class="k-checkbox-label"
+                                                                   for="ignoreIfNoParticipant"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                        </div>
+                                                        <div class="col-md-4 control-label">
+                                                        </div>
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="preventAutoPopulate"
+                                                                   class="title-control">Prevent Auto Populate: </label>
+                                                        </div>
+                                                        <div class="col-md-4 control-label">
+                                                            <input type="checkbox" name="preventAutoPopulate"
+                                                                   id="preventAutoPopulate" class="k-checkbox" disabled
+                                                                   ng-model="currentStep.preventAutoPopulate">
+                                                            <label class="k-checkbox-label"
+                                                                   for="preventAutoPopulate"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="jobGrade" class="title-control">
+                                                                Job
+                                                                Grade:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" id="stepName" name="stepName"
+                                                                   class="k-textbox" style="width: 100%;"
+                                                                   ng-model="currentStep.jobGrade" k-value-primitive="true" disabled
+                                                                   autocomplete="off" />
+                                                        </div>
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="maxJobGrade" class="title-control">
+                                                                Max Job
+                                                                Grade:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" id="stepName" name="stepName"
+                                                                   class="k-textbox" style="width: 100%;"
+                                                                   ng-model="currentStep.maxJobGrade" k-value-primitive="true" disabled
+                                                                   autocomplete="off" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="reverseJobGrade" class="title-control">
+                                                                Reverse
+                                                                JobGrade:
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4 control-label">
+                                                            <input type="checkbox" name="reverseJobGrade"
+                                                                   id="reverseJobGrade" class="k-checkbox" disabled
+                                                                   ng-model="currentStep.reverseJobGrade">
+                                                            <label class="k-checkbox-label"
+                                                                   for="reverseJobGrade"></label>
+                                                        </div>
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="includeCurrentNode"
+                                                                   class="title-control">Include Current Node:</label>
+                                                        </div>
+                                                        <div class="col-md-4 control-label">
+                                                            <input type="checkbox" name="includeCurrentNode"
+                                                                   id="includeCurrentNode" class="k-checkbox" disabled
+                                                                   ng-model="currentStep.includeCurrentNode">
+                                                            <label class="k-checkbox-label"
+                                                                   for="includeCurrentNode"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="isCustomEvent" class="title-control"> Custom Event: </label>
+                                                        </div>
+                                                        <div class="col-md-4 control-label">
+                                                            <input type="checkbox" name="isCustomEvent" id="isCustomEvent" disabled class="k-checkbox" ng-model="currentStep.isCustomEvent">
+                                                            <label class="k-checkbox-label" for="isCustomEvent"></label>
+                                                        </div>
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="isCustomEvent" class="title-control"> Custom Event Key: </label>
+                                                        </div>
+                                                        <div class="col-md-4 control-label">
+                                                            <input type="text" name="customEventKey" id="customEventKey" ng-disabled="!currentStep.isCustomEvent"
+                                                                   class="k-textbox" style="width: 100%;" k-value-primitive="true" autocomplete="off" disabled
+                                                                   ng-model="currentStep.customEventKey" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="isTurnedOffSendNotification" class="title-control"> Turn Off Notification: </label>
+                                                        </div>
+                                                        <div class="col-md-4 control-label">
+                                                            <input type="checkbox" name="isTurnedOffSendNotification"
+                                                                   id="isTurnedOffSendNotification" class="k-checkbox" disabled
+                                                                   ng-model="currentStep.isTurnedOffSendNotification">
+                                                            <label class="k-checkbox-label"
+                                                                   for="isTurnedOffSendNotification"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="isAttachmentFile" class="title-control"> Attachment File: </label>
+                                                        </div>
+                                                        <div class="col-md-4 control-label">
+                                                            <input type="checkbox" name="isAttachmentFile" id="isAttachmentFile" class="k-checkbox" disabled ng-model="currentStep.isAttachmentFile">
+                                                            <label class="k-checkbox-label" for="isAttachmentFile"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2 control-label">
+                                                            <label for="isStepWithConditions" class="title-control"> Step with conditions: </label>
+                                                        </div>
+                                                        <div class="col-md-4 control-label">
+                                                            <input type="checkbox" name="isStepWithConditions" id="isStepWithConditions" disabled class="k-checkbox" ng-model="currentStep.isStepWithConditions">
+                                                            <label class="k-checkbox-label" for="isStepWithConditions"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
+
+                                                <!--Step Conditions-->
+                                                <!--<div class="col-md-12" ng-show="currentStep.isStepWithConditions == true">
+                                                    <div class="caption"
+                                                         style="padding: 15px 0px 15px 0px;font-weight: bold;">
+                                                        <span class="caption-subject hr-process uppercase f-collapse">
+                                                            Conditions of this step
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" ng-show="currentStep.isStepWithConditions == true">
+                                                    <kendo-grid k-scope-field="widget.stepConditions" options="stepConditionsGridOptions"></kendo-grid>
+                                                </div>
+                                                <div class="col-md-12" style="padding-top: 10px;" ng-show="currentStep.isStepWithConditions == true">
+                                                    <kendo-button type="button"
+                                                                  style="background-color: #b42e83; color: white;"
+                                                                  class="btn btn-default btn-sm pull-right" disabled
+                                                                  ng-click="addRow(widget.stepConditions)">
+                                                        {{'COMMON_BUTTON_ADD_MORE'|translate}}
+                                                    </kendo-button>
+                                                </div>-->
+                                                <!--End Step Conditions-->
+                                                <!--Restricted Edit Property-->
+                                                <!--<div class="col-md-12">
+                                                    <div class="caption"
+                                                         style="padding: 15px 0px 15px 0px;font-weight: bold;">
+                                                        <span class="caption-subject hr-process uppercase f-collapse">
+                                                            Restricted Edit Property
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <kendo-grid k-scope-field="widget.restrictedProperties"
+                                                                options="restrictedPropertiesGridOptions"></kendo-grid>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>-->

@@ -1,0 +1,118 @@
+<div>
+    <table class="table borderless" style="border-top:solid 1px #ddd">
+        <thead>
+            <tr>
+                <th scope="col">C</th>
+                <th scope="col">C.1</th>
+                <th scope="col"></th>
+                <th scope="col">
+                    Hãy chia sẻ kế hoạch ứng dụng kiến thức đã học của bạn & thời gian
+                    thực hiện/ Please share your action plan & execution deadline after
+                    the training
+                </th>
+                <th scope="col">
+                    Thời gian thực hiện dự kiến / Tentative exectuion deadline
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="question in dataC">
+                <td></td>
+                <td></td>
+                <td>
+                    <a ng-click="deleteplan($index)"
+                       ng-disabled="!isEditable" class='btn-delete-upgrade btn-border-upgrade'> </a>
+
+                    <a ng-if="dataC.length==$index + 1 && dataC.length < 10 "
+                        ng-click="addMoreplan()" ng-disabled="!isEditable" class='btn-add-upgrade btn-border-upgrade'> </a>
+
+                    
+                </td>
+                <td>
+                    <textarea kendo-text-area
+                              name="{{'Action plan'+ $index + 1}}"
+                              ng-model="question.actionPlanCode"
+                              style="width: 100%"
+                              rows="5"
+
+                              k-on-change="changeEventForsubQuestionB1($event)"
+                              class="kendoTextArea form-control"
+                              ng-disabled="!isEditable"></textarea>
+                </td>
+                <td>
+                    <div class="d-flex gap-3" style="margin-left:10px">
+                        <div>
+                            <input type="checkbox"
+                                   name="{{$index + '-' + 1}}"
+                                   id="{{'plan' + $index + 1}}"
+                                   class="form-check-input"
+                                   ng-model="question.quarter1"
+                                   checked="{{true}}"
+                                   ng-click="changeEventForsubQuestionC($event,$index,'quarter1')"
+                                   ng-disabled="!isEditable" />
+                            <label style="color: #9b9b9b; padding-right: 15px"
+                                   class="form-check-label"
+                                   for="{{'plan' + $index + 1}}">Quý 1 / Quarter 1</label>
+                        </div>
+                        <div>
+                            <input type="checkbox"
+                                   name="{{$index + '-' + 2}}"
+                                   id="{{'plan' + $index + 2}}"
+                                   class="form-check-input"
+                                   ng-model="question.quarter2"
+                                   checked="question.quarter2"
+                                   ng-click="changeEventForsubQuestionC($event,$index,'quarter2')"
+                                   ng-disabled="!isEditable" />
+                            <label style="color: #9b9b9b; padding-right: 15px"
+                                   class="form-check-label"
+                                   for="{{'plan' + $index + 2}}">Quý 2 / Quarter 2</label>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-4" style="margin-left:10px">
+                        <div>
+                            <input type="checkbox"
+                                   name="{{$index + '-' + 3}}"
+                                   id="{{'plan' + $index + 3}}"
+                                   class="form-check-input"
+                                   ng-model="question.quarter3"
+                                   checked="question.quarter3"
+                                   ng-click="changeEventForsubQuestionC($event,$index,'quarter3')"
+                                   ng-disabled="!isEditable" />
+                            <label style="color: #9b9b9b"
+                                   class="form-check-label"
+                                   for="{{'plan' + $index + 3}}">Quý 3 / Quarter 3</label>
+                        </div>
+                        <div>
+                            <input type="checkbox"
+                                   name="{{$index + '-' + 4}}"
+                                   id="{{'plan' + $index + 4}}"
+                                   class="form-check-input"
+                                   ng-model="question.quarter4"
+                                   checked="question.quarter4"
+                                   ng-click="changeEventForsubQuestionC($event,$index,'quarter4')"
+                                   ng-disabled="!isEditable" />
+                            <label style="color: #9b9b9b"
+                                   class="form-check-label"
+                                   for="{{'plan' + $index + 4}}">Quý 4 / Quarter 4</label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>C.2</td>
+                <td>Other feedback (if any)</td>
+                <td>
+                    <textarea kendo-text-area
+                              ng-model="surveyDataModel.otherFeedback"
+                              style="width: 100%"
+                              rows="5"
+                              k-on-change="changeEventForsubQuestionB1($event)"
+                              class="kendoTextArea form-control"
+                              ng-disabled="!isEditable"></textarea>
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

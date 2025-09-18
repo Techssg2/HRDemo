@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F9CB3B6C-EC91-431F-A675-3A0AB6D17630}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Aeon.HR.Data</RootNamespace>
+    <AssemblyName>Aeon.HR.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aeon.HR.Infrastructure">
+      <HintPath>..\Aeon.Academy.API\Academy\Aeon.Academy.API\Bin\Aeon.HR.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HRDbContext.cs" />
+    <Compile Include="DbInitializer.cs" />
+    <Compile Include="Models\BTAReason.cs" />
+    <Compile Include="Models\BookingContract.cs" />
+    <Compile Include="Models\BTALog.cs" />
+    <Compile Include="Models\BusinessTripOverBudget.cs" />
+    <Compile Include="Models\BusinessTripOverBudgetsDetail.cs" />
+    <Compile Include="Models\BTAErrorMessage.cs" />
+    <Compile Include="Models\CanViewDepartment.cs" />
+    <Compile Include="Models\ChangeUser.cs" />
+    <Compile Include="Models\HRTrackingAPILog.cs" />
+    <Compile Include="Models\ItemWorkflowLog.cs" />
+    <Compile Include="Models\SyncLog\DepartmentSyncHistory.cs" />
+    <Compile Include="Models\SyncLog\UserDepartmentSyncHistory.cs" />
+    <Compile Include="Models\SyncLog\UserSyncHistory.cs" />
+    <Compile Include="Models\TrackingAPIIntegrationLog.cs" />
+    <Compile Include="Models\UserPasswordHistories.cs" />
+    <Compile Include="Models\CompanyPolicy.cs" />
+    <Compile Include="Models\EmailHistory.cs" />
+    <Compile Include="Models\GlobalLocation.cs" />
+    <Compile Include="Models\BusinessModel.cs" />
+    <Compile Include="Models\LogHistory.cs" />
+    <Compile Include="Models\ImportTracking.cs" />
+    <Compile Include="Models\ShiftCode.cs" />
+    <Compile Include="Models\TrackingHistory.cs" />
+    <Compile Include="Models\Navigation.cs" />
+    <Compile Include="Models\Partition.cs" />
+    <Compile Include="Models\PassengerInformation.cs" />
+    <Compile Include="Models\BookingFlight.cs" />
+    <Compile Include="Models\Airline.cs" />
+    <Compile Include="Models\BTAPolicy.cs" />
+    <Compile Include="Models\BTAPolicySpecial.cs" />
+    <Compile Include="Models\BusinessTripApplication.cs" />
+    <Compile Include="Models\BusinessTripApplicationDetail.cs" />
+    <Compile Include="Models\BusinessTripLocation.cs" />
+    <Compile Include="Models\ChangeCancelBusinessTripDetail.cs" />
+    <Compile Include="Models\CostCenterRecruitment.cs" />
+    <Compile Include="Models\FlightDetail.cs" />
+    <Compile Include="Models\HolidaySchedule.cs" />
+    <Compile Include="Models\FlightNumber.cs" />
+    <Compile Include="Models\Hotel.cs" />
+    <Compile Include="Models\DaysConfiguration.cs" />
+    <Compile Include="Models\InterviewEvaluateViewModel.cs" />
+    <Compile Include="Models\LanguageProficiencyEntry.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Acting.cs" />
+    <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\AddressInfomation.cs" />
+    <Compile Include="Models\Applicant.cs" />
+    <Compile Include="Models\ApplicantEducation.cs" />
+    <Compile Include="Models\ApplicantRelativeInAeon.cs" />
+    <Compile Include="Models\ApplicantStatusRecruitment.cs" />
+    <Compile Include="Models\ApplicantWorkingProcess.cs" />
+    <Compile Include="Models\AppreciationListRecruitment.cs" />
+    <Compile Include="Models\AttachmentFile.cs" />
+    <Compile Include="Models\CacheMasterData.cs" />
+    <Compile Include="Models\CharacterReferee.cs" />
+    <Compile Include="Models\EmailTemplate.cs" />
+    <Compile Include="Models\Education.cs" />
+    <Compile Include="Models\EmergencyContact.cs" />
+    <Compile Include="Models\EmploymentHistory.cs" />
+    <Compile Include="Models\FamilyMember.cs" />
+    <Compile Include="Models\FamilyMemberInCompany.cs" />
+    <Compile Include="Models\InterviewEvaluate.cs" />
+    <Compile Include="Models\JobGradeItemRecruitmentMapping.cs" />
+    <Compile Include="Models\LeaveApplicationDetail.cs" />
+    <Compile Include="Models\MaintainPromoteAndTranferPrint.cs" />
+    <Compile Include="Models\PendingTargetPlan.cs" />
+    <Compile Include="Models\PendingTargetPlanDetail.cs" />
+    <Compile Include="Models\PermissionUserMapping.cs" />
+    <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\StepCondition.cs" />
+    <Compile Include="Models\TargetPlanDetail.cs" />
+    <Compile Include="Models\MissingTimeClockDetail.cs" />
+    <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Handover.cs" />
+    <Compile Include="Models\HandoverDetailItem.cs" />
+    <Compile Include="Models\HeadCount.cs" />
+    <Compile Include="Models\ItemListRecruitment.cs" />
+    <Compile Include="Models\JobGrade.cs" />
+    <Compile Include="Models\LeaveApplication.cs" />
+    <Compile Include="Models\MasterData.cs" />
+    <Compile Include="Models\MetadataType.cs" />
+    <Compile Include="Models\MissingTimeClock.cs" />
+    <Compile Include="Models\OvertimeApplication.cs" />
+    <Compile Include="Models\OvertimeApplicationDetail.cs" />
+    <Compile Include="Models\Period.cs" />
+    <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\PromoteAndTransfer.cs" />
+    <Compile Include="Models\RecruitmentCategory.cs" />
+    <Compile Include="Models\ReferenceNumber.cs" />
+    <Compile Include="Models\RequestToHire.cs" />
+    <Compile Include="Models\ResignationApplication.cs" />
+    <Compile Include="Models\RoomOrganization.cs" />
+    <Compile Include="Models\RoomType.cs" />
+    <Compile Include="Models\RoomUserMapping.cs" />
+    <Compile Include="Models\ShiftExchangeApplication.cs" />
+    <Compile Include="Models\ShiftExchangeApplicationDetail.cs" />
+    <Compile Include="Models\TargetPlan.cs" />
+    <Compile Include="Models\TargetPlanPeriod.cs" />
+    <Compile Include="Models\TestDepartment.cs" />
+    <Compile Include="Models\TrackingLog.cs" />
+    <Compile Include="Models\TrackingLogInitData.cs" />
+    <Compile Include="Models\TrackingRequest.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\BusinessModelUnitMapping.cs" />
+    <Compile Include="Models\UserDepartmentMapping.cs" />
+    <Compile Include="Models\TargetPlanSpecialDepartmentMapping.cs" />
+    <Compile Include="Models\UserSubmitPersonDeparmentMapping.cs" />
+    <Compile Include="Models\WorkflowCondition.cs" />
+    <Compile Include="Models\WorkflowData.cs" />
+    <Compile Include="Models\WorkflowHistory.cs" />
+    <Compile Include="Models\WorkflowInstance.cs" />
+    <Compile Include="Models\WorkflowStep.cs" />
+    <Compile Include="Models\WorkflowTask.cs" />
+    <Compile Include="Models\WorkflowTemplate.cs" />
+    <Compile Include="Models\WorkingAddressRecruitment.cs" />
+    <Compile Include="Models\WorkingTimeRecruitment.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="sql_initializer.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="EFSecondLevelCache">
+      <Version>1.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="EntityFramework">
+      <Version>6.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Z.EntityFramework.Plus.Audit.EF6">
+      <Version>1.8.5</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Migrations\Scripts\Add-Update-Time-Config.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aeon.HR.Infrastructure\Aeon.HR.Infrastructure.csproj">
+      <Project>{1d52c6c0-82f2-49a0-a49f-9ed7e9b0d0b6}</Project>
+      <Name>Aeon.HR.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

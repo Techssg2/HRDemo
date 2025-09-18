@@ -1,0 +1,56 @@
+﻿{
+  "LeaveBalanceSet": [
+    {
+      "SourceField": "EmployeeCode",
+      "TargetField": "Pernr",
+      "Type": 0
+    },
+
+    {
+      "SourceField": "FromDate",
+      "TargetField": "Begda",
+      "Type": 0
+    },
+    {
+      "SourceField": "ToDate",
+      "TargetField": "Endda",
+      "Type": 0
+    },
+    {
+      "SourceField": "LeaveKind",
+      "TargetField": "Awart",
+      "Type": 0
+    },
+    {
+      "SourceField": "AbsenceQuotaType",
+      "TargetField": "Ktart",
+      "Type": 0
+    },
+    {
+      "SourceField": "CurrentYearBalance",
+      "TargetField": "Anzhl",
+      "Type": 0
+    },
+    {
+      "SourceField": "Deduction",
+      "TargetField": "Kverb",
+      "Type": 0
+    },
+    {
+      "SourceField": "Year",
+      "TargetField": "Year",
+      "Type": 0
+    },
+    {
+      "SourceField": "UserEdoc",
+      "TargetField": "User_edoc",
+      "Type": 0
+    },
+    {
+      "SourceField": "OTRemain",
+      "TargetField": "Remaining",
+      "Type": 0
+    }
+
+  ]
+}

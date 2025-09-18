@@ -1,0 +1,240 @@
+<style>
+    k-loading-mask {
+        z-index: 3;
+        /* must be larger than the z-index:2 of #container */
+    }
+
+    .k-dialog {
+        position: fixed;
+        top: calc(25%) !important;
+    }
+
+    #userGridReview .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+
+    #userGrid .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+
+    #userGrid .k-loading-image {
+        background-image: none !important;
+    }
+
+    #userGrid .k-loading-color {
+        opacity: 0;
+    }
+</style>
+<div id="loading"></div>
+<!--<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <div class="portlet-title">
+                <div class="caption caption-md tabbable-line">
+                    <span class="caption-subject uppercase">{{title}}</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row ng-scope" ng-if="getLengthObjectKeys(errorsTwo) > 0"
+                     style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12" ng-repeat="(key, value) in errorsTwo">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase" ng-if="key">
+                                {{key}}<span ng-switch-when="key"
+                                             class="font-red-thunderbird">*:</span>
+                            </h5>
+                            <ul ng-if="value.length > 0">
+                                <li ng-repeat="error in value">
+                                    <span ng-bind-html="renderHtml(error.message)"></span>
+                                </li>
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content-wrapper float-none">
+                    <form name="formItem">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="row align-middle">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'SHIFT_EXCHANGE_APPLICATION_APPLY_DATE'|translate}}:</label>
+                                            <div class="col-md-8 ">
+                                                <input class="w100" kendo-date-picker k-date-input="true"
+                                                       k-format="'dd/MM/yyyy'" name="applyDate" disabled
+                                                       id="applyDate"
+                                                       k-ng-model="form.applyDate" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'COMMON_DEPT_LINE'|translate}}:</label>
+                                            <div class="col-md-8 ">
+                                                <select kendo-drop-down-list name="deptLineOptionName"
+                                                        id="deptLineOptionId" k-options="deptLineOption" disabled
+                                                        k-ng-model="form.dept_Line" style="width: 100%;">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'COMMON_DIVISION_GROUP'|translate}}:</label>
+                                            <div class="col-md-8 ">
+                                                <input kendo-drop-down-tree="divisionTree" class="w100"
+                                                       k-on-change="onChangeDivision(form.dept_Division)"
+                                                       k-options="searchOptions.divisionOptions" disabled
+                                                       k-ng-model="form.dept_Division" id="deptDivision" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mrb10">
+                                    <div class="col-md-12">
+                                        <span class="input-group-btn">
+                                            <a class="btn btn-sm btn-primary" id="create" ng-if="perm"
+                                               style="color: white; padding-top: 7px !important;background-color: #b42e83;float: right"
+                                               ng-click="addItemsUser(employeesDataSource)">
+                                                {{'ADD_USER_TITLE_DIALOG'| translate}}
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row mrt10">
+                                    <div class="col-md-12">
+                                        <kendo-grid id="shiftExchangeEditListGrid"
+                                                    options="shiftExchangeViewLogListGridOptions">
+                                        </kendo-grid>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+<div class="p-3">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="widget-title">{{titleHeader}}</h2>
+            <p class="display-11">
+                <span class="opacity-40">Number of record:</span> {{total}}
+            </p>
+        </div>
+    </div>
+    <div class="portlet-body mb-3">
+        <div class="mt-3">
+            <div class="accordion accordion-style1">
+                <div class="accordion-item">
+                    <div class="accordion-collapse collapse show">
+                        <div class="portlet bordered light">
+                            <!-- Title -->
+                            <div class="row p-3">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 46 46">
+                                                <path id="_12.File" data-name="12.File" d="M37,47H11a4,4,0,0,1-4-4V5a4,4,0,0,1,4-4H30a.984.984,0,0,1,.776.395l9.829,9.829A.981.981,0,0,1,41,12h0V43A4,4,0,0,1,37,47ZM31,4.381V11h6.619ZM39,13H30a1,1,0,0,1-1-1V3H11A2,2,0,0,0,9,5V43a2,2,0,0,0,2,2H37a2,2,0,0,0,2-2ZM33,39H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Zm0-8H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Zm0-8H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Z" transform="translate(-7 -1)" fill-rule="evenodd"></path>
+                                            </svg>&nbsp;{{title}}
+                                        </div>
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 24 24">
+                                                <path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z" fill="#0D0D0D"></path>
+                                            </svg>&nbsp;{{ model.createdByFullName }} <!--({{ model.employeeCode }})-->
+                                        </div>
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 24 24">
+                                                <path d="M9 2a1 1 0 0 1 1 1v1h4V3a1 1 0 1 1 2 0v1h3a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V3a1 1 0 0 1 1-1zM8 6H5v3h14V6h-3v1a1 1 0 1 1-2 0V6h-4v1a1 1 0 0 1-2 0V6zm11 5H5v8h14v-8z" fill="#0D0D0D"></path>
+                                            </svg>&nbsp;{{ model.created | date:'dd/MM/yyyy HH:mm' }}
+                                        </div>
+                                        <!--<div class="col-4 name-wrapper" style="word-wrap: break-word;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 24 24">
+                                                <path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z" fill="#0D0D0D"></path>
+                                            </svg>&nbsp;{{ createdByFullName }}-->
+                                        <!--({{ model.employeeCode }})-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="row ng-scope" style="padding: 15px 0;margin-bottom:15px">
+                                    <div class="col-sm-12">
+                                        <workflow-comment></workflow-comment>
+                                    </div>
+                                </div>
+                                <div class="alert alert-danger-style1 mb-3" role="alert" ng-if="errors.length > 0">
+                                    <div class="col-sm-12">
+                                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                                            <ul>
+                                                <li style="word-wrap: break-word;" ng-repeat="error in errors track by $index">
+                                                    <span class="bold ">{{error.controlName}} </span>{{error.message?error.message: ''}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <div class="accordion accordion-style1">
+                                        <div class="accordion-item">
+                                            <div class="accordion-collapse collapse show">
+                                                <div class="accordion-body">
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label text-secondary">{{'SHIFT_EXCHANGE_APPLICATION_APPLY_DATE'|translate}}:</label>
+                                                                <input class="form-control w100" kendo-date-picker k-date-input="true"
+                                                                       k-format="'dd/MM/yyyy'" name="applyDate" disabled
+                                                                       id="applyDate"
+                                                                       k-ng-model="form.applyDate" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label text-secondary">{{'COMMON_DEPT_LINE'|translate}}:</label>
+                                                                <select kendo-drop-down-list class="form-control" name="deptLineOptionName"
+                                                                        id="deptLineOptionId" k-options="deptLineOption" disabled
+                                                                        k-ng-model="form.dept_Line" style="width: 100%;">
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label text-secondary">{{'COMMON_DIVISION_GROUP'|translate}}:</label>
+                                                                <input kendo-drop-down-tree="divisionTree" class="form-control w100"
+                                                                       k-on-change="onChangeDivision(form.dept_Division)"
+                                                                       k-options="searchOptions.divisionOptions" disabled
+                                                                       k-ng-model="form.dept_Division" id="deptDivision" />
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row mrt10">
+                                                        <div class="col-md-12">
+                                                            <kendo-grid id="shiftExchangeEditListGrid"
+                                                                        options="shiftExchangeViewLogListGridOptions">
+                                                            </kendo-grid>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

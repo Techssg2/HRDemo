@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B03ADE48-4568-4967-A045-7B96AE625FEB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>UpdateUserInfoFromSapJobV2</RootNamespace>
+    <AssemblyName>UpdateUserInfoFromSapJobV2</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.5\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=9.0.0.5, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.5\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=9.0.0.5, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.9.0.5\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=9.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.9.0.5\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Helpers\AppSettingsHelper.cs" />
+    <Compile Include="src\Helpers\JsonHelper.cs" />
+    <Compile Include="src\Helpers\PropertyRenameSerializerContractResolver.cs" />
+    <Compile Include="src\Helpers\Utilities.cs" />
+    <Compile Include="src\Interfaces\IIntegrationExternalServiceBO.cs" />
+    <Compile Include="src\Interfaces\ITrackingBO.cs" />
+    <Compile Include="src\ModelEntity\SAPSettingsSection.cs" />
+    <Compile Include="src\ModelEntity\UserEntity.cs" />
+    <Compile Include="src\SAP\ExternalExcution.cs" />
+    <Compile Include="src\SAP\SAPBO.cs" />
+    <Compile Include="src\SAP\SAPSerializerSettings.cs" />
+    <Compile Include="src\SAP\TrackingBO.cs" />
+    <Compile Include="src\SQLExcute\SQLQuery.cs" />
+    <Compile Include="src\UpdateUserInfoFromSap.cs" />
+    <Compile Include="src\Utilities.cs" />
+    <Compile Include="src\ViewModel\EmployeeResponsSearchingViewModel.cs" />
+    <Compile Include="src\ViewModel\FieldMappingDTO.cs" />
+    <Compile Include="src\ViewModel\LeaveBalanceResponceSAPViewModel.cs" />
+    <Compile Include="src\ViewModel\QuotaDataJsonDTO.cs" />
+    <Compile Include="src\ViewModel\ResultDTO.cs" />
+    <Compile Include="src\ViewModel\SAPAPIResultForArray.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\UpdateUserInfoFromSapJobV2.csproj.AssemblyReference.cache" />
+    <None Include="packages.config" />
+    <None Include="src\Mappings\employee-for-searching-mapping.json" />
+    <None Include="src\Mappings\leaveBalanceInfo.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aeon.HR.DataCommon\Aeon.HR.Data.csproj">
+      <Project>{f9cb3b6c-ec91-431f-a675-3a0ab6d17630}</Project>
+      <Name>Aeon.HR.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aeon.HR.Infrastructure\Aeon.HR.Infrastructure.csproj">
+      <Project>{1d52c6c0-82f2-49a0-a49f-9ed7e9b0d0b6}</Project>
+      <Name>Aeon.HR.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aeon.HR.ViewModels\Aeon.HR.ViewModels.csproj">
+      <Project>{4107A398-5774-43D6-B193-67D98F0875BD}</Project>
+      <Name>Aeon.HR.ViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

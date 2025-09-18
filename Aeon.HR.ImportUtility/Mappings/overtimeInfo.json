@@ -1,0 +1,52 @@
+[
+  {
+    "SourceField": "RequestFrom",
+    "TargetField": "Edoc_user",
+    "Type": 0
+  },
+  {
+    "SourceField": "EmployeeCode",
+    "TargetField": "Pernr",
+    "Type": 0
+  },
+  {
+    "SourceField": "Date",
+    "TargetField": "Date",
+    "Type": 0
+  },
+  {
+    "SourceField": "ActualHoursFrom",
+    "TargetField": "Beguz",
+    "Type": 0
+  },
+  {
+    "SourceField": "ActualHoursTo",
+    "TargetField": "Enduz",
+    "Type": 0
+  },
+  {
+    "SourceField": "ActualHours",
+    "TargetField": "Stdaz",
+    "Type": 0
+  },
+  {
+    "SourceField": "DateOffInLieuL",
+    "TargetField": "L",
+    "Type": 0
+  },
+  {
+    "SourceField": "DateOffInLieuL_1_2",
+    "TargetField": "L_1_2",
+    "Type": 0
+  },
+  {
+    "SourceField": "Status",
+    "TargetField": "Status",
+    "Type": 0
+  },
+  {
+    "SourceField": "Reason",
+    "TargetField": "REASON",
+    "Type": 0
+  }
+]

@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-md-12 ">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">{{title}}</span>
+                </div>
+                <div class="actions"> 
+                    <div class="row">
+                        <div class="col-md-7">
+
+                        </div>
+                        <div class="col-md-5 align-right-btn-group">
+                            <!-- <div class="input-group" style="width: 400px">
+                                <input type="text" class="form-control w100" id='FieldFilter' placeholder="Search for..." ng-keypress="actions.ifEnter($event)" ng-model="searchInfo.keyword">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default btn-sm" type="button" ng-click="search()" style="border: 1px solid #dadada;
+                                    margin-bottom: 10px;"><span class="k-icon k-i-search"></span></button>
+                                </span>
+                            </div> -->
+                            <div add-class class="btn-group" current-class="btn-group" added-class="open" style="margin-top:3px">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="padding: 0px !important"><img
+                                        src="ClientApp/assets/images/icon/more.png"
+                                        style="position: relative;top: -2px"
+                                        class="ng-isolate-scope"></button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a  ng-click="export()" class="ng-binding"><i class="fa fa-table font-blue right-5"></i>
+                                            Export excel</a></li>
+                                    <!-- <li><a  ng-click="import()" class="ng-binding"><i class="fa fa-table font-blue right-5"></i>
+                                            Import excel</a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <!--Grid-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <kendo-grid id="allOrMyRequestGrid" options="allOrMyRequestGridOptions">
+                        </kendo-grid>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>
+
+
+<div id="dialogDetail" kendo-dialog="dialogDetail" k-title="titleModal" k-on-open="dialogVisible = true"
+    k-on-close="dialogVisible = false" k-width="768" k-modal="true" k-visible="false" options="dialogDetailOption">
+    <div class="row" ng-if="getLengthObjectKeys(errorsTwo) > 0" style="margin-bottom:15px">
+        <div class="col-sm-12" ng-repeat="(key, value) in errorsTwo">
+            <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                <h5 class="bold uppercase">{{key}}<span class="font-red-thunderbird">*</span>:</h5>
+                <p></p>
+                <ul ng-if="value.length > 0">
+                    <li ng-repeat="error in value"><span ng-bind-html="renderHtml(error.message)"></span></li>
+                </ul>
+                <p></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <kendo-grid id="itemsOnGrid" options="itemsEditListGridOptions">
+            </kendo-grid>
+        </div>
+    </div>
+    <div class="row mrt10">
+        <div class="col-md-12">
+            <kendo-button style="background-color: #b42e83; color: white;" class="btn btn-default btn-sm pull-right" ng-click="actions.addItem()">Add more
+            </kendo-button>
+        </div>
+    </div>
+</div>

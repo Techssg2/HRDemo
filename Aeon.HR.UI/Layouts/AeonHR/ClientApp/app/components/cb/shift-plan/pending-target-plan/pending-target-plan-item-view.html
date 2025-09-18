@@ -1,0 +1,250 @@
+<style>
+    .k-loading-mask {
+        z-index: 3;
+        /* must be larger than the z-index:2 of #container */
+    }
+
+    .k-dialog {
+        position: fixed;
+        top: calc(25%) !important;
+    }
+
+    #userGridReview .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+
+    #userGrid .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }
+
+    #userGrid .k-loading-image {
+        background-image: none !important;
+    }
+
+    #userGrid .k-loading-color {
+        opacity: 0;
+    }
+    
+    .k-grid-content {
+        min-height: 0px !important;
+        max-height: 500px !important;
+    }
+    .k-grid-content-locked {
+        overflow: hidden !important;
+        min-height: 50px !important;
+    }
+    tr.separate td {
+        border-bottom: 1px solid #dedbdb !important;
+    }
+
+    .table-cell {
+        border: 1px solid #dedbdb !important;
+    }
+    
+</style>
+<div id="loading"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md tabbable-line">
+                    <span class="caption-subject uppercase">{{title}}</span>
+                </div>
+                <div class="actions">
+                    <kendo-button class="btn btn-default btn-sm" type="button" ng-click="cancelPropress()"
+                                  ng-if="!visibleSendData && !visibleSubmitData && buttonCancel">
+                        <i class="fa fa-minus-circle font-red right-5"></i> {{'COMMON_BUTTON_CANCEL'|translate}}
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" type="button" ng-click="save(true)"
+                                  ng-if="visibleSendData && !visibleSubmitData">
+                        <i class="fa fa-send font-green-jungle right-5"></i> {{'COMMON_BUTTON_SEND_DATA'|translate}}
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" type="button" ng-click="submit()"
+                                  ng-if="visibleSubmitData">
+                        <i class="fa fa-send font-green-jungle right-5"></i> {{'COMMON_BUTTON_SUBMIT'|translate}}
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" type="button" ng-click="save()"
+                                  ng-if="visibleSendData || visibleSubmitData">
+                        <i class="k-icon k-i-save font-green-jungle"></i> {{'COMMON_BUTTON_SAVE'|translate}}
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" type="button" ng-click="cancel()">
+                        <i class="k-icon k-i-close font-green-jungle"></i> {{'COMMON_BUTTON_CLOSE'|translate}}
+                    </kendo-button>
+                    <div add-class class="btn-group" current-class="btn-group" added-class="open" ng-if="visibleSendData || visibleSubmitData">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                aria-expanded="true" style="padding: 0px !important">
+                            <img src="ClientApp/assets/images/icon/more.png" style="position: relative;top: -2px"
+                                 class="ng-isolate-scope">
+                        </button>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a ng-click="import()" class="ng-binding">
+                                    <i class="fa fa-table font-blue right-5"></i>
+                                    {{'COMMON_BUTTON_IMPORT'|translate}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row ng-scope" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <workflow-comment></workflow-comment>
+                    </div>
+                </div>
+                <div class="row ng-scope" ng-if="errors.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <ul>
+                                <li ng-repeat="error in errors track by $index">
+                                    <span class="bold ">{{error.controlName}} </span>{{error.message?error.message: ''}}
+                                </li>
+                                <br>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content-wrapper float-none">
+                    <form name="formItem">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="row align-middle">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'COMMON_DEPT_LINE'|translate}}:</label>
+                                            <div class="col-md-8 ">
+                                                <select kendo-drop-down-list name="dept_line_name" id="dept_line_id"
+                                                        k-options="deptLineOptions" k-ng-model="model.deptId"
+                                                        style="width: 100%;">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'COMMON_DIVISION_GROUP'|translate}}:</label>
+                                            <div class="col-md-8 ">
+                                                <input kendo-drop-down-tree="divisionTree" class="w100"
+                                                       name="division_name"
+                                                       k-on-change="onChangeDivision(model.divisionId)"
+                                                       k-options="divisionOptions" k-ng-model="model.divisionId"
+                                                       id="division_id" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-middle">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">{{'SHIFT_PLAN_PERIOD'|translate}}:</label>
+                                            <div class="col-md-4 ">
+                                                <select id="period_source_id" kendo-drop-down-list
+                                                        k-options="targetPlans" style="width: 100%;"
+                                                        name="period_source_name" k-ng-model="model.periodId"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <ul class="fieldlist">
+                                            <li>
+                                                <input type="radio" name="engine" id="all" class="k-radio"
+                                                       ng-value="'all'" ng-model="checkStatus.value"
+                                                       ng-change="onCheckStatus()" checked="checked">
+                                                <label class="k-radio-label"
+                                                       for="all">{{'TARGET_PLAN_ALL'|translate}}</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" name="engine" id="have" ng-value="'isHave'"
+                                                       ng-model="checkStatus.value" ng-change="onCheckStatus()"
+                                                       class="k-radio">
+                                                <label class="k-radio-label"
+                                                       for="have">{{'TARGET_PLAN_HAVE_MADE'|translate}}</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" name="engine" id="notHave" ng-value="'isNotHave'"
+                                                       ng-model="checkStatus.value" ng-change="onCheckStatus()"
+                                                       class="k-radio">
+                                                <label class="k-radio-label"
+                                                       for="notHave">{{'TARGET_PLAN_HAVE_NOT_MADE'|translate}}</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <label class="col-md-1 control-label">{{'TARGET_PLAN_NOTE_ALERT'|translate}}:</label>
+                                    <div class="col-md-2">
+                                        <img kendo-tooltip k-content="colorContent" k-position="'right'"
+                                             k-width="'400px'" class="img-circle"
+                                             src="ClientApp/assets/images/icon/color-picker-icon.png" style="height:22.5px;">
+                                    </div>
+                                </div>
+                                <div class="row mrt10">
+                                    <div class="col-md-12">
+                                        <kendo-grid id="grid_user_id" k-options="gridUsers" k-rebind="gridUsers">
+                                        </kendo-grid>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="portlet-title">
+                <div class="actions">
+                    <kendo-button class="btn btn-default btn-sm" type="button" ng-click="save(true)"
+                                  ng-if="visibleSendData && !visibleSubmitData">
+                        <i class="fa fa-send font-green-jungle right-5"></i> {{'COMMON_BUTTON_SEND_DATA'|translate}}
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" type="button" ng-click="submit()"
+                                  ng-if="visibleSubmitData">
+                        <i class="fa fa-send font-green-jungle right-5"></i> {{'COMMON_BUTTON_SUBMIT'|translate}}
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" type="button" ng-click="save()"
+                                  ng-if="visibleSendData">
+                        <i class="k-icon k-i-save font-green-jungle"></i> {{'COMMON_BUTTON_SAVE'|translate}}
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" type="button" ng-click="cancel()">
+                        <i class="k-icon k-i-close font-green-jungle"></i> {{'COMMON_BUTTON_CLOSE'|translate}}
+                    </kendo-button>
+                </div>
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>
+<div id="dialog" kendo-dialog="warningDialog" options="warningDialogOpts">
+    <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+        <span class="font-red-thunderbird">{{'USER_SUBMIT_PERSON_DEPARTMENT_VALIDATE'|translate}}</span>
+    </div>
+</div>
+<div id="dialog-import" kendo-dialog="importDialog" options="importDialogOpts" k-on-open="dialogVisible = true"
+    k-on-close="closeImportDialog()">
+    <div class="row form-group">
+        <div class="col-md-12 form-group">
+            <a ng-click="downloadTemplate()" target="_self">
+                <i class="fa fa-download"></i> {{'COMMON_DOWNLOAD_TEMPLATE'|translate}}
+            </a>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <any ng-click="onClickSelectFile()">
+                    <input name="files" id="attachmentDetail" class="input-default attachmentDetail" accept=".xls,.xlsx" type="file"
+                        kendo-upload k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }"
+                        k-select="onSelect" k-remove="removeAttach" />
+                </any>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row form-group">
+        <div class="col-md-12" style="text-align:right">
+            <button ng-click="sendData()" class="btn btn-sm btn-primary"
+                style="background:#b42e83">{{'COMMON_BUTTON_OK'|translate}}</button>
+        </div>
+    </div>
+</div>
+<!-- <processing-stage workflow-instances="workflowInstances"></processing-stage> -->

@@ -1,0 +1,338 @@
+<style>
+    .row {
+        margin-top: 10px;
+    }
+</style>
+<div class="row">
+    <div id="loading_bta"></div>
+    <div class="col-md-12">
+        <div class="portlet bordered light" style="padding-bottom: 50px !important;">
+
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">{{title}}
+                    </span>
+                </div>
+                <div class="actions">
+                    <kendo-button class="btn btn-default btn-sm" ng-click="printForm()"
+                        ng-if="model.status == 'Completed' || model.status == 'Completed Changing'">
+                        <i style="font-size: 12px; padding-right: 3px;" class="fa fa-file-pdf-o font-green-jungle"></i>
+                        {{'COMMON_BUTTON_PRINT'|translate}}
+                    </kendo-button>
+                    <action-items model="model" save="save" form="btaForm" set-room="setRooms"></action-items>
+                    <div add-class class="btn-group" current-class="btn-group" added-class="open">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="true" style="padding: 0px !important"><img
+                                src="ClientApp/assets/images/icon/more.png" style="position: relative;top: -2px"
+                                class="ng-isolate-scope"></button>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a data-toggle="modal" class="ng-binding" ng-click="showProcessingStages()"><i
+                                        class="fa fa-recycle right-5" style="color: #b42e83"></i>
+                                    {{'COMMON_PROCESSING_STAGE' | translate}} </a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row ng-scope" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <workflow-comment></workflow-comment>
+                    </div>
+                </div>
+
+                <div class="row ng-scope" ng-if="resignationInProgress" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-warning note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase">{{'COMMON_WARNING'|translate}}:</h5>
+                            <p></p>
+                            <ul>
+                                {{warning}}
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ng-scope" ng-if="errors.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase"> {{'COMMON_ENTER_FIELD' | translate}} <span
+                                    class="font-red-thunderbird">*</span>:</h5>
+                            <p></p>
+                            <ul>
+                                <li ng-repeat="error in errors track by $index"><span
+                                        class="bold ">{{error.controlName}}</span>{{error.message  ?error.message: ''}}
+                                </li><br>
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ng-scope" ng-if="errorChangings.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase">
+                                {{'COMMON_ENTER_FIELD' | translate}}
+                                <span class="font-red-thunderbird">*</span>:
+                            </h5>
+                            <p></p>
+                            <ul>
+                                <li ng-repeat="error in errorChangings" style="margin-left: 1em;">
+                                    <span class="bold">{{error.controlName}}</span>
+                                    <zt ng-if="!error.isRule">: {{error.errorDetail}}
+                                    </zt>
+                                    <span ng-if="error.isRule">
+                                        {{error.errorDetail}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-content-wrapper float-none">
+                    <div class="page-content">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <!-- row 1 -->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">
+                                                SAP Code: <span class="font-red-thunderbird">*</span>
+                                            </label>
+                                            <div class="col-md-8">
+                                                <select kendo-drop-down-list name="sapCode" id="sapCode"
+                                                    k-options="sapCodesDataSource" k-ng-model="model.userId"
+                                                    style="width: 100%">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Full Name: </label>
+                                            <div class="col-md-8">
+                                                <input type="text" name="" class="k-textbox form-control input-sm"
+                                                    ng-model="model.fullName" style="width: 100%;" readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Department: </label>
+                                            <div class="col-md-8">
+                                                <input type="text" name="" class="k-textbox form-control input-sm"
+                                                    ng-model="model.department" style="width: 100%;" readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <!-- row 2 -->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Position:</label>
+                                            <div class="col-md-8">
+                                                <input type="text" name="" class="k-textbox form-control input-sm"
+                                                    ng-model="model.position" style="width: 100%;"
+                                                    readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Date Joined:</label>
+                                            <div class="col-md-8">
+                                                <input type="text" name="" class="k-textbox form-control input-sm"
+                                                    ng-model="model.dateJoined" style="width: 100%;"
+                                                    readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Probation Period:</label>
+                                            <div class="col-md-8">
+                                                <input kendo-date-picker id="fromDate_id" k-date-input="true" k-format="'dd/MM/yyyy'" k-ng-model="model.probationPeriodFrom" k-rebind="maxDate" k-on-change="fromDateChanged()" readonly/>
+                                                - 
+                                                <input kendo-date-picker id="toDate_id" k-date-input="true" k-format="'dd/MM/yyyy'" k-ng-model="model.probationPeriodTo" k-rebind="minDate" readonly/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- row probation rating -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="rating-text">Rating Scale</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="rating-text">Important Level:</label>
+                                        <label class="rating-text">(1) - Low</label>
+                                        <label class="rating-text">(2) - Medium</label>
+                                        <label class="rating-text">(3) - High</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="rating-text">Required Performance Level:</label>
+                                        <label class="rating-text">(1) - Fair</label>
+                                        <label class="rating-text">(2) - Good</label>
+                                        <label class="rating-text">(3) - Excelent</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="rating-text">Achieved Performance:</label>
+                                        <label class="rating-text">(1) - Un-sactifactory</label>
+                                        <label class="rating-text">(2) - Need Improvement</label>
+                                        <label class="rating-text">(3) - Meet Expectation</label>
+                                        <label class="rating-text">(4) - Exceed Expectation</label>
+                                        <label class="rating-text">(5) - Outstanding</label>
+                                    </div>
+                                </div>
+                                <!-- row 3 -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <kendo-grid id="grid" options="probationGridOptions"></kendo-grid>
+                                    </div>
+                                </div>
+                                <!-- row 4 -->
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <input type="text" name="" class="k-textbox form-control input-sm" value="Rate of Competency"  disabled />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input style="background-color: white !important;" type="text" name="" class="k-textbox form-control input-sm" ng-model="model.rateOfCompetency" style="width: 100%;" readonly/>
+                                    </div>
+                                </div>
+                                <!-- row 5-->
+                                <div class="row" style="margin-top: 20px;">
+                                    <div class="col-md-3">
+                                        <div class="portlet-title">
+                                            <div class="caption caption-md">
+                                                <h4 class="caption-subject hr-process uppercase f-collapse">Performance Review</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <textarea style="border-color: #8f8f8f; height: 80px;"
+                                        ng-model="model.performanceReview" class="form-control" ></textarea>
+                                    </div>
+                                </div>
+                                <!-- row 6-->
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="portlet-title">
+                                            <div class="caption caption-md">
+                                                <h4 class="caption-subject hr-process uppercase f-collapse">Describe areas requiring improvement</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <textarea style="border-color: #8f8f8f; height: 80px;"
+                                        ng-model="model.describeAreasRequiringImproment" class="form-control" ></textarea>
+                                    </div>
+                                </div>
+                                <!-- row 7-->
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="portlet-title">
+                                            <div class="caption caption-md">
+                                                <h4 class="caption-subject hr-process uppercase f-collapse">Proposal of Head Department</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- row 8-->
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="radio" name="typeProposal" id="signOfficial" class="k-radio" ng-model="model.proposalOfHeadOfDepartment" ng-value="{{typeProposal.SignOffical}}" ng-change="changeProposalOfHeadOfDepartment()">
+                                        <label style="color: #9b9b9b;" class="k-radio-label" for="signOfficial">Sign Official Labor Contract Type</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="radio" name="typeProposal" id="extendProbation" class="k-radio" ng-model="model.proposalOfHeadOfDepartment" ng-value="{{typeProposal.ExtendProbation}}" ng-change="changeProposalOfHeadOfDepartment()">
+                                        <label style="color: #9b9b9b;" class="k-radio-label" for="extendProbation">Extend Probation Period</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="radio" name="typeProposal" id="adjustSalary" class="k-radio" ng-model="model.proposalOfHeadOfDepartment" ng-value="{{typeProposal.AdjustSalary}}" ng-change="changeProposalOfHeadOfDepartment()">
+                                        <label style="color: #9b9b9b;" class="k-radio-label" for="adjustSalary">Adjust Salary</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="radio" name="typeProposal" id="otherInstruction" class="k-radio" ng-model="model.proposalOfHeadOfDepartment" ng-value="{{typeProposal.OtherInstruction}}" ng-change="changeProposalOfHeadOfDepartment()">
+                                        <label style="color: #9b9b9b;" class="k-radio-label" for="otherInstruction">Other Instruction</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <textarea kendo-text-area id="otherInstructionText" style="border-color: #8f8f8f; height: 80px;" ng-model="model.otherInstructionProposal" class="form-control" ng-disabled="disableProposal"></textarea>
+                                    </div>
+                                </div>
+                                <!-- row 9-->
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="portlet-title">
+                                            <div class="caption caption-md">
+                                                <h4 class="caption-subject hr-process uppercase f-collapse">Appraisee’s Comment</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="radio" name="typeApraisee" id="agreeProposal" class="k-radio" ng-model="model.appraiseeCommonent" ng-value="{{typeApraisee.AgreeProposal}}" ng-change="changeApraisee()">
+                                        <label style="color: #9b9b9b;" class="k-radio-label" for="agreeProposal">Agree with Proposal</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="radio" name="typeApraisee" id="disagreeProposal" class="k-radio" ng-model="model.appraiseeCommonent" ng-value="{{typeApraisee.DisagreeProposal}}" ng-change="changeApraisee()">
+                                        <label style="color: #9b9b9b;" class="k-radio-label" for="disagreeProposal">Disagree with Proposal</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <textarea id="disagreeProposalText" style="border-color: #8f8f8f; height: 80px;" ng-model="model.disagreeAppraisee" class="form-control" ng-disabled="disableAppraisee"></textarea>
+                                    </div>
+                                </div>
+                                <!-- row 10-->
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="portlet-title">
+                                            <div class="caption caption-md">
+                                                <h4 class="caption-subject hr-process uppercase f-collapse">HR</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="radio" name="typeHr" id="toBeConfimed" class="k-radio" ng-model="model.hr" ng-value="{{typeHr.ToBeConfimed}}" ng-change="changeHr()">
+                                        <label style="color: #9b9b9b;" class="k-radio-label" for="toBeConfimed">To be confirmed in Position w.e.f</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <textarea id="toBeConfimedText" style="border-color: #8f8f8f; height: 50px;" ng-model="model.hrTobe" class="form-control" ng-disabled="disableHrToBe"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="radio" name="typeHr" id="probationPeriod" class="k-radio" ng-model="model.hr" ng-value="{{typeHr.ProbationPeriod}}" ng-change="changeHr()">
+                                        <label style="color: #9b9b9b;" class="k-radio-label" for="probationPeriod">Probation period to be extended till</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <textarea id="probationPeriodText" style="border-color: #8f8f8f; height: 50px;" ng-model="model.hrProbationPeriod" class="form-control" ng-disabled="disableHrProbation"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<processing-stage workflow-instances="workflowInstances"></processing-stage>

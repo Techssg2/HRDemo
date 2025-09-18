@@ -1,0 +1,409 @@
+<!-- <style ng-if="reportType !=1">
+    #gridReportDetail .k-filter-row>th:first-child, .k-grid tbody td:first-child, .k-grid tfoot td:first-child, .k-grid-header th.k-header:first-child{
+        display: none;
+    }
+</style> -->
+<style>
+    .k-loading-mask {
+        z-index: 10004 !important;
+        /* must be larger than the z-index:2 of #container */
+    }
+    #dialogReport .k-auto-scrollable {
+        max-height: 300px;
+        min-height: 0px;
+    }    
+    .label-hotel {
+        color: #a9a7a7;
+        margin: 0 0 10px 15px;
+    }
+
+    .k-dropdown, .k-textbox, .k-datepicker, .k-numerictextbox {
+        height: 37px !important
+    }
+
+        .k-dropdown .k-dropdown-wrap, .k-dropdown .k-dropdown-wrap {
+            margin-top: -1px;
+            margin-left: -1px;
+            margin-right: -1px;
+        }
+</style>
+<!--<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet bordered light">-->
+            <!-- Title -->
+            <!--<div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">{{title}}
+                    </span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div add-class class="btn-group" current-class="btn-group" added-class="open">
+                                <kendo-button class="btn btn-default btn-sm" type="button" ng-click="cancel()">
+                                    <i class="k-icon k-i-close font-green-jungle"></i>
+                                    {{'COMMON_BUTTON_CLOSE'|translate}}
+                                </kendo-button>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    id="exportCommonButton" ng-click="buttonExport(this)" aria-expanded="true"
+                                    style="padding: 0px !important"><img src="ClientApp/assets/images/icon/more.png"
+                                        style="position: relative;top: -2px" class="ng-isolate-scope"></button>
+                                <ul class="dropdown-menu pull-right" id="exportCommon">
+                                    <li><a ng-click="export()" class="ng-binding"><i
+                                                class="fa fa-table font-blue right-5"></i>
+                                            {{'COMMON_BUTTON_EXPORT' | translate}} </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row form-horizontal">
+                    <div class="form-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">{{'BTA_REPORT_TYPE' | translate}}:</label>
+                                <div class="col-md-8">
+                                    <select class="w100" kendo-drop-down-list k-options="reportTypeOptions"
+                                            k-ng-model="reportType"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" ng-if="reportType == 1">
+                            <label class="col-md-4 control-label">{{'BTA_HOTEL' | translate}}:</label>
+                            <div class="col-md-8">
+                                <input class="w100" id="hotel_id" kendo-drop-down-list k-options="hotelOptions"
+                                       ng-model="searchInfo.hotel" />
+                            </div>
+                        </div>
+                        <div class="col-md-6" ng-if="reportType == 2">
+                            <label class="col-md-4 control-label">{{'BTA_FLIGHT_NUMBER' | translate}}:</label>
+                            <div class="col-md-8">
+                                <input class="w100" id="flight_number_id" kendo-drop-down-list
+                                       k-options="flightNumberOptions" ng-model="searchInfo.flightNumber" />
+                            </div>
+                        </div>
+                        <div class="col-md-6" ng-if="reportType == 3">
+                            <label class="col-md-4 control-label">{{'COMMON_STATUS' | translate}}:</label>
+                            <div class="col-md-8">-->
+                                <!-- <input class="w100" id="status_id" kendo-drop-down-list
+                    k-options="statusOptions" ng-model="searchInfo.status" /> -->
+                                <!--<select kendo-multi-select class="w100" id="status_id" k-options="statusOptions"
+                                        name="status" k-ng-model="searchInfo.status">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6" ng-if="reportType == 4">
+                            <label class="col-md-4 control-label">{{'COMMON_STATUS' | translate}}:</label>
+                            <div class="col-md-8">
+                                <select kendo-multi-select class="w100" id="status_id" k-options="statusFlightsBookingOptions"
+                                        name="status" k-ng-model="searchInfo.status">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-horizontal">
+                    <div class="form-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 col-md-4 control-label">{{'MISSING_TIMECLOCK_DATE'|translate}}:</label>
+                                <div class="col-sm-8 col-md-8">
+                                    <range-Date-Of-Date-Picker d-from="searchInfo.fromDate" d-to="searchInfo.toDate">
+                                    </range-Date-Of-Date-Picker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" ng-if="reportType == 1">
+                            <label class="col-md-4 control-label">{{'BTA_LOCATION' | translate}}:</label>
+                            <div class="col-md-8">
+                                <input class="w100" id="location_id" kendo-drop-down-list k-options="locationOptions"
+                                       ng-model="searchInfo.location" />
+                            </div>
+                        </div>
+                        <div class="col-md-6" ng-if="reportType == 2">
+                            <label class="col-md-4 control-label">{{'BTA_AIRLINE' | translate}}:</label>
+                            <div class="col-md-8">
+                                <input class="w100" id="airline_id" kendo-drop-down-list k-options="airlineOptions"
+                                       ng-model="searchInfo.airline" />
+                            </div>
+                        </div>
+                        <div class="col-md-6" ng-if="reportType == 4">
+                            <label class="col-md-4 control-label">{{'COMMON_DEPARTMENT' | translate}}:</label>
+                            <div class="col-md-8">
+                                <input kendo-drop-down-tree id="departmentId" name="departmentId"
+                                       k-options="departmentOptions" k-ng-model="searchInfo.departmentId"
+                                       style="width: 100%;" k-value-primitive="true" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mrb10">
+                    <div class="col-md-2"> </div>
+                    <div class="col-md-4 btn-group">
+                        <kendo-button class="btn btn-default btn-sm" ng-click="search()">
+                            <i class="k-icon k-i-search font-green-jungle"></i>
+                            {{'COMMON_BUTTON_SEARCH' | translate}}
+                        </kendo-button>
+                        <kendo-button class="btn btn-default btn-sm" ng-click="clearSearch()">
+                            <i style="font-size: 12px; padding-right: 3px;" class="fa fa-refresh"></i>
+                            {{'COMMON_BUTTON_RESET' | translate}}
+                        </kendo-button>
+                    </div>
+                    <div class="col-md-6" ng-if="reportType == 4">
+                        <label class="col-md-4 control-label">{{'COMMON_SAP_CODE' | translate}}:</label>
+                        <div class="col-md-8">
+                            <select kendo-drop-down-list class="w100" name="sapCode" id="sapCode"
+                                    k-options="sapCodesDataSource" k-ng-model="searchInfo.userSapCode">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">-->
+                        <!--<kendo-grid id="grid" options="reportGridOptions"></kendo-grid>-->
+
+                        <!--<kendo-grid id="grid" options="reportGridOptions" k-data-source="reportDataSource">
+                            <div k-detail-template id="gridReportDetail">
+                                <div kendo-grid k-options="reportDetailGridOptions(dataItem)">
+
+                                </div>
+                            </div>
+                        </kendo-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<div class="row">
+    <div class="d-flex align-items-center justify-content-between title-wrapper stickybar-1">
+        <div class="group poppins-medium text-grey-300">
+            <p class="display-8 m-0">
+                <span style=" text-transform: uppercase !important;" class="caption-subject uppercase">
+                    {{title}}
+                </span>
+
+            </p>
+            <p class="display-11">
+                <span class="opacity-40">Number of record:</span> {{total}}
+            </p>
+        </div>
+        <div class="group">
+            <!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+            id="exportCommonButton" ng-click="buttonExport(this)" aria-expanded="true"
+            style="padding: 0px !important">
+        <img src="ClientApp/assets/images/icon/more.png"
+             style="position: relative;top: -2px" class="ng-isolate-scope">
+    </button>
+    <ul class="dropdown-menu pull-right" id="exportCommon">
+        <li>
+            <a ng-click="export()" class="ng-binding">
+                <i class="fa fa-table font-blue right-5"></i>
+                {{'COMMON_BUTTON_EXPORT' | translate}}
+            </a>
+        </li>
+    </ul>-->
+            <button type="button" class="btn btn-outline-cyan rounded-3 poppins-regular display-9 py-2 px-3" ng-click="export()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class=" bi bi-check-square" viewBox="0 0 1920 1920">
+                    <path d="m0 1016.081 409.186 409.073 79.85-79.736-272.867-272.979h1136.415V959.611H216.169l272.866-272.866-79.85-79.85L0 1016.082ZM1465.592 305.32l315.445 315.445h-315.445V305.32Zm402.184 242.372-329.224-329.11C1507.042 187.07 1463.334 169 1418.835 169h-743.83v677.647h112.94V281.941h564.706v451.765h451.765v903.53H787.946V1185.47H675.003v564.705h1242.353V667.522c0-44.498-18.07-88.207-49.581-119.83Z" fill-rule="evenodd"></path>
+                </svg>
+                &nbsp;Export
+            </button>
+            <button type="button" ng-click="cancel()" class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1 ng-binding">
+                <i class="fa fa-times"></i> &nbsp;Close
+            </button>
+        </div>
+    </div>
+    <!-- BREAKLINE -->
+    <div class="h-1r"></div>
+
+    <div class="table-rounded-toolbar">
+        <!-- toolbar -->
+        <div class="toolbar">
+            <div class="row">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">{{'BTA_REPORT_TYPE' | translate}}:</label>
+                            <select class="w100" kendo-drop-down-list k-options="reportTypeOptions"
+                                    k-ng-model="reportType"></select>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-6" ng-if="reportType == 1">
+                        <div class="form-group">
+                            <label class="form-label">{{'BTA_HOTEL' | translate}}:</label>
+                            <input class="w100" id="hotel_id" kendo-drop-down-list k-options="hotelOptions"
+                                   ng-model="searchInfo.hotel" />
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-if="reportType == 2">
+                        <div class="form-group">
+                            <label class="form-label">{{'BTA_FLIGHT_NUMBER' | translate}}:</label>
+                            <input class="w100" id="flight_number_id" kendo-drop-down-list
+                                   k-options="flightNumberOptions" ng-model="searchInfo.flightNumber" />
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-if="reportType == 3">
+                        <div class="form-group">
+                            <label class="form-label">{{'COMMON_STATUS' | translate}}:</label>
+                            <select kendo-multi-select class="w100" id="status_id" k-options="statusOptions"
+                                    name="status" k-ng-model="searchInfo.status">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-if="reportType == 4">
+                        <div class="form-group">
+                            <label class="form-label">{{'COMMON_STATUS' | translate}}:</label>
+                            <select kendo-multi-select class="w100" id="status_id" k-options="statusFlightsBookingOptions"
+                                    name="status" k-ng-model="searchInfo.status">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">{{'MISSING_TIMECLOCK_DATE'|translate}}:</label>
+                        <br><range-Date-Of-Date-Picker d-from="searchInfo.fromDate" d-to="searchInfo.toDate">
+                        </range-Date-Of-Date-Picker>
+                    </div>
+                    <div class="col-md-6" ng-if="reportType == 1">
+                        <label class="form-label">{{'BTA_LOCATION' | translate}}:</label>
+                        <input class="w100" id="location_id" kendo-drop-down-list k-options="locationOptions"
+                               ng-model="searchInfo.location" />
+                    </div>
+                    <div class="col-md-6" ng-if="reportType == 2">
+                        <label class="form-label">{{'BTA_AIRLINE' | translate}}:</label>
+                        <input class="w100" id="airline_id" kendo-drop-down-list k-options="airlineOptions"
+                               ng-model="searchInfo.airline" />
+                    </div>
+                    <div class="col-md-6" ng-if="reportType == 4">
+                        <label class="form-label">{{'COMMON_DEPARTMENT' | translate}}:</label>
+                        <input kendo-drop-down-tree id="departmentId" name="departmentId"
+                               k-options="departmentOptions" k-ng-model="searchInfo.departmentId"
+                               style="width: 100%;" k-value-primitive="true" />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-white rounded-3 poppins-regular display-9" ng-click="clearSearch()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"></path>
+                                <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"></path>
+                            </svg>
+                            &nbsp;{{'COMMON_BUTTON_RESET' | translate}}
+                        </button>
+                        <button type="button" class="btn btn-primary rounded-3 poppins-regular display-9" ng-click="search()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                            </svg>
+                            &nbsp;{{'COMMON_BUTTON_SEARCH' | translate}}
+                        </button>
+                    </div>
+                    <div class="col-md-6" ng-if="reportType == 4">
+                        <label class="form-label">{{'COMMON_SAP_CODE' | translate}}:</label>
+                        <select kendo-drop-down-list class="w100" name="sapCode" id="sapCode"
+                                k-options="sapCodesDataSource" k-ng-model="searchInfo.userSapCode">
+                        </select>
+                    </div>
+                </div>
+                <!-- table -->
+
+            </div>
+        </div>
+        <div class="display-10 leading-18">
+            <div class="row">
+                <div class="col-md-12">
+                    <kendo-grid id="grid" options="reportGridOptions" k-data-source="reportDataSource" style=" overflow: hidden; border-top-left-radius: 0px !important; border-top-right-radius: 0px !important;">
+                        <div k-detail-template id="gridReportDetail">
+                            <div kendo-grid k-options="reportDetailGridOptions(dataItem)">
+
+                            </div>
+                        </div>
+                    </kendo-grid>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--dialog report of hotel-->
+<div id="dialogReportOfHotel" kendo-dialog="dialogReportOfHotel" k-title="titleModal" k-on-open="dialogVisible = true"
+    k-on-close="dialogVisible = false" k-width="1000" k-modal="true" k-visible="false">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet bordered light">
+                <!-- Title -->
+                <div class="portlet-title">
+                    <div class="caption caption-md col-md-6 col-sm-12" ng-if="reportType == 1">
+                        <p class="caption-subject uppercase">
+                            Room Type: {{roomTypeName}}
+                        </p>
+                    </div>
+                    <div class="actions">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="d-flex gap-2 align-items-center justify-content-between">
+                                    <div class=" d-flex gap-3" style="width: 500px; margin-top:10px">
+                                        <input type="text" class="form-control" style="width: 300px; height: 40px" id='FieldFilter' placeholder="Search for..."   ng-keypress="actions.ifEnterDialogReport($event, keywordDialogReport)"
+                                           ng-model="keywordDialogReport" autocomplete="off">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary rounded-3 poppins-regular display-9  py-2 px-3" type="button" ng-click="searchDialogReport(keywordDialogReport)" style="border: 1px solid #dadada; margin-bottom: 10px;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                                </svg>
+                                                &nbsp;Search
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex gap-2">
+
+                                        <button type="button" ng-click="exportDialogReport()" class="btn btn-outline-cyan rounded-3 poppins-regular display-9 py-2 px-3">
+                                            <svg fill="currentColor" class="bi bi-check-square" width="16" height="16" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="m0 1016.081 409.186 409.073 79.85-79.736-272.867-272.979h1136.415V959.611H216.169l272.866-272.866-79.85-79.85L0 1016.082ZM1465.592 305.32l315.445 315.445h-315.445V305.32Zm402.184 242.372-329.224-329.11C1507.042 187.07 1463.334 169 1418.835 169h-743.83v677.647h112.94V281.941h564.706v451.765h451.765v903.53H787.946V1185.47H675.003v564.705h1242.353V667.522c0-44.498-18.07-88.207-49.581-119.83Z" fill-rule="evenodd"></path>
+                                            </svg>
+                                            &nbsp;Export
+                                        </button>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+
+                    </div>
+                    <div class="row" style="clear: both;" ng-if="reportType == 1">
+                        <div class="col-md-6">
+                            <div class="label-hotel"> {{'COMMON_ADDRESS'|translate}}: <span
+                                    class="k-header">{{hotel.address}}</span></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="label-hotel" style="padding-left:15px">
+                                {{'COMMON_MOBILE'|translate}}: <span
+                                    class="k-header">{{hotel.telephone && hotel.telephone!='null'?hotel.telephone: ''}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- <kendo-grid id="dialogReport" options="dialogReportOptions">
+                                </kendo-grid> -->
+
+                                <div kendo-grid id="dialogReport" options="dialogReportOptions">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end-->

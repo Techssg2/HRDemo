@@ -1,0 +1,244 @@
+<div class="row mb-3" style="padding-top: 5px;">
+    <div class="col-md-12">
+        <div style="overflow:hidden;">
+            <div class="p-2 mb-2" style="border-left: 5px solid #006efa;">
+                <span class="display-8 m-0 fw-bold">{{'TRAINING_REQUEST_PURPOSE_REASON'|translate}}</span>
+            </div>
+
+            <div class="p-3">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label" style="color: black">
+                                <strong>1 - {{'TRAINING_REQUEST_REASON'|translate}}</strong><span class="text-danger">*</span>
+                            </label>
+                            <div class="row align-items-end mt-3">
+                                <div class="col-md-12">
+                                    <textarea name="Why does learner need to attend this course?"
+                                              style="height: 80px; resize: none"
+                                              ng-model="purposeAndReason.reason"
+                                              class="form-control"
+                                              ng-disabled="!isEditable || isCheckerAcademy || isHODAcademy"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label" style="color: black">
+                                <strong>2 - {{'TRAINING_REQUEST_PURPOSE'|translate}} </strong><span class="text-danger">*</span>
+                            </label><br />
+                            <label class="form-label text-secondary">
+                                - {{'TRAINING_REQUEST_WHAT_EXECUTE'|translate}}
+                            </label>
+                            <div class="row align-items-end mt-3">
+                                <div class="col-md-12">
+                                    <textarea name="What does learner do to execute?"
+                                              style="height: 60px; resize: none"
+                                              ng-model="purposeAndReason.purpose"
+                                              class="form-control"
+                                              ng-disabled="!isEditable || isCheckerAcademy || isHODAcademy"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-label text-secondary">
+                                - {{'TRAINING_REQUEST_HOW_APPLY'|translate}}
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="row align-items-end mt-3">
+                                <div class="col-md-12">
+                                    <textarea name="How does learner will apply?"
+                                              style="height: 60px; resize: none"
+                                              ng-model="purposeAndReason.howApply"
+                                              class="form-control"
+                                              ng-disabled="!isEditable || isCheckerAcademy || isHODAcademy"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row ">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-label text-secondary">
+                                -{{'TRAINING_REQUEST_WHEN_EXECUTE'|translate}}
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="row align-items-end mt-3">
+                                <div class="col-md-12">
+                                    <textarea name="When does learner execute the plan?"
+                                              style="height: 60px; resize: none"
+                                              ng-model="purposeAndReason.whenExcute"
+                                              class="form-control"
+                                              ng-disabled="!isEditable || isCheckerAcademy || isHODAcademy"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-label text-secondary">
+                                - {{'TRAINING_REQUEST_WHAT_EXPECTED_KPI'|translate}}
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="row align-items-end mt-3">
+                                <div class="col-md-12">
+                                    <textarea name="What are the expected KPI of the application?"
+                                              style="height: 60px; resize: none"
+                                              ng-model="purposeAndReason.whatExpectedKPI"
+                                              class="form-control"
+                                              ng-disabled="!isEditable || isCheckerAcademy || isHODAcademy"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--<div class="portlet box bg-grey bg-font-grey fx-portlet">
+  <div class="portlet-title">
+    <div class="caption">
+      <span class="caption-subject hr-process uppercase f-collapse"
+        >{{'TRAINING_REQUEST_PURPOSE_REASON'|translate}}</span
+      >
+    </div>
+  </div>
+</div>
+<div class="page-content-wrapper float-none">
+  <div class="page-content">
+    <div class="form-horizontal">
+      <div class="form-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="col-md-2 control-label" style="color: black">
+                <strong>1 - {{'TRAINING_REQUEST_REASON'|translate}}</strong
+                ><span class="font-red-thunderbird">*</span></label
+              >
+              <div class="col-md-9">
+                <textarea
+                  name="Why does learner need to attend this course?"
+                  style="height: 80px; resize: none"
+                  ng-model="purposeAndReason.reason"
+                  class="form-control"
+                  ng-disabled="!isEditable || isCheckerAcademy || isHODAcademy"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-2">
+                <label class="control-label" style="color: black">
+                  <strong>2 - {{'TRAINING_REQUEST_PURPOSE'|translate}} </strong
+                  ><span class="font-red-thunderbird">*</span></label
+                >
+                <label class="control-label">
+                  - {{'TRAINING_REQUEST_WHAT_EXECUTE'|translate}}
+                </label>
+              </div>
+              <div class="col-md-9">
+                <textarea
+                  name="What does learner do to execute?"
+                  style="height: 60px; resize: none"
+                  ng-model="purposeAndReason.purpose"
+                  class="form-control"
+                  ng-disabled="!isEditable || isCheckerAcademy || isHODAcademy"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-2">
+                <label class="control-label">
+                  - {{'TRAINING_REQUEST_HOW_APPLY'|translate}}
+                  <span class="font-red-thunderbird">*</span>
+                </label>
+              </div>
+              <div class="col-md-9">
+                <textarea
+                  name="How does learner will apply?"
+                  style="height: 60px; resize: none"
+                  ng-model="purposeAndReason.howApply"
+                  class="form-control"
+                  ng-disabled="!isEditable || isCheckerAcademy || isHODAcademy"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-2">
+                <label class="control-label">
+                  -{{'TRAINING_REQUEST_WHEN_EXECUTE'|translate}}
+                  <span class="font-red-thunderbird">*</span>
+                </label>
+              </div>
+              <div class="col-md-9">
+                <textarea
+                  name="When does learner execute the plan?"
+                  style="height: 60px; resize: none"
+                  ng-model="purposeAndReason.whenExcute"
+                  class="form-control"
+                  ng-disabled="!isEditable || isCheckerAcademy || isHODAcademy"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-2">
+                <label class="control-label">
+                  - {{'TRAINING_REQUEST_WHAT_EXPECTED_KPI'|translate}}
+                  <span class="font-red-thunderbird">*</span>
+                </label>
+              </div>
+              <div class="col-md-9">
+                <textarea
+                  name="What are the expected KPI of the application?"
+                  style="height: 60px; resize: none"
+                  ng-model="purposeAndReason.whatExpectedKPI"
+                  class="form-control"
+                  ng-disabled="!isEditable || isCheckerAcademy || isHODAcademy"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->

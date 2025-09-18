@@ -1,0 +1,130 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">POSITION DETAIL</span>
+                </div>
+                <div class="actions">
+                    <kendo-button class="btn btn-default btn-sm" type="button" ng-click="cancel('home.position.allRequests')">
+                        <i class="k-icon k-i-close font-green-jungle"></i> Close
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="toggleSearch()" ng-show="!showSearch">
+                        <i class="k-icon k-i-filter font-green-jungle"></i> Search
+                    </kendo-button>
+                    <kendo-button class="btn btn-default btn-sm" ng-click="toggleSearch()" ng-show="showSearch">
+                        <i class="k-icon k-i-close font-green-jungle"></i> Close Search
+                    </kendo-button>
+                    <div add-class class="btn-group" current-class="btn-group" added-class="open">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="padding: 0px !important"><img src="ClientApp/assets/images/icon/more.png" style="position: relative;top: -2px" class="ng-isolate-scope"></button>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a ng-click="exportPositionDetail()" class="ng-binding"><i class="fa fa-table font-blue right-5"></i> Export excel</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portlet-body">
+
+                <div class="container-fluid" ng-show="showSearch">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Keyword:</label>
+                                <div class="col-md-8">
+                                    <!-- <select kendo-drop-down-list="widget.positionListForFilter" style="width: 100%;" k-options="dataPositions" ng-model="filter.position"></select> -->
+                                    <input type="text" class="k-textbox" style="width: 100%;" ng-model="filterPosition.keyword" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Status:</label>
+                                <div class="col-md-8">
+                                    <select kendo-multi-select class="w100" id="multiselect" k-options="statusDetailOptions"  k-ng-model="filterPosition.statusDetail"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mrt10">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Created Date:</label>
+                                <div class="col-md-8">
+                                    <range-date-for-filter-kendo-model d-from="filterPosition.fromDate" d-to="filterPosition.toDate" ></range-date-for-filter-kendo-model>
+                                    <!-- <input kendo-date-picker k-date-input="true" k-format="'dd/MM/yyyy'" ng-model="searchInfo.fromDateObject" /> -
+                                    <input kendo-date-picker k-date-input="true" k-format="'dd/MM/yyyy'" ng-model="searchInfo.toDateObject" /> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mrt10">
+                        <div class="col-md-2"> </div>
+                        <div class="col-md-4 btn-group">
+                            <kendo-button class="btn btn-default btn-sm" ng-click="onClickSearchPositionDetails()">
+                                <i class="k-icon k-i-search font-green-jungle"></i> Search
+                            </kendo-button>
+                            <kendo-button class="btn btn-default btn-sm" ng-click="onClickResetPositionDetails()">
+                                <i style="font-size: 12px; padding-right: 3px;" class="fa fa-refresh"></i>Reset
+                            </kendo-button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mrt10">
+                    <div class="col-md-12">
+                        <kendo-grid id="grid" k-scope-field="widget.positionDetailList" options="positionDetailGridOptions"></kendo-grid> 
+                    </div>
+                </div>
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+</div>
+
+<div id="dialogDetail" kendo-dialog="widget.dialogDetail" options="additionalApplicantDialogOptions">
+    <div class="form-group">
+        <label class="col-md-4 control-label">Starting Date</label>
+        <div class="col-md-6 k-edit-field">
+            <input kendo-date-picker k-date-input="true" k-format="'dd/MM/yyyy'" id="startingDate" name="startingDate" k-ng-model="model.startDate" />
+        </div>
+
+        <label for="empGroup" class="col-md-4 control-label">Employee Group</label>
+        <div class="col-md-6 k-edit-field">
+            <select id="empGroup" kendo-drop-down-list style="width: 300px;" k-options="optionGroup.empGroupOptions" name="empGroup" k-ng-model="model.employeeGroupCode"> </select>
+        </div>
+
+        <label for="empSubGroup" class="col-md-4 control-label">Employee Sub Group </label>
+        <div class="col-md-6 k-edit-field">
+            <select id="empSubGroup" kendo-drop-down-list style="width: 300px;" k-options="optionGroup.empSubGroupOptions" name="empSubGroup" k-ng-model="model.employeeSybGroupCode"> </select>
+        </div>
+
+        <label for="reasonHire" class="col-md-4 control-label">Reason Hiring</label>
+        <div class="col-md-6 k-edit-field">
+            <select id="reasonHire" kendo-drop-down-list style="width: 300px;" k-options="optionGroup.reasonHireOptions" name="reasonHire" k-ng-model="model.reasonHiringCode"> </select>
+        </div>
+        <label for="position" class="col-md-4 control-label">Position </label>
+        <div class="col-md-6 k-edit-field">
+            <select id="positionId" kendo-drop-down-list style="width: 300px;" k-on-change="onchangeApplicantPosition(kendoEvent)" k-options="optionGroup.positionOptions" name="position" k-ng-model="model.additionalPositionCode"> </select>
+        </div>
+        <!--Ngan them-->
+        <label for="position" class="col-md-4 control-label">Create F2 Form</label>
+        <div class="col-md-6" style="padding-top: 10px;">
+            <div class="col-md-5">
+                <input type="radio" name="type" id="type1" class="k-radio" ng-model="model.hasCreateF2Form" ng-value="true">
+                <label style="color: #9b9b9b;" class="k-radio-label" for="type1">Yes</label>
+            </div>
+            <div class="col-md-5">
+                <input type="radio" name="type" id="type2" class="k-radio" ng-model="model.hasCreateF2Form" ng-value="false">
+                <label style="color: #9b9b9b;" class="k-radio-label" for="type2">
+                    No
+                </label>
+            </div>
+        </div>
+        <!--end-->
+    </div>
+</div>

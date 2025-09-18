@@ -1,0 +1,207 @@
+﻿<style>
+    .k-loading-mask {
+        z-index: 3;
+        /* must be larger than the z-index:2 of #container */
+    }
+</style>
+<!--<kendo-button class="btn btn-default btn-sm" type="button" ng-if="isShowButtonEditITHelpdesk() && !isEditing && appearButtonEdit()" ng-click="editField()">
+    <i class="fa fa-edit font-green-jungle right-5"></i> {{'COMMON_BUTTON_IT_EDIT'|translate}}
+</kendo-button>-->
+<button type="button"
+        ng-if="isShowButtonEditITHelpdesk() && !isEditing && appearButtonEdit()" ng-click="editField()"
+        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+    <i class="fa fa-pencil" style="color: #18aa7e;"></i>&nbsp;
+    {{'COMMON_BUTTON_IT_EDIT'|translate}}
+</button>
+<!--<kendo-button class="btn btn-default btn-sm" type="button" ng-if="isShowButtonEditITHelpdesk() && isEditing" ng-click="saveForm()">
+    <i class="fa fa-save font-green-jungle right-5"></i> {{'COMMON_BUTTON_IT_SAVE'|translate}}
+</kendo-button>-->
+<button type="button"
+        ng-if="isShowButtonEditITHelpdesk() && isEditing" ng-click="saveForm()"
+        class="btn btn-outline-grey-300 rounded-3 btn-sm poppins-regular display-9">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="16"
+         height="16"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="#1C1C1C"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round">
+        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+        <polyline points="7 3 7 8 15 8"></polyline>
+    </svg>
+    &nbsp;{{'COMMON_BUTTON_IT_SAVE'|translate}}
+</button>
+
+<!--﻿<kendo-button class="btn btn-default btn-sm" type="button" ng-if="isShowButtonITHelpdesk()&& status.currentStatus != 'Completed'&& status.currentStatus != 'Cancelled'" ng-click="updateStatusItem('Completed')">
+    <i class="fa fa-check font-green-jungle right-5"></i> {{'COMMON_BUTTON_IT_COMPLETE'|translate}}
+</kendo-button>-->
+<button type="button"
+        ng-if="isShowButtonITHelpdesk()&& status.currentStatus != 'Completed'&& status.currentStatus != 'Cancelled'" ng-click="updateStatusItem('Completed')"
+        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+    <i class="fa fa-check-square" style="color: #18aa7e;"></i>&nbsp;
+    {{'COMMON_BUTTON_IT_COMPLETE'|translate}}
+</button>
+
+
+<!--<kendo-button class="btn btn-default btn-sm" type="button" ng-if="isShowButtonITHelpdesk()&& status.currentStatus !='Cancelled'&& hidenCancel()" ng-click="updateStatusItem('Cancelled')">
+    <i class="fa fa-minus-circle font-red right-5"></i> {{'COMMON_BUTTON_IT_CANCEL'|translate}}
+</kendo-button>-->
+<button type="button"
+        ng-if="isShowButtonITHelpdesk()&& status.currentStatus !='Cancelled'&& hidenCancel()" ng-click="updateStatusItem('Cancelled')"
+        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+    <i class="fa fa-xmark" style="color: rgba(255,0,0,0.7)"></i>&nbsp;{{'COMMON_BUTTON_IT_CANCEL'|translate}}
+</button>
+
+<a ng-if="isShowButtonITHelpdesk()"> | </a>
+<!--<kendo-button class="btn btn-default btn-sm" ng-repeat="button in status.workflowButtons" ng-click="submit(button.id, button.name)">
+    <i style="font-size: 12px; padding-right: 3px;" class="fa fa-paper-plane font-green-jungle"></i>
+    <span>
+        {{button.name|translate}}
+    </span>
+</kendo-button>-->
+<button type="button"
+        ng-repeat="button in status.workflowButtons" ng-click="submit(button.id, button.name)"
+        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+    <i class="fa fa-paper-plane" style="--fa-rotate-angle: -45deg; color: #18aa7e;"></i>&nbsp;{{button.name|translate}}
+</button>
+
+<!--<kendo-button type="button" class="btn btn-default btn-sm right-5" ng-if="status.allowToVote && status.approveFieldText"
+              ng-click="vote(1)">
+    <i class="fa fa-check font-green-jungle right-5"></i> {{approveFieldText | translate}}
+</kendo-button>-->
+<button type="button"
+        ng-if="status.allowToVote && status.approveFieldText"
+         ng-click="vote(1)"
+        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+    <i class="fa-solid fa-check" style="color: #18aa7e;"></i> &nbsp;{{approveFieldText | translate}}
+</button>
+
+<!--<kendo-button type="button" class="btn btn-default btn-sm right-5" ng-if="status.allowRequestToChange"
+              ng-click="vote(3)">
+    <i class="fa fa-minus-circle font-red right-5"></i> {{'COMMON_BUTTON_REQUEST_TO_CHANGE'|translate}}
+</kendo-button>-->
+<button type="button"
+        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1"
+        ng-if="status.allowRequestToChange"
+        ng-click="vote(3)">
+    <svg fill="#FFB200" xmlns="http://www.w3.org/2000/svg"
+         width="16" height="16" viewBox="0 0 52 52" enable-background="new 0 0 52 52">
+        <path d="M26,2C12.8,2,2,12.8,2,26s10.8,24,24,24s24-10.8,24-24S39.2,2,26,2z M37.9,27.7c-0.1,0.7-0.7,1.3-1.5,1.3
+	                                H15.6c-0.8,0-1.4-0.5-1.5-1.3c-0.1-1.2-0.1-2.3,0-3.4c0.1-0.7,0.7-1.3,1.5-1.3h20.8c0.8,0,1.4,0.6,1.5,1.3
+	                                C38,25.5,38,26.6,37.9,27.7z" />
+    </svg>&nbsp;{{'COMMON_BUTTON_REQUEST_TO_CHANGE'|translate}}
+</button>
+
+<!--<kendo-button type="button" class="btn btn-default btn-sm right-5" ng-if="status.allowToVote && status.rejectFieldText"
+              ng-click="vote(2)">
+    <i class="fa fa-minus-circle font-red right-5"></i> {{status.rejectFieldText|translate}}
+</kendo-button>-->
+
+<button type="button"
+        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1"
+        ng-if="status.allowToVote && status.rejectFieldText"
+        ng-click="vote(2)">
+    <svg fill="rgba(255,0,0,0.7)" xmlns="http://www.w3.org/2000/svg"
+         width="16" height="16" viewBox="0 0 52 52" enable-background="new 0 0 52 52">
+        <path d="M26,2C12.8,2,2,12.8,2,26s10.8,24,24,24s24-10.8,24-24S39.2,2,26,2z M37.9,27.7c-0.1,0.7-0.7,1.3-1.5,1.3
+	                                H15.6c-0.8,0-1.4-0.5-1.5-1.3c-0.1-1.2-0.1-2.3,0-3.4c0.1-0.7,0.7-1.3,1.5-1.3h20.8c0.8,0,1.4,0.6,1.5,1.3
+	                                C38,25.5,38,26.6,37.9,27.7z" />
+    </svg>&nbsp;{{status.rejectFieldText|translate}}
+</button>
+
+<!--<kendo-button class="btn btn-default btn-sm" type="button" ng-if="status.allowToCancel" ng-click="vote(4)">
+    <i class="fa fa-minus-circle font-red right-5"></i> {{'COMMON_BUTTON_CANCEL'|translate}}
+</kendo-button>-->
+<button type="button"
+        ng-if="status.allowToCancel" ng-click="vote(4)"
+        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+    <i class="fa fa-xmark" style="color: rgba(255,0,0,0.7)"></i> &nbsp;{{'COMMON_BUTTON_CANCEL'|translate}}
+</button>
+
+<!--<kendo-button class="btn btn-default btn-sm" type="button" ng-if="((!model.id && isLoaded) || hasPerm(2)) && isPerAdminHrAdmin() "
+              ng-click="dSave()">
+    <i class="k-icon k-i-save font-green-jungle"></i> {{'COMMON_BUTTON_SAVE'|translate}}
+</kendo-button>-->
+
+<button type="button"
+        ng-if="((!model.id && isLoaded) || hasPerm(2)) && isPerAdminHrAdmin()"
+        ng-click="dSave()"
+        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+    <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><path fill="#18aa7e" fill-rule="evenodd" d="M4 3a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-.293-.707l-4-4A1 1 0 0 0 16 3H4zm6 11c0-1.6 1.333-2 2-2s2 .4 2 2-1.333 2-2 2-2-.4-2-2zm4-9H8v3h6V5z" clip-rule="evenodd" /></svg>
+    &nbsp;{{'COMMON_BUTTON_SAVE'|translate}}
+</button>
+
+<!--<kendo-button class="btn btn-default btn-sm" type="button" ng-if="status.allowToDelete" ng-click="delete()">
+    <i class="k-icon k-i-close font-green-jungle"></i> {{'COMMON_BUTTON_DELETE'|translate}}
+</kendo-button>-->
+<button type="button"
+        ng-if="status.allowToDelete" ng-click="delete()"
+        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+    <i class="fa fa-trash" style="color: rgba(255,0,0,0.7)"></i> &nbsp;{{'COMMON_BUTTON_DELETE'|translate}}
+</button>
+
+<!--<kendo-button class="btn btn-default btn-sm" type="button" ng-click="cancel()">
+    <i class="k-icon k-i-close font-green-jungle"></i> {{'COMMON_BUTTON_CLOSE'|translate}}
+</kendo-button>-->
+<button type="button"
+        ng-click="cancel()"
+        class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1">
+    <i class="fa fa-xmark" style="color: #18aa7e;"></i> &nbsp;{{'COMMON_BUTTON_CLOSE'|translate}}
+</button>
+
+<div id="dialog" kendo-dialog="voteDialog" options="voteDialogOpts">
+    <div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px" ng-if="!voteModel.isValid">
+        <span class="font-red-thunderbird">{{voteModel.errorMessage}}</span>
+    </div>
+    <label class="control-label">{{'COMMON_COMMENT'|translate}}</label>
+    <textarea class="form-control comment-text input-default" placeholder="" style="width: 100%;" rows="6"
+              ng-model="voteModel.comment"></textarea>
+</div>
+
+<!-- Cancel, Completed IT -->
+<div id="dialog" kendo-dialog="updateStatusDialog" options="updateStatusDialogOpts" ng-show="isShowButtonITHelpdesk">
+    <div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px" ng-if="!updateStatusModel.isValid">
+        <span class="font-red-thunderbird">{{updateStatusModel.errorMessage}}</span>
+    </div>
+
+    <label class="form-label">{{'COMMON_COMMENT'|translate}}</label>
+    <textarea class="form-control comment-text input-default it-helpdesk" style="width: 100%;" placeholder="" rows="6"
+              ng-model="updateStatusModel.comment"></textarea>
+    <label for="exampleInputText1"
+           class="form-label">{{'Attachment'|translate}}</label>
+    <input id="attachmentFieldId" class="k-disabled it-helpdesk" name="files" type="file" kendo-upload k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }" k-select="onSelect" k-remove="removeAttach" />
+</div>
+
+<div id="dialog" kendo-dialog="updateModelDialog" options="updateModelDialogOpts" ng-show="isShowButtonITHelpdesk">
+    <div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px" ng-if="!updateModel.isValid">
+        <span class="font-red-thunderbird">{{updateModel.errorMessage}}</span>
+    </div>
+    <div control-label">
+        <label class="form-label">{{'COMMON_COMMENT'|translate}}</label>
+        <textarea class="form-control comment-text input-default it-helpdesk" placeholder="" style="width: 100%;" rows="6"
+                  ng-model="updateModel.comment"></textarea>
+       
+    </div> 
+    <br />
+    <div control-label" ng-if="model.status == 'Completed'">
+        <input type="checkbox" id="eq87"
+               ng-model="updateModel.applyPayload"
+               class="k-checkbox input-default it-helpdesk">
+        <label class="k-checkbox-label" for="eq87">
+            {{'APPLY_PAYLOAD'| translate}}
+        </label>
+    </div>
+    <label class="control-label">{{'Attachment'|translate}}</label>
+    <input class="k-disabled it-helpdesk" id="attachmentFieldId" name="files" type="file" kendo-upload k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }" k-select="onSelect" k-remove="removeAttach" />
+</div>
+<div kendo-dialog="revokeDialog" options="revokeDialogOpts">
+    <div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px" ng-if="!revokeModel.isValid">
+        <span class="font-red-thunderbird">{{revokeModel.errorMessage}}</span>
+    </div>
+    <label class="control-label">{{'COMMON_COMMENT'|translate}}</label>
+    <textarea class="form-control comment-text input-default" placeholder="" style="width: 100%;" rows="6"
+              ng-model="revokeModel.comment"></textarea>
+</div>

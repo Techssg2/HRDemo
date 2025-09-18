@@ -1,0 +1,320 @@
+{
+  "WorkLocation": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Btrtl"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Btext"
+    }
+  ],
+  "WorkLocationByCode": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Btrtl"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Btext"
+    }
+  ],
+  "PersonalArea": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Persa"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Ptext"
+    }
+  ],
+  "Province": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Zprovince"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "ZprovinceT"
+    }
+  ],
+  "District": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Zdistrict"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "ZdistrictT"
+    }
+  ],
+  "Ward": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Zwards"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "ZwardsT"
+    }
+  ],
+  "LeaveKind": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Awart"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Atext"
+    },
+    {
+      "SourceField": "NameVN",
+      "TargetField": "Atexvn"
+    }
+
+  ],
+  "ActionType": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Massn"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Mntxt"
+    }
+  ],
+  "ActionTypeResignation": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Massg"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Mgtxt"
+    },
+    {
+      "SourceField": "NameVN",
+      "TargetField": "Mgtxvn"
+    }
+  ],
+  "ActionTypePromoteAndTransfer": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Massg"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Mgtxt"
+    }
+  ],
+  "ContractType": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Cttyp"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Cttxt"
+    }
+  ],
+  "Ethnic": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Racky"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Ltext"
+    }
+  ],
+  "MaritalStatus": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Famst"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Ftext"
+    }
+  ],
+  "Nationality": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Land1"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Landx"
+    }
+  ],
+  "Relationship": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Subty"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Stext"
+    }
+  ],
+  "Religion": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Konfe"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Ktext"
+    }
+  ],
+  "JobTitle": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Stell"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Stltx"
+    }
+  ],
+  "JobTitleByCode": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Stell"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Stltx"
+    }
+  ],
+  "ShiftCode": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Tprog"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Ttext"
+    },
+    {
+      "SourceField": "NameVN",
+      "TargetField": "Ttexvn"
+    }
+  ],
+  "CurrentShift": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Shift"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "ShiftC"
+    },
+    {
+      "SourceField": "NameVN",
+      "TargetField": "ShiftCvn"
+    }
+  ],
+  "Gender": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Anred"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Atext"
+    }
+  ],
+  "GenderByCode": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Anred"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Atext"
+    }
+  ],
+  "BranchOfStudy": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Faart"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Ftext"
+    }
+  ],
+  "EducationalEst": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Slart"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Stext"
+    }
+  ],
+  "Institute": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Quali"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Qtext"
+    }
+  ],
+  "EmployeeSubgroup": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Persk"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "PtextS"
+    }
+  ],
+  "EmployeeGroupCode": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Persg"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Ptext"
+    }
+  ],
+  "ReasonHiring": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Massg"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Mgtxt"
+    }
+  ],
+  "Position": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Plans"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Plstx"
+    }
+  ],
+  "PositionByCode": [
+    {
+      "SourceField": "Code",
+      "TargetField": "Plans"
+    },
+    {
+      "SourceField": "Name",
+      "TargetField": "Plstx"
+    }
+  ]
+
+}

@@ -1,0 +1,268 @@
+<!--<style>
+    .step-round-container {
+        width: 391px !important;
+        border-right: 1px #ddd solid !important;
+        padding-top: 71px !important;
+        padding-right: 20px !important;
+        padding-bottom: 0 !important;
+        padding-left: 20px !important;
+    }
+
+    .white-space {
+        white-space: normal;
+    }
+</style>
+<div class="step-round-container">
+    <div class="workflow-history-task" ng-class="roundStyle">
+        <div class="task-info" ng-if="round.id">
+            <div class="task-info-line ">
+                <span class="info-label" ng-if="round.assignedToUserFullName">{{'COMMON_ASSIGN_TO'|translate}}:</span>
+                <span class="info-label" ng-if="!round.assignedToUserFullName">{{'COMMON_ASSIGN_TO_DEPARTMENT'|translate}}:</span>
+                <span class="info-data white-space ng-binding" k-content="'{{round.assignedToDepartmentInfo ? round.assignedToDepartmentInfo : round.assignedToUserCode}}'" kendo-tooltip>{{round.assignedToUserFullName ? round.assignedToUserFullName: round.assignedToDepartmentName}}</span>
+                <div ng-if="!isRefind && canEdit('EditDepartment')">
+                    <a id="editId" name="editName" ng-click="showEditDepartment(round)">[ {{'COMMON_EDIT_DEPARTMENT'|translate}} ]</a>
+                </div>
+                <div ng-if="!isRefind && canEdit('EditUser')">
+                    <a id="editId" name="editName" ng-click="showEditDepartment(round)">[ {{'COMMON_EDIT_USER'|translate}} ]</a>
+                </div>
+                <div ng-if="isRefind">
+                    <a id="" name="" ng-click="reFindDepartment()">[ {{'COMMON_REFIND_DEPT'|translate}} ]</a>
+                </div>
+            </div>
+            <div class="task-info-line ">
+                <span class="info-label ">{{'COMMON_START_DAY'|translate}}:</span>
+                <span class="info-data ng-binding ng-scope ">
+                    {{round.created | date: formatDate}}
+                </span>
+            </div>
+            <div class="task-info-line ng-scope">
+                <span class="info-label ">{{'COMMON_COMPLETED_DATE'|translate}}:</span>
+                <span class="info-data ng-binding " ng-if="round.isStepCompleted">
+                    {{round.modified| date: formatDate}}
+                </span>
+            </div>
+        </div>
+        <div class="task-info task-info-more" ng-if="round.id">
+            <div class="task-info-line ng-scope ">
+                <span class="info-label ">{{'COMMON_COMPLETED_BY'|translate}}:</span>
+                <span class="info-data ng-binding" ng-if="round.voteType != 0 && round.isStepCompleted">{{round.approverFullName}}</span>
+                <span class="info-data ng-binding" ng-if="round.voteType == 0 && round.isStepCompleted">System (Auto Ignore)</span>
+            </div>
+            <div class="task-info-line ">
+                <span class="info-label ">{{'COMMON_STATUS'|translate}}:</span>
+                <span class="info-data" ng-if="round.voteType == 0 && round.isStepCompleted">Completed</span>
+                <span class="info-data" ng-if="round.voteType == 0 && !round.isStepCompleted">In Progress</span>
+                <span class="info-data" ng-if="round.voteType == 2 || round.voteType == 1">{{round.outcome}}</span>
+                <span class="info-data" ng-if="round.voteType == 3">Request To Change</span>
+                <span class="info-data" ng-if="round.voteType == 4">Cancelled</span>
+                <span class="info-data" ng-if="round.voteType == 5">Out of period</span>
+            </div>
+
+            <div class="task-info-line ng-scope ">
+                <span class="info-label ">{{'COMMON_DUE_DATE'|translate}}:</span>
+                <span class="info-data ng-binding ">{{round.dueDate|date: formatDate}}</span>
+            </div>
+            <div class="task-info-line ng-scope ">
+                <span class="info-label">{{'COMMON_COMMENT'|translate}}:</span>
+                <show-more class="info-data ng-binding" number=30 text="round.comment" more=" View more" less=" View less">
+                </show-more>
+            </div>
+        </div>
+        <div class="task-icon">
+            <i data-toggle="tooltip" class="fa fa-spinner task-icon-not-started" title="Not Started"></i>
+            <i data-toggle="tooltip" class="fa fa-refresh task-icon-in-progress" title="In Progress"></i>
+            <i data-toggle="tooltip" class="fa fa-check-square-o task-icon-approved" style="font-size: 29px; position: relative; top: 3px;" title="Approved"></i>
+            <i data-toggle="tooltip" class="fa fa-times task-icon-rejected" style="font-size: 30px; position: relative; top: 1px; left: 3px;" title="Rejected"></i>
+            <i data-toggle="tooltip" class="fa fa-power-off task-icon-cancelled" style="font-size: 26px; position: relative; top: 1px;" title="Cancelled"></i>
+            <i data-toggle="tooltip" class="fa fa-edit task-icon-requested-to-change" style="font-size: 29px; position: relative; top: 3px;" title="Request To Change"></i>
+            <i data-toggle="tooltip" class="fa fa-file-word-o task-icon-requested-to-document-supplement" style="position: relative; top: -1px;" title="Request To Document"></i>
+            <i data-toggle="tooltip" class="fa fa-user-times task-icon-rejected-to-applicant" title="Rejected"></i>
+            <i data-toggle="tooltip" class="fa fa-exclamation task-icon-overdue" style="font-size: 29px; position: relative; top: 2px;"></i>
+        </div>
+    </div>
+</div>-->
+
+<div id="editDepartmentDialog" kendo-dialog="editDepartmentDialog" options="dialogEditDepartmentDialogOpts" k-visible="false" ng-show="isITHelpDesk">
+    <form class="k-disabled">
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <div class="alert alert-danger-style1 mb-3" style="margin-bottom: 0px" ng-if="!model.isValid">
+                    <span class="font-red-thunderbird">{{model.errorMessage}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6" ng-if="isEditDepartment">
+                <label>Current Department</label>
+                <input id="currentDepartmentId" class="form-control" kendo-drop-down-list k-options="currentdepartmentOptions" ng-model="model.currentDepartmentId" style="width: 100%;" />
+            </div>
+            <div class="form-group col-md-6" ng-if="!isEditDepartment">
+                <label>Current User</label>
+                <input id="currentUserId" class="form-control" kendo-drop-down-list k-options="currentUserOptions" ng-model="model.currentUserId" style="width: 100%;" />
+            </div>
+            <div class="form-group col-md-6" ng-if="isEditDepartment">
+                <label>New Department</label>
+                <select kendo-drop-down-list name="newDepartmentId" id="newDepartmentId"
+                        k-options="departmentOptions" k-ng-model="model.newDepartmentId"
+                        style="width: 100%" class="form-control input-default it-helpdesk">
+                </select>
+            </div>
+            <div class="form-group col-md-6" ng-if="!isEditDepartment">
+                <label>New User </label>
+                <select kendo-drop-down-list name="newUserId" id="newUserId"
+                        k-options="newUserOptions" k-ng-model="model.newUserId"
+                        style="width: 100%" class="form-control input-default it-helpdesk">
+                </select>
+            </div>
+        </div>
+        <div class="form-row" ng-if="isEditDepartment">
+            <div class="form-group col-md-6">
+                <label>Current Group</label>
+                <input kendo-drop-down-list class="form-control" k-options="currentDepartmentGroupOptions" ng-model="model.currentDepartmenGroup" style="width: 100%;" disabled />
+            </div>
+            <div class="form-group col-md-6 it-helpdesk">
+                <label>New Group</label>
+                <input kendo-drop-down-list  id="newDepartmentGroupId" class="form-control it-helpdesk" k-options="newDepartmentGroupOptions" ng-model="model.newDepartmentGroup" style="width: 100%;" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label style="width: 100%">{{'COMMON_COMMENT'|translate}}: <span class="text-danger">*</span></label>
+                <textarea rows="3" id="reason" ng-readonly="false" ng-model="model.comment" class="form-control it-helpdesk" type="text" style="width: 100%" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label style="width: 100%">{{'Attachment'|translate}}:</label>
+                <input id="attachmentFieldId" class="k-disabled it-helpdesk" name="files" type="file" kendo-upload k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }" k-select="onSelect" k-remove="removeAttach" />
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<div class="mt-3 d-grid grid-cols-5">
+    <div class="d-flex">
+        <div class="progresses progresses-style1 vertical">
+            <div class="steps"
+                 ng-class="{
+                           'badge-green': step.stepNumber == round.stepNumber && round.voteType == 1 && round.isStepCompleted,
+                           'badge-yellow-60': step.stepNumber == round.stepNumber && round.voteType == 3,
+                           'badge-orange': step.stepNumber == round.stepNumber && round.voteType == 0 && !round.isStepCompleted,
+                           'badge-red': step.stepNumber == round.stepNumber && (round.voteType == 2 || round.voteType == 4),
+                         }">
+                {{step.stepNumber}}
+            </div>
+
+            <span class="dashed-line active"></span>
+        </div>
+    </div>
+    <div class="card card-style1 col-span-4">
+        <div class="card-header"
+             ng-class="{ 'badge-green': step.stepNumber == round.stepNumber && round.voteType == 1 && round.isStepCompleted,
+                           'badge-yellow-60': step.stepNumber == round.stepNumber && round.voteType == 3,
+                           'badge-orange': step.stepNumber == round.stepNumber && round.voteType == 0 && !round.isStepCompleted,
+                           'badge-red': step.stepNumber == round.stepNumber && (round.voteType == 2 || round.voteType == 4),
+                         }">
+
+            <span style="text-transform: uppercase;">{{step.stepName}} </span>
+            <a class="workflow-change-step ng-scope float-end" ng-if="!flow.isCompleted && isITHelpDesk && round.voteType == 1 " ng-click="onChangeStep(step)" data-toggle="tooltip" data-placement="right" title="Are you sure to change step this item?">
+                <i class="workflow-change-step-icon k-icon k-i-arrow-overflow-down"></i>
+            </a>
+            <a class="workflow-change-step ng-scope float-end" ng-if="isITHelpDesk&&step.stepName=='Booking Flight'&& !round.isStepCompleted" ng-click="skipBTA()" data-toggle="tooltip" data-placement="right" title="{{'SkipBTA' | translate}}">
+                <i class="fa fa-forward" style="color:white"></i>
+            </a>
+        </div>
+        <div class="card-body d-grid">
+            <div class="card-group-style1">
+                <div class="row">
+                    <div class="col-md-6">
+                        <span class="card-title" ng-if="round.assignedToUserFullName">{{'COMMON_ASSIGN_TO'|translate}}:</span>
+                        <span class="card-title" ng-if="!round.assignedToUserFullName">{{'COMMON_ASSIGN_TO_DEPARTMENT'|translate}}:</span>
+                        <span ng-if="round.assignedToUserFullName || round.assignedToDepartmentInfo" class="info-data white-space ng-binding" k-content="'{{round.assignedToDepartmentInfo ? round.assignedToDepartmentInfo : round.assignedToUserCode}}'" kendo-tooltip>{{round.assignedToUserFullName ? round.assignedToUserFullName: round.assignedToDepartmentName}}</span>
+                        <span ng-if="!round.assignedToUserFullName && !round.assignedToDepartmentInfo">-/-</span>
+                        <div ng-if="!isRefind && canEdit('EditDepartment')">
+                            <a href="javascript:void(0)" class="custom-link" id="editId" name="editName" ng-click="showEditDepartment(round)">[ {{'COMMON_EDIT_DEPARTMENT'|translate}} ]</a>
+                        </div>
+                        <div ng-if="!isRefind && canEdit('EditUser')">
+                            <a href="javascript:void(0)" class="custom-link" id="editId" name="editName" ng-click="showEditDepartment(round)">[ {{'COMMON_EDIT_USER'|translate}} ]</a>
+                        </div>
+                        <div ng-if="isRefind">
+                            <a href="javascript:void(0)" class="custom-link" id="" name="" ng-click="reFindDepartment()">[ {{'COMMON_REFIND_DEPT'|translate}} ]</a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <span class="card-title">
+                            Completed By:
+                        </span>
+                        <span ng-if="round.voteType != 0 && round.isStepCompleted">{{round.approverFullName}}</span>
+                        <span ng-if="round.voteType == 0 && round.isStepCompleted">System (Auto Ignore)</span>
+                        <span ng-if="!round.voteType">-/-</span>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mt-3">
+                            <span class="card-title">
+                                Start date:
+                            </span>
+                            <span ng-if="round.created">{{round.created | date: formatDate}}</span>
+                            <span ng-if="!round.created">-/-</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mt-3">
+                            <span class="card-title">
+                                Status:
+                            </span>
+                            <span class="info-data" ng-if="round && round.voteType == 0 && round.isStepCompleted">Completed</span>
+                            <span class="info-data" ng-if="round && round.voteType == 0 && !round.isStepCompleted">In Progress</span>
+                            <span class="info-data" ng-if="round && round.voteType == 2 || round.voteType == 1">{{round.outcome}}</span>
+                            <span class="info-data" ng-if="round && round.voteType == 3">Request To Change</span>
+                            <span class="info-data" ng-if="round && round.voteType == 4">Cancelled</span>
+                            <span class="info-data" ng-if="round && round.voteType == 5">Out of period</span>
+                            <span ng-if="!round.voteType">-/-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mt-3">
+                            <span class="card-title">
+                                Completed date:
+                            </span>
+                            <span ng-if="round.modified && round.isStepCompleted">{{round.modified| date: formatDate}}</span>
+                            <span ng-if="!round.modified">-/-</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mt-3" ng-if="round.dueDate">
+                            <span class="card-title">
+                                Due date:
+                            </span>
+                            {{round.dueDate|date: formatDate}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mt-3" >
+                            <span class="card-title">
+                                Comment:
+                            </span>
+                            <show-more class="info-data ng-binding" number=30 text="round.comment" more=" View more" less=" View less">
+                            </show-more>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+         
+        </div>
+    </div>
+</div>

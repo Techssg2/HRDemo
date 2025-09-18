@@ -1,0 +1,20 @@
+﻿{
+  "EmployeeSubGroup": [
+    {
+      "SourceField": "EmployeeGroup",
+      "TargetField": "Persg"
+    },
+    {
+      "SourceField": "EmployeeGroupDescription",
+      "TargetField": "Ptext"
+    },
+    {
+      "SourceField": "EmployeeSubgroup",
+      "TargetField": "Persk"
+    },
+    {
+      "SourceField": "EmployeeSubgroupDescription",
+      "TargetField": "PtextS"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html ng-app="ssg">
+
+<head>
+    <meta charset="utf-8">
+    <title>SSG</title>
+    <base href="/">
+
+    <link type="text/css" rel="stylesheet" href="./assets/lib/kendo/styles/kendo.common.min.css" />
+    <link type="text/css" rel="stylesheet" href="./assets/lib/kendo/styles/kendo.office365.min.css" />
+    <link type="text/css" rel="stylesheet" href="./assets/lib/kendo/styles/fx.framework.core.css" />
+    <link type="text/css" rel="stylesheet" href="./assets/css/aeon.edocument.css" />
+    <link type="text/css" rel="stylesheet" href="./assets/css/shared.css" />
+    <link type="text/css" rel="stylesheet" href="./assets/css/angular-ui-notification.css" />
+    <link type="text/css" rel="stylesheet" href="./assets/css/styles.css" />
+    <script src="./assets/lib/kendo/js/jquery.min.js"></script>
+    <script src="./assets/lib/kendo/js/angular.min.js"></script>
+    <script src="./assets/lib/kendo/js/kendo.all.min.js"></script>
+    <script src="./assets/lib/ui-router/angular-ui-router.min.js"></script>
+    <script src="./assets/lib/angular-resource/angular-resource.min.js"></script>
+    <script data-require="lodash.js@*" data-semver="3.1.0" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.1.0/lodash.min.js"></script>
+
+    <!-- My js files -->
+    <script src="./app/app.module.js"></script>
+    <script src="./app/components/recruitment/recruitment-controller.js"></script>
+    <script src="./app/components/cb/cb-controller.js"></script>
+    <script src="./app/components/setting/setting-controller.js"></script>
+    <script src="./app/components/dashboard/dashboard-controller.js"></script>
+    <script src="./app/components/dashboard/orgchart/orgchart-controller.js"></script>
+    <script src="./app/app-controller.js"></script>
+    <script src="./app/components/recruitment/applicant/applicant-controller.js"></script>
+    <script src="./app/components/recruitment/position/position-controller.js"></script>
+    <script src="./app/components/recruitment/promote-and-transfer/promote-and-transfer-controller.js"></script>
+    <script src="./app/components/recruitment/new-staff-onboard/new-staff-onboard-controller.js"></script>
+    <script src="./app/components/recruitment/request-to-hire/request-to-hire-controller.js"></script>
+    <script src="./app/components/cb/overtime-application/overtime-application-controller.js"></script>
+    <script src="./app/components/cb/resignation-application/resignation-application-controller.js"></script>
+    <script src="./app/components/cb/shift-exchange-application/shift-exchange-application-controller.js"></script>
+    <script src="./app/components/cb/leave-management/leave-management-controller.js"></script>
+    <script src="./app/components/setting/departments/department-controller.js"></script>
+    <script src="./app/components/cb/missing-timelock/missing-timelock-controller.js"></script>
+    <script src="./app/components/setting/job-grade/job-grade-controller.js"></script>
+    <script src="./app/components/recruitment/handover/handover-controller.js"></script>
+    <script src="./app/components/setting/recruitments/category/category-controller.js"></script>
+    <script src="./app/components/setting/recruitments/working-time/recruitment-working-time-controller.js"></script>
+    <script src="./app/components/setting/recruitments/promoteTransferPrint/recruitment-promote-transfer-print-controller.js"></script>
+    <script src="./app/components/setting/recruitments/item-list/recruitment-item-list-controller.js"></script>
+    <script src="./app/components/recruitment/action/action-controller.js"></script>
+    <script src="./app/components/setting/cb/c-a-b-reason-controller.js"></script>
+    <script src="./app/components/setting/reference-number/reference-number-controller.js"></script>
+    <script src="./app/components/setting/recruitments/status/recruitment-applicant-status-controller.js"></script>
+    <script src="./app/components/setting/recruitments/appreciation/recruitment-appreciation-list-controller.js"></script>
+    <script src="./app/components/setting/tracking-logs/tracking-log-controller.js"></script>
+    <script src="./app/components/setting/recruitments/cost-center/recruitment-cost-center-controller.js"></script>
+    <script src="./app/components/setting/cb/holiday-schedule/cb-holiday-schedule-controller.js"></script>
+    <script src="./app/components/setting/shift-plan-submit-person/shift-plan-submit-person-controller.js"></script>
+    <script src="./app/components/setting/days-configuration/days-configuration-controller.js"></script>
+    <script src="./app/components/setting/business-model/business-model-controller.js"></script>
+
+    <script src="./app/components/setting/recruitments/working-address/recruitment-working-address-controller.js"></script>
+    <!-- Shared -->
+    <script src="./app/app.setting.js"></script>
+    <script src="./app/shared/utilities.js"></script>
+    <script src="./app/shared/moment.js"></script>
+    <script src="./app/shared/history.js"></script>
+    <script src="./app/shared/angular-ui-notification.js"></script>
+    <script src="./app/shared/fileSaver.js"></script>
+
+    <!-- Directive -->
+    <script src="./app/shared/directives/user-info/user-info.directive.js"></script>
+    <script src="./app/shared/directives/sub-menu-section/sub-menu-section.directive.js"></script>
+    <script src="./app/shared/directives/excute-jq.directive.js"></script>
+    <script src="./app/shared/directives/notification/notification.directive.js"></script>
+    <script src="./app/shared/directives/workflow-status/workflow-status.directive.js"></script>
+    <!-- Children page -->
+    <script src="./app/components/setting/users/user-controller.js"></script>
+    <script src="./app/components/setting/budgets/budget-controller.js"></script>
+    <script src="./app/components/setting/workflows/workflow-controller.js"></script>
+    <!-- Service -->
+    <script src="./app/components/setting/setting-service.js"></script>
+    <script src="./app/components/cb/cb-service.js"></script>
+    <script src="./app/components/recruitment/recruitment-service.js"></script>
+    <script src="./app/components/cb/cb-service.js"></script>
+    <script src="./app/shared/interceptor-service.js"></script>
+    <script src="./app/components/master-data/master-data-service.js"></script>
+    <script src="./app/components/employee/employee-service.js"></script>
+    <script src="./app/shared/services/attachmentFile-service.js"></script>
+    <!-- Filter -->
+    <script src="app/shared/filter-option.js"></script>
+
+    <script src="./app/shared/modules/attachment-file-module.js"></script>
+
+</head>
+
+<body class="app-font page-header-fixed page-container-bg-solid ms-backgroundImage">
+    <div ui-view></div>
+</body>
+
+</html>

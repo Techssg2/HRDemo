@@ -1,0 +1,50 @@
+<div class="col-md-12">
+    <!--<div class="row ng-scope" ng-if="errors.length > 0" style="padding: 15px 0;margin-bottom:15px">
+        <div class="col-sm-12">
+            <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                <h5 class="bold uppercase">
+                    {{'COMMON_ENTER_FIELD' | translate}}
+                    <span class="font-red-thunderbird">*</span>:
+                </h5>
+                <p></p>
+                <ul>
+                    <li ng-repeat="error in errors" style="margin-left: 1em;">
+                        <span class="bold">{{error.fieldName}}</span>
+                        <zt ng-if="!error.isRule">
+                            : {{error.error}}
+                        </zt>
+                        <span ng-if="error.isRule">
+                            {{error.error}}
+                        </span>
+                    </li>
+                </ul>
+                <p></p>
+            </div>
+        </div>
+    </div>-->
+
+    <div class="alert alert-danger-style1 mb-3" role="alert" ng-if="errors.length > 0">
+        <div class="col-sm-12">
+            <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                <h5 class="bold uppercase"> {{'COMMON_ENTER_FIELD' | translate}} <span class="text-danger">*</span>:</h5>
+                <p></p>
+                <ul>
+                    <li ng-repeat="error in errors" style="margin-left: 1em;">
+                        <span class="bold">{{error.fieldName}}</span>
+                        <zt ng-if="!error.isRule">
+                            : {{error.error}}
+                        </zt>
+                        <span ng-if="error.isRule">
+                            {{error.error}}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .ng-invalid {
+        border: 1px solid #f00 !important;
+    }
+</style>

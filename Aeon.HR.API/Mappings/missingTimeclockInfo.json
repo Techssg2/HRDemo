@@ -1,0 +1,22 @@
+[
+  {
+    "SourceField": "RequestFrom",
+    "TargetField": "Edoc_user",
+    "Type": 0
+  },
+  {
+    "SourceField": "EmployeeCode",
+    "TargetField": "Pernr",
+    "Type": 0
+  },
+  {
+    "SourceField": "Date",
+    "TargetField": "Date",
+    "Type": 0
+  },
+  {
+    "SourceField": "ActualTimeIn",
+    "TargetField": "Time",
+    "Type": 0
+  }
+]

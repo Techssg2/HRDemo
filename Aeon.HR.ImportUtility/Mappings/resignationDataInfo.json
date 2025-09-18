@@ -1,0 +1,27 @@
+﻿[
+  {
+    "SourceField": "RequestFrom",
+    "TargetField": "Edoc_user",
+    "Type": 0
+  },
+  {
+    "SourceField": "EmployeeCode",
+    "TargetField": "Pernr",
+    "Type": 0
+  },
+  {
+    "SourceField": "OfficialResignationDate",
+    "TargetField": "Begda",
+    "Type": 0
+  },
+  {
+    "SourceField": "ActionType",
+    "TargetField": "Massn",
+    "Type": 0
+  },
+  {
+    "SourceField": "Reason",
+    "TargetField": "Massg",
+    "Type": 0
+  }
+]

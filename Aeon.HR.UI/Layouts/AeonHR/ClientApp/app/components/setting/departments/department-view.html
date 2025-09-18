@@ -1,0 +1,471 @@
+<style>
+    .k-window-title {
+        color: #b42e83 !important;
+        font-family: 'Nova-Regular' !important;
+        font-size: 18px;
+    }
+    .k-grid-content-locked {
+        float: right;
+        text-align: center;
+    }
+
+    .k-grid-header-locked {
+        float: right;
+        text-align: center;
+    }
+    
+    .k-grid-header-locked table thead tr .k-header {
+        text-align: center;
+    }
+
+    /* .k-grid-content{
+        overflow-y: hidden;
+    } */
+
+    .k-grid-content-locked {
+        overflow: hidden;
+        min-height: 50px !important;
+    }
+
+    .k-grid-content {
+        min-height: 0px !important;
+        max-height: 500px !important;
+    }
+
+    #create:hover {
+        background-color: #3175af !important;
+        color: white !important;
+        border-bottom: 1px solid #3175af !important;
+    }
+    span.k-dropdown-wrap.k-state-default {
+        background-color: #fff !important;
+    }
+</style>
+
+
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">{{title}}</span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-md-7">
+                        </div>
+                        <div class="col-md-5 align-right-btn-group">
+                            <div class="input-group" style="width: 500px">
+                                <!-- <span class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span> -->
+
+                                <span class="input-group-btn">
+                                    <a class="btn btn-sm btn-primary" id="create"
+                                        style="margin-right: 20px;margin-bottom: 10px;color: white; padding-top: 7px !important"
+                                        ng-click="resetDepartmentModel();openCreateWindow()">
+                                        <i class="fa fa-plus right-5"></i>Create</a>
+                                </span>
+
+                                <input type="text" class="form-control" id='fieldFilter' ng-model="searchText"
+                                    ng-keypress="ifEnter($event)" placeholder="Search for..." style="width: 100%; ">
+                                <span class="input-group-btn">
+                                    <button ng-click="search()" class="btn btn-default btn-sm" type="button" style="border: 1px solid #dadada;
+                                                margin-bottom: 10px;"><span class="k-icon k-i-search"></span></button>
+                                </span>
+                            </div>
+                            <div add-class class="btn-group" current-class="btn-group" added-class="open"
+                                style="margin-top:3px">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-expanded="true" style="padding: 0px !important"><img
+                                        src="ClientApp/assets/images/icon/more.png" style="position: relative;top: -2px"
+                                        class="ng-isolate-scope"></button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a ng-click="export()" class="ng-binding"><i
+                                                class="fa fa-table font-blue right-5"></i>
+                                            Export excel</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="page-content-wrapper float-none">
+                    <div class="row">
+                        <div class="col-md-4" id="body"
+                            style="border-radius: 16px; border: 2px solid #e5e5e5;overflow: auto;height: 100%;">
+                            <!-- <div id="treeview"></div> -->
+                            <input style="margin-bottom: 10px; margin-top: 10px;" class="w100" id="departmentId"
+                                kendo-drop-down-tree="widget.department" k-options="departmentOptions"
+                                ng-model="departmentTreeId" />
+                            <div kendo-tree-view="tree" k-options="treeViewDepartment" id="treeview"
+                                k-data-source="dataDepartment" k-on-change="onchangeItemTreeView(dataItem)">
+                                <span k-template>
+                                    <!-- <span ng-if="dataItem.jobGradeCaption">{{dataItem.name}}
+                                        ({{dataItem.jobGradeCaption}})</span> -->
+                                    <span ng-if="dataItem.jobGradeCaption">{{dataItem.name}}
+                                    </span>
+                                    <span ng-if="!dataItem.jobGradeCaption">{{dataItem.name}}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <!-- <div class="row" style="margin-bottom: 10px;">
+                                <a class="btn btn-sm btn-primary float-right" style="margin-right: 20px;"
+                                    ng-click="resetDepartmentModel();openCreateWindow()">
+                                    <i class="fa fa-plus right-5"></i>Create</a>
+                            </div> -->
+                            <div class="row" style="margin-left: 10px;">
+                                <kendo-grid id="departmentGrid" options="departmentGridOptions">
+                                </kendo-grid>
+                            </div>
+
+
+                            <!-- <a class="btn btn-sm btn-primary float-right"
+                                ng-click="resetDepartmentModel();openCreateWindow()">
+                                <i class="fa fa-plus right-5"></i>Create</a> -->
+                        </div>
+                        <!-- <div class="col-md-12 mt-2">
+                            <a class="btn btn-sm btn-primary float-right"
+                                ng-click="resetDepartmentModel();openCreateWindow()">
+                                <i class="fa fa-plus right-5"></i>Create</a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <!-- Windows edit -->
+            <div kendo-window="departmentEditWin" id="departmentEditWin" k-title="'Edit Department'" k-draggable="false"
+                k-visible="false" k-actions="dialogActions" width="600" modal="true" resizable="false"
+                k-on-close="onClose()" k-on-open="onOpen()">
+                <div class="row k-popup-edit-form k-window-content k-content" style="padding-bottom:0px">
+                    <div class="col-md-12">
+                        <div class="k-edit-label">
+                            <label for="Code">
+                                Code: <span class="font-red-thunderbird">*</span>
+                            </label>
+                        </div>
+                        <div data-container-for="Code" class="k-edit-field">
+                            <input type="text" autocomplete="off" class="k-textbox" name="Code" title="Code"
+                                   ng-model="departmentModel.code">
+                        </div>
+                        <div class="k-edit-label">
+                            <label for="Name">
+                                Name: <span class="font-red-thunderbird">*</span>
+                            </label>
+                        </div>
+                        <div data-container-for="Name" class="k-edit-field">
+                            <input type="text" autocomplete="off" class="k-textbox" name="Name" title="Name"
+                                   ng-model="departmentModel.name">
+                        </div>
+                        <div class="k-edit-label">
+                            <label for="Caption">
+                                Position: <span class="font-red-thunderbird">*</span>
+                            </label>
+                        </div>
+                        <div data-container-for="Caption" class="k-edit-field">
+                            <input kendo-drop-down-list
+                                   k-options="groupOptions.positionListOptions" ng-model="departmentModel.positionCode" />
+                        </div>
+                        <div class="k-edit-label">
+                            <label for="Type">
+                                Type: <span class="font-red-thunderbird">*</span>
+                            </label>
+                        </div>
+                        <div data-container-for="Type" class="k-edit-field">
+                            <input kendo-drop-down-list k-data-source="model.typeList" data-role="dropdownlist"
+                                   k-auto-bind="false" k-on-change="updateJobGradeList('edit')" k-data-text-field="'title'"
+                                   k-data-value-field="'id'" ng-model="departmentModel.type" />
+                        </div>
+                        <div class="k-edit-label">
+                            <label for="JobGrade">
+                                Job Grade: <span class="font-red-thunderbird">*</span>
+                            </label>
+                        </div>
+                        <div data-container-for="JobGrade" class="k-edit-field">
+                            <input kendo-drop-down-list="jobGradeDropdownEdit"
+                                   k-options="groupOptions.jobGradeListOptions" k-on-change="updateTreeList('edit')"
+                                   ng-model="departmentModel.jobGradeId" />
+                        </div>
+                        <div class="k-edit-label">
+                            <label for="DepartmentParent">Department Parent:</label>
+                        </div>
+                        <div data-container-for="DepartmentParent" class="k-edit-field">
+                            <input kendo-drop-down-tree="departmentTreeEdit"
+                                   k-options="groupOptions.departmentListOptions" k-ng-model="departmentModel.parentId"
+                                   k-on-change="changeDepartment('edit')" />
+                        </div>
+
+                        <div class="k-edit-label">
+                            <label for="Region">
+                                Region: <span class="font-red-thunderbird">*</span>
+                            </label>
+                        </div>
+                        <div data-container-for="Region" class="k-edit-field">
+                            <input kendo-drop-down-list
+                                   k-options="groupOptions.regionListOptions"
+                                   ng-model="departmentModel.regionId" />
+                        </div>
+
+                        <div class="k-edit-label"><label for="sapCode">SAP Code:</label></div>
+                        <div data-container-for="sapCode" class="k-edit-field">
+                            <input type="text" autocomplete="off" class="k-textbox" name="sapCode" title="sapCode"
+                                   ng-model="departmentModel.sapCode">
+                        </div>
+                        <div class="k-edit-label"><label for="Color">Color:</label></div>
+                        <div data-container-for="Color" class="k-edit-field"
+                             style="width: 60px;float: left;margin-left: 2.8em;display:inline-flex">
+                            <input class="spectrumColor" type="color" name="Color" ng-model="departmentModel.color"
+                                   value="departmentModel.color" title="Color">
+                        </div>
+                        <div class="k-edit-label"><label for="isStore">Is Store:</label></div>
+                        <div data-container-for="isStoreA" class="k-edit-field">
+                            <input type="checkbox" class="k-checkbox" name="isStoreA" title="isStore"
+                                   ng-model="departmentModel.isStore">
+                            <label for="isStoreA" class="k-checkbox-label">Is Store</label>
+                        </div>
+                        <div class="k-edit-label"><label for="isHr">Is HR:</label></div>
+                        <div data-container-for="isHrA" class="k-edit-field">
+                            <input type="checkbox" id="isHrA" class="k-checkbox" name="isHrA" title="isHr"
+                                   ng-model="departmentModel.isHr">
+                            <label for="isHrA" class="k-checkbox-label">Is HR</label>
+                        </div>
+                        <div class="k-edit-label"><label for="isPrB">Is C&B:</label></div>
+                        <div data-container-for="isPrB" class="k-edit-field">
+                            <input type="checkbox" id="isPrB" class="k-checkbox" name="isPrB" title="isCB"
+                                   ng-model="departmentModel.isCB">
+                            <label for="isPrB" class="k-checkbox-label">Is C&B</label>
+                        </div>
+                        <div class="k-edit-label"><label for="isPrA">Is Perfomance:</label></div>
+                        <div data-container-for="isPrA" class="k-edit-field">
+                            <input type="checkbox" id="isPrA" class="k-checkbox" name="isPrA" title="isPrA"
+                                   ng-model="departmentModel.isPerfomance">
+                            <label for="isPrA" class="k-checkbox-label">Is Perfomance</label>
+                        </div>
+                        <div class="k-edit-label"><label for="isAdminA">Is Admin:</label></div>
+                        <div data-container-for="isPrA" class="k-edit-field">
+                            <input type="checkbox" id="isAdminA" class="k-checkbox" name="isAdminA" title="isAdminA"
+                                   ng-model="departmentModel.isAdmin">
+                            <label for="isAdminA" class="k-checkbox-label">Is Admin</label>
+                        </div>
+                        <div class="k-edit-label"><label for="isAdminB">Is Facility:</label></div>
+                        <div data-container-for="isPrB" class="k-edit-field">
+                            <input type="checkbox" id="isFacility" class="k-checkbox" name="isFacility" title="isFacility"
+                                   ng-model="departmentModel.isFacility">
+                            <label for="isFacility" class="k-checkbox-label">Is Facility</label>
+                        </div>
+                        <div class="k-edit-label"><label for="isAdminB">Enable for Promote/Transfer or Acting:</label></div>
+                        <div data-container-for="enableForPromoteActing" class="k-edit-field">
+                            <input type="checkbox" id="enableForPromoteActing" class="k-checkbox" name="enableForPromoteActing" title="enableForPromoteActing"
+                                   ng-model="departmentModel.enableForPromoteActing">
+                            <label for="enableForPromoteActing" class="k-checkbox-label">Enable for Promote/Transfer or Acting</label>
+                        </div>
+                        <div class="k-edit-label">
+                            <label for="DepartmentParent">HR Department:</label>
+                        </div>
+                        <div data-container-for="DepartmentParent" class="k-edit-field">
+                            <input kendo-drop-down-tree="hrDepartmentTree" id="hrDepartmentTree"
+                                   k-options="groupOptions.hrTreeEditOptions"
+                                   k-ng-model="departmentModel.hrDepartmentId" />
+                        </div>
+
+                        <div class="k-edit-label">
+                            <label for="CostCenter">
+                                Cost Center:
+                            </label>
+                        </div>
+                        <div data-container-for="CostCenter" class="k-edit-field">
+                            <input kendo-drop-down-list
+                                   k-options="groupOptions.costCenterListOptions"
+                                   ng-model="departmentModel.costCenterRecruitmentId" />
+                        </div>
+
+
+                    </div>
+                    <div class="k-edit-buttons k-state-default col-md-12"
+                        style="border-top:1px solid #c9c9c9;padding-top:1em;">
+                        <a role="button" ng-click="saveDepartment();" style="margin-right:1.5em !important;"
+                            class="float-right btn btn-default btn-sm btn-save-popup">
+                            <span class="k-icon k-i-save font-green-jungle"
+                                style="font-size: 14px;margin-right: .1em;margin-bottom: .1em;"></span>Save
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Window thêm mới -->
+            <div kendo-window="departmentCreateWin" id="departmentCreateWin" k-title="'CREATE A DEPARTMENT'"
+                k-draggable="false" k-visible="false" k-actions="dialogActions" width="600" modal="true"
+                resizable="false" k-on-close="dialogVisible = false;">
+                <div class="row k-popup-edit-form k-window-content k-content" style="padding-bottom:0px">
+                    <div class="col-md-12">
+                        <div class="k-edit-label">
+                            <label for="Code">
+                                Code: <span class="font-red-thunderbird">*</span>
+                            </label>
+                        </div>
+                        <div data-container-for="Code" class="k-edit-field">
+                            <input type="text" autocomplete="off" class="k-textbox" name="Code" title="Code"
+                                   ng-model="departmentModel.code">
+                        </div>
+                        <div class="k-edit-label">
+                            <label for="Name">
+                                Name: <span class="font-red-thunderbird">*</span>
+                            </label>
+                        </div>
+                        <div data-container-for="Name" class="k-edit-field">
+                            <input type="text" autocomplete="off" class="k-textbox" name="Name" title="Name"
+                                   ng-model="departmentModel.name">
+                        </div>
+                        <div class="k-edit-label">
+                            <label for="Caption">
+                                Position: <span class="font-red-thunderbird">*</span>
+                            </label>
+                        </div>
+                        <div data-container-for="Caption" class="k-edit-field">
+                            <input kendo-drop-down-list k-options="groupOptions.positionListOptions"
+                                   ng-model="departmentModel.positionCode" />
+                        </div>
+
+                        <div class="k-edit-label">
+                            <label for="DepartmentParent">Department Parent:</label>
+                        </div>
+                        <div data-container-for="DepartmentParent" class="k-edit-field" ng-show="isAeon">
+                            <input kendo-drop-down-tree="departmentTreeAdd" k-options="departmentListOptionsAdd"
+                                   k-ng-model="departmentModel.parentIdCreate" k-on-change="changeDepartmentAdd()" />
+                        </div>
+                        <div data-container-for="DepartmentParent" class="k-edit-field" ng-show="!isAeon">
+                            <input type="text" autocomplete="off" class="k-textbox" name="sapCode" title="sapCode"
+                                   ng-model="selectedItem.name" readonly />
+                        </div>
+
+                        <div class="k-edit-label">
+                            <label for="Region">
+                                Region: <span class="font-red-thunderbird">*</span>
+                            </label>
+                        </div>
+                        <div data-container-for="Region" class="k-edit-field">
+                            <input kendo-drop-down-list
+                                   k-options="groupOptions.regionListOptions" ng-model="departmentModel.regionId" />
+                        </div>
+
+                        <div class="k-edit-label">
+                            <label for="JobGrade">
+                                Job Grade: <span class="font-red-thunderbird">*</span>
+                            </label>
+                        </div>
+                        <div data-container-for="JobGrade" class="k-edit-field">
+                            <input kendo-dropdownlist="jobGradeDropdownAdd" k-options="groupOptions.jobGradeListOptions"
+                                   k-on-change="updateTypeFormAdd()" ng-model="departmentModel.jobGradeId" />
+                        </div>
+                        <div class="k-edit-label">
+                            <label for="Type">
+                                Type: <span class="font-red-thunderbird">*</span>
+                            </label>
+                        </div>
+                        <div data-container-for="Type" class="k-edit-field">
+                            <input kendo-drop-down-list k-data-source="model.typeList" data-role="dropdownlist"
+                                   k-data-text-field="'title'" readonly k-data-value-field="'id'"
+                                   ng-model="departmentModel.type" />
+                        </div>
+                        <div class="k-edit-label"><label for="sapCode">SAP Code:</label></div>
+                        <div data-container-for="sapCode" class="k-edit-field">
+                            <input type="text" autocomplete="off" class="k-textbox" name="sapCode" title="sapCode"
+                                   ng-model="departmentModel.sapCode">
+                        </div>
+                        <div class="k-edit-label"><label for="Color">Color:</label></div>
+                        <div data-container-for="Color" class="k-edit-field"
+                             style="width: 60px;float: left;margin-left: 2.8em;;display:inline-flex">
+                            <input class="spectrumColor" type="color" name="Color" ng-model="departmentModel.color"
+                                   value="departmentModel.color" title="Color">
+                        </div>
+                        <div class="k-edit-label"><label for="isStore">Is Store:</label></div>
+                        <div data-container-for="isStore" class="k-edit-field">
+                            <input type="checkbox" class="k-checkbox" name="isStoreB" title="isStore"
+                                   ng-model="departmentModel.isStore">
+                            <label class="k-checkbox-label">Is Store</label>
+                        </div>
+                        <div class="k-edit-label"><label for="isHrB">Is HR:</label></div>
+                        <div data-container-for="isHrB" class="k-edit-field">
+                            <input type="checkbox" id="isHrB" class="k-checkbox" name="isHrB" title="isHr"
+                                   ng-model="departmentModel.isHr">
+                            <label class="k-checkbox-label">Is HR</label>
+                        </div>
+                        <div class="k-edit-label"><label for="isPrB">Is C&B:</label></div>
+                        <div data-container-for="isPrB" class="k-edit-field">
+                            <input type="checkbox" id="isPrB" class="k-checkbox" name="isPrB" title="isCB"
+                                   ng-model="departmentModel.isCB">
+                            <label for="isPrB" class="k-checkbox-label">Is C&B</label>
+                        </div>
+                        <div class="k-edit-label"><label for="isPrB">Is Perfomance:</label></div>
+                        <div data-container-for="isPrB" class="k-edit-field">
+                            <input type="checkbox" id="isPrB" class="k-checkbox" name="isPrB" title="isPrB"
+                                   ng-model="departmentModel.isPerfomance">
+                            <label for="isPrB" class="k-checkbox-label">Is Perfomance</label>
+                        </div>
+                        <div class="k-edit-label"><label for="isAdminB">Is Admin:</label></div>
+                        <div data-container-for="isPrB" class="k-edit-field">
+                            <input type="checkbox" id="isAdminB" class="k-checkbox" name="isAdminB" title="isAdminB"
+                                   ng-model="departmentModel.isAdmin">
+                            <label for="isAdminB" class="k-checkbox-label">Is Admin</label>
+                        </div>
+                        <div class="k-edit-label"><label for="isAdminB">Is Facility:</label></div>
+                        <div data-container-for="isPrB" class="k-edit-field">
+                            <input type="checkbox" id="isFacility" class="k-checkbox" name="isFacility" title="isFacility"
+                                   ng-model="departmentModel.isFacility">
+                            <label for="isFacility" class="k-checkbox-label">Is Facility</label>
+                        </div>
+                        <div class="k-edit-label"><label for="isAdminB">Enable for Promote/Transfer or Acting:</label></div>
+                        <div data-container-for="enableForPromoteActing" class="k-edit-field">
+                            <input type="checkbox" id="enableForPromoteActing" class="k-checkbox" name="enableForPromoteActing" title="enableForPromoteActing"
+                                   ng-model="departmentModel.enableForPromoteActing">
+                            <label for="enableForPromoteActing" class="k-checkbox-label">Enable for Promote/Transfer or Acting</label>
+                        </div>
+                        <div class="k-edit-label">
+                            <label for="DepartmentParent">HR Department:</label>
+                        </div>
+                        <div data-container-for="DepartmentParent" class="k-edit-field">
+                            <input kendo-drop-down-tree="hrDepartmentTreeAdd" id="hrDepartmentTreeAdd"
+                                   k-options="groupOptions.hrTreeAddOptions"
+                                   ng-model="departmentModel.hrDepartmentIdCreate" />
+                        </div>
+                        <div class="k-edit-label">
+                            <label for="CostCenter">
+                                Cost Center:
+                            </label>
+                        </div>
+                        <div data-container-for="CostCenter" class="k-edit-field">
+                            <input kendo-drop-down-list
+                                   k-options="groupOptions.costCenterListOptions"
+                                   ng-model="departmentModel.costCenterRecruitmentId" />
+                        </div>
+                    </div>
+                    <div class="k-edit-buttons k-state-default col-md-12"
+                        style="border-top:1px solid #c9c9c9;padding-top:1em;">
+                        <a role="button" ng-click="addDepartment();" style="margin-right:1.5em !important;"
+                            class="float-right btn btn-default btn-sm btn-save-popup">
+                            <span class="k-icon k-i-save font-green-jungle"
+                                style="font-size: 14px;margin-right: .1em;margin-bottom: .1em;"></span>Save
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Windows user in department -->
+            <div id="userWin" kendo-window="userWin" k-title="'Users in Department'" k-on-open="dialogVisible = true"
+                k-visible="false" k-actions="dialogActions" width="890" modal="true" resizable="false"
+                k-on-close="dialogVisible = false;onCloseUserWindow()">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div kendo-grid id="userInDepartmentGrid" style="width:850px;"
+                            options="userInDepartmentGridOptions">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        <button ng-disabled="hasEditingUser()" ng-click="addUserInDepartment()"
+                            style="margin-right: 2.4em;" class="k-primary app-button k-button float-right">Add
+                            More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

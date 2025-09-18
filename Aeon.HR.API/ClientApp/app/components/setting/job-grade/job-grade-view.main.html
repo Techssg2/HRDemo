@@ -1,0 +1,115 @@
+<style>
+   
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+
+            <div class="d-flex align-items-center justify-content-between portlet-title">
+                <div class="group poppins-medium text-grey-300 caption caption-md px-3">
+                    <p style=" text-transform: uppercase !important;" class="display-8 m-0">{{title}}</p>
+                    <p class="display-11">
+                        <span class="opacity-40">Number of record:</span> {{total}}
+                    </p>
+                </div>
+            </div>
+            <div class="portlet-body p-2 bg-neutral-blue-300">
+                <div ng-show="false"><input id="files" name="files" kendo-upload type="file" ng-show="false" class="ng-hide" /></div>
+                <div class="page-content-wrapper float-none table-rounded-toolbar ">
+                    <div class="toolbar">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="d-flex gap-2 align-items-center justify-content-between">
+
+                                    <div class="input-group d-flex gap-3" style="width: 500px; margin-top:10px">
+
+                                    </div>
+                                    <div class="d-flex gap-2">
+
+                                        <button type="button" ng-click="export()" class="btn btn-outline-cyan rounded-3 poppins-regular display-9 py-2 px-3">
+                                            <svg fill="currentColor" class="bi bi-check-square" width="16" height="16" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="m0 1016.081 409.186 409.073 79.85-79.736-272.867-272.979h1136.415V959.611H216.169l272.866-272.866-79.85-79.85L0 1016.082ZM1465.592 305.32l315.445 315.445h-315.445V305.32Zm402.184 242.372-329.224-329.11C1507.042 187.07 1463.334 169 1418.835 169h-743.83v677.647h112.94V281.941h564.706v451.765h451.765v903.53H787.946V1185.47H675.003v564.705h1242.353V667.522c0-44.498-18.07-88.207-49.581-119.83Z" fill-rule="evenodd"></path>
+                                            </svg>
+                                            &nbsp;Export
+                                        </button>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="display-10 leading-18">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <kendo-grid id="allOrMyRequestGrid" options="allOrMyRequestGridOptions" style=" overflow: hidden; border-top-left-radius: 0px !important; border-top-right-radius: 0px !important;">
+                                </kendo-grid>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="dialogDetail" kendo-dialog="dialogDetail" k-title="titleModal" k-on-open="dialogVisible = true"
+     k-on-close="dialogVisible = false" k-width="850" k-modal="true" k-visible="false" options="dialogDetailOption" style=" overflow-y: hidden;">
+    <div class="row" ng-if="getLengthObjectKeys(errorsTwo) > 0" style="margin-bottom:15px">
+        <div class="col-sm-12" ng-repeat="(key, value) in errorsTwo">
+            <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                <h5 class="bold uppercase">{{key}}<span class="font-red-thunderbird">*</span>:</h5>
+                <p></p>
+                <ul ng-if="value.length > 0">
+                    <li ng-repeat="error in value"><span ng-bind-html="renderHtml(error.message)"></span></li>
+                </ul>
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="display-10 leading-18 row" >
+
+        <div class="col-md-12">
+            <kendo-grid id="itemsOnGrid" options="itemsEditListGridOptions" style=" overflow: hidden; border: 1px solid #ddd;">
+            </kendo-grid>
+        </div>
+
+    </div>
+
+    <div class="row mrt10" style="width:820px; margin-top:3px">
+        <div class="col-md-12">
+            <a role="button" style="color:white; " class="btn btn-primary rounded-3 poppins-regular display-8 py-1 px-2 float-end" ng-click="actions.addItem()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"></path>
+                </svg>
+                &nbsp;Create
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<div id="dialog_LoadingBooking" kendo-dialog="dialogLoadingBooking" options="dialogLoadingCreateJobgradeOption">
+    <div class="alert alert-warning" style="clear: both; margin-top: 10px; margin-bottom: 10px; font-size: 14px;">
+        <strong>Warning!</strong> <p>{{'COMMON_WAITING_CREATE_JOBGRADE'|translate}}</p>
+    </div>
+
+    <div style=" margin-top:10px;">
+        <ul>
+            <div class="row">
+                <div class="ring" style=" margin-top:30px;">
+                    Loading
+                    <span id="loading1"></span>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>

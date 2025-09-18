@@ -1,0 +1,266 @@
+<style>
+  .k-editor-toolbar-wrap {
+    display: none;
+  }
+
+  #userGrid .k-grid-header table .k-checkbox-label:before {
+    display: none;
+  }
+</style>
+<div class="page-content-wrapper float-none">
+  <div class="page-content">
+    <div class="form-horizontal">
+      <div class="form-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'TRAINING_REQUEST_COURSE_CATEGORY'|translate}}</label>
+              <div class="col-md-6">
+                <input type="text" name="courseCategory" class="k-textbox form-control input-sm"
+                  ng-model="models.courseCategory" style="width: 100%" disabled="true" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'TRAINING_REQUEST_COURSE_NAME'|translate}}</label>
+              <div class="col-md-6">
+                <input type="text" name="courseName" class="k-textbox form-control input-sm"
+                  ng-model="models.courseName" style="width: 100%" disabled="true" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" ng-style="{'display': (models.displayServiceProvider==true) ? 'block':'none'}">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'SERVICE_PROVIDER'|translate}}</label>
+              <div class="col-md-6">
+                <input type="text" name="serviceProvider" class="k-textbox form-control input-sm"
+                  ng-model="models.serviceProvider" style="width: 100%" disabled="true" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" ng-style="{'display': (models.displayServiceProvider==true) ? 'none':'block'}">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'COMMON_TRAINER_NAME'|translate}}</label>
+              <div class="col-md-5">
+                <input type="text" name="trainerName" class="k-textbox form-control input-sm"
+                  ng-model="models.trainerName" style="width: 100%" disabled="true" />
+              </div>
+              <div class="col-md-1">
+                <span class="input-group-btn" style="text-align: right">
+                  <kendo-button class="btn btn-default btn-sm" ng-click="addItemsUser()"
+                    ng-disabled="sta.disabledField">
+                    <i class="k-icon k-i-plus font-green-jungle"></i>{{'ADD_TRAINER'|translate}}
+                  </kendo-button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'COURSE_START_DATE'|translate}}</label>
+              <div class="col-md-6">
+                <input name="Course Start Date" style="width: 100%" kendo-date-time-picker min="minDate"
+                  k-ng-model="models.startDate" k-date-input="true" k-format="'dd/MM/yyyy HH:mm'"
+                  k-time-format="'HH:mm'" ng-disabled="sta.disabledField" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'COURSE_END_DATE'|translate}}</label>
+              <div class="col-md-6">
+                <input name="Course End Date" style="width: 100%" kendo-date-time-picker min="minDate"
+                  k-ng-model="models.endDate" k-date-input="true" k-format="'dd/MM/yyyy HH:mm'" k-time-format="'HH:mm'"
+                  k-on-change="onChangeEndDate($event)" ng-disabled="sta.disabledField" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'TOTAL_ONLINE_TRAINING_HOUR'|translate}}</label>
+              <div class="col-md-6">
+                <input type="number" name="Total Online Training Hours" class="k-textbox form-control input-sm"
+                  ng-model="models.totalOnlineTrainingHours" style="width: 100%" ng-disabled="sta.disabledField"
+                  onkeydown="if(event.key==='.'){event.preventDefault();}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'TOTAL_OFFLINE_TRAINING_HOUR'|translate}}</label>
+              <div class="col-md-6">
+                <input type="number" name="Total Offline Training Hours" class="k-textbox form-control input-sm"
+                  ng-model="models.totalOfflineTrainingHours" style="width: 100%" ng-disabled="sta.disabledField"
+                  onkeydown="if(event.key==='.'){event.preventDefault();}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'TRAINING_REQUEST_TRAINING_LOCATION'|translate}}</label>
+              <div class="col-md-6">
+                <input type="text" name="Location" class="k-textbox form-control input-sm" ng-model="models.location"
+                  style="width: 100%" ng-disabled="sta.disabledField" maxlength="30" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'TRAINING_HOURS_PER_DAY'|translate}}</label>
+              <div class="col-md-6">
+                <input type="number" name="Training Hours Per Day" class="k-textbox form-control input-sm"
+                  ng-model="models.trainingHoursPerDay" style="width: 100%" ng-disabled="sta.disabledField"
+                  onkeydown="if(event.key==='.'){event.preventDefault();}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'TRAINING_NUMBER_OF_DATE'|translate}}</label>
+              <div class="col-md-6">
+                <input type="number" name="Number of Days" class="k-textbox form-control input-sm"
+                  ng-model="models.numberOfDays" style="width: 100%" ng-disabled="sta.disabledField"
+                  onkeydown="if(event.key==='.'){event.preventDefault();}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'TRAINING_TOTOAL_HOURS'|translate}}</label>
+              <div class="col-md-6">
+                <input type="number" name="totalHour" class="k-textbox form-control input-sm" ng-model="totalHour"
+                  ng-bind="totalHour()" ng-model-options="{ getterSetter: true }" style="width: 100%" disabled="true" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'COMMON_NOTE'|translate}}</label>
+              <div class="col-md-6">
+                <textarea name="note" style="height: 80px; resize: none" ng-model="models.note" class="form-control"
+                  ng-disabled="sta.disabledField"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <div class="col-md-3">
+                <label class="k-label control-label" style="padding-top: 0 !important">
+                  {{'AFTER_TRAINING_REPORT_NOT_REQUIRED'|translate}}
+                </label>
+              </div>
+              <div class="col-md-6">
+                <input type="checkbox" name="afterTrainingReportNotRequired" id="afterTrainingReportNotRequired"
+                  ng-model="models.afterTrainingReportNotRequired" class="" ng-change="onCheckReport()"
+                  checked="checked" ng-disabled="sta.disabledField" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'AFTER_TRAINING_REPORT_DEADLINE'|translate}}</label>
+              <div class="col-md-6">
+                <input style="width: 100%" kendo-date-picker min="minDate" k-ng-model="models.reportDeadLine"
+                  k-date-input="true" k-format="'dd/MM/yyyy'"
+                  ng-disabled="models.afterTrainingReportNotRequired || sta.disabledField"
+                  name="After Training Report Deadline" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'Attachment'|translate}}</label>
+              <div class="col-md-6">
+                <input name="files" id="attachmentDetail" type="file" kendo-upload
+                  k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: false }"
+                  k-select="onSelectTrainingDetails" k-remove="removeAttach" class="input-default"
+                  ng-disabled="sta.disabledField" />
+              </div>
+              <div class="col-md-4"></div>
+              <div class="col-md-8">
+                <label class="col-md-4 control-label"
+                  ng-if="oldAttachmentDetails && oldAttachmentDetails.length"></label>
+                <div class="col-md-12" style="margin-top: 10px; padding-left: 30px"
+                  ng-if="oldAttachmentDetails && oldAttachmentDetails.length">
+                  <p><b>{{'UPLOADED_FILE_LIST'| translate}}</b></p>
+                  <ol>
+                    <li ng-repeat="doc in oldAttachmentDetails">
+                      <span>
+                        <a ng-click="viewFileOnline(doc)">{{doc.fileName}}</a>
+                      </span>
+                      <span ng-click="removeOldAttach(doc)" class="deleteattachmentDetail"
+                        style="color: #5b9bd1; cursor: pointer">| {{'COMMON_BUTTON_DELETE'| translate}}
+                      </span>
+                      <span ng-click="dowloadAttachment(doc)" class="deleteattachmentDetail"
+                        style="color: #5b9bd1; cursor: pointer">| {{'COMMON_BUTTON_DOWLOAD'| translate}}
+                      </span>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-md-1"></div>
+              <label class="col-md-3 control-label">{{'TRAINING_INVITATION_CONTENT'| translate}}</label>
+              <div class="col-md-6">
+                <textarea kendo-editor name="Purpose" style="height: 200px" ng-model="models.content"
+                  class="form-control" ng-disabled="sta.disabledField" id="editor"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

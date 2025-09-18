@@ -1,0 +1,68 @@
+<div style="padding-right: 20px;padding-left:10px" class="d-flex gap-3">
+    <div>
+        <input type="radio"
+               kendo-radio
+               name="{{dataItem.surveyQuestion}}"
+               id="{{dataItem.surveyQuestion + '-' +1}}"
+               class="form-check-input"
+               ng-model="dataItem.value"
+               ng-click="changeEvent($event)"
+               value="1"
+               ng-disabled="!isEditable" />
+        <label style="color: #9b9b9b; padding-right: 20px"
+               class="form-check-label"
+               for="{{dataItem.surveyQuestion + '-' + 1}}">1</label>
+    </div>
+    <div>
+        <input type="radio"
+               name="{{dataItem.surveyQuestion}}"
+               id="{{dataItem.surveyQuestion + '-' + 2}}"
+               class="form-check-input"
+               ng-model="dataItem.value"
+               value="2"
+               ng-click="changeEvent($event)"
+               ng-disabled="!isEditable" />
+        <label style="color: #9b9b9b; padding-right: 20px"
+               class="form-check-label"
+               for="{{dataItem.surveyQuestion + '-' +2}}">2</label>
+    </div>
+    <div>
+        <input type="radio"
+               name="{{dataItem.surveyQuestion}}"
+               id="{{dataItem.surveyQuestion + '-' +3}}"
+               class="form-check-input"
+               ng-model="dataItem.value"
+               value="3"
+               ng-click="changeEvent($event)"
+               ng-disabled="!isEditable" />
+        <label style="color: #9b9b9b; padding-right: 20px"
+               class="form-check-label"
+               for="{{dataItem.surveyQuestion + '-' +3}}">3</label>
+    </div>
+    <div>
+        <input type="radio"
+               name="{{dataItem.surveyQuestion}}"
+               id="{{dataItem.surveyQuestion + '-' +4}}"
+               class="form-check-input"
+               ng-model="dataItem.value"
+               value="4"
+               ng-click="changeEvent($event)"
+               ng-disabled="!isEditable" />
+        <label style="color: #9b9b9b; padding-right: 20px"
+               class="form-check-label"
+               for="{{dataItem.surveyQuestion + '-' + 4}}">4</label>
+    </div>
+    <div>
+        <input type="radio"
+               name="{{dataItem.surveyQuestion}}"
+               id="{{dataItem.surveyQuestion + '-' +5}}"
+               class="form-check-input"
+               ng-model="dataItem.value"
+               value="5"
+               ng-click="changeEvent($event)"
+               ng-disabled="!isEditable" />
+        <label style="color: #9b9b9b; padding-right: 20px"
+               class="form-check-label"
+               for="{{dataItem.surveyQuestion + '-' +5}}">5</label>
+    </div>
+</div>

@@ -1,0 +1,521 @@
+<style>
+    .text-label {
+        padding-top: 7px;
+    }
+</style>
+
+<div ng-if="trainingDetails.typeOfTraining=='External'">
+    <div class="row mb-3" style="padding-top: 5px;">
+        <div class="col-md-12">
+            <div style="overflow:hidden;">
+                <div class="p-2 mb-2" style="border-left: 5px solid #006efa;">
+                    <span class="display-8 m-0 fw-bold">{{'TRAINING_REQUEST_BUDGET_TITLE' | translate}}</span>
+                </div>
+
+                <div class="p-3">
+                    <div class="row ">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label text-secondary">
+                                    {{"REQUESTED_DEPARTMENT_F2"|translate}}:
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="row align-items-end mt-3">
+                                    <div class="col-md-12">
+                                        <input id="requested-department-ddt" 
+                                               ng-disabled="!isEditable"
+                                               class="w100 form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label text-secondary">
+                                    {{"METHOD_CHOOSING_CONTRACTOR"|translate}}:
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="row align-items-end mt-3">
+                                    <div class="col-md-12">
+                                        <select name="Method of Choosing Contractor"
+                                                kendo-drop-down-list
+                                                k-data-source="methodOfChoosingContractorOptions"
+                                                data-k-ng-model="participantBudget.methodOfChoosingContractor"
+                                                k-data-text-field="'text'"
+                                                k-data-value-field="'value'"
+                                                class="w100"
+                                                k-value-primitive="'false'"
+                                                k-filter="'contains'"
+                                                k-template="'<span><label>#: data.text# </label></span>'"
+                                                disabled></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label text-secondary">
+                                    {{"THE_PROPOSAL_FOR"|translate}}:
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="row align-items-end mt-3">
+                                    <div class="col-md-12">
+                                        <select name="The Proposal for"
+                                                kendo-drop-down-list
+                                                k-data-source="theProposalForOptions"
+                                                data-k-ng-model="participantBudget.theProposalFor"
+                                                k-data-text-field="'text'"
+                                                k-data-value-field="'value'"
+                                                class="w100"
+                                                k-value-primitive="'false'"
+                                                k-filter="'contains'"
+                                                k-template="'<span><label>#: data.text# </label></span>'"
+                                                ng-disabled="!isEditable"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label text-secondary">
+                                    {{'TRAINING_REQUEST_DEPARTMENT_IN_CHARGE' | translate}}:
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="row align-items-end mt-3">
+                                    <div class="col-md-12">
+                                        <select name="Department In Charge"
+                                                kendo-drop-down-list
+                                                k-data-source="departmentInChargesOptions"
+                                                data-k-ng-model="participantBudget.departmentInChargeCode"
+                                                k-data-text-field="'name'"
+                                                k-data-value-field="'dicCode'"
+                                                class="w100"
+                                                k-value-primitive="'false'"
+                                                k-filter="'contains'"
+                                                k-template="'<span><label>#: data.name# </label></span>'"
+                                                ng-disabled="!isEditable"
+                                                k-on-change="handleBudgetInformation(kendoEvent)"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label text-secondary">
+                                    {{'TRAINING_REQUEST_YEAR' | translate}}:
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="row align-items-end mt-3">
+                                    <div class="col-md-12">
+                                        <select name="Year"
+                                                kendo-drop-down-list
+                                                k-data-source="budgetYearsOptions"
+                                                data-k-ng-model="participantBudget.year"
+                                                k-data-text-field="'name'"
+                                                k-data-value-field="'value'"
+                                                class="w100"
+                                                k-value-primitive="'false'"
+                                                k-filter="'contains'"
+                                                k-template="'<span><label>#: data.name# </label></span>'"
+                                                ng-disabled="!isEditable"
+                                                k-on-change="handleBudgetInformation(kendoEvent)"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" ng-if="participantBudget.theProposalFor == 'PO with Principle Contract'">
+                            <div class="form-group">
+                                <label class="form-label text-secondary">
+                                    Reference Number:
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="row align-items-end mt-3">
+                                    <div class="col-md-12">
+                                        <input type="text"
+                                               name="Reference Number"
+                                               class="form-control input-sm"
+                                               ng-model="participantBudget.reference"
+                                               style="width: 100%;"
+                                               maxlength="30"
+                                               ng-disabled="!isEditable" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label text-secondary">
+                                    {{"MONTH_OF_USE"|translate}}:
+                                </label>
+                                <div class="row align-items-end mt-3">
+                                    <div class="col-md-12">
+                                        <input name="Month Of Use"
+                                               type="text"
+                                               ng-model="participantBudget.monthOfUse"
+                                               name="Sponsorship ContractNumber"
+                                               class="form-control input-sm"
+                                               style="width: 100%"
+                                               disabled />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label text-secondary">
+                                    {{"F2_FROM"|translate}}:
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="row align-items-end mt-3">
+                                    <div class="col-md-12">
+                                        <input name="From"
+                                               kendo-date-picker
+                                               id="participantBudgetFromId"
+                                               k-options="monthSelectorOptions"
+                                               k-format="'MM/yyyy'"
+                                               ng-model="participantBudget.from"
+                                               k-ng-model="participantBudget.fromObj"
+                                               style="width: 100%"
+                                               k-on-change="onDateChange(kendoEvent)"
+                                               ng-disabled="!isEditable" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label text-secondary">
+                                    {{"F2_TO"|translate}}:
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="row align-items-end mt-3">
+                                    <div class="col-md-12">
+                                        <input name="To"
+                                               kendo-date-picker
+                                               id="participantBudgetToId"
+                                               k-options="monthSelectorOptions"
+                                               k-format="'MM/yyyy'"
+                                               ng-model="participantBudget.to"
+                                               k-ng-model="participantBudget.toObj"
+                                               style="width: 100%"
+                                               k-on-change="onDateChange(kendoEvent)"
+                                               ng-disabled="!isEditable" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3" style="padding-top: 5px;">
+        <div class="col-md-12">
+            <div style="overflow:hidden;">
+                <div class="p-2 mb-2" style="border-left: 5px solid #006efa;">
+                    <span class="display-8 m-0 fw-bold">{{'TRAINING_REQUEST_COST_CENTER' | translate}}</span>
+                </div>
+
+                <div class="p-3">
+                    <div class="row mrt10">
+                        <div class="col-md-12">
+                            <kendo-grid options="budgetGridOptions"
+                                        id="budgetGrid"
+                                        class="participant-grid">
+                            </kendo-grid>
+                        </div>
+                    </div>
+                    <div class="row mrt10" ng-if="isEditable">
+                        <div class="col-md-12">
+                           
+
+                            <button type="button" class=" mt-2 btn btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1 ng-binding float-end" ng-click="addNewBudgetPlan()">
+                                {{"TRAINING_REQUEST_ADD"|translate}}
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <br />
+                    <div class="row" ng-if="f2.f2Url != null">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label text-secondary">
+                                    F2 Reference Number:
+                                </label>
+                                <div class="col-md-6 control-label">
+                                    <span>
+                                        <a href="{{f2.f2Url}}" target="_blank">
+                                            {{f2.f2ReferenceNumber}}
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div ng-if="trainingDetails.typeOfTraining=='External'">
+    <div class="portlet box bg-grey bg-font-grey fx-portlet">
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject hr-process uppercase f-collapse">{{'TRAINING_REQUEST_BUDGET_TITLE' | translate}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="page-content-wrapper float-none">
+        <div class="page-content">
+            <div class="form-horizontal">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">
+                                    {{"REQUESTED_DEPARTMENT_F2"|translate}}:
+                                    <span class="font-red-thunderbird">*</span>
+                                </label>
+                                <div class="col-md-8">
+                                    <input id="requested-department-ddt"
+                                           ng-disabled="!isEditable"
+                                           class="w100" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-6 control-label">
+                                    {{"METHOD_CHOOSING_CONTRACTOR"|translate}}:
+                                    <span class="font-red-thunderbird">*</span>
+                                </label>
+                                <div class="col-md-6">
+                                    <select name="Method of Choosing Contractor"
+                                            kendo-drop-down-list
+                                            k-data-source="methodOfChoosingContractorOptions"
+                                            data-k-ng-model="participantBudget.methodOfChoosingContractor"
+                                            k-data-text-field="'text'"
+                                            k-data-value-field="'value'"
+                                            class="w100"
+                                            k-value-primitive="'false'"
+                                            k-filter="'contains'"
+                                            k-template="'<span><label>#: data.text# </label></span>'"
+                                            disabled></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">
+                                    {{"THE_PROPOSAL_FOR"|translate}}:
+                                    <span class="font-red-thunderbird">*</span>
+                                </label>
+                                <div class="col-md-6">
+                                    <select name="The Proposal for"
+                                            kendo-drop-down-list
+                                            k-data-source="theProposalForOptions"
+                                            data-k-ng-model="participantBudget.theProposalFor"
+                                            k-data-text-field="'text'"
+                                            k-data-value-field="'value'"
+                                            class="w100"
+                                            k-value-primitive="'false'"
+                                            k-filter="'contains'"
+                                            k-template="'<span><label>#: data.text# </label></span>'"
+                                            ng-disabled="!isEditable"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">
+                                    {{'TRAINING_REQUEST_DEPARTMENT_IN_CHARGE' | translate}}:
+                                    <span class="font-red-thunderbird">*</span>
+                                </label>
+                                <div class="col-md-8">
+                                    <select name="Department In Charge"
+                                            kendo-drop-down-list
+                                            k-data-source="departmentInChargesOptions"
+                                            data-k-ng-model="participantBudget.departmentInChargeCode"
+                                            k-data-text-field="'name'"
+                                            k-data-value-field="'dicCode'"
+                                            class="w100"
+                                            k-value-primitive="'false'"
+                                            k-filter="'contains'"
+                                            k-template="'<span><label>#: data.name# </label></span>'"
+                                            ng-disabled="!isEditable"
+                                            k-on-change="handleBudgetInformation(kendoEvent)"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-6 control-label">
+                                    {{'TRAINING_REQUEST_YEAR' | translate}}:
+                                    <span class="font-red-thunderbird">*</span>
+                                </label>
+                                <div class="col-md-6">
+                                    <select name="Year"
+                                            kendo-drop-down-list
+                                            k-data-source="budgetYearsOptions"
+                                            data-k-ng-model="participantBudget.year"
+                                            k-data-text-field="'name'"
+                                            k-data-value-field="'value'"
+                                            class="w100"
+                                            k-value-primitive="'false'"
+                                            k-filter="'contains'"
+                                            k-template="'<span><label>#: data.name# </label></span>'"
+                                            ng-disabled="!isEditable"
+                                            k-on-change="handleBudgetInformation(kendoEvent)"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" ng-if="participantBudget.theProposalFor == 'PO with Principle Contract'">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">
+                                    Reference Number:
+                                    <span class="font-red-thunderbird">*</span>
+                                </label>
+                                <div class="col-md-6">
+                                    <input type="text"
+                                           name="Reference Number"
+                                           class="k-textbox form-control input-sm"
+                                           ng-model="participantBudget.reference"
+                                           style="width: 100%;"
+                                           maxlength="30"
+                                           ng-disabled="!isEditable" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">
+                                    {{"MONTH_OF_USE"|translate}}:
+                                </label>
+                                <div class="col-md-8">
+                                    <input name="Month Of Use"
+                                           type="text"
+                                           ng-model="participantBudget.monthOfUse"
+                                           name="Sponsorship ContractNumber"
+                                           class="k-textbox form-control input-sm"
+                                           style="width: 100%"
+                                           disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-6 control-label">
+                                    {{"F2_FROM"|translate}}:
+                                    <span class="font-red-thunderbird">*</span>
+                                </label>
+                                <div class="col-md-6">
+                                    <input name="From"
+                                           kendo-date-picker
+                                           id="participantBudgetFromId"
+                                           k-options="monthSelectorOptions"
+                                           k-format="'MM/yyyy'"
+                                           ng-model="participantBudget.from"
+                                           k-ng-model="participantBudget.fromObj"
+                                           style="width: 100%"
+                                           k-on-change="onDateChange(kendoEvent)"
+                                           ng-disabled="!isEditable" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">
+                                    {{"F2_TO"|translate}}:
+                                    <span class="font-red-thunderbird">*</span>
+                                </label>
+                                <div class="col-md-6">
+                                    <input name="To"
+                                           kendo-date-picker
+                                           id="participantBudgetToId"
+                                           k-options="monthSelectorOptions"
+                                           k-format="'MM/yyyy'"
+                                           ng-model="participantBudget.to"
+                                           k-ng-model="participantBudget.toObj"
+                                           style="width: 100%"
+                                           k-on-change="onDateChange(kendoEvent)"
+                                           ng-disabled="!isEditable" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portlet box bg-grey bg-font-grey fx-portlet">
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject hr-process uppercase f-collapse">{{'TRAINING_REQUEST_COST_CENTER' | translate}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="page-content-wrapper float-none">
+        <div class="page-content">
+            <div class="form-horizontal">
+                <div class="form-body">
+                    <div class="row mrt10">
+                        <div class="col-md-12">
+                            <kendo-grid options="budgetGridOptions"
+                                        id="budgetGrid"
+                                        class="participant-grid">
+                            </kendo-grid>
+                        </div>
+                    </div>
+                    <div class="row mrt10" ng-if="isEditable">
+                        <div class="col-md-12">
+                            <a class="btn btn-default btn-sm" ng-click="addNewBudgetPlan()">
+                                <i class="fa fa-plus right-5 font-green-jungle"></i>{{"TRAINING_REQUEST_ADD"|translate}}
+                            </a>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="row" ng-if="f2.f2Url != null">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">
+                                    F2 Reference Number:
+                                </label>
+                                <div class="col-md-6 control-label">
+                                    <span>
+                                        <a href="{{f2.f2Url}}" target="_blank">
+                                            {{f2.f2ReferenceNumber}}
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

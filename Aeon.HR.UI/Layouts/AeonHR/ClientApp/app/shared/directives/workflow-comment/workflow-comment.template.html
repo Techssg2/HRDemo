@@ -1,0 +1,14 @@
+﻿<div class="note note-danger note-bordered" style="margin-bottom: 0px" ng-if="status && status.lastHistory && (status.lastHistory.voteType==2||status.lastHistory.voteType==3||status.lastHistory.voteType==4)">
+    <!-- <h5 class="bold uppercase"><span class="font-red-thunderbird">Reason</span>:</h5> -->
+    <h5 class="bold uppercase"><span class="font-red-thunderbird">{{'COMMON_REASON'|translate}}</span>:</h5>
+    <p><span class="bold">{{ status.lastHistory.comment }}</span></p>
+    <!-- <p>Processor: <span class="bold">{{ status.lastHistory.approverFullName }}</span></p> -->
+    <p>{{'COMMON_PROCESSOR'|translate}}: <span class="bold">{{ status.lastHistory.approverFullName }}</span></p>
+</div>
+
+<div class="note note-danger note-bordered" style="margin-bottom: 0px" ng-if="status && status.lastHistory && (status.lastHistory.voteType==0 && status.workflowComment)">
+    <!-- <h5 class="bold uppercase"><span class="font-red-thunderbird">Reason</span>:</h5> -->
+    <h5 class="bold uppercase"><span class="font-red-thunderbird">{{'COMMON_REASON'|translate}}</span>:</h5>
+    <p><span class="bold" ng-if="status.workflowComment">{{ status.workflowComment }}</span></p>
+</div>
+

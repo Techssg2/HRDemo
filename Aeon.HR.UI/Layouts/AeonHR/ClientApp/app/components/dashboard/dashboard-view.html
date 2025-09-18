@@ -1,0 +1,164 @@
+<!-- TO-DO LIST -->
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet bordered light">
+            <!-- Title -->
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">
+                        {{'COMMON_TO_DO_LIST'|translate}}
+                    </span>
+                </div>
+                <div class="actions" ng-if="!isParentMenu">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <kendo-button class="btn btn-default btn-sm" ng-click="toggleFilterPanel(true)"
+                                          ng-show="!advancedSearchMode">
+                                <i class="k-icon k-i-filter font-green-jungle"></i> {{'COMMON_BUTTON_SEARCH'|translate}}
+                            </kendo-button>
+                            <kendo-button class="btn btn-default btn-sm" ng-click="toggleFilterPanel(false)"
+                                          ng-show="advancedSearchMode">
+                                <i class="k-icon k-i-close font-green-jungle"></i> {{'COMMON_BUTTON_CLOSE'|translate}}
+                            </kendo-button>
+                            <div add-class class="btn-group" current-class="btn-group" added-class="open">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-expanded="true" style="padding: 0px !important">
+                                    <img src="ClientApp/assets/images/icon/more.png" style="position: relative;top: -2px"
+                                         class="ng-isolate-scope">
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a ng-click="exportToDoList()" class="ng-binding">
+                                            <i class="fa fa-table font-blue right-5"></i>
+                                            {{'COMMON_BUTTON_EXPORT'|translate}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div ng-show='advancedSearchMode' ng-if="!isParentMenu">
+                    <div class="row">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">{{'COMMON_KEYWORD'|translate}}:</label>
+                                        <div class="col-md-8">
+                                            <input type="text" maxlength="50" class="k-textbox" style="width: 100%;"
+                                                   ng-model="query.keyword">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Status:</label>
+                                        <div class="col-md-8">
+                                            <select id="dataStatusId" kendo-multi-select k-options="statusOptions" k-ng-model="query.status"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <!-- <label class="col-md-4 control-label">Created Date:</label> -->
+                                        <label class="col-md-4 control-label">{{'COMMON_CREATED_DATE'|translate}}:</label>
+                                        <div class="col-md-8">
+                                            <range-date-for-filter-kendo-model d-from="query.fromDate"
+                                                                               d-to="query.toDate"></range-date-for-filter-kendo-model>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <!-- <label class="col-md-4 control-label">Due Date:</label> -->
+                                        <label class="col-md-4 control-label">{{'COMMON_DUE_DATE'|translate}}:</label>
+                                        <div class="col-md-8">
+                                            <range-date-for-filter-kendo-model d-from="query.fromDueDate"
+                                                                               d-to="query.toDueDate"></range-date-for-filter-kendo-model>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">{{'LEAVE_MANAGEMENT_FROM_DATE'|translate}}:</label>
+                                        <div class="col-md-8">
+                                            <input class="w100" kendo-date-picker k-ng-model="query.fromDate" k-format="'dd/MM/yyyy'" k-date-input="true" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-4 control-label">{{'LEAVE_MANAGEMENT_TO_DATE'|translate}}:</label>
+                                    <div class="col-md-8">
+                                        <input class="w100" kendo-date-picker k-ng-model="query.toDate" k-format="'dd/MM/yyyy'" k-date-input="true" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+
+
+                    <div class="row mrb10">
+                        <div class="col-md-2"> </div>
+                        <div class="col-md-4 btn-group">
+                            <kendo-button class="btn btn-default btn-sm" ng-click="search(true)">
+                                <i class="k-icon k-i-search font-green-jungle"></i>
+                                {{'COMMON_BUTTON_SEARCH' | translate}}
+                            </kendo-button>
+                            <kendo-button class="btn btn-default btn-sm" ng-click="clearSearch()">
+                                <i style="font-size: 12px; padding-right: 3px;"
+                                   class="fa fa-refresh"></i>{{'COMMON_BUTTON_RESET' | translate}}
+                            </kendo-button>
+                        </div>
+                    </div>
+                </div>
+                <ul class="fieldlist">
+                    <li ng-show="showCheckAll">
+                        <input type="checkbox" class="k-checkbox" id="is-check-all" ng-model="isCheckedAll">
+                        <label class="k-checkbox-label" for="is-check-all">All</label>
+                    </li>
+                </ul>
+                <div class="row">
+                    <div class="col-md-12">
+                        <kendo-grid k-scope-field="toDoListGrid" options="toDoListGridOptions" id="toDoListGridId">
+                        </kendo-grid>
+                    </div>
+                </div>
+            </div>
+            <!-- Content -->
+        </div>
+        <div class="portlet bordered light" ng-if="isParentMenu">
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase">
+                        {{'COMMON_MY_ITEMS'|translate}}
+                    </span>
+                </div>
+                <div class="actions">
+                    <div class="row">
+                        <div class="col-sm-12">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <kendo-grid k-scope-field="myItemsGrid" options="myItemsGridOptions"></kendo-grid>
+            <!-- Content -->
+        </div>
+    </div>
+</div>

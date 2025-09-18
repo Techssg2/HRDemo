@@ -1,0 +1,30 @@
+<div class="page-quick-sidebar-wrapper" >
+    <ul class="nav nav-tabs nav-justified ">
+        <li class="active fx-quick-sidebar">
+            <a style="text-align: left;padding: 20px 10px 8px;padding: 20px 10px 8px; background: #21282e;border-bottom: 3px solid #f3565d; color: white; " data-target="#tab_notification" data-toggle="tab" class="uppercase" >Todo List</a>
+        </li>
+    </ul>
+    <div style="text-align: left;  color: white;" ng-repeat="data in notifications">
+        <h3 class="title" >{{data.name}}</h3>
+        <span class="badge badge-danger pull-left fx-quick-sidebar ng-binding" style="margin: 8px 0 20px 0">{{data.childrens.length}}</span>
+        <div class="fx-quick-sidebar ng-scope" style="clear: both; float: left; width: 100%" >
+             <ul ng-repeat="item in data.childrens" class="li">
+                <li style="padding: 10px; padding-bottom: 20px;">
+                    <div class="col1" >
+                        <div class="cont fx-quick-sidebar">
+                            <div class="cont-col1" >
+                                <div class="label label-sm fx-quick-sidebar"><i class="fa fa-circle font-blue fx-quick-sidebar"></i></div>
+                            </div>
+                            <div class="cont-col2" style="padding-left: 30px;">
+                                <div class="desc">{{item.nameTask}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col2" >
+                        <div class="date">{{item.dateTask}}</div>
+                    </div>
+                </li>
+             </ul>
+        </div>
+    </div>
+</div>

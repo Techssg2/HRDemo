@@ -1,0 +1,20 @@
+﻿{
+  "NewWorkLocationGroup": [
+    {
+      "SourceField": "PersonnelArea",
+      "TargetField": "Persa"
+    },
+    {
+      "SourceField": "PersonnelAreaText",
+      "TargetField": "Ptext"
+    },
+    {
+      "SourceField": "PersonnelSubArea",
+      "TargetField": "Btrtl"
+    },
+    {
+      "SourceField": "PersonnelSubAreaText",
+      "TargetField": "Btext"
+    }
+  ]
+}

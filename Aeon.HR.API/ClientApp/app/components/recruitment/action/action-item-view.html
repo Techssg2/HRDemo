@@ -1,0 +1,1367 @@
+<style type="text/css">
+    #attachmentViewDialog {
+        min-height: 40vh !important;
+        height: 98vh !important;
+    }
+
+    .close-owa-dialog {
+        margin: 5px;
+    }
+
+    #tooltipText {
+        position: absolute;
+        left: 50%;
+        top: -40px;
+        transform: translateX(-50%);
+        background-color: #fff;
+        color: #000;
+        white-space: nowrap;
+        padding: 5px 10px;
+        border-radius: 10px;
+        border: 1px solid #000;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+        #tooltipText::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            transform: translateX(-50%);
+            border: 10px solid;
+            border-color: #808080 #0000 #0000 #0000;
+        }
+
+    #tooltip:hover #tooltipText {
+        top: -140%;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .k-dropdown, .k-textbox, .k-datepicker, .k-numerictextbox {
+        height: 37px !important
+    }
+</style>
+<div class="p-3">
+    <div class="row title-wrapper stickybar-1">
+        <div class="col-6">
+            <h2 class="widget-title">{{titleHeader}}</h2>
+        </div>
+        <div class="col-6">
+            <div class="d-flex gap-2 flex-wrap justify-content-end">
+                <!--<button type="button" ng-click="printForm()" ng-if="mode=='Edit'" class="btn btn-outline-dark rounded-3 btn-sm poppins-regular display-9 m-1 ng-binding">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                        <rect x="6" y="14" width="12" height="8"></rect>
+                    </svg>&nbsp;Print
+                </button>-->
+                <action-items  class="d-flex flex-wrap justify-content-end align-items-center" style="flex: 1 1 auto; gap: 4px;"  model="model" save="saveItem" form="g1Form"></action-items>
+               
+            </div>
+        </div>
+    </div>
+    <div class="portlet-body mb-3">
+        <div class="mt-3">
+            <div class="accordion accordion-style1">
+                <div class="accordion-item">
+                    <div class="accordion-collapse collapse show">
+                        <div class="portlet bordered light">
+                            <!-- Title -->
+                            <div class="row p-3">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;" ng-if="title">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 46 46">
+                                                <path id="_12.File" data-name="12.File" d="M37,47H11a4,4,0,0,1-4-4V5a4,4,0,0,1,4-4H30a.984.984,0,0,1,.776.395l9.829,9.829A.981.981,0,0,1,41,12h0V43A4,4,0,0,1,37,47ZM31,4.381V11h6.619ZM39,13H30a1,1,0,0,1-1-1V3H11A2,2,0,0,0,9,5V43a2,2,0,0,0,2,2H37a2,2,0,0,0,2-2ZM33,39H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Zm0-8H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Zm0-8H15a1,1,0,0,1,0-2H33a1,1,0,0,1,0,2Z" transform="translate(-7 -1)" fill-rule="evenodd"></path>
+                                            </svg>&nbsp;{{title}}
+                                        </div>
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 24 24">
+                                                <path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z" fill="#0D0D0D"></path>
+                                            </svg>&nbsp;{{ detail.createdByFullName }} 
+                                        </div>
+                                        <div class="col-4 name-wrapper" style="word-wrap: break-word;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="16" height="16" viewBox="0 0 24 24" ng-if="detail.formatCreated">
+                                                <path d="M9 2a1 1 0 0 1 1 1v1h4V3a1 1 0 1 1 2 0v1h3a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V3a1 1 0 0 1 1-1zM8 6H5v3h14V6h-3v1a1 1 0 1 1-2 0V6h-4v1a1 1 0 0 1-2 0V6zm11 5H5v8h14v-8z" fill="#0D0D0D"></path>
+                                            </svg>&nbsp;{{ detail.formatCreated }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 d-flex flex-wrap justify-content-end">
+                                    <button class="btn-none dropdown-toggle"
+                                            type="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             width="16"
+                                             height="16"
+                                             fill="currentColor"
+                                             class="bi bi-three-dots-vertical"
+                                             viewBox="0 0 16 16">
+                                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                        </svg>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-end dropdown-menu-text-link display-11 text-center">
+                                        <li>
+                                            <a class="dropdown-item" href="" ng-click="showTrackingHistory()" ng-if="isITHelpdesk">
+                                                <svg width="16" height="16" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                                    <g fill="currentColor" fill-rule="evenodd" transform="translate(2 1)">
+                                                        <path fill-rule="nonzero" d="M3 4C3 3.44772 3.44772 3 4 3 4.55228 3 5 3.44772 5 4 5 4.55228 4.55228 5 4 5 3.44772 5 3 4.55228 3 4zM7 3C6.44772 3 6 3.44772 6 4 6 4.55228 6.44771 5 7 5L8 5C8.5523 5 9 4.55228 9 4 9 3.44772 8.5523 3 8 3L7 3zM6 7C6 6.44772 6.44772 6 7 6L8 6C8.5523 6 9 6.44772 9 7 9 7.55228 8.5523 8 8 8L7 8C6.44771 8 6 7.55228 6 7zM3 7C3 6.44772 3.44772 6 4 6 4.55228 6 5 6.44772 5 7 5 7.55228 4.55228 8 4 8 3.44772 8 3 7.55228 3 7zM6 10C6 9.4477 6.44772 9 7 9L8 9C8.5523 9 9 9.4477 9 10 9 10.5523 8.5523 11 8 11L7 11C6.44771 11 6 10.5523 6 10zM3 10C3 9.4477 3.44772 9 4 9 4.55228 9 5 9.4477 5 10 5 10.5523 4.55228 11 4 11 3.44772 11 3 10.5523 3 10z"></path>
+                                                        <path d="M0,1 C0,0.44772 0.44772,0 1,0 L11,0 C11.5523,0 12,0.44772 12,1 L12,13 C12,13.5523 11.5523,14 11,14 L1,14 C0.44772,14 0,13.5523 0,13 L0,1 Z M2,12 L2,2 L10,2 L10,12 L2,12 Z"></path>
+                                                    </g>
+                                                </svg>&nbsp;{{'COMMON_TRACKING_HISTORY'|translate}}
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider" ng-show="mode=='Edit'" /></li>
+                                        <li>
+                                            <a class="dropdown-item" href="" ng-click="printForm()" ng-if="mode=='Edit'">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                                                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                                                    <rect x="6" y="14" width="12" height="8"></rect>
+                                                </svg>&nbsp;{{'COMMON_BUTTON_PRINT'|translate}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div class="row" style="padding-left: 0 !important; padding-top: 0 !important;">
+                                <div class="col-6">
+                                    <span class="badge badge-style1 justify-content-start" ng-if="model.status"
+                                          ng-class="{
+                                                    'badge-orange': model.status != 'Completed' && model.status != 'Draft' && model.status != 'Cancelled' && model.status != 'Reject' && model.status != 'Out Of Period',
+                                                    'badge-green': model.status == 'Completed',
+                                                    'badge-red': model.status == 'Cancelled' || model.status == 'Reject' || model.status == 'Out Of Period',
+                                                    '': model.status == 'Draft'
+                                                    }">
+                                        {{statusTranslate}}
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mt-2 d-flex flex-column flex-lg-row justify-content-end">
+                                        <div class="progresses" ng-repeat="item in currentInstanceProcessingStage.workflowData.steps">
+                                            <div class="steps badge-green" ng-if="item.stepNumber == 1">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     width="16"
+                                                     height="16"
+                                                     viewBox="0 0 24 24"
+                                                     fill="none"
+                                                     stroke="#ffffff"
+                                                     stroke-width="2"
+                                                     stroke-linecap="round"
+                                                     stroke-linejoin="round">
+                                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                                </svg>
+                                            </div>
+                                            <span class="line" ng-if="item.stepNumber == 1"></span>
+                                            <div class="steps" ng-class="!item.histories ? '' : {'badge-green': item.histories.voteType == 1 && item.histories.isStepCompleted,
+                                                   'badge-yellow-60': item.histories.voteType == 3,
+                                                   'badge-outline-orange': item.histories.voteType == 0 && !item.histories.isStepCompleted,
+                                                   'badge-red': (item.histories.voteType == 2 || item.histories.voteType == 4)}" ng-if="item.stepNumber != 1">
+                                                <div class="tooltip-custom tooltip-style2 tooltip-below">
+                                                    {{item.stepNumber}}
+                                                    <span class="tooltip-text">
+                                                        <span class="badge btn-grey rounded-pill poppins-regular display-12 leading-14">Round {{processingStageRound}}</span>
+                                                        <p class="text-orange poppins-medium display-11" style="text-transform: uppercase;">
+                                                            {{item.stepName}}
+                                                        </p>
+                                                        <p class="display-12" ng-if="(item.histories.assignedToUserFullName || item.histories.assignedToDepartmentName)">
+                                                            <span class="text-grey">Assign To: </span>
+                                                            <span style="text-transform: uppercase;">
+                                                                {{item.histories.assignedToUserFullName ? item.histories.assignedToUserFullName: item.histories.assignedToDepartmentName}}
+                                                            </span>
+                                                        </p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="line" ng-if="item.stepNumber != 1 && currentInstanceProcessingStage.workflowData.steps[currentInstanceProcessingStage.workflowData.steps.length - 1].stepNumber != item.stepNumber"></span>
+                                        </div>
+                                        <a href="#" style="padding-left: 20px"
+                                           data-bs-toggle="modal"
+                                           data-bs-target="#exampleModalView5">
+                                            View more
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 width="10"
+                                                 height="10"
+                                                 viewBox="0 0 24 24"
+                                                 fill="none"
+                                                 stroke="#0D6EFD"
+                                                 stroke-width="2"
+                                                 stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path d="M9 18l6-6-6-6" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <!--<div class="row ng-scope" style="padding: 15px 0;margin-bottom:15px">
+                                    <div class="col-sm-12">
+                                        <workflow-comment></workflow-comment>
+                                    </div>
+                                </div>-->
+                                <div class="alert alert-danger-style1 mb-3" role="alert" ng-if="errors.length > 0">
+                                    <div class="col-sm-12">
+                                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                                            <h5 class="bold uppercase">
+                                                Please enter all required fields <span class="text-danger">*</span>:
+                                            </h5>
+                                            <p></p>
+                                            <ul>
+                                                <li ng-repeat="error in errors">
+                                                    <span class="bold ">{{error.controlName}}</span>:
+                                                    {{error.message ? error.message : 'Field is required'}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <div class="accordion accordion-style1">
+                                        <div class="accordion-item">
+                                            <div class="accordion-collapse collapse show">
+                                                <div class="accordion-body">
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <label class="form-label text-secondary">
+                                                                SAP Code: <span class="text-danger">*</span>
+                                                            </label>
+                                                            <select kendo-drop-down-list name="sapCode" id="sapCode"
+                                                                    k-options="sapCodesDataSource" k-ng-model="detail.userId"
+                                                                    style="width: 100%;">
+                                                            </select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="form-label text-secondary">Full Name: </label>
+                                                            <input type="text" name="" class="k-textbox form-control input-sm"
+                                                                   ng-model="detail.fullName" style="width: 100%;" readonly />
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="form-label text-secondary">Department: </label>
+                                                            <input type="text" name="" class="k-textbox form-control input-sm"
+                                                                   ng-model="detail.deptLine" style="width: 100%;" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <label class="form-label text-secondary">Work Location: </label>
+                                                            <input type="text" name="" class="k-textbox form-control input-sm"
+                                                                   ng-model="detail.workLocationName" style="width: 100%;"
+                                                                   readonly />
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="form-label text-secondary">Current Position: </label>
+                                                            <input type="text" name="" class="k-textbox form-control input-sm"
+                                                                   ng-model="detail.currentPosition" style="width: 100%;"
+                                                                   readonly />
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="form-label text-secondary">
+                                                                Acting to Postion:<span class="text-danger">*</span>
+                                                            </label>
+                                                            <select kendo-drop-down-list name="titleInActingPeriodCode"
+                                                                    id="titleInActingPeriodCode" k-options="jobTitlesDataSource"
+                                                                    k-ng-model="detail.positionId" style="width: 100%;">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <label class="form-label text-secondary">
+                                                                1<sup>st</sup> Appraiser: <span class="text-danger">*</span>
+                                                            </label>
+                                                            <select kendo-drop-down-list name="appraiser1st" id="appraiser1st"
+                                                                    k-options="appraiser1stDataSource"
+                                                                    ng-model="detail.firstAppraiserId" style="width: 100%;">
+                                                            </select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="form-label text-secondary">
+                                                                2<sup>nd</sup> Appraiser: <span class="text-danger">*</span>
+                                                            </label>
+                                                            <select kendo-drop-down-list name="appraiser2nd" id="appraiser2nd"
+                                                                    k-options="appraiser2ndDataSource"
+                                                                    ng-model="detail.secondAppraiserId" style="width: 100%">
+                                                            </select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="form-label text-secondary">
+                                                                Position in Acting Period:
+                                                            </label>
+                                                            <input type="text" name="" class="k-textbox form-control input-sm"
+                                                                   ng-model="detail.positionName" style="width: 100%;" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <label class="control-label">
+                                                                New Personel area:<span class="text-danger">*</span>
+                                                            </label>
+                                                            <input kendo-drop-down-list id="newPersonnelArea" name="newPersonnelArea"
+                                                                   k-options="newPersonelAreaOptions" ng-model="detail.newPersonnelArea"
+                                                                   style="width: 100%;" k-value-primitive="true" disabled="disabled" ng-readonly="true" />
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="form-label text-secondary">
+                                                                New Personel Subarea:<span class="text-danger">*</span>
+                                                            </label>
+                                                            <input kendo-drop-down-list id="newWorkLocationCode" name="newWorkLocationCode"
+                                                                   k-options="personelSubareaOptions" ng-model="detail.newWorkLocationCode"
+                                                                   style="width: 100%;" k-value-primitive="true" disabled="disabled" ng-readonly="true" />
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="form-label text-secondary">
+                                                                Department in Acting Period: <span class="text-danger">*</span>
+                                                            </label>
+                                                            <div id="tooltip">
+                                                                <span id="tooltipText"> {{ detail.newDeptOrLineCode }}</span>
+                                                                <span ng-if="!titleEdit">
+                                                                    <input kendo-drop-down-tree id="departmentId" name="departmentId"
+                                                                           k-options="departmentOptions" k-ng-model="detail.departmentId"
+                                                                           style="width: 100%; height: 37px" k-value-primitive="true" />
+                                                                </span>
+                                                                <span ng-if="titleEdit">
+                                                                    <input type="text" name="" class="k-textbox form-control input-sm"
+                                                                           ng-model="detail.departmentActingPeriodName" style="width: 100%;"
+                                                                           readonly />
+                                                                </span>
+                                                            </div>
+                                                            <div ng-show="false">
+                                                                <label class="form-label text-secondary">
+                                                                    Department in Acting Period (SAP):<span class="text-danger">*</span>
+                                                                </label>
+                                                                <input kendo-drop-down-tree id="departmentSAPId" name="departmentSAPId"
+                                                                       k-options="departmentSAPOptions" k-ng-model="detail.departmentSAPId"
+                                                                       style="width: 100%; height: 37px" k-value-primitive="true" disabled="disabled" ng-readonly="true" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <label class="form-label text-secondary">
+                                                                Employee group: <span class="text-danger">*</span>
+                                                            </label>
+                                                            <select kendo-drop-down-list name="employeeGroup" id="employeeGroup"
+                                                                    k-options="employeeSubGroupDataSource"
+                                                                    ng-model="detail.employeeGroup" style="width: 100%" disabled="disabled" ng-readonly="true">
+                                                            </select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="form-label text-secondary">
+                                                                Employee Subgroup: <span class="text-danger">*</span>
+                                                            </label>
+                                                            <input type="text" name="" class="k-textbox form-control input-sm"
+                                                                   ng-model="detail.employeeSubgroup" style="width: 100%;"
+                                                                   readonly />
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="form-label text-secondary">
+                                                                Pay Scale Area: <span class="text-danger">*</span>
+                                                            </label>
+                                                            <input type="text" name="" class="k-textbox form-control input-sm"
+                                                                   ng-model="detail.payScaleArea" style="width: 100%;"
+                                                                   readonly />
+                                                        </div>
+                                                    </div>
+                                                    <!--PERIOD-->
+                                                    <div class="row mb-3" style="padding-top: 15px;">
+                                                        <div class="col-md-12">
+                                                            <div class="portlet-title mb-3">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="me-2" style="width: 4px; height: 20px; background-color: #006efa;"></div>
+                                                                    <h2 class="accordion-header">
+                                                                        <label class="poppins-semibold display-9">
+                                                                            PERIOD
+                                                                        </label>
+                                                                    </h2>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label text-secondary">
+                                                                            Period 1:
+                                                                            <span class="text-danger">*</span>
+                                                                        </label>
+                                                                        <div class="row align-items-end mt-3">
+                                                                            <div class="col-md-5">
+                                                                                <input style="width: 100%;"
+                                                                                       kendo-date-picker id="period1Froms"
+                                                                                       name="period1Froms"
+                                                                                       k-ng-model="detail.period1From"
+                                                                                       k-format="'dd/MM/yyyy'"
+                                                                                       k-date-input="true"
+                                                                                       k-max="dateRange.period1FromMax"
+                                                                                       k-rebind="dateRange.period1FromMax"
+                                                                                       k-on-change="onChangePeriod(kendoEvent, 'period1From', 'period1ToMin', true)" />
+                                                                            </div>
+                                                                            <div class="col-md-1 k-icon k-i-minus mrt5"></div>
+                                                                            <div class="col-md-5">
+                                                                                <input style="width: 100%;"
+                                                                                       kendo-date-picker id="period1To"
+                                                                                       name="period1To"
+                                                                                       k-ng-model="detail.period1To"
+                                                                                       k-format="'dd/MM/yyyy'"
+                                                                                       k-date-input="true"
+                                                                                       k-min="dateRange.period1ToMin"
+                                                                                       k-rebind="dateRange.period1ToMin"
+                                                                                       k-on-change="onChangePeriod(kendoEvent, 'period1To', 'period1FromMax', false)" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label text-secondary">
+                                                                            Period 2:
+                                                                        </label>
+                                                                        <div class="row align-items-end mt-3">
+                                                                            <div class="col-md-5">
+                                                                                <input style="width: 100%;"
+                                                                                       kendo-date-picker id="period2From"
+                                                                                       name="period2From"
+                                                                                       k-ng-model="detail.period2From"
+                                                                                       k-format="'dd/MM/yyyy'"
+                                                                                       k-date-input="true"
+                                                                                       k-max="dateRange.period2FromMax"
+                                                                                       k-rebind="dateRange.period2FromMax"
+                                                                                       k-on-change="onChangePeriod(kendoEvent, 'period2From', 'period2ToMin', true)" />
+                                                                            </div>
+                                                                            <div class="col-md-1 k-icon k-i-minus mrt5">
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <input style="width: 100%;"
+                                                                                       kendo-date-picker id="period2To"
+                                                                                       name="period2To"
+                                                                                       k-ng-model="detail.period2To"
+                                                                                       k-format="'dd/MM/yyyy'"
+                                                                                       k-date-input="true"
+                                                                                       k-min="dateRange.period2ToMin"
+                                                                                       k-rebind="dateRange.period2ToMin"
+                                                                                       k-on-change="onChangePeriod(kendoEvent, 'period2To', 'period2FromMax', false)" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label text-secondary">
+                                                                            Period 3:
+                                                                        </label>
+                                                                        <div class="row align-items-end mt-3">
+                                                                            <div class="col-md-5">
+                                                                                <input style="width: 100%;"
+                                                                                       kendo-date-picker id="period3From"
+                                                                                       name="period3From"
+                                                                                       k-ng-model="detail.period3From"
+                                                                                       k-format="'dd/MM/yyyy'"
+                                                                                       k-date-input="true"
+                                                                                       k-max="dateRange.period3FromMax"
+                                                                                       k-rebind="dateRange.period3FromMax"
+                                                                                       k-on-change="onChangePeriod(kendoEvent, 'period3From', 'period3ToMin', true)" />
+                                                                            </div>
+                                                                            <div class="col-md-1 k-icon k-i-minus mrt5">
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <input style="width: 100%;"
+                                                                                       kendo-date-picker id="period3To"
+                                                                                       name="period3To"
+                                                                                       k-ng-model="detail.period3To"
+                                                                                       k-format="'dd/MM/yyyy'"
+                                                                                       k-date-input="true"
+                                                                                       k-min="dateRange.period3ToMin"
+                                                                                       k-rebind="dateRange.period3ToMin"
+                                                                                       k-on-change="onChangePeriod(kendoEvent, 'period3To', 'period3FromMax', false)" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label text-secondary">
+                                                                            Period 4:
+                                                                        </label>
+                                                                        <div class="row align-items-end mt-3">
+                                                                            <div class="col-md-5">
+                                                                                <input style="width: 100%;"
+                                                                                       kendo-date-picker id="period4From"
+                                                                                       name="period4From"
+                                                                                       k-ng-model="detail.period4From"
+                                                                                       k-format="'dd/MM/yyyy'"
+                                                                                       k-date-input="true"
+                                                                                       k-max="dateRange.period4FromMax"
+                                                                                       k-rebind="dateRange.period4FromMax"
+                                                                                       k-on-change="onChangePeriod(kendoEvent, 'period4From', 'period4ToMin', true)" />
+                                                                            </div>
+                                                                            <div class="col-md-1 k-icon k-i-minus mrt5">
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <input style="width: 100%;"
+                                                                                       kendo-date-picker id="period4To"
+                                                                                       name="period4To"
+                                                                                       k-ng-model="detail.period4To"
+                                                                                       k-format="'dd/MM/yyyy'"
+                                                                                       k-date-input="true"
+                                                                                       k-min="dateRange.period4ToMin"
+                                                                                       k-rebind="dateRange.period4ToMin"
+                                                                                       k-on-change="onChangePeriod(kendoEvent, 'period4To', 'period4FromMax', false)" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--GOAL-->
+                                                    <div class="row mb-3" style="padding-top: 15px;">
+                                                        <div class="col">
+                                                            <div class="portlet-title mb-3">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="me-2" style="width: 4px; height: 20px; background-color: #006efa;"></div>
+                                                                    <h2 class="accordion-header">
+                                                                        <label class="poppins-semibold display-9">
+                                                                            GOAD <span class="text-danger">*</span>
+                                                                        </label>
+                                                                    </h2>
+                                                                </div>
+                                                            </div>
+                                                            <kendo-grid id="goalGrid" options="goalGridOptions"></kendo-grid>
+                                                            <div class="row mt-3">
+                                                                <div class="col-md-12">
+                                                                    <button type="button"
+                                                                            class="btn btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1" ng-click="addRow('goal')">
+                                                                        {{'COMMON_BUTTON_ADD_MORE'|translate}}
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--APPRAISING-->
+                                                    <div class="row mb-3" style="padding-top: 15px;">
+                                                        <div class="col">
+                                                            <div class="portlet-title mb-3">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="me-2" style="width: 4px; height: 20px; background-color: #006efa;"></div>
+                                                                    <h2 class="accordion-header">
+                                                                        <label class="poppins-semibold display-9">
+                                                                            APPRAISING
+                                                                        </label>
+                                                                    </h2>
+                                                                </div>
+                                                            </div>
+                                                            <div kendo-grid k-scope-field="inst.appraising"
+                                                                 id="mainAppraisingGridOptions"
+                                                                 k-options="mainAppraisingGridOptions">
+                                                                <div k-detail-template>
+                                                                    <div kendo-grid id="appraisingDetailGridOptions" k-options="appraisingDetailGridOptions(dataItem)"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--COMPULSORY TRAINING-->
+                                                    <div class="row mb-3" style="padding-top: 15px;" ng-if="!model.isCompletedTranningGrid && (detail.jobGradeValue < 2 || detail.jobGradeValue === undefined)">
+                                                        <div class="col">
+                                                            <div class="portlet-title mb-3">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="me-2" style="width: 4px; height: 20px; background-color: #006efa;"></div>
+                                                                    <h2 class="accordion-header">
+                                                                        <label class="poppins-semibold display-9">
+                                                                            COMPULSORY TRAINING <span class="text-danger">*</span>
+                                                                        </label>
+                                                                    </h2>
+                                                                    <div class="form-check ms-4" style="padding-top: 8px;">
+                                                                        <input class="form-check-input dark-style" id="eq5" type="checkbox" ng-model="detail.isCompletedTranning" ng-change="onChange(detail.isCompletedTranning)">
+                                                                        <label class="form-check-label" for="eq5">
+                                                                            Completed Training
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div ng-if="!detail.isCompletedTranning">
+                                                                <kendo-grid id="compulsoryGrid" options="compulsoryGridOptions"></kendo-grid>
+                                                                <div class="row mt-3">
+                                                                    <div class="col-md-12">
+                                                                        <button type="button"
+                                                                                class="btn btn-primary rounded-3 btn-outline-blue poppins-regular display-9 py-1" ng-click="addRow('compulsoryTraining')">
+                                                                            {{'COMMON_BUTTON_ADD_MORE'|translate}}
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--CONFIRMATION-->
+                                                    <div class="row mb-3" style="padding-top: 15px;">
+                                                        <div class="col">
+                                                            <div class="portlet-title mb-3">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="me-2" style="width: 4px; height: 20px; background-color: #006efa;"></div>
+                                                                    <h2 class="accordion-header">
+                                                                        <label class="poppins-semibold display-9">
+                                                                            CONFIRMATION FOR APPRAISAL PHASE
+                                                                        </label>
+                                                                    </h2>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col">
+                                                                    <label class="form-label text-secondary">1<sup>st</sup> Appraiser (Direct Superior): </label>
+                                                                    <div class="d-flex gap-4">
+                                                                        <div class="form-check" ng-repeat="confirm in confirmDataSource1">
+                                                                            <input type="radio"
+                                                                                   class="form-check-input"
+                                                                                   disabled="disabled"
+                                                                                   name="firstAppraiserNote"
+                                                                                   value="{{confirm.name}}"
+                                                                                   id="{{confirm.code}}"
+                                                                                   ng-model="detail.firstAppraiserNote"
+                                                                                   ng-change="onChangeConfirm1(detail.firstAppraiserNote)">
+                                                                            <label class="form-check-label" for="{{confirm.code}}">{{confirm.name}}</label>
+
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <label class="form-label">2<sup>nd</sup> Appraiser:</label>
+                                                                    <div class="d-flex gap-4">
+                                                                        <div class="form-check" ng-repeat="confirm in confirmDataSource2">
+                                                                            <input type="radio"
+                                                                                   class="form-check-input"
+                                                                                   disabled="disabled"
+                                                                                   name="secondAppraiserNote"
+                                                                                   value="{{confirm.name}}"
+                                                                                   id="{{confirm.code}}"
+                                                                                   ng-model="detail.secondAppraiserNote"
+                                                                                   ng-change="onChangeConfirm2(detail.secondAppraiserNote)">
+                                                                            <label class="form-check-label" for="{{confirm.code}}">{{confirm.name}}</label>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="group poppins-medium text-grey-300">
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2" style="margin-bottom:12px">
+                                        <action-items model="model" save="saveItem" form="g1Form"></action-items>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<processing-stage workflow-instances="workflowInstances"></processing-stage>
+<tracking-history tracking-history="trackingHistory"></tracking-history>
+
+
+
+
+
+
+
+
+
+
+
+<!--<style type="text/css">
+    #attachmentViewDialog {
+        min-height: 40vh !important;
+        height: 98vh !important;
+    }
+
+    .close-owa-dialog {
+        margin: 5px;
+    }
+
+    #tooltipText {
+        position: absolute;
+        left: 50%;
+        top: -40px;
+        transform: translateX(-50%);
+        background-color: #fff;
+        color: #000;
+        white-space: nowrap;
+        padding: 5px 10px;
+        border-radius: 10px;
+        border: 1px solid #000;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+        #tooltipText::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            transform: translateX(-50%);
+            border: 10px solid;
+            border-color: #808080 #0000 #0000 #0000;
+        }
+
+    #tooltip:hover #tooltipText {
+        top: -140%;
+        visibility: visible;
+        opacity: 1;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet bordered light">-->
+            <!-- Title -->
+            <!--<div class="portlet-title">
+                <div class="caption caption-md">
+                    <span class="caption-subject uppercase" ng-if="!checkTitleEdit">{{title}}</span>
+                </div>
+                <div class="actions">
+                    <kendo-button class="btn btn-default btn-sm" ng-click="printForm()" ng-if="mode=='Edit'">
+                        <i style="font-size: 12px; padding-right: 3px;" class="fa fa-file-pdf-o font-green-jungle"></i> Print
+                    </kendo-button>
+                    <action-items model="model" save="saveItem" form="g1Form"></action-items>
+                    <div add-class class="btn-group" current-class="btn-group" added-class="open">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                aria-expanded="true" style="padding: 0px !important">
+                            <img src="ClientApp/assets/images/icon/more.png" style="position: relative;top: -2px"
+                                 class="ng-isolate-scope">
+
+
+
+
+
+
+                        </button>
+                        <ul class="dropdown-menu pull-right">-->
+                            <!-- <li><a data-toggle="modal" class="ng-binding"
+                                    ng-click="showProcessingStages()"><i class="fa fa-recycle right-5"
+                                        style="color: #b42e83"></i> Processing Stages</a></li> -->
+                            <!--<li>
+                                <a data-toggle="modal" class="ng-binding"
+                                   ng-click="showProcessingStages()">
+                                    <i class="fa fa-recycle right-5"
+                                       style="color: #b42e83"></i> {{'COMMON_PROCESSING_STAGE'|translate}}
+                                </a>
+                            </li>
+                            <li>
+                                <a data-toggle="modal" class="ng-binding" ng-click="showTrackingHistory()" ng-if="isITHelpdesk">
+
+
+
+                                    <i class="fa fa-book right-5" style="color: #b42e83"></i>
+                                    {{'COMMON_TRACKING_HISTORY' | translate}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row ng-scope" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <workflow-comment></workflow-comment>
+                    </div>
+                </div>
+                <div class="row ng-scope" ng-if="errors.length > 0" style="padding: 15px 0;margin-bottom:15px">
+                    <div class="col-sm-12">
+                        <div class="note note-danger note-bordered" style="margin-bottom: 0px">
+                            <h5 class="bold uppercase">
+                                Please enter all required fields <span class="font-red-thunderbird">*</span>:
+                            </h5>
+                            <p></p>
+                            <ul>
+                                <li ng-repeat="error in errors">
+                                    <span class="bold ">{{error.controlName}}</span>:
+                                    {{error.message ? error.message : 'Field is required'}}
+                                </li>
+                            </ul>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+                <form name="g1Form">
+                    <div class="page-content-wrapper float-none">
+
+                        <div class="page-content">
+                            <div class="form-horizontal">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    SAP Code: <span class="font-red-thunderbird">*</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <select kendo-drop-down-list name="sapCode" id="sapCode"
+                                                            k-options="sapCodesDataSource" k-ng-model="detail.userId"
+                                                            style="width: 100%">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Full Name: </label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="" class="k-textbox form-control input-sm"
+                                                           ng-model="detail.fullName" style="width: 100%;" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Department: </label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="" class="k-textbox form-control input-sm"
+                                                           ng-model="detail.deptLine" style="width: 100%;" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Work Location: </label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="" class="k-textbox form-control input-sm"
+                                                           ng-model="detail.workLocationName" style="width: 100%;"
+                                                           readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Current Position: </label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="" class="k-textbox form-control input-sm"
+                                                           ng-model="detail.currentPosition" style="width: 100%;"
+                                                           readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Acting to Postion:<span class="font-red-thunderbird">*</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <select kendo-drop-down-list name="titleInActingPeriodCode"
+                                                            id="titleInActingPeriodCode" k-options="jobTitlesDataSource"
+                                                            k-ng-model="detail.positionId" style="width: 100%">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    1<sup>st</sup> Appraiser: <span class="font-red-thunderbird">*</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <select kendo-drop-down-list name="appraiser1st" id="appraiser1st"
+                                                            k-options="appraiser1stDataSource"
+                                                            ng-model="detail.firstAppraiserId" style="width: 100%">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    2<sup>nd</sup> Appraiser: <span class="font-red-thunderbird">*</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <select kendo-drop-down-list name="appraiser2nd" id="appraiser2nd"
+                                                            k-options="appraiser2ndDataSource"
+                                                            ng-model="detail.secondAppraiserId" style="width: 100%">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Position in Acting Period:
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="" class="k-textbox form-control input-sm"
+                                                           ng-model="detail.positionName" style="width: 100%;" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    New Personel area:<span class="font-red-thunderbird">*</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input kendo-drop-down-list id="newPersonnelArea" name="newPersonnelArea"
+                                                           k-options="newPersonelAreaOptions" ng-model="detail.newPersonnelArea"
+                                                           style="width: 100%;" k-value-primitive="true" disabled="disabled" ng-readonly="true" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    New Personel Subarea:<span class="font-red-thunderbird">*</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input kendo-drop-down-list id="newWorkLocationCode" name="newWorkLocationCode"
+                                                           k-options="personelSubareaOptions" ng-model="detail.newWorkLocationCode"
+                                                           style="width: 100%;" k-value-primitive="true" disabled="disabled" ng-readonly="true" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Department in Acting Period: <span class="font-red-thunderbird">*</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <div id="tooltip">
+                                                        <span id="tooltipText"> {{ detail.newDeptOrLineCode }}</span>
+                                                        <span>
+                                                            <input kendo-drop-down-tree id="departmentId" name="departmentId"
+                                                                   k-options="departmentOptions" k-ng-model="detail.departmentId"
+                                                                   style="width: 100%;" k-value-primitive="true" />
+                                                        </span>
+                                                    </div>-->
+                                                    <!--<input kendo-drop-down-tree id="departmentId" name="departmentId"
+                                                           k-options="departmentOptions" k-ng-model="detail.departmentId"
+                                                           style="width: 100%;" k-value-primitive="true" />-->
+                                                <!--</div>
+                                            </div>
+                                            <div class="form-group" ng-show="false">
+                                                <label class="col-md-4 control-label">
+                                                    Department in Acting Period (SAP):<span class="font-red-thunderbird">*</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input kendo-drop-down-tree id="departmentSAPId" name="departmentSAPId"
+                                                           k-options="departmentSAPOptions" k-ng-model="detail.departmentSAPId"
+                                                           style="width: 100%;" k-value-primitive="true" disabled="disabled" ng-readonly="true" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Employee group: <span class="font-red-thunderbird">*</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <select kendo-drop-down-list name="employeeGroup" id="employeeGroup"
+                                                            k-options="employeeSubGroupDataSource"
+                                                            ng-model="detail.employeeGroup" style="width: 100%" disabled="disabled" ng-readonly="true">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Employee Subgroup: <span class="font-red-thunderbird">*</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="" class="k-textbox form-control input-sm"
+                                                           ng-model="detail.employeeSubgroup" style="width: 100%;"
+                                                           readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">
+                                                    Pay Scale Area: <span class="font-red-thunderbird">*</span>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="" class="k-textbox form-control input-sm"
+                                                           ng-model="detail.payScaleArea" style="width: 100%;"
+                                                           readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <!--PERIOD-->
+                                    <!--<div class="row" style="padding-top: 15px;">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <div class="portlet box bg-grey bg-font-grey fx-portlet">
+                                                    <div class="portlet-title">
+                                                        <div class="caption">
+                                                            <span class="caption-subject hr-process uppercase f-collapse">PERIOD</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body">
+                                                        <div class="row caption-md">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">
+                                                                        Period 1:
+                                                                        <span class="font-red-thunderbird">*</span>
+                                                                    </label>
+                                                                    <div class="col-md-9">
+                                                                        <div class="col-md-5">
+
+                                                                            <input style="width: 100%;"
+                                                                                   kendo-date-picker id="period1Froms"
+                                                                                   name="period1Froms"
+                                                                                   k-ng-model="detail.period1From"
+                                                                                   k-format="'dd/MM/yyyy'"
+                                                                                   k-date-input="true"
+                                                                                   k-max="dateRange.period1FromMax"
+                                                                                   k-rebind="dateRange.period1FromMax"
+                                                                                   k-on-change="onChangePeriod(kendoEvent, 'period1From', 'period1ToMin', true)" />
+                                                                        </div>
+                                                                        <div class="col-md-1 k-icon k-i-minus mrt5">
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <input style="width: 100%;"
+                                                                                   kendo-date-picker id="period1To"
+                                                                                   name="period1To"
+                                                                                   k-ng-model="detail.period1To"
+                                                                                   k-format="'dd/MM/yyyy'"
+                                                                                   k-date-input="true"
+                                                                                   k-min="dateRange.period1ToMin"
+                                                                                   k-rebind="dateRange.period1ToMin"
+                                                                                   k-on-change="onChangePeriod(kendoEvent, 'period1To', 'period1FromMax', false)" />
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">
+                                                                        Period 2:
+                                                                    </label>
+                                                                    <div class="col-md-9">
+                                                                        <div class="col-md-5">
+                                                                            <input style="width: 100%;"
+                                                                                   kendo-date-picker id="period2From"
+                                                                                   name="period2From"
+                                                                                   k-ng-model="detail.period2From"
+                                                                                   k-format="'dd/MM/yyyy'"
+                                                                                   k-date-input="true"
+                                                                                   k-max="dateRange.period2FromMax"
+                                                                                   k-rebind="dateRange.period2FromMax"
+                                                                                   k-on-change="onChangePeriod(kendoEvent, 'period2From', 'period2ToMin', true)" />
+                                                                        </div>
+                                                                        <div class="col-md-1 k-icon k-i-minus mrt5">
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <input style="width: 100%;"
+                                                                                   kendo-date-picker id="period2To"
+                                                                                   name="period2To"
+                                                                                   k-ng-model="detail.period2To"
+                                                                                   k-format="'dd/MM/yyyy'"
+                                                                                   k-date-input="true"
+                                                                                   k-min="dateRange.period2ToMin"
+                                                                                   k-rebind="dateRange.period2ToMin"
+                                                                                   k-on-change="onChangePeriod(kendoEvent, 'period2To', 'period2FromMax', false)" />
+                                                                        </div>
+
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row caption-md">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">
+                                                                        Period 3:
+                                                                    </label>
+                                                                    <div class="col-md-9">
+                                                                        <div class="col-md-5">
+                                                                            <input style="width: 100%;"
+                                                                                   kendo-date-picker id="period3From"
+                                                                                   name="period3From"
+                                                                                   k-ng-model="detail.period3From"
+                                                                                   k-format="'dd/MM/yyyy'"
+                                                                                   k-date-input="true"
+                                                                                   k-max="dateRange.period3FromMax"
+                                                                                   k-rebind="dateRange.period3FromMax"
+                                                                                   k-on-change="onChangePeriod(kendoEvent, 'period3From', 'period3ToMin', true)" />
+                                                                        </div>
+                                                                        <div class="col-md-1 k-icon k-i-minus mrt5">
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <input style="width: 100%;"
+                                                                                   kendo-date-picker id="period3To"
+                                                                                   name="period3To"
+                                                                                   k-ng-model="detail.period3To"
+                                                                                   k-format="'dd/MM/yyyy'"
+                                                                                   k-date-input="true"
+                                                                                   k-min="dateRange.period3ToMin"
+                                                                                   k-rebind="dateRange.period3ToMin"
+                                                                                   k-on-change="onChangePeriod(kendoEvent, 'period3To', 'period3FromMax', false)" />
+                                                                        </div>
+
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">
+                                                                        Period 4:
+                                                                    </label>
+                                                                    <div class="col-md-9">
+                                                                        <div class="col-md-5">
+                                                                            <input style="width: 100%;"
+                                                                                   kendo-date-picker id="period4From"
+                                                                                   name="period4From"
+                                                                                   k-ng-model="detail.period4From"
+                                                                                   k-format="'dd/MM/yyyy'"
+                                                                                   k-date-input="true"
+                                                                                   k-max="dateRange.period4FromMax"
+                                                                                   k-rebind="dateRange.period4FromMax"
+                                                                                   k-on-change="onChangePeriod(kendoEvent, 'period4From', 'period4ToMin', true)" />
+                                                                        </div>
+                                                                        <div class="col-md-1 k-icon k-i-minus mrt5">
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <input style="width: 100%;"
+                                                                                   kendo-date-picker id="period4To"
+                                                                                   name="period4To"
+                                                                                   k-ng-model="detail.period4To"
+                                                                                   k-format="'dd/MM/yyyy'"
+                                                                                   k-date-input="true"
+                                                                                   k-min="dateRange.period4ToMin"
+                                                                                   k-rebind="dateRange.period4ToMin"
+                                                                                   k-on-change="onChangePeriod(kendoEvent, 'period4To', 'period4FromMax', false)" />
+                                                                        </div>
+
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <!--GOAL-->
+                                    <!--<div class="row" style="padding-top: 15px;">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <div class="portlet box bg-grey bg-font-grey fx-portlet">
+                                                    <div class="portlet-title">
+                                                        <div class="caption">
+                                                            <span class="caption-subject hr-process uppercase f-collapse">
+                                                                GOAL
+                                                                <span class="font-red-thunderbird">*</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div kendo-grid id="goalGrid" options="goalGridOptions">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="padding-top: 10px;">
+                                                            <div class="col-md-12">
+                                                                <kendo-button style="background-color: #b42e83; color:#fff;"
+                                                                              type="button"
+                                                                              class="btn btn-default btn-sm pull-right"
+                                                                              ng-click="addRow('goal')">
+                                                                    Add more
+                                                                </kendo-button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <!--APPRAISING-->
+                                    <!--<div class="row" style="padding-top: 15px;">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <div class="portlet box bg-grey bg-font-grey fx-portlet">
+                                                    <div class="portlet-title">
+                                                        <div class="caption">
+                                                            <span class="caption-subject hr-process uppercase f-collapse">APPRAISING</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div kendo-grid k-scope-field="inst.appraising"
+                                                                     id="mainAppraisingGridOptions"
+                                                                     k-options="mainAppraisingGridOptions">
+                                                                    <div k-detail-template>-->
+                                                                        <!-- <div kendo-grid id="appraisingGrid" options="appraisingGridOptions"></div> -->
+                                                                        <!-- <div class="orders"></div> -->
+                                                                        <!--<div kendo-grid id="appraisingDetailGridOptions"
+                                                                             k-options="appraisingDetailGridOptions(dataItem)">
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <!--COMPULSORY TRAINING-->
+
+
+                                    <!--<div class="row" style="padding-top: 15px;" ng-if="!model.isCompletedTranningGrid && (detail.jobGradeValue < 2 || detail.jobGradeValue === undefined)">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <div class="portlet box bg-grey bg-font-grey fx-portlet">
+                                                    <div class="portlet-title row caption"
+                                                         style="min-height:41px; padding-top:9px; font-size:14px;">
+                                                        <div class="col-md-3 caption-subject hr-process f-collapse">
+                                                            <span class="caption-subject hr-process uppercase f-collapse">
+                                                                COMPULSORY TRAINING
+                                                                <span class="font-red-thunderbird">*</span>
+                                                            </span>
+                                                            <input type="checkbox" id="eq5" class="k-checkbox"
+                                                                   ng-model="detail.isCompletedTranning"
+                                                                   ng-change="onChange(detail.isCompletedTranning)">
+                                                            <label class="k-checkbox-label " for="eq5"
+                                                                   style="color:black; padding-top: 2px; font-family: sans-serif !important;">
+                                                                Completed Training
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="portlet-body" ng-if="!detail.isCompletedTranning">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <kendo-grid id="compulsoryGrid"
+                                                                            options="compulsoryGridOptions"></kendo-grid>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="padding-top: 10px;">
+                                                            <div class="col-md-12">
+                                                                <kendo-button style="background-color: #b42e83; color:#fff;"
+                                                                              type="button"
+                                                                              class="btn btn-default btn-sm pull-right"
+                                                                              ng-click="addRow('compulsoryTraining')">
+                                                                    Add more
+                                                                </kendo-button>
+                                                            </div>
+
+
+
+
+
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <!--CONFIRMATION-->
+                                    <!--<div class="row" style="padding-top: 15px;">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <div class="portlet box bg-grey bg-font-grey fx-portlet">
+                                                    <div class="portlet-title">
+                                                        <div class="caption">
+                                                            <span class="caption-subject hr-process uppercase f-collapse">CONFIRMATION FOR APPRAISAL PHASE</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="col-md-6 control-label">1<sup>st</sup> Appraiser (Direct Superior): </label>
+                                                                    <div class="col-md-6">
+                                                                        <ul class="fieldlist form-control-static">
+                                                                            <li ng-repeat="confirm in confirmDataSource1">
+                                                                                <input type="radio" class="k-radio input-default" disabled="disabled" name="firstAppraiserNote" value="{{confirm.name}}" id="{{confirm.code}}" ng-model="detail.firstAppraiserNote" ng-change="onChangeConfirm1(detail.firstAppraiserNote)">
+                                                                                <label class="k-radio-label" for="{{confirm.code}}">{{confirm.name}}</label>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 control-label">2<sup>nd</sup> Appraiser:</label>
+                                                                    <div class="col-md-8">
+                                                                        <ul class="fieldlist form-control-static">
+                                                                            <li ng-repeat="confirm in confirmDataSource2">
+                                                                                <input type="radio" class="k-radio input-default" disabled="disabled" name="secondAppraiserNote" value="{{confirm.name}}" id="{{confirm.code}}" ng-model="detail.secondAppraiserNote" ng-change="onChangeConfirm2(detail.secondAppraiserNote)">
+                                                                                <label class="k-radio-label" for="{{confirm.code}}">{{confirm.name}}</label>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="portlet-title">
+                <div class="actions">
+                    <action-items model="model" save="saveItem" form="g1Form"></action-items>
+
+
+
+
+                </div>
+            </div>-->
+            <!-- Content -->
+        <!--</div>
+    </div>
+</div>
+<processing-stage workflow-instances="workflowInstances"></processing-stage>
+<tracking-history tracking-history="trackingHistory"></tracking-history>-->
