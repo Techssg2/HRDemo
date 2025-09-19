@@ -1,0 +1,60 @@
+# Tên của workflow, bạn có thể đặt tùy ý
+name: Auto Create Branch From Issue
+
+# Cấu hình khi nào workflow sẽ được kích hoạt
+on:
+  # Chạy khi một issue được MỞ hoặc được GÁN NHÃN
+  issues:
+    types: [opened, labeled]
+
+# Các công việc cần thực hiện
+jobs:
+  create_branch_job:
+    # Sử dụng máy ảo Ubuntu phiên bản mới nhất
+    runs-on: ubuntu-latest
+    
+    # Các bước thực hiện công việc
+    steps:
+      # Bước 1: Xác định tiền tố cho nhánh dựa trên nhãn của issue
+      - name: Determine Branch Prefix
+        id: get_prefix # Đặt ID cho bước này để có thể tham chiếu ở bước sau
+        run: |
+          # Lấy danh sách các nhãn của issue dưới dạng một chuỗi JSON
+          # Ví dụ: '["bug", "critical"]'
+          LABELS_JSON='${{ toJSON(github.event.issue.labels.*.name) }}'
+          
+          # Đặt tiền tố mặc định là 'chore/'
+          # Dùng cho các công việc không phải là tính năng hay sửa lỗi
+          PREFIX="chore/"
+          
+          # Kiểm tra nếu trong chuỗi JSON có chứa từ 'bug' (không phân biệt hoa thường)
+          if [[ $(echo "$LABELS_JSON" | grep -i "bug") ]]; then
+            PREFIX="fix/"
+          # Kiểm tra nếu trong chuỗi JSON có chứa từ 'feature'
+          elif [[ $(echo "$LABELS_JSON" | grep -i "feature") ]]; then
+            PREFIX="feature/"
+          # Kiểm tra nếu trong chuỗi JSON có chứa từ 'documentation'
+          elif [[ $(echo "$LABELS_JSON" | grep -i "documentation") ]]; then
+            PREFIX="docs/"
+          # Bạn có thể thêm các điều kiện else if khác ở đây
+          # elif [[ $(echo "$LABELS_JSON" | grep -i "refactor") ]]; then
+          #   PREFIX="refactor/"
+          fi
+          
+          # Xuất biến PREFIX ra môi trường để các bước sau có thể sử dụng
+          # Ví dụ: echo "prefix=fix/" >> $GITHUB_OUTPUT
+          echo "prefix=$PREFIX" >> $GITHUB_OUTPUT
+
+      # Bước 2: Sử dụng Action từ Marketplace để tạo nhánh
+      - name: Create Branch From Issue
+        # Action này sẽ thực hiện việc tạo nhánh trên GitHub
+        uses: daniellockyer/create-branch-when-issue-created@v1.0.0
+        env:
+          # Cung cấp Token để Action có quyền tương tác với repository của bạn
+          # Đây là token mặc định, an toàn do GitHub Actions cung cấp
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # Cấu hình tên nhánh sẽ được tạo ra
+          # Cú pháp: '{tiền-tố}{số-issue}-{tiêu-đề-issue}'
+          # Ví dụ: 'fix/123-login-button-is-broken'
+          branch-name: '${{ steps.get_prefix.outputs.prefix }}{issue-number}-{issue-title}'
