@@ -1,39 +1,92 @@
-# Tên của workflow
 name: Auto Create Branch From Issue
 
-# Cấu hình khi nào workflow sẽ được kích hoạt
 on:
   issues:
     types: [opened, labeled]
 
-# Các công việc cần thực hiện
+permissions:
+  contents: write
+  issues: read
+
 jobs:
   create_branch_job:
     runs-on: ubuntu-latest
-    
     steps:
-      # Bước 1: Xác định tiền tố cho nhánh dựa trên nhãn của issue
+      - name: Collect labels string
+        id: labels
+        run: |
+          echo "labels=$(jq -r '[.issue.labels[].name]|join(",")' <<< '${{ toJSON(github.event) }}')" >> $GITHUB_OUTPUT
+
       - name: Determine Branch Prefix
         id: get_prefix
         run: |
-          LABELS_JSON='${{ toJSON(github.event.issue.labels.*.name) }}'
+          LABELS="${{ steps.labels.outputs.labels }}"
           PREFIX="chore/"
-          
-          if [[ $(echo "$LABELS_JSON" | grep -i "bug") ]]; then
+          shopt -s nocasematch
+          if [[ "$LABELS" =~ bug ]]; then
             PREFIX="fix/"
-          elif [[ $(echo "$LABELS_JSON" | grep -i "feature") ]]; then
+          elif [[ "$LABELS" =~ feature ]]; then
             PREFIX="feature/"
-          elif [[ $(echo "$LABELS_JSON" | grep -i "documentation") ]]; then
+          elif [[ "$LABELS" =~ documentation ]]; then
             PREFIX="docs/"
           fi
-          
           echo "prefix=$PREFIX" >> $GITHUB_OUTPUT
 
-      # Bước 2: Sử dụng Action từ Marketplace để tạo nhánh (ĐÃ SỬA LỖI)
-      - name: Create Branch From Issue
-        # Sửa tên action ở dòng này
+      - name: Normalize issue title
+        id: norm
+        run: |
+          RAW_TITLE='${{ github.event.issue.title }}'
+          NORMALIZED=$(echo "$RAW_TITLE" | tr '[:upper:]' '[:lower:]' | sed -E 's/[[:space:]]+/-/g' | sed -E 's/[^a-z0-9_-]//g' | sed -E 's/-+/-/g' | sed -E 's/^-|-$//g')
+          NORMALIZED=$(echo "$NORMALIZED" | cut -c1-50)
+          echo "title=$NORMALIZED" >> $GITHUB_OUTPUT
+
+      - name: Compose final branch name
+        id: branch
+        run: |
+          ISSUE_NUM=${{ github.event.issue.number }}
+          PREFIX='${{ steps.get_prefix.outputs.prefix }}'
+          TITLE='${{ steps.norm.outputs.title }}'
+          FINAL="${PREFIX}${ISSUE_NUM}-${TITLE}"
+          echo "final=$FINAL" >> $GITHUB_OUTPUT
+
+      - name: Check if branch already exists (remote)
+        id: check_branch
+        run: |
+          BRANCH='${{ steps.branch.outputs.final }}'
+          git ls-remote --heads https://github.com/${{ github.repository }} "$BRANCH" | grep "$BRANCH" && EXISTS=1 || EXISTS=0
+          echo "exists=$EXISTS" >> $GITHUB_OUTPUT
+
+      - name: Decide whether to skip
+        id: should_run
+        run: |
+          ACTION='${{ github.event.action }}'
+          LABELS='${{ steps.labels.outputs.labels }}'
+          EXISTS='${{ steps.check_branch.outputs.exists }}'
+
+          CREATE=0
+          if [ "$EXISTS" = "1" ]; then
+            echo "Branch da ton tai. Khong tao lai."
+          else
+            if [ "$ACTION" = "opened" ]; then
+              CREATE=1
+            elif [ "$ACTION" = "labeled" ]; then
+              shopt -s nocasematch
+              if [[ "$LABELS" =~ bug|feature|documentation ]]; then
+                CREATE=1
+              fi
+            fi
+          fi
+
+          echo "create=$CREATE" >> $GITHUB_OUTPUT
+
+      - name: Stop if not creating
+        if: ${{ steps.should_run.outputs.create != '1' }}
+        run: echo "Skip branch creation."
+
+      - name: Create Branch From Issue (Action marketplace)
+        if: ${{ steps.should_run.outputs.create == '1' }}
         uses: robot-actions/create-branch-when-issue-created@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch-name: '${{ steps.get_prefix.outputs.prefix }}{issue-number}-{issue-title}'
+          branch-name: '${{ steps.branch.outputs.final }}'
