@@ -157,7 +157,7 @@ namespace Aeon.HR.BusinessObjects.DataHandlers
 
         protected TContext Context { get; }
 
-        TContext IUnitOfWork<TContext>.Context => throw new NotImplementedException();
+        TContext IUnitOfWork<TContext>.Context => Context;
 
         public DataSet ExecuteQuery(string sql, Dictionary<string, object> parameters)
         {
