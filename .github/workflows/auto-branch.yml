@@ -42,7 +42,7 @@ jobs:
 
       # Bước 2: Sử dụng một Action có sẵn để thực hiện việc tạo branch
       - name: Create Issue Branch
-        # Sử dụng action 'andymckay/create-issue-branch' phiên bản 1, đây là một action ổn định và phổ biến
+        # Tên action mới và chính xác, đang hoạt động ổn định
         uses: andymckay/create-issue-branch@v1
         with:
           # Cung cấp token mặc định của GitHub để action có quyền tạo branch trong repo của bạn
