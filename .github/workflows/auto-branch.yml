@@ -1,92 +1,53 @@
+# Tên của workflow, hiển thị trong tab "Actions" trên GitHub
 name: Auto Create Branch From Issue
 
+# Cấu hình sự kiện kích hoạt workflow
 on:
+  # Chạy khi một issue được MỞ hoặc được GÁN NHÃN
   issues:
     types: [opened, labeled]
 
-permissions:
-  contents: write
-  issues: read
-
+# Nơi định nghĩa các công việc cần thực hiện
 jobs:
+  # Đặt tên cho công việc là 'create_branch_job'
   create_branch_job:
+    # Luôn chạy trên phiên bản Ubuntu mới nhất do GitHub cung cấp
     runs-on: ubuntu-latest
+    
+    # Các bước tuần tự mà công việc sẽ thực hiện
     steps:
-      - name: Collect labels string
-        id: labels
-        run: |
-          echo "labels=$(jq -r '[.issue.labels[].name]|join(",")' <<< '${{ toJSON(github.event) }}')" >> $GITHUB_OUTPUT
-
+      # Bước 1: Quyết định tiền tố cho branch (ví dụ: 'fix/' hoặc 'feature/')
       - name: Determine Branch Prefix
+        # Đặt một ID cho bước này để các bước sau có thể tham chiếu đến kết quả của nó
         id: get_prefix
+        # Chạy một đoạn mã shell script
         run: |
-          LABELS="${{ steps.labels.outputs.labels }}"
+          # Lấy danh sách các label của issue dưới dạng một chuỗi JSON
+          LABELS_JSON='${{ toJSON(github.event.issue.labels.*.name) }}'
+          
+          # Đặt tiền tố mặc định là 'chore/' cho các công việc nhỏ, không phân loại
           PREFIX="chore/"
-          shopt -s nocasematch
-          if [[ "$LABELS" =~ bug ]]; then
+          
+          # Dùng câu lệnh 'grep' để kiểm tra sự tồn tại của các từ khóa trong chuỗi label
+          if [[ $(echo "$LABELS_JSON" | grep -i "bug") ]]; then
             PREFIX="fix/"
-          elif [[ "$LABELS" =~ feature ]]; then
+          elif [[ $(echo "$LABELS_JSON" | grep -i "feature") ]]; then
             PREFIX="feature/"
-          elif [[ "$LABELS" =~ documentation ]]; then
+          elif [[ $(echo "$LABELS_JSON" | grep -i "documentation") ]]; then
             PREFIX="docs/"
           fi
+          
+          # Xuất biến PREFIX ra để các bước sau có thể sử dụng
           echo "prefix=$PREFIX" >> $GITHUB_OUTPUT
 
-      - name: Normalize issue title
-        id: norm
-        run: |
-          RAW_TITLE='${{ github.event.issue.title }}'
-          NORMALIZED=$(echo "$RAW_TITLE" | tr '[:upper:]' '[:lower:]' | sed -E 's/[[:space:]]+/-/g' | sed -E 's/[^a-z0-9_-]//g' | sed -E 's/-+/-/g' | sed -E 's/^-|-$//g')
-          NORMALIZED=$(echo "$NORMALIZED" | cut -c1-50)
-          echo "title=$NORMALIZED" >> $GITHUB_OUTPUT
-
-      - name: Compose final branch name
-        id: branch
-        run: |
-          ISSUE_NUM=${{ github.event.issue.number }}
-          PREFIX='${{ steps.get_prefix.outputs.prefix }}'
-          TITLE='${{ steps.norm.outputs.title }}'
-          FINAL="${PREFIX}${ISSUE_NUM}-${TITLE}"
-          echo "final=$FINAL" >> $GITHUB_OUTPUT
-
-      - name: Check if branch already exists (remote)
-        id: check_branch
-        run: |
-          BRANCH='${{ steps.branch.outputs.final }}'
-          git ls-remote --heads https://github.com/${{ github.repository }} "$BRANCH" | grep "$BRANCH" && EXISTS=1 || EXISTS=0
-          echo "exists=$EXISTS" >> $GITHUB_OUTPUT
-
-      - name: Decide whether to skip
-        id: should_run
-        run: |
-          ACTION='${{ github.event.action }}'
-          LABELS='${{ steps.labels.outputs.labels }}'
-          EXISTS='${{ steps.check_branch.outputs.exists }}'
-
-          CREATE=0
-          if [ "$EXISTS" = "1" ]; then
-            echo "Branch da ton tai. Khong tao lai."
-          else
-            if [ "$ACTION" = "opened" ]; then
-              CREATE=1
-            elif [ "$ACTION" = "labeled" ]; then
-              shopt -s nocasematch
-              if [[ "$LABELS" =~ bug|feature|documentation ]]; then
-                CREATE=1
-              fi
-            fi
-          fi
-
-          echo "create=$CREATE" >> $GITHUB_OUTPUT
-
-      - name: Stop if not creating
-        if: ${{ steps.should_run.outputs.create != '1' }}
-        run: echo "Skip branch creation."
-
-      - name: Create Branch From Issue (Action marketplace)
-        if: ${{ steps.should_run.outputs.create == '1' }}
-        uses: robot-actions/create-branch-when-issue-created@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Bước 2: Sử dụng một Action có sẵn để thực hiện việc tạo branch
+      - name: Create Issue Branch
+        # Sử dụng action 'andymckay/create-issue-branch' phiên bản 1, đây là một action ổn định và phổ biến
+        uses: andymckay/create-issue-branch@v1
         with:
-          branch-name: '${{ steps.branch.outputs.final }}'
+          # Cung cấp token mặc định của GitHub để action có quyền tạo branch trong repo của bạn
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Định dạng tên nhánh sẽ được tạo ra
+          # Action này sẽ tự động dọn dẹp tiêu đề issue (thay khoảng trắng bằng '-', xóa ký tự đặc biệt)
+          # Ví dụ: 'fix/123-login-button-is-broken'
+          branchName: '${{ steps.get_prefix.outputs.prefix }}${{ github.event.issue.number }}-${{ github.event.issue.title }}'
